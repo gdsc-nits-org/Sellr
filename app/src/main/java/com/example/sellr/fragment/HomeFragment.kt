@@ -1,11 +1,15 @@
 package com.example.sellr.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
 import com.example.sellr.R
+import com.example.sellr.SellActivity
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +39,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        //TODO: For testing purposes,edit this button later,keep intent unchanged(except the data part)
+        val view:View= inflater.inflate(R.layout.fragment_home, container, false)
+        view.findViewById<Button>(R.id.button).setOnClickListener{
+            val intent = Intent(activity, SellActivity::class.java)
+            //TODO: Obtain below data from database here and send with the intent
+            intent.putExtra("userUID", "1234567")
+            intent.putExtra("emailID","deep21_ug@cse.nits.ac.in")
+            startActivity(intent)
+        }
+        return view
     }
 
     companion object {
