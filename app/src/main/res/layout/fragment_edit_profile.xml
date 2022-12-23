@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/guideline_2" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_email_edittext"
+        android:id="@+id/getScholarId"
         android:layout_width="0dp"
         style="@style/CustomEditText"
         android:layout_height="wrap_content"
@@ -55,16 +55,16 @@
         android:elevation="10sp">
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editScholarID"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/email_icon_custom_dynamic"
+
             android:drawablePadding="10dp"
             android:ems="10"
             android:background="@drawable/rounded_text_edit"
-            android:hint="Email ID"
-            android:inputType="textEmailAddress"
+            android:hint="Scholar ID"
+            android:inputType="number"
             android:textAlignment="inherit"
             app:layout_constraintBottom_toTopOf="@+id/editUserName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,27 +84,27 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_email_edittext">
+        app:layout_constraintTop_toBottomOf="@id/getScholarId">
 
         <EditText
             android:id="@+id/editUserName"
             android:background="@drawable/rounded_text_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_profile_image_24"
+
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="User Name"
             android:inputType="textPersonName"
             android:textAlignment="inherit"
-            app:layout_constraintBottom_toTopOf="@+id/getPassword"
+            app:layout_constraintBottom_toTopOf="@+id/getPhone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/getPassword"
+        android:id="@+id/getPhone"
         style="@style/CustomEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -113,21 +113,48 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_user_name"
-        app:passwordToggleEnabled="true">
+        app:layout_constraintTop_toBottomOf="@id/edit_user_name">
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editPhoneNumber"
             android:layout_width="match_parent"
             android:background="@drawable/rounded_text_edit"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/lock_icon_custom_dynamic"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
+            android:hint="Phone Number"
+            android:inputType="phone"
             android:textAlignment="inherit"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+            app:layout_constraintBottom_toTopOf="@+id/getPhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/getHostel"
+        style="@style/CustomEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/getPhone">
+
+        <EditText
+            android:id="@+id/editHostelNumber"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_text_edit"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Hostel Number"
+            android:inputType="text"
+            android:textAlignment="inherit"
+            app:layout_constraintBottom_toTopOf="@+id/getHostel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -150,19 +177,20 @@
         app:rippleColor="#AF91F4"
         app:strokeColor="#6333D3"
         app:strokeWidth="1dp" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_begin="50dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.40" />
+        app:layout_constraintGuide_percent="0.3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

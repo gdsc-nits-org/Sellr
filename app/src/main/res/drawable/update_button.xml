@@ -7,10 +7,10 @@
         <solid android:color="@android:color/transparent" />
 
         <corners
-            android:bottomLeftRadius="4dp"
-            android:bottomRightRadius="4dp"
-            android:topLeftRadius="4dp"
-            android:topRightRadius="4dp" />
+            android:bottomLeftRadius="15dp"
+            android:bottomRightRadius="15dp"
+            android:topLeftRadius="15dp"
+            android:topRightRadius="15dp" />
     </shape></item>
 
 </selector>
