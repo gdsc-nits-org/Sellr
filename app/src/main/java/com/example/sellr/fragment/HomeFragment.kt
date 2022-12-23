@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         val view:View= inflater.inflate(R.layout.fragment_home, container, false)
         view.findViewById<Button>(R.id.button).setOnClickListener{
             val intent = Intent(activity, SellActivity::class.java)
-            //TODO: Obtain below data from database here and send with the intent
+            //TODO: Fetch userID and emailID from database
             intent.putExtra("userUID", "1234567")
             intent.putExtra("emailID","deep21_ug@cse.nits.ac.in")
             startActivity(intent)

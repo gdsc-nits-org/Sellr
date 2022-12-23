@@ -236,7 +236,7 @@ class SellActivity : AppCompatActivity() {
         }, 180000)
         uploadData.addOnSuccessListener {
             database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
-            val upDateUserList=database.child(userUID!!).push().setValue(uID)
+            val upDateUserList=database.child(userUID!!).child("productID").push().setValue(uID)
             upDateUserList.addOnSuccessListener {
 
                 makeToast( "Successfully Listed")
