@@ -28,9 +28,10 @@ class RegisterFragment : Fragment() {
     private lateinit var auth:FirebaseAuth
      private lateinit var emailtxt:String
     private lateinit var passtxt:String
+    private lateinit var cnfrmpasstxt:String
     private lateinit var user:FirebaseUser
     private lateinit var database:DatabaseReference
-
+   var ct:Int = 0
     lateinit var register: TextView
     lateinit var actionbar: ActionBar
 
@@ -54,29 +55,84 @@ class RegisterFragment : Fragment() {
 
 
         signupbtn.setOnClickListener {
+
+             ct = 0;
             emailtxt = email.text.toString().trim()
             passtxt = pass.text.toString().trim()
-            auth.createUserWithEmailAndPassword(emailtxt, passtxt)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
+            cnfrmpasstxt= confrmpass.text.toString().trim()
 
-                        auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
-                            Toast.makeText(requireContext(),"Verification Link Sent, Please Verify",Toast.LENGTH_LONG).show()
-                            user = auth.currentUser!!
-                            val uid = user.uid.toString()
-                            saveuserinfo(emailtxt,passtxt,uid)
-                            updateUI(user)
-
-                        }
-                        // Sign in success, update UI with the signed-in user's information
-
-
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(requireContext(),"Sign Up Unsuccessful",Toast.LENGTH_LONG).show()
-                      //  updateUI(null)
-                    }
+            if(emailtxt.isBlank()) {
+                Toast.makeText(requireContext(), "Please, Enter Valid email", Toast.LENGTH_SHORT)
+                    .show()
+                email.setError("Please, Enter Valid email")
+            }
+            else
+                ct++;
+             if(passtxt.isBlank()) {
+                 Toast.makeText(requireContext(), "Password can't be empty", Toast.LENGTH_SHORT)
+                     .show()
+                 pass.setError("Password can't be empty")
+             }
+            else
+                ct++
+            if(cnfrmpasstxt.equals(passtxt)!=true)
+                {
+                    Toast.makeText(requireContext(), "Password Mismatch", Toast.LENGTH_SHORT)
+                        .show()
+                    confrmpass.setError("Password Mismatch")
                 }
+            else
+                ct++
+             if(passtxt.length<6) {
+                 Toast.makeText(requireContext(), "Password must be greater than 6 char", Toast.LENGTH_SHORT)
+                     .show()
+                 pass.setError("Password must be greater than 6 char")
+             }
+            else
+                ct++
+            if( emailtxt.contains("nits")!=true) {
+                Toast.makeText(requireContext(), "Please enter institute email id", Toast.LENGTH_SHORT)
+                    .show()
+                email.setError("Please enter institute email id")
+            }
+            else
+                ct++
+            if(ct==5)
+             {
+
+
+                auth.createUserWithEmailAndPassword(emailtxt, passtxt)
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+
+                            auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Verification Link Sent, Please Verify",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                user = auth.currentUser!!
+                                val uid = user.uid.toString()
+                                saveuserinfo(emailtxt, passtxt, uid)
+                                updateUI(user)
+
+                            }
+                            // Sign in success, update UI with the signed-in user's information
+
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(
+                                requireContext(),
+                                "Sign Up Unsuccessful",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            //  updateUI(null)
+                        }
+                    }
+            }
+
+
 
         }
 

@@ -28,7 +28,7 @@ class LoginFragment : Fragment() {
     lateinit var actionbar: ActionBar
     private lateinit var email: EditText
     private lateinit var pass: EditText
-    private lateinit var signupbtn: Button
+    private lateinit var signinbtn: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var emailtxt:String
     private lateinit var passtxt:String
@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
         register = view.findViewById(R.id.textViewregister)
         email = view.findViewById(R.id.editTextTextPersonName)
         pass = view.findViewById(R.id.editTextTextPassword)
-        signupbtn = view.findViewById(R.id.button)
+        signinbtn = view.findViewById(R.id.button)
 
         auth = FirebaseAuth.getInstance()
         register.setOnClickListener {
@@ -54,37 +54,61 @@ class LoginFragment : Fragment() {
 
 
         }
-        signupbtn.setOnClickListener {
+        signinbtn.setOnClickListener {
             emailtxt = email.text.toString().trim()
             passtxt = pass.text.toString().trim()
-            auth.signInWithEmailAndPassword(emailtxt, passtxt)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
+            var ct =0
+            if(emailtxt.isBlank())
+            {
+                Toast.makeText(requireContext(), "Please, Enter Valid email", Toast.LENGTH_SHORT)
+                    .show()
+                email.setError("Please, Enter Valid email")
+            }
+            else
+                ct++
+            if(passtxt.isBlank()) {
+                Toast.makeText(requireContext(), "Password can't be empty", Toast.LENGTH_SHORT)
+                    .show()
+                pass.setError("Password can't be empty")
+            }
+            else
+                ct++
+            if(ct==2) {
 
-                        val isverified = auth.currentUser?.isEmailVerified
-                        if(isverified==true)
-                        {
-                            Toast.makeText(requireContext(), "Authentication Successful.",
-                                Toast.LENGTH_SHORT).show()
-                            val user = Firebase.auth.currentUser
-                            println("UID is "+ user?.uid.toString())
-                            updateUI(user)
 
+                auth.signInWithEmailAndPassword(emailtxt, passtxt)
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+
+                            val isverified = auth.currentUser?.isEmailVerified
+                            if (isverified == true) {
+                                Toast.makeText(
+                                    requireContext(), "Authentication Successful.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val user = Firebase.auth.currentUser
+                                println("UID is " + user?.uid.toString())
+                                updateUI(user)
+
+                            } else
+                                Toast.makeText(
+                                    requireContext(), "Email Not Verified",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            println("Error reason" + task.exception)
+                            Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            Toast.makeText(
+                                requireContext(), "Authentication failed.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            // updateUI(null)
                         }
-                        else
-                            Toast.makeText(requireContext(), "Email Not Verified",
-                                Toast.LENGTH_SHORT).show()
-
-
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        println("Error reason"+ task.exception)
-                        Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(requireContext(), "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
-                       // updateUI(null)
                     }
-                }
+            }
         }
 
 
