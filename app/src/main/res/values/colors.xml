@@ -10,4 +10,5 @@
 
     <color name="colourPrimary">#03A9F4</color>
     <color name="colourSecondary">#84D4F8</color>
+    <color name="error">#B00020</color>
 </resources>
