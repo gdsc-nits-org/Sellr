@@ -165,7 +165,6 @@
         android:id="@+id/button"
         android:layout_width="172dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/update_button"
         android:text="Update"
         android:textColor="#495579"
@@ -174,6 +173,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getHostel"
+        app:layout_constraintVertical_bias="0.333"
         app:rippleColor="#AF91F4"
         app:strokeColor="#6333D3"
         app:strokeWidth="1dp" />
@@ -190,7 +191,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.33" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

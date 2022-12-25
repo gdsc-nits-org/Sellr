@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment">
+    tools:context=".fragment.ProfileFragment"
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,6 +49,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <RelativeLayout
+                    android:layout_marginTop="10sp"
                     android:id="@+id/main_block_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,7 +98,7 @@
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/SCHOLAR_ID"
+                        android:id="@+id/SCHOLAR"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/scholar_id"
@@ -119,7 +121,7 @@
                         android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/SCHOLAR_ID"
+                        android:layout_below="@id/SCHOLAR"
                         android:layout_marginLeft="50dp"
                         android:layout_marginTop="10dp"
                         android:text="Email"
@@ -227,12 +229,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/first_button">
 
                     <Button
+                        android:id="@+id/onSaleButton"
                         android:layout_width="180sp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle"
                         android:text="Items On Sale" />
 
                     <Button
+                        android:id="@+id/soldButton"
                         android:layout_width="180sp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20sp"
@@ -241,15 +245,18 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <ImageButton
+                    android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="215dp"
                     android:layout_marginBottom="70dp"
+                    android:background="@color/white"
                     android:src="@drawable/edit"
                     app:layout_constraintBottom_toTopOf="@+id/main_block_account"
-                    app:layout_constraintStart_toStartOf="@+id/IMAGE_CARDVIEW" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/IMAGE_CARDVIEW"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

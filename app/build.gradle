@@ -9,10 +9,6 @@ plugins {
 android {
     compileSdk 32
 
-    buildFeatures{
-        viewBinding true
-    }
-
     defaultConfig {
         applicationId "com.example.sellr"
         minSdk 21
@@ -21,6 +17,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures{
+        viewBinding true
     }
 
     buildTypes {
