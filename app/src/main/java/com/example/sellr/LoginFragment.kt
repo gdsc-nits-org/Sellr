@@ -32,6 +32,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var emailtxt:String
     private lateinit var passtxt:String
+    private  lateinit var forgot:TextView
 
 
 
@@ -46,7 +47,13 @@ class LoginFragment : Fragment() {
         register = view.findViewById(R.id.textViewregister)
         email = view.findViewById(R.id.editTextTextPersonName)
         pass = view.findViewById(R.id.editTextTextPassword)
+        forgot = view.findViewById(R.id.textViewforgot)
         signinbtn = view.findViewById(R.id.button)
+
+        forgot.setOnClickListener {
+            fragmentload(fragment_forgotpass())
+
+        }
 
         auth = FirebaseAuth.getInstance()
         register.setOnClickListener {
