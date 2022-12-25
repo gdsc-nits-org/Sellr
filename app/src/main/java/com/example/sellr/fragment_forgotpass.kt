@@ -32,7 +32,7 @@ class fragment_forgotpass : Fragment() {
 
         button.setOnClickListener {
             val emailtxt = email.text.toString().trim()
-            if(emailtxt.isBlank())
+            if(emailtxt.isBlank() || !emailtxt.contains("nits"))
                 email.setError("Please Enter Valid Email")
             else {
                 auth.sendPasswordResetEmail(emailtxt)
