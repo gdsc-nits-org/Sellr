@@ -56,6 +56,7 @@ class fragment_extradetails : Fragment() {
                         dtb.child("Users").child(user.uid).child("scholarid").setValue(id)
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
+                activity?.finish()
 
                 activity?.finish()
 
