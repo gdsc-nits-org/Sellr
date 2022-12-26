@@ -46,7 +46,7 @@ class fragmentEditProfile : Fragment() {
                 if (user != null) {
                     //println("userId: ${user.Email}")
                     binding.editHostelNumber.setText(user.Hostel)
-                    //binding.editUserName.setText(user.Name)
+                    binding.editUserName.setText(user.Name)
                     binding.editScholarID.setText(user.ScholarId)
                     binding.editPhoneNumber.setText(user.Phone)
                 }
@@ -62,14 +62,14 @@ class fragmentEditProfile : Fragment() {
 
     fun updateData(){
 
-        //val updatedName=binding.editUserName.text.toString()
+        val updatedName=binding.editUserName.text.toString()
         val updatedScholarId=binding.editScholarID.text.toString()
         val updatedPhoneNumber=binding.editPhoneNumber.text.toString()
         val updatedHostel=binding.editHostelNumber.text.toString()
         val userId=12122
 
         val userMap= mutableMapOf<String,Any>()
-        //userMap["Email"]=updatedName
+        userMap["Name"]=updatedName
         userMap["Hostel"]=updatedHostel
         userMap["Phone"]=updatedPhoneNumber
         userMap["ScholarId"]=updatedScholarId

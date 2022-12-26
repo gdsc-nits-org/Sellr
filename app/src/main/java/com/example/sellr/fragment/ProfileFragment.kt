@@ -43,6 +43,7 @@ class ProfileFragment : Fragment() {
             val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
             val soldFragment=SoldFragment()
             fragmentTransaction.replace(R.id.frame,soldFragment)
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
         }
@@ -52,6 +53,7 @@ class ProfileFragment : Fragment() {
             val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
             val onSaleFragment=OnSaleFragment()
             fragmentTransaction.replace(R.id.frame,onSaleFragment)
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
 

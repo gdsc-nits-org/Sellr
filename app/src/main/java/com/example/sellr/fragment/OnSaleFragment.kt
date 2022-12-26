@@ -1,5 +1,6 @@
 package com.example.sellr.fragment
 
+import android.content.ClipData
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,8 +20,10 @@ class OnSaleFragment : Fragment() {
 
 
     val itemList=ArrayList<SellData>()
+    val updatedList=ArrayList<SellData>()
     lateinit var itemsAdapter:OnSaleAdapter
-    private lateinit var recyclerView: RecyclerView
+    lateinit var recyclerView: RecyclerView
+
 
     private var viewBinding: FragmentOnSaleBinding?=null
     private val binding get()= viewBinding!!
@@ -37,16 +40,12 @@ class OnSaleFragment : Fragment() {
 
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        retriveDataFromDatabase()
-//        val layoutmanager=LinearLayoutManager(context)
-//        recyclerView=binding.recyclerView
-//        recyclerView.layoutManager=layoutmanager
-//        recyclerView.setHasFixedSize(true)
-//
-//
-//    }
+    fun toSold(pId:String){
+        myReference.child(pId).child("sold").setValue(true)
+
+    }
+
+
 
     fun retriveDataFromDatabase(){
 
@@ -56,16 +55,16 @@ class OnSaleFragment : Fragment() {
                 itemList.clear()   //For clearing when data gets added to database.
                 for(eachItem in snapshot.children){
                     val item=eachItem.getValue(SellData::class.java)
-                    if(item!=null){
+                    if(item!=null && item.userUID=="12122"&&!item.sold){
                         itemList.add(item)
 
                     }
+
                     itemsAdapter=OnSaleAdapter(activity,itemList)
                     binding.recyclerView.layoutManager=LinearLayoutManager(activity)
                     binding.recyclerView.adapter=itemsAdapter
-
-
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -73,6 +72,10 @@ class OnSaleFragment : Fragment() {
             }
 
         })
+    }
+
+    fun toDelete(pId: String) {
+        myReference.child(pId).removeValue()
     }
 
 }

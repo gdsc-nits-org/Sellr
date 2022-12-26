@@ -8,6 +8,9 @@ import com.bumptech.glide.Glide
 import com.example.sellr.MainActivity
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.GridLayoutBinding
+import com.example.sellr.fragment.OnSaleFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class OnSaleAdapter(
     var context: FragmentActivity?,
@@ -31,12 +34,26 @@ class OnSaleAdapter(
         holder.adapterBinding.itemName.text=itemList[position].productName
         holder.adapterBinding.itemPrice.text=itemList[position].price
 
+        var mySold:OnSaleFragment=OnSaleFragment()
+
+        holder.adapterBinding.soldButton.setOnClickListener{
+            println("position to delete $position")
+            mySold.toSold(itemList[position].pId)
+        }
+
+        holder.adapterBinding.deleteButton.setOnClickListener{
+            mySold.toDelete(itemList[position].pId)
+        }
+
 
     }
+
+
 
     override fun getItemCount(): Int {
         return itemList.size
     }
+
 }
 
 
