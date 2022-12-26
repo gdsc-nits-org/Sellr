@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.sellr.R
-import com.example.sellr.SellActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,13 +40,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         //TODO: For testing purposes,edit this button later,keep intent unchanged(except the data part)
         val view:View= inflater.inflate(R.layout.fragment_home, container, false)
-        view.findViewById<Button>(R.id.button).setOnClickListener{
-            val intent = Intent(activity, SellActivity::class.java)
-            //TODO: Fetch userID and emailID from database
-            intent.putExtra("userUID", "1234567")
-            intent.putExtra("emailID","deep21_ug@cse.nits.ac.in")
-            startActivity(intent)
-        }
+
         return view
     }
 
