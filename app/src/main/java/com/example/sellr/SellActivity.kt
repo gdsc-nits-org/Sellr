@@ -216,14 +216,14 @@ class SellActivity : AppCompatActivity() {
     }
     private fun setData(){
         setProgressBar()
-        val dataObject=getData()
+        val uID: String = generateUID(emailID!!)
+        val dataObject=getData(uID)
         if(dataObject==null)
         {
             deleteProgressBar()
             return
         }
         database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Items")
-        val uID: String = generateUID(emailID!!)
         val uploadData=database.child(uID).setValue(dataObject)
         Handler(Looper.getMainLooper()).postDelayed({
             if(progressCircular?.visibility==View.VISIBLE)
@@ -236,7 +236,7 @@ class SellActivity : AppCompatActivity() {
         }, 180000)
         uploadData.addOnSuccessListener {
             database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
-            val upDateUserList=database.child(userUID!!).child("productID").push().setValue(uID)
+            val upDateUserList=database.child(userUID!!).child("pId").push().setValue(uID)
             upDateUserList.addOnSuccessListener {
 
                 makeToast( "Successfully Listed")
@@ -253,7 +253,7 @@ class SellActivity : AppCompatActivity() {
         }
 
     }
-    private fun getData(): SellData? {
+    private fun getData(uID:String): SellData? {
         var flag=true
         val productName=findViewById<EditText>(R.id.textFieldName).text.toString().trim()
         if(productName=="")
@@ -327,7 +327,7 @@ class SellActivity : AppCompatActivity() {
                 imagePrimary,
                 imageSecond,
                 imageThird,
-                userUID
+                userUID,false,uID
             )
         }
         else
