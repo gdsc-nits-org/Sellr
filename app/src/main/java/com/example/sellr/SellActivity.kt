@@ -20,6 +20,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
@@ -29,7 +30,6 @@ import java.util.*
 
 class SellActivity : AppCompatActivity() {
     private lateinit var database : DatabaseReference
-
     private var userUID:String?=""
     private var emailID:String?=""
 
@@ -44,22 +44,22 @@ class SellActivity : AppCompatActivity() {
     private var imageButtonThird: ImageButton? =null
     private var progressCircular: ProgressBar? =null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sell)
-
+        val user = Firebase.auth.currentUser
+        if(user!=null) {
+            emailID = user.email
+            userUID = user.uid
+        }
+        else
+        {
+            makeToast("Not logged in")
+            onBackPressed()
+        }
         populateDropDown()
         progressCircular=findViewById(R.id.progress_circular)
-        val intent = intent
-        if(intent.getStringExtra("userUID")!=null)
-        {
-            userUID = intent.getStringExtra("userUID")
-        }
-        if(intent.getStringExtra("emailID")!=null)
-        {
-            emailID=intent.getStringExtra("emailID")
-        }
-
         //get images from storage on user click
         imageButtonPrimary=findViewById(R.id.imageButtonPrimary)
         imageButtonSecond=findViewById(R.id.imageButtonSecond)
