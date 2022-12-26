@@ -50,11 +50,15 @@ class fragment_extradetails : Fragment() {
                 phonenum.setError("Aestrik fields are required")
             else
             {
+
                 dtb.child("Users").child(user.uid).child("phonenum").setValue(phone)
                         dtb.child("Users").child(user.uid).child("name").setValue(nametxt)
                         dtb.child("Users").child(user.uid).child("scholarid").setValue(id)
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
+                activity?.finish()
+
+                activity?.finish()
 
 
             }
