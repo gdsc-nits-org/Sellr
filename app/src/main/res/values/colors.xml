@@ -6,9 +6,39 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
+    <color name="bg_login">#F8F7F7</color>
     <color name="colourPrimary">#03A9F4</color>
     <color name="colourSecondary">#84D4F8</color>
+    <color name="colorPrimary">#EFF0F1</color>
+    <color name="colorPrimaryDark">#969597</color>
+    <color name="colorAccent">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="darkgray">#6c6c6c</color>
+
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="red">#ff0000</color>
+    <color name="blue">#03DAC5</color>
+
+    <color name="below_criterion_color">#D3BFEF</color>
+
+    <color name="bg_bottom_nav">#FFFCFC</color>
+    <color name="card_bg_color">#FFFFFF</color>
+    <color name="btn_tint_color">#F6F2FD</color>
+    <color name="text_color_primary">#3A3A3A</color>
+    <color name="bottom_sheet_bg">#F6F5F5</color>
+    <color name="btn_tint_2">#E7DDFA</color>
+    <color name="btn_positive_text_color">#7D14F5</color>
+    <color name="btn_negative_text_color">#FB5050</color>
+    <color name="text_color_secondary">#323131</color>
+    <color name="calendar_bottom_sheet">#FFFFFF</color>
+    <color name="about_card_bg">#F1E7FF</color>
+    <color name="profile_image_card">#F4F4F4</color>
+    <color name="theme_shadow_color">#7A31C3</color>
+    <color name="warning_color">#BDBA0B</color>
     <color name="error">#B00020</color>
 </resources>
