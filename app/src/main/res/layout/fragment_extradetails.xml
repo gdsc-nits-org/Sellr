@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_login"
-    tools:context=".registerfrag">
+    tools:context=".fragment_extradetails">
 
 
     <ImageView
@@ -30,14 +30,29 @@
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView3"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Extra Details"-->
+<!--        android:textColor="#505050"-->
+<!--        android:textSize="28dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        -->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/guideline_2" />-->
     <TextView
         android:id="@+id/textView3"
-        android:layout_marginTop="30dp"
-        android:layout_width="183dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="We need some extra details to make the process smoother for you"
+        android:layout_margin="6dp"
+        android:fontFamily="@font/comfortaa"
         android:textColor="#505050"
-        android:textSize="28dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.171"
@@ -57,14 +72,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editTextphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/email_icon_custom_dynamic"
+            android:drawableStart="@drawable/phone_android_custom_dynamic"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Institute Email ID"
-            android:inputType="textEmailAddress"
+            android:hint="Phone Number*"
+            android:inputType="number"
             android:textAlignment="inherit"
             app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,17 +99,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signup_email_edittext"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="false">
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editTextname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/lock_icon_custom_dynamic"
+            android:drawableStart="@drawable/account_icon_custom_dynamic"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
+            android:hint="Name*"
+            android:inputType="textPersonName"
             android:textAlignment="inherit"
             app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,17 +130,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signup_passowrd_edittext"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="false">
 
         <EditText
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/editTextid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/lock_icon_custom_dynamic"
+            android:drawableStart="@drawable/school_icon_custom_dynamic"
             android:drawablePadding="10dp"
 
-            android:hint="Confirm Password"
-            android:inputType="textPersonName"
+            android:hint="Scholar ID"
+            android:inputType="number"
             android:textAlignment="inherit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,35 +148,35 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/signup_confirm_name_edittext"-->
-<!--        style="@style/CustomEditText"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/signup_confirm_password_edittext"-->
-<!--        app:passwordToggleEnabled="true">-->
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/signup_confirm_name_edittext"-->
+    <!--        style="@style/CustomEditText"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="32dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_marginEnd="32dp"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/signup_confirm_password_edittext"-->
+    <!--        app:passwordToggleEnabled="true">-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/editTextTextscholarid"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:drawableStart="@drawable/lock_icon_custom_dynamic"-->
-<!--            android:drawablePadding="10dp"-->
+    <!--        <EditText-->
+    <!--            android:id="@+id/editTextTextscholarid"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:drawableStart="@drawable/lock_icon_custom_dynamic"-->
+    <!--            android:drawablePadding="10dp"-->
 
-<!--            android:hint="Scholar ID"-->
-<!--            android:inputType="number"-->
-<!--            android:textAlignment="inherit"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/signup_passowrd_edittext" />-->
+    <!--            android:hint="Scholar ID"-->
+    <!--            android:inputType="number"-->
+    <!--            android:textAlignment="inherit"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/signup_passowrd_edittext" />-->
 
 
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
     <Button
@@ -175,7 +190,7 @@
         android:clickable="true"
         android:elevation="0dp"
 
-        android:text="Signup"
+        android:text="Submit"
         android:textColor="#5B97C6"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -211,7 +226,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
+        app:layout_constraintGuide_percent="0.37" />
 
 
 

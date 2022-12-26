@@ -95,7 +95,7 @@ class LoginFragment : Fragment() {
                                 ).show()
                                 val user = Firebase.auth.currentUser
                                 println("UID is " + user?.uid.toString())
-                                updateUI(user)
+                                fragmentload(fragment_extradetails())
 
                             } else
                                 Toast.makeText(

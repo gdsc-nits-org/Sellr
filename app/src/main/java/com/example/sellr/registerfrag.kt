@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 
 class RegisterFragment : Fragment() {
@@ -146,7 +144,7 @@ class RegisterFragment : Fragment() {
 
     private fun saveuserinfo(emailtxt: String, passtxt: String, uid: String) {
 
-        val user = UserModel(emailtxt,passtxt)
+        val user = UserModel(emailtxt,passtxt,null,null,null)
         database.child("Users").child(uid).setValue(user)
 
     }
