@@ -19,6 +19,8 @@ import com.example.sellr.fragment.RegisterFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 
@@ -33,6 +35,7 @@ class LoginFragment : Fragment() {
     private lateinit var emailtxt:String
     private lateinit var passtxt:String
     private  lateinit var forgot:TextView
+    private lateinit var dtb:DatabaseReference
 
 
 
@@ -49,6 +52,8 @@ class LoginFragment : Fragment() {
         pass = view.findViewById(R.id.editTextTextPassword)
         forgot = view.findViewById(R.id.textViewforgot)
         signinbtn = view.findViewById(R.id.button)
+        dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+
 
         forgot.setOnClickListener {
             fragmentload(fragment_forgotpass())
@@ -95,7 +100,32 @@ class LoginFragment : Fragment() {
                                 ).show()
                                 val user = Firebase.auth.currentUser
                                 println("UID is " + user?.uid.toString())
-                                fragmentload(fragment_extradetails())
+
+                                if (user != null) {
+                                    dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
+                                        val check = it.child("infoentered").toString();
+
+                                        if(check.contains("no")) {
+                                            fragmentload(fragment_extradetails())
+                                            dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
+
+                                        }
+                                        else
+                                        {
+
+                                            val intent = Intent(requireContext(), MainActivity::class.java)
+                                            startActivity(intent)
+
+                                            activity?.finish()
+                                        }
+
+                                    }.addOnFailureListener{
+
+                                    }
+                                }
+
+
+
 
                             } else
                                 Toast.makeText(
@@ -146,3 +176,4 @@ class LoginFragment : Fragment() {
 
 
 }
+

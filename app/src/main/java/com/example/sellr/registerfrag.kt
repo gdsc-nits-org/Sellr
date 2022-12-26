@@ -1,3 +1,4 @@
+
 package com.example.sellr.fragment
 
 import android.app.ActionBar
@@ -24,12 +25,12 @@ class RegisterFragment : Fragment() {
     private lateinit var confrmpass:EditText
     private lateinit var signupbtn:Button
     private lateinit var auth:FirebaseAuth
-     private lateinit var emailtxt:String
+    private lateinit var emailtxt:String
     private lateinit var passtxt:String
     private lateinit var cnfrmpasstxt:String
     private lateinit var user:FirebaseUser
     private lateinit var database:DatabaseReference
-   var ct:Int = 0
+    var ct:Int = 0
     lateinit var register: TextView
     lateinit var actionbar: ActionBar
 
@@ -43,7 +44,7 @@ class RegisterFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_registerfrag, container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         auth = FirebaseAuth.getInstance()
-         database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+        database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         email = view.findViewById(R.id.editTextEmail)
         pass = view.findViewById(R.id.editTextTextPassword)
         confrmpass = view.findViewById(R.id.editTextTextPassword2)
@@ -54,7 +55,7 @@ class RegisterFragment : Fragment() {
 
         signupbtn.setOnClickListener {
 
-             ct = 0;
+            ct = 0;
             emailtxt = email.text.toString().trim()
             passtxt = pass.text.toString().trim()
             cnfrmpasstxt= confrmpass.text.toString().trim()
@@ -66,26 +67,26 @@ class RegisterFragment : Fragment() {
             }
             else
                 ct++;
-             if(passtxt.isBlank()) {
-                 Toast.makeText(requireContext(), "Password can't be empty", Toast.LENGTH_SHORT)
-                     .show()
-                 pass.setError("Password can't be empty")
-             }
+            if(passtxt.isBlank()) {
+                Toast.makeText(requireContext(), "Password can't be empty", Toast.LENGTH_SHORT)
+                    .show()
+                pass.setError("Password can't be empty")
+            }
             else
                 ct++
             if(cnfrmpasstxt.equals(passtxt)!=true)
-                {
-                    Toast.makeText(requireContext(), "Password Mismatch", Toast.LENGTH_SHORT)
-                        .show()
-                    confrmpass.setError("Password Mismatch")
-                }
+            {
+                Toast.makeText(requireContext(), "Password Mismatch", Toast.LENGTH_SHORT)
+                    .show()
+                confrmpass.setError("Password Mismatch")
+            }
             else
                 ct++
-             if(passtxt.length<6) {
-                 Toast.makeText(requireContext(), "Password must be greater than 6 char", Toast.LENGTH_SHORT)
-                     .show()
-                 pass.setError("Password must be greater than 6 char")
-             }
+            if(passtxt.length<6) {
+                Toast.makeText(requireContext(), "Password must be greater than 6 char", Toast.LENGTH_SHORT)
+                    .show()
+                pass.setError("Password must be greater than 6 char")
+            }
             else
                 ct++
             if( emailtxt.contains("nits")!=true) {
@@ -96,7 +97,7 @@ class RegisterFragment : Fragment() {
             else
                 ct++
             if(ct==5)
-             {
+            {
 
 
                 auth.createUserWithEmailAndPassword(emailtxt, passtxt)
@@ -144,7 +145,7 @@ class RegisterFragment : Fragment() {
 
     private fun saveuserinfo(emailtxt: String, passtxt: String, uid: String) {
 
-        val user = UserModel(emailtxt,passtxt,null,null,null)
+        val user = UserModel(emailtxt,passtxt,null,null,null,"no")
         database.child("Users").child(uid).setValue(user)
 
     }
