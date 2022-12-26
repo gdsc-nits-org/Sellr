@@ -2,4 +2,25 @@
     <string name="app_name">Sellr</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">title</string>
+    <string name="cancel">Cancel</string>
+    <string name="decline">decline</string>
+    <string name="accept">accept</string>
+    <string name="item_name">Item Name</string>
+    <string name="choose_a_category">Choose a Category</string>
+    <string name="used">Used</string>
+    <string name="newChip">new</string>
+    <string name="item_condition">Item Condition</string>
+    <string name="please_choose_item_condition">Please choose item condition</string>
+    <string name="price">Price</string>
+    <string name="upload_image">Upload images</string>
+    <string name="list_it">List it!</string>
+    <string name="please_upload_images">Please upload images</string>
+    <string-array name="Categories">
+        <item>Books</item>
+        <item>Electronics</item>
+        <item>Clothes</item>
+        <item>Vehicles</item>
+        <item>Others</item>
+    </string-array>
 </resources>
