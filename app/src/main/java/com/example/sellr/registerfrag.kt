@@ -144,7 +144,7 @@ class RegisterFragment : Fragment() {
 
     private fun saveuserinfo(emailtxt: String, passtxt: String, uid: String) {
 
-        val user = UserModel(emailtxt,passtxt,null,null,null)
+        val user = UserModel(emailtxt,passtxt,null,null,null,"no")
         database.child("Users").child(uid).setValue(user)
 
     }

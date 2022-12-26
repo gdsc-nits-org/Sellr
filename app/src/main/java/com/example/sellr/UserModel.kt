@@ -5,5 +5,6 @@ data class UserModel(
     val password:String,
     val phonenum: String?,
     val name:String?,
-    val scholarID:String?
+    val scholarID:String?,
+    val infoentered:String
 )
