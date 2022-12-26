@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sellr.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sellr.Adapters.OnSaleAdapter
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.FragmentOnSaleBinding
-import com.example.sellr.databinding.FragmentProfileBinding
 import com.google.firebase.database.*
 
 
@@ -16,6 +17,10 @@ class OnSaleFragment : Fragment() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
     val myReference: DatabaseReference =database.reference.child("Items")
 
+
+    val itemList=ArrayList<SellData>()
+    lateinit var itemsAdapter:OnSaleAdapter
+    private lateinit var recyclerView: RecyclerView
 
     private var viewBinding: FragmentOnSaleBinding?=null
     private val binding get()= viewBinding!!
@@ -26,19 +31,40 @@ class OnSaleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewBinding=FragmentOnSaleBinding.inflate(inflater,container,false)
-        val view=binding.root
-        return view
+        viewBinding = FragmentOnSaleBinding.inflate(inflater, container, false)
+        retriveDataFromDatabase()
+        return binding.root
+
     }
 
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        retriveDataFromDatabase()
+//        val layoutmanager=LinearLayoutManager(context)
+//        recyclerView=binding.recyclerView
+//        recyclerView.layoutManager=layoutmanager
+//        recyclerView.setHasFixedSize(true)
+//
+//
+//    }
+
     fun retriveDataFromDatabase(){
+
         myReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                itemList.clear()   //For clearing when data gets added to database.
                 for(eachItem in snapshot.children){
                     val item=eachItem.getValue(SellData::class.java)
                     if(item!=null){
+                        itemList.add(item)
 
                     }
+                    itemsAdapter=OnSaleAdapter(activity,itemList)
+                    binding.recyclerView.layoutManager=LinearLayoutManager(activity)
+                    binding.recyclerView.adapter=itemsAdapter
+
+
                 }
             }
 
