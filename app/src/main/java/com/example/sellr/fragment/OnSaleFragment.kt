@@ -22,7 +22,6 @@ class OnSaleFragment : Fragment() {
     val itemList=ArrayList<SellData>()
     val updatedList=ArrayList<SellData>()
     lateinit var itemsAdapter:OnSaleAdapter
-    lateinit var recyclerView: RecyclerView
 
 
     private var viewBinding: FragmentOnSaleBinding?=null

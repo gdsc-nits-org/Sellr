@@ -42,13 +42,13 @@ class fragmentEditProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //for(eachUser in snapshot.children) {
-                val user = snapshot.child(12122.toString()).getValue(UserData::class.java)
+                val user = snapshot.child("ybGanSNyMQQMsb7tytZkjyCELOu2").getValue(UserData::class.java)
                 if (user != null) {
                     //println("userId: ${user.Email}")
                     binding.editHostelNumber.setText(user.Hostel)
-                    binding.editUserName.setText(user.Name)
-                    binding.editScholarID.setText(user.ScholarId)
-                    binding.editPhoneNumber.setText(user.Phone)
+                    binding.editUserName.setText(user.name)
+                    binding.editScholarID.setText(user.scholarid)
+                    binding.editPhoneNumber.setText(user.phonenum)
                 }
                 //}
 
@@ -66,7 +66,7 @@ class fragmentEditProfile : Fragment() {
         val updatedScholarId=binding.editScholarID.text.toString()
         val updatedPhoneNumber=binding.editPhoneNumber.text.toString()
         val updatedHostel=binding.editHostelNumber.text.toString()
-        val userId=12122
+        val userId="ybGanSNyMQQMsb7tytZkjyCELOu2"
 
         val userMap= mutableMapOf<String,Any>()
         userMap["Name"]=updatedName

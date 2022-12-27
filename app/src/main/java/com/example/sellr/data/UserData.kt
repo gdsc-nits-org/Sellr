@@ -1,4 +1,4 @@
 package com.example.sellr.data
 
-data class UserData(val Email:String="",val Hostel:String="",val Name:String="",val Phone:String="",val ScholarId:String="") {
+data class UserData(val email:String="",val Hostel:String="",val name:String?="",val phonenum:String="",val scholarid:String?="",val uId:String="") {
 }

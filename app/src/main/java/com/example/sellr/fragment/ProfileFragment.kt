@@ -34,6 +34,7 @@ class ProfileFragment : Fragment() {
             val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
             val profileFragment=fragmentEditProfile()
             fragmentTransaction.replace(R.id.frame,profileFragment)
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
         }
@@ -66,14 +67,14 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //for(eachUser in snapshot.children) {
-                    val user = snapshot.child(12122.toString()).getValue(UserData::class.java)
+                    val user = snapshot.child("ybGanSNyMQQMsb7tytZkjyCELOu2").getValue(UserData::class.java)
                     if (user != null) {
                         //println("userId: ${user.Email}")
-                        binding.EMAIL.text=user.Email
+                        binding.EMAIL.text=user.email
                         binding.HOSTEL.text=user.Hostel
-                        binding.USERNAME.text=user.Name
-                        binding.SCHOLAR.text=user.ScholarId
-                        binding.PHONE.text=user.Phone
+                        binding.USERNAME.text=user.name
+                        binding.SCHOLAR.text=user.scholarid
+                        binding.PHONE.text=user.phonenum
                     }
                 //}
 
