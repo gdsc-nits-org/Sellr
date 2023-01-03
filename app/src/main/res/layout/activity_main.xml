@@ -13,7 +13,8 @@
         app:navGraph="@navigation/nav"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintBottom_toTopOf="@+id/bottomBar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_home" />
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottomBar"
