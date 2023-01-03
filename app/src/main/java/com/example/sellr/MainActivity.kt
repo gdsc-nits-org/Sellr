@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 arguments: Bundle?
             ) {
                 title = when(destination.id){
-                    R.id.cartFragment -> "Cart"
+                    R.id.cartFragment -> "My Cart"
                     R.id.profileFragment -> "Profile"
                     else -> "Sellr"
                 }
