@@ -45,13 +45,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:id="@+id/inputCategory"
+                android:hint="@string/choose_a_category"
                 app:errorEnabled="true">
                 <AutoCompleteTextView
                     android:id="@+id/categoryDropDown"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:text="@string/choose_a_category"
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>

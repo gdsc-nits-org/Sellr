@@ -266,7 +266,7 @@ class SellActivity : AppCompatActivity() {
             findViewById<TextInputLayout>(R.id.inputName).error=null
         }
         val category=findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()
-        if(category=="Choose a Category")
+        if(category=="")
         {
             findViewById<TextInputLayout>(R.id.inputCategory).error="This field is required"
             flag=false
@@ -318,6 +318,7 @@ class SellActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.imageError).visibility=View.GONE
         }
         if(flag) {
+            val currentDate=SimpleDateFormat("dd-MM-yyyy").format(Date())
             return SellData(
                 productName,
                 productDesc,
@@ -327,7 +328,7 @@ class SellActivity : AppCompatActivity() {
                 imagePrimary,
                 imageSecond,
                 imageThird,
-                userUID,false,uID
+                userUID, false, uID,currentDate
             )
         }
         else
