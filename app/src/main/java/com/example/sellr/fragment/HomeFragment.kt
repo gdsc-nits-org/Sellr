@@ -10,9 +10,12 @@ import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellr.R
 import com.example.sellr.databinding.FragmentHomeBinding
+import com.example.sellr.datahome.filterAdapter
+import com.example.sellr.datahome.filterData
 import com.example.sellr.datahome.items_home
 import com.example.sellr.datahome.myAdapterhome
 import com.google.firebase.database.*
@@ -37,12 +40,17 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    //for items
     private lateinit var recylerView: RecyclerView
     private lateinit var datalist: ArrayList<items_home>
     private lateinit var searchList: ArrayList<items_home>
     private lateinit var searchView: SearchView
     private lateinit var dbref: DatabaseReference
-    private lateinit var like: ImageView
+
+    //for filer
+    private lateinit var datalistforfilter : kotlin.collections.ArrayList<filterData>
+    private lateinit var recylerViewfilter: RecyclerView
+    private lateinit var dbreffiler: DatabaseReference
 
 
 
@@ -87,7 +95,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //for filter
+        val layoutManagerfilter = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recylerViewfilter = view.findViewById(R.id.filter)
+        recylerViewfilter.layoutManager = layoutManagerfilter
 
+        datalistforfilter = arrayListOf()
+
+        datalistforfilter.add(filterData("Electronics"))
+        datalistforfilter.add(filterData("Books"))
+        datalistforfilter.add(filterData("Vehicles"))
+        datalistforfilter.add(filterData("Clothes"))
+        datalistforfilter.add(filterData("Others"))
+
+        recylerViewfilter.adapter = filterAdapter(datalistforfilter)
+
+
+        // for items
         val layoutManager = GridLayoutManager(context, 2)
         recylerView = view.findViewById(R.id.Home_rc)
         recylerView.layoutManager = layoutManager
@@ -129,7 +153,10 @@ class HomeFragment : Fragment() {
 
 
 
+
     }
+
+
 
     private fun getUserData() {
 
@@ -171,5 +198,6 @@ class HomeFragment : Fragment() {
 
 
     }
+
 }
 

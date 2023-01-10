@@ -26,7 +26,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
-        val currentItem = dataList[position]
+        val currentItem = dataList[dataList.size - position - 1]
         holder.newOrOld.text = currentItem.condition
         Glide.with(fragment).load(currentItem.imagePrimary).into(holder.photo)
         holder.itemName.text = currentItem.productName
