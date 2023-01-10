@@ -15,7 +15,8 @@
     <string name="price">Price</string>
     <string name="upload_image">Upload images</string>
     <string name="list_it">List it!</string>
-    <string name="please_upload_images">Please upload images</string>
+    <string name="please_upload_images">Please upload at least one image</string>
+    <string name="used_for_time">Used for time</string>
     <string-array name="Categories">
         <item>Books</item>
         <item>Electronics</item>

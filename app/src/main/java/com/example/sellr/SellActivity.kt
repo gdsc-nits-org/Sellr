@@ -3,6 +3,7 @@
 package com.example.sellr
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,10 +11,12 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.example.sellr.data.SellData
 import com.example.sellr.utils.CheckInternet
 import com.google.android.material.chip.Chip
@@ -27,27 +30,30 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-class SellActivity : AppCompatActivity() {
+
+class SellActivity : AppCompatActivity(){
     private lateinit var database : DatabaseReference
     private var userUID:String?=""
     private var emailID:String?=""
 
     //For SellData Class
-    private var imagePrimary : String? =""
-    private var imageSecond : String? = ""
-    private var imageThird : String? = ""
-
-
+    private var imagePrimary : String? = ""
+    private var imageArray = ArrayList<String>()
     private var imageButtonPrimary: ImageButton? =null
     private var imageButtonSecond: ImageButton? =null
     private var imageButtonThird: ImageButton? =null
+    private var imageButtonFourth: ImageButton? =null
     private var progressCircular: ProgressBar? =null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sell)
+        imageArray.add("")
+        imageArray.add("")
+        imageArray.add("")
         val user = Firebase.auth.currentUser
         if(user!=null) {
             emailID = user.email
@@ -59,11 +65,27 @@ class SellActivity : AppCompatActivity() {
             onBackPressed()
         }
         populateDropDown()
+        findViewById<AutoCompleteTextView>(R.id.categoryDropDown).doAfterTextChanged {
+            if(findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()=="Others")
+            {
+                showDialog()
+            }
+            else
+            {
+                findViewById<TextInputLayout>(R.id.inputCategory).helperText=null
+            }
+        }
+
+
         progressCircular=findViewById(R.id.progress_circular)
         //get images from storage on user click
-        imageButtonPrimary=findViewById(R.id.imageButtonPrimary)
+        imageButtonPrimary=findViewById(R.id.imageButtonFirst)
         imageButtonSecond=findViewById(R.id.imageButtonSecond)
         imageButtonThird=findViewById(R.id.imageButtonThird)
+        imageButtonFourth=findViewById(R.id.imageButtonFourth)
+        imageButtonSecond?.isEnabled=false
+        imageButtonThird?.isEnabled=false
+        imageButtonFourth?.isEnabled=false
         imageButtonPrimary?.setOnClickListener{
 
             if(checkInternet())
@@ -96,6 +118,27 @@ class SellActivity : AppCompatActivity() {
 
             }
 
+        }
+        imageButtonFourth?.setOnClickListener{
+
+            if(checkInternet())
+            {
+                val iGallery=Intent(Intent.ACTION_PICK)
+                iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                startActivityForResult(iGallery,4000)
+            }
+
+        }
+
+        //On used click
+        findViewById<TextInputLayout>(R.id.usedCondition).isEnabled=false
+        val usedChip:Chip=findViewById(R.id.usedChip)
+        val newChip:Chip=findViewById(R.id.newChip)
+        usedChip.setOnClickListener{
+            chipClicked()
+        }
+        newChip.setOnClickListener{
+            chipClicked()
         }
 
 
@@ -133,8 +176,16 @@ class SellActivity : AppCompatActivity() {
                 3000 -> {
                     upDateImage(3, data)
                 }
+                4000 -> {
+                    upDateImage(4, data)
+                }
             }
         }
+    }
+    private fun chipClicked()
+    {
+        val usedClicked=findViewById<Chip>(R.id.usedChip)
+        findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = usedClicked.isChecked
     }
     private fun upDateImage(i: Int, data: Intent?) {
         setProgressBar()
@@ -163,25 +214,43 @@ class SellActivity : AppCompatActivity() {
                         }
                         imageButtonPrimary?.setImageURI(imageUri)
                         imagePrimary=it.toString()
+                        imageButtonSecond?.isEnabled=true
+                        imageButtonSecond?.visibility= View.VISIBLE
+                        imageButtonSecond?.setImageResource(R.drawable.ic_image_placeholder)
 
                     }
                     2 -> {
-                        if(imageSecond!="")
+                        if(imageArray[0]!="")
                         {
-                            val ref=Firebase.storage.getReferenceFromUrl(imageSecond!!)
+                            val ref=Firebase.storage.getReferenceFromUrl(imageArray[0])
                             ref.delete()
                         }
                         imageButtonSecond?.setImageURI(imageUri)
-                        imageSecond=it.toString()
+                        imageArray[0]=it.toString()
+                        imageButtonThird?.isEnabled=true
+                        imageButtonThird?.visibility= View.VISIBLE
+                        imageButtonThird?.setImageResource(R.drawable.ic_image_placeholder)
                     }
                     3 -> {
                         imageButtonThird?.setImageURI(imageUri)
-                        if(imageThird!="")
+                        if(imageArray[1]!="")
                         {
-                            val ref=Firebase.storage.getReferenceFromUrl(imageThird!!)
+                            val ref=Firebase.storage.getReferenceFromUrl(imageArray[2])
                             ref.delete()
                         }
-                        imageThird=it.toString()
+                        imageArray[1]=it.toString()
+                        imageButtonFourth?.isEnabled=true
+                        imageButtonFourth?.visibility= View.VISIBLE
+                        imageButtonFourth?.setImageResource(R.drawable.ic_image_placeholder)
+                    }
+                    4 -> {
+                        imageButtonFourth?.setImageURI(imageUri)
+                        if(imageArray[2]!="")
+                        {
+                            val ref=Firebase.storage.getReferenceFromUrl(imageArray[2])
+                            ref.delete()
+                        }
+                        imageArray[2]=it.toString()
                     }
                 }
                 deleteProgressBar()
@@ -253,12 +322,14 @@ class SellActivity : AppCompatActivity() {
         }
 
     }
+    @SuppressLint("SimpleDateFormat")
     private fun getData(uID:String): SellData? {
         var flag=true
         val productName=findViewById<EditText>(R.id.textFieldName).text.toString().trim()
         if(productName=="")
         {
             findViewById<TextInputLayout>(R.id.inputName).error="This field is required"
+
             flag=false
         }
         else
@@ -266,14 +337,24 @@ class SellActivity : AppCompatActivity() {
             findViewById<TextInputLayout>(R.id.inputName).error=null
         }
         val category=findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()
+        val ipCategory=findViewById<TextInputLayout>(R.id.inputCategory)
+        val additionalCategory=ipCategory.helperText.toString()
         if(category=="")
         {
-            findViewById<TextInputLayout>(R.id.inputCategory).error="This field is required"
+            ipCategory.error="This field is required"
             flag=false
+        }
+        else if(category=="Others")
+        {
+            if(additionalCategory=="null")
+            {
+                ipCategory.error="Please Specify Item Category"
+                flag=false
+            }
         }
         else
         {
-            findViewById<TextInputLayout>(R.id.inputCategory).error=null
+            ipCategory.error=null
         }
         val productDesc=findViewById<EditText>(R.id.textFieldDesc).text.toString().trim()
         if(productDesc=="")
@@ -307,7 +388,7 @@ class SellActivity : AppCompatActivity() {
         {
             findViewById<TextInputLayout>(R.id.inputPrice).error=null
         }
-        if(imagePrimary==""||imageSecond==""||imageThird=="")
+        if(imagePrimary=="")
         {
             findViewById<TextView>(R.id.imageError).visibility=View.VISIBLE
             flag=false
@@ -317,17 +398,35 @@ class SellActivity : AppCompatActivity() {
         {
             findViewById<TextView>(R.id.imageError).visibility=View.GONE
         }
+        var usedTime=""
+        if(condition=="Used")
+        {
+            usedTime=findViewById<EditText>(R.id.textFieldUsedCondition).text.toString()
+            if(usedTime=="")
+            {
+                findViewById<TextInputLayout>(R.id.usedCondition).error="This field is required"
+                flag=false
+            }
+            else
+            {
+                findViewById<TextInputLayout>(R.id.usedCondition).error=null
+            }
+        }
+
         if(flag) {
             val currentDate=SimpleDateFormat("dd-MM-yyyy").format(Date())
+
+
             return SellData(
                 productName,
                 productDesc,
                 category,
+                additionalCategory,
                 condition,
+                usedTime,
                 price,
                 imagePrimary,
-                imageSecond,
-                imageThird,
+                imageArray,
                 userUID, false, uID,currentDate
             )
         }
@@ -348,6 +447,30 @@ class SellActivity : AppCompatActivity() {
         }
         return true
     }
+    private fun showDialog() {
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.other_category)
+        dialog.setCancelable(true)
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        val etPost = dialog.findViewById<EditText>(R.id.et_post)
+        dialog.findViewById<View>(R.id.bt_cancel)
+            .setOnClickListener { dialog.dismiss() }
+        dialog.findViewById<View>(R.id.btn_submit).setOnClickListener { _: View? ->
+            val customCat = etPost.text.toString().trim { it <= ' ' }
+            val update=findViewById<TextInputLayout>(R.id.inputCategory)
+            update.error=null
+            update.helperText=customCat
+            dialog.dismiss()
+        }
+        dialog.show()
+        dialog.window!!.attributes = lp
+
+    }
     private fun makeToast(value:String){
 
         Toast.makeText(applicationContext,value,Toast.LENGTH_LONG).show()
@@ -365,8 +488,9 @@ class SellActivity : AppCompatActivity() {
     {
         //Populate dropDown category list
         val categories = resources.getStringArray(R.array.Categories)
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, categories)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item,categories)
         findViewById<AutoCompleteTextView>(R.id.categoryDropDown).setAdapter(arrayAdapter)
+
     }
     override fun onRestart() {
         super.onRestart()

@@ -8,8 +8,9 @@
     <color name="black">#FF000000</color>
 
     <color name="bg_login">#F8F7F7</color>
-    <color name="colourPrimary">#03A9F4</color>
-    <color name="colourSecondary">#84D4F8</color>
+    <color name="colourPrimary">#00b59c</color>
+    <color name="colourSecondary">#00efd2</color>
+    <color name="colourAccent">#fec202</color>
     <color name="colorPrimary">#EFF0F1</color>
     <color name="colorPrimaryDark">#969597</color>
     <color name="colorAccent">#000000</color>
