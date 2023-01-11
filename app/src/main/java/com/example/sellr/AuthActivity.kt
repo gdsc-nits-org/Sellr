@@ -3,6 +3,7 @@ package com.example.sellr
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sellr.databinding.ActivityAuthBinding
 import com.example.sellr.fragment.RegisterFragment
@@ -14,7 +15,17 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        fragmentload(LoginFragment())
+        val intent:Intent= intent
+        if(intent.hasExtra("splash off"))
+        {
+            fragmentload(LoginFragment())
+        }
+        else
+        {
+            fragmentload(SplashFragment())
+        }
+
+
 
 
 
@@ -30,15 +41,19 @@ class AuthActivity : AppCompatActivity() {
     }
     override fun onBackPressed() {
         println("Hi there")
-        super.onBackPressed()
         val currentFragment = supportFragmentManager.fragments.last()
+        super.onBackPressed()
         if(currentFragment.toString().contains("RegisterFragment") || currentFragment.toString().contains("fragment_forgotpass") ) {
+
             val intent = Intent(this, AuthActivity::class.java)
+            intent.putExtra("splash off","splash off")
             startActivity(intent)
         }
         else {
             finish()
         }
+
+
 
 
     }
