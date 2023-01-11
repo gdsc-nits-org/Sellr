@@ -18,10 +18,23 @@ var selectedItemPosition: Int = 0
 class filterAdapter(private var dataList: ArrayList<filterData>) :
     RecyclerView.Adapter<filterAdapter.MyViewHolder>() {
 
+    private lateinit var mListener : onItemClickListener
+
+    interface onItemClickListener{
+
+        fun onItemClick(category: String)
+
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+
+        mListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): filterAdapter.MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filter_item,
             parent, false)
-        return filterAdapter.MyViewHolder(itemView)
+        return filterAdapter.MyViewHolder(itemView,mListener)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -31,6 +44,7 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         holder.itemView.setOnClickListener {
             selectedItemPosition = position
             notifyDataSetChanged()
+            mListener.onItemClick(currentItem.category)
         }
 
         if(selectedItemPosition == position)
@@ -44,10 +58,12 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         return dataList.size
     }
 
-    class MyViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
+    class MyViewHolder (itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         var category : TextView = itemView.findViewById(R.id.category)
 
+
         }
+
         }
 
 

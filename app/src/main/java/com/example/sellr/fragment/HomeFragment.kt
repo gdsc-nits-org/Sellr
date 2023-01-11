@@ -50,8 +50,10 @@ class HomeFragment : Fragment() {
     //for filer
     private lateinit var datalistforfilter : kotlin.collections.ArrayList<filterData>
     private lateinit var recylerViewfilter: RecyclerView
-    private lateinit var dbreffiler: DatabaseReference
 
+
+    //for filtered datalist in myadapterhome
+    private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,7 +111,8 @@ class HomeFragment : Fragment() {
         datalistforfilter.add(filterData("Clothes"))
         datalistforfilter.add(filterData("Others"))
 
-        recylerViewfilter.adapter = filterAdapter(datalistforfilter)
+        var adapterfilter = filterAdapter(datalistforfilter)
+        recylerViewfilter.adapter = adapterfilter
 
 
 
@@ -122,8 +125,13 @@ class HomeFragment : Fragment() {
 
         datalist = arrayListOf()
         searchList = arrayListOf()
+        datalistforfilteredmyAdapter= arrayListOf()
+
+        datalistforfilteredmyAdapter.addAll(datalist)
         getUserData()
 
+
+        //for searching
 
 
         searchView.clearFocus()
@@ -155,9 +163,25 @@ class HomeFragment : Fragment() {
 
         })
 
+        //koi filter ko press karega toh kya hoga uska code hai
 
+        adapterfilter.setOnItemClickListener(object:filterAdapter.onItemClickListener{
+            override fun onItemClick(category: String) {
+                datalistforfilteredmyAdapter.clear()
+                datalist.forEach{
+                    if(it.category == category){
+                        datalistforfilteredmyAdapter.add(it)
+                    }
+                }
+                if(category == "All"){
+                    datalistforfilteredmyAdapter.addAll(datalist)
+                }
+                recylerView.adapter?.notifyDataSetChanged()
+                recylerView.adapter = myAdapterhome(this@HomeFragment,datalistforfilteredmyAdapter)
 
+            }
 
+        })
     }
 
 
@@ -180,6 +204,7 @@ class HomeFragment : Fragment() {
                             }
                         }
                     }
+
 
                     searchList.addAll(datalist)
                     recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
