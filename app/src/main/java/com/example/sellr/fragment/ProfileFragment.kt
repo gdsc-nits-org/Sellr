@@ -29,15 +29,15 @@ class ProfileFragment : Fragment() {
 
         retriveDataFromDatabase()
 
-        binding.editButton.setOnClickListener{
-            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
-            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
-            val profileFragment=fragmentEditProfile()
-            fragmentTransaction.replace(R.id.frame,profileFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-
-        }
+//        binding.editButton.setOnClickListener{
+//            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
+//            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
+//            val profileFragment=fragmentEditProfile()
+//            fragmentTransaction.replace(R.id.frame,profileFragment)
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+//
+//        }
 
         binding.soldButton.setOnClickListener {
             val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
@@ -71,7 +71,7 @@ class ProfileFragment : Fragment() {
                     if (user != null) {
                         //println("userId: ${user.Email}")
                         binding.EMAIL.text=user.email
-                        binding.HOSTEL.text=user.Hostel
+                       // binding.HOSTEL.text=user.Hostel
                         binding.USERNAME.text=user.name
                         binding.SCHOLAR.text=user.scholarid
                         binding.PHONE.text=user.phonenum
