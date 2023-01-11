@@ -102,6 +102,7 @@ class HomeFragment : Fragment() {
 
         datalistforfilter = arrayListOf()
 
+        datalistforfilter.add(filterData("All"))
         datalistforfilter.add(filterData("Electronics"))
         datalistforfilter.add(filterData("Books"))
         datalistforfilter.add(filterData("Vehicles"))
@@ -109,6 +110,7 @@ class HomeFragment : Fragment() {
         datalistforfilter.add(filterData("Others"))
 
         recylerViewfilter.adapter = filterAdapter(datalistforfilter)
+
 
 
         // for items
@@ -121,6 +123,8 @@ class HomeFragment : Fragment() {
         datalist = arrayListOf()
         searchList = arrayListOf()
         getUserData()
+
+
 
         searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{

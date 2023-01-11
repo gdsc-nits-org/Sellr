@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide.init
 import com.example.sellr.R
 import kotlinx.coroutines.NonDisposableHandle.parent
 
+var selectedItemPosition: Int = 0
+
 class filterAdapter(private var dataList: ArrayList<filterData>) :
     RecyclerView.Adapter<filterAdapter.MyViewHolder>() {
 
@@ -25,7 +27,18 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = dataList[position]
         holder.category.text = currentItem.category
+
+        holder.itemView.setOnClickListener {
+            selectedItemPosition = position
+            notifyDataSetChanged()
         }
+
+        if(selectedItemPosition == position)
+            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#146AFF"))
+        else
+            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#C2E4F3"))
+    }
+
 
     override fun getItemCount(): Int {
         return dataList.size
