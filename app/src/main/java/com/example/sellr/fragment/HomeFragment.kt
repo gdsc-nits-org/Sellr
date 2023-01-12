@@ -179,9 +179,44 @@ class HomeFragment : Fragment() {
                 recylerView.adapter?.notifyDataSetChanged()
                 recylerView.adapter = myAdapterhome(this@HomeFragment,datalistforfilteredmyAdapter)
 
+                searchView.clearFocus()
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(p0: String?): Boolean {
+                        searchView.clearFocus()
+                        return true
+                    }
+
+                    override fun onQueryTextChange(p0: String?): Boolean {
+                        searchList.clear()
+                        val searchText = p0!!.toLowerCase(Locale.getDefault())
+                        if(searchText.isNotEmpty()){
+                            datalistforfilteredmyAdapter.forEach{
+                                if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                                    searchList.add(it)
+                                }
+                            }
+                            recylerView.adapter?.notifyDataSetChanged()
+                            recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
+                        }
+                        else{
+                            searchList.clear()
+                            searchList.addAll(datalistforfilteredmyAdapter)
+                            recylerView.adapter?.notifyDataSetChanged()
+                            recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
+                        }
+                        return false
+                    }
+
+
+                })
             }
 
-        })
+
+
+        }
+
+
+        )
     }
 
 

@@ -48,9 +48,9 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         }
 
         if(selectedItemPosition == position)
-            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#146AFF"))
+            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#FEC202"))
         else
-            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#C2E4F3"))
+            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#00A58E"))
     }
 
 

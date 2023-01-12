@@ -16,7 +16,7 @@
         app:cardCornerRadius="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="#C2E4F3">
+        android:backgroundTint="#00A58E">
 
         <LinearLayout
             android:id="@+id/item_linearl"

@@ -44,7 +44,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
 
                         val items = userSnapshot.getValue()
                         if(items == currentItem.pid) {
-                            holder.addToFav.setImageResource(R.drawable.favorite)
+                            holder.addToFav.setImageResource(R.drawable.add_to_carty)
                             currentItem.addedtofav = true
                             currentItem.key = userSnapshot.key
                             println("Item is " + holder.itemName.text + "value is " + currentItem.addedtofav + "under for loop")
@@ -57,7 +57,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
                     if(x==0)
                     {
 
-                        holder.addToFav.setImageResource(R.drawable.like)
+                        holder.addToFav.setImageResource(R.drawable.add_to_cart)
                         currentItem.addedtofav = false
                         println("Item is "+ holder.itemName.text+ "value is "+currentItem.addedtofav)
                     }
@@ -94,10 +94,10 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
             }
             else
             {
-                holder.addToFav.setImageResource(R.drawable.like)
+                holder.addToFav.setImageResource(R.drawable.add_to_cart)
                 println("inside removing")
                 currentItem.addedtofav = false
-                holder.addToFav.setImageResource(R.drawable.like)
+                holder.addToFav.setImageResource(R.drawable.add_to_cart)
                 dtb.child("Users").child("9BBFtFinnoUNc388iUKm7AbPKrs2").child("favpost").child(currentItem.key.toString()).removeValue()
 
 
