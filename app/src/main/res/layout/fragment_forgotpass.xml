@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_login"
+    android:background="@drawable/bg"
     tools:context=".fragment_forgotpass">
 
     <TextView
@@ -67,26 +67,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/submit"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="84dp"
+        app:cornerRadius="20dp"
+        android:backgroundTint="#fec202"
         android:clickable="true"
         android:text="Submit"
         android:textAllCaps="false"
-        android:textColor="#5B97C6"
+        android:textColor="#4e4637"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="#5B97C6"
+        app:rippleColor="#BCA250"
         app:strokeColor="#5B97C6"
         app:strokeWidth="1dp" />
 

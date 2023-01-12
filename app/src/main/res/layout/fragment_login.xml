@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_login"
+   android:background="@drawable/bg"
     tools:context=".LoginFragment">
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_width="113dp"
         android:layout_height="204dp"
         android:transitionName="app_icon_animation"
-        android:src="@drawable/googleg_standard_color_18"
+        android:src="@drawable/common_google_signin_btn_icon_dark_normal_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_edit_text_layout"
-        style="@style/CustomEditText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
@@ -88,7 +88,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passowrd_edit_text_layout"
-        style="@style/CustomEditText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -115,27 +115,30 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
+
         android:layout_height="60dp"
         android:layout_marginStart="110dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="110dp"
+        android:backgroundTint="#fec202"
         android:clickable="true"
         android:elevation="0dp"
-
         android:text="Login"
-        android:textColor="#5B97C6"
+
+
+        android:textColor="#4e4637"
         android:textSize="18dp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passowrd_edit_text_layout"
         app:layout_constraintVertical_bias="0.121"
-        app:rippleColor="#AF91F4"
+        app:rippleColor="#BCA250"
         app:strokeColor="#5B97C6"
         app:strokeWidth="1dp" />
 
