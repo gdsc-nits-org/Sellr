@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +30,7 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_cart, container, false)
         val cart = view.findViewById<RecyclerView>(R.id.idRVCourse)
-        val emptyIV=view.findViewById<ImageView>(R.id.cartEmptyIV)
+        val emptyIV=view.findViewById<ConstraintLayout>(R.id.emptyIV)
         val cartModelArrayList: ArrayList<CartModel> = ArrayList()
         val cartRVAdapter = CartRVAdapter(context, cartModelArrayList)
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -66,7 +67,14 @@ class CartFragment : Fragment() {
                                     }
 
                                 }
-
+                                if(cartModelArrayList.size==0)
+                                {
+                                    emptyIV.visibility=View.VISIBLE
+                                }
+                                else
+                                {
+                                    emptyIV.visibility=View.GONE
+                                }
                             }.addOnFailureListener{
                                 TODO("Not yet implemented")
                             }
@@ -74,14 +82,7 @@ class CartFragment : Fragment() {
                         }
                     }
                 }
-                if(cartModelArrayList.size==0)
-                {
-                    emptyIV.visibility=View.VISIBLE
-                }
-                else
-                {
-                    emptyIV.visibility=View.INVISIBLE
-                }
+
 
             }
 

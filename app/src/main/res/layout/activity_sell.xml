@@ -23,6 +23,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="70dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
@@ -44,6 +48,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
                 android:id="@+id/inputCategory"
                 app:errorEnabled="true">
                 <AutoCompleteTextView
@@ -59,6 +67,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 app:endIconMode="clear_text"
@@ -77,6 +89,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/inputPrice"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="70dp"
@@ -166,6 +182,10 @@
                     android:layout_marginTop="5dp"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
                     android:hint="@string/used_for_time">
 
                     <com.google.android.material.textfield.TextInputEditText

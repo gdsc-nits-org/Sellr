@@ -11,8 +11,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.sellr.R
 import com.example.sellr.data.UserData
 import com.example.sellr.databinding.FragmentProfileBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -59,7 +61,8 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //for(eachUser in snapshot.children) {
-                    val user = snapshot.child("ybGanSNyMQQMsb7tytZkjyCELOu2").getValue(UserData::class.java)
+
+                    val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
                     if (user != null) {
                         //println("userId: ${user.Email}")
                         binding.EMAIL.text=user.email

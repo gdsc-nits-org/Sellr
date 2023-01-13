@@ -5,19 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragment.CartFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/emptyIV"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <ImageView
-        android:id="@+id/cartEmptyIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/cart_empty"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Your Cart is Empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Looks like you haven't made\n your choice yet"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVCourse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
