@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
@@ -18,26 +17,25 @@
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
             android:src="@drawable/cart"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="2"
+            android:layout_marginStart="10dp"
             android:orientation="vertical"
             >
 
             <TextView
                 android:id="@+id/item_name"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
                 android:text="Title"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -45,19 +43,18 @@
                 android:id="@+id/item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-
                 android:text="Price"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <ImageButton
                 android:id="@+id/remove_button"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center"
+                android:layout_gravity="right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_delete" />
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/trash_bin" />
 
         </LinearLayout>
     </LinearLayout>

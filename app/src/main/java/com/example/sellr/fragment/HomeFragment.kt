@@ -41,8 +41,8 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view:View= inflater.inflate(R.layout.fragment_home, container, false)
         view.findViewById<Button>(R.id.button).setOnClickListener{
-//            val intent = Intent(activity, SellActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(activity, SellActivity::class.java)
+            startActivity(intent)
         }
         return view
     }
