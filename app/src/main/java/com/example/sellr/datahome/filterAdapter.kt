@@ -61,7 +61,6 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
     class MyViewHolder (itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         var category : TextView = itemView.findViewById(R.id.category)
 
-
         }
 
         }
