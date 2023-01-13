@@ -5,56 +5,84 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.sellr.R
+import com.example.sellr.data.UserData
+import com.example.sellr.databinding.FragmentProfileBinding
+import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    val database: FirebaseDatabase =FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+    val myReference:DatabaseReference=database.reference.child("Users")
+    private var viewBinding: FragmentProfileBinding?=null
+    private val binding get()= viewBinding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        viewBinding=FragmentProfileBinding.inflate(inflater,container,false)
+        val view=binding.root
+
+        retriveDataFromDatabase()
+
+//        binding.editButton.setOnClickListener{
+//            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
+//            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
+//            val profileFragment=fragmentEditProfile()
+//            fragmentTransaction.replace(R.id.frame,profileFragment)
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+//
+//        }
+
+        binding.soldButton.setOnClickListener {
+            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
+            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
+            val soldFragment=SoldFragment()
+            fragmentTransaction.replace(R.id.frame,soldFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+        }
+
+        binding.onSaleButton.setOnClickListener {
+            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
+            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
+            val onSaleFragment=OnSaleFragment()
+            fragmentTransaction.replace(R.id.frame,onSaleFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+    fun retriveDataFromDatabase(){
+        myReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                //for(eachUser in snapshot.children) {
+                    val user = snapshot.child("ybGanSNyMQQMsb7tytZkjyCELOu2").getValue(UserData::class.java)
+                    if (user != null) {
+                        //println("userId: ${user.Email}")
+                        binding.EMAIL.text=user.email
+                       // binding.HOSTEL.text=user.Hostel
+                        binding.USERNAME.text=user.name
+                        binding.SCHOLAR.text=user.scholarid
+                        binding.PHONE.text=user.phonenum
+                    }
+                //}
+
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

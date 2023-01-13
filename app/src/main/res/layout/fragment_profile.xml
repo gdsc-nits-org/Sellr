@@ -1,14 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment">
+    tools:context=".fragment.ProfileFragment"
+    android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile Fragment" />
+        android:layout_height="260sp"
+        android:background="@drawable/cut_rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:orientation="horizontal">
 
-</FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle"
+        android:src="@drawable/ic_baseline_profile_image_24"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.28">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41sp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:text="Name"
+                    android:textColor="#4E4637"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/USER_NAME"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:text="Navneet"
+                    android:letterSpacing="0.01"
+                    android:textSize="20sp"
+                    android:textColor="#4E4637"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41sp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15sp">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:text="Scholar Id"
+                    android:textColor="#4E4637"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/SCHOLAR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:textSize="20sp"
+                    android:text="2112160"
+                    android:textColor="#4E4637"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41sp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15sp">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:text="Email Id"
+                    android:textColor="#4E4637"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/EMAIL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:textSize="20sp"
+                    android:text="user@gmail.com"
+                    android:textColor="#4E4637"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41sp"
+            android:orientation="horizontal"
+            android:layout_marginTop="15sp">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_3" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:text="Phone No."
+                    android:textColor="#4E4637"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/PHONE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFeatureSettings="pnum, lnum"
+                    android:letterSpacing="0.01"
+                    android:textSize="20sp"
+                    android:text="6287840639"
+                    android:textColor="#4E4637"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50sp"
+            android:layout_marginStart="20sp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/soldButton"
+                android:background="@drawable/rounded_rectangle"
+                android:elevation="5sp"
+                android:layout_width="160sp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/accept"
+                android:backgroundTint="#FEC202"
+                android:text="SOLD ITEMS"
+                android:textColor="#4E4637"
+                android:textSize="16sp"
+                android:layout_gravity="start"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/onSaleButton"
+                android:background="@drawable/rounded_rectangle"
+                android:elevation="5sp"
+                android:layout_width="160sp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/accept"
+                android:backgroundTint="#FEC202"
+                android:text="ITEM ON SALE"
+                android:layout_marginStart="20sp"
+                android:textColor="#4E4637"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
