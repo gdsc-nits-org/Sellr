@@ -46,7 +46,7 @@ class SoldFragment : Fragment() {
                 itemList.clear()   //For clearing when data gets added to database.
                 for(eachItem in snapshot.children){
                     val item=eachItem.getValue(SellData::class.java)
-                    if(item!=null && item.userUID=="12122"&&item.sold){
+                    if(item!=null && item.userUID=="12122"&& item.sold == true){
                         itemList.add(item)
 
                     }

@@ -29,21 +29,13 @@ class ProfileFragment : Fragment() {
 
         retriveDataFromDatabase()
 
-//        binding.editButton.setOnClickListener{
-//            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
-//            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
-//            val profileFragment=fragmentEditProfile()
-//            fragmentTransaction.replace(R.id.frame,profileFragment)
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
-//
-//        }
+
 
         binding.soldButton.setOnClickListener {
             val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
             val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
             val soldFragment=SoldFragment()
-            fragmentTransaction.replace(R.id.frame,soldFragment)
+            fragmentTransaction.replace(R.id.fragmentContainer,soldFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
@@ -53,7 +45,7 @@ class ProfileFragment : Fragment() {
             val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
             val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
             val onSaleFragment=OnSaleFragment()
-            fragmentTransaction.replace(R.id.frame,onSaleFragment)
+            fragmentTransaction.replace(R.id.fragmentContainer,onSaleFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

@@ -79,7 +79,7 @@ class fragmentEditProfile : Fragment() {
                 val fragmentManager: FragmentManager =requireActivity().supportFragmentManager
                 val fragmentTransaction: FragmentTransaction =fragmentManager.beginTransaction()
                 val profileFragment=ProfileFragment()
-                fragmentTransaction.replace(R.id.frame,profileFragment)
+                fragmentTransaction.replace(R.id.fragmentContainer,profileFragment)
                 fragmentTransaction.commit()
 
             }

@@ -38,11 +38,11 @@ class OnSaleAdapter(
 
         holder.adapterBinding.soldButton.setOnClickListener{
             println("position to delete $position")
-            mySold.toSold(itemList[position].pId)
+            itemList[position].pId?.let { it1 -> mySold.toSold(it1) }
         }
 
         holder.adapterBinding.deleteButton.setOnClickListener{
-            mySold.toDelete(itemList[position].pId)
+            itemList[position].pId?.let { it1 -> mySold.toDelete(it1) }
         }
 
 
