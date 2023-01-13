@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,43 +42,48 @@ class CartFragment : Fragment() {
         database.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 count++
-                if(count==1)
-                {
-                    if(snapshot.exists()){
-                        for(userSnapshot in snapshot.children){
+                if(snapshot.exists()){
+                    for(userSnapshot in snapshot.children){
 
-                            val items = userSnapshot.value.toString()
+                        val items = userSnapshot.value.toString()
 
-                            val databaseItem = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Items")
-                            databaseItem.child(items).get().addOnSuccessListener {
+                        val databaseItem = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Items")
+                        databaseItem.child(items).get().addOnSuccessListener {
 
-                                if (it.exists()){
-                                    val sold=it.child("sold").value.toString()
-                                    if(sold=="false")
-                                    {
-                                        val price = it.child("price").value
-                                        val name=it.child("productName").value
-                                        val image=it.child("imagePrimary").value
-                                        val key=userSnapshot.key.toString()
-                                        cartModelArrayList.add(CartModel(name.toString(),price.toString(),image.toString(),key))
-                                        cartRVAdapter.notifyItemInserted(cartModelArrayList.size-1)
-
-                                    }
-
-                                }
-                                if(cartModelArrayList.size==0)
+                            if (it.exists()){
+                                val sold=it.child("sold").value.toString()
+                                if(sold=="false" && count==1)
                                 {
-                                    emptyIV.visibility=View.VISIBLE
+                                    val price = it.child("price").value
+                                    val name=it.child("productName").value
+                                    val image=it.child("imagePrimary").value
+                                    val key=userSnapshot.key.toString()
+                                    cartModelArrayList.add(CartModel(name.toString(),price.toString(),image.toString(),key))
+                                    cartRVAdapter.notifyItemInserted(cartModelArrayList.size-1)
+
                                 }
-                                else
-                                {
-                                    emptyIV.visibility=View.GONE
-                                }
-                            }.addOnFailureListener{
-                                TODO("Not yet implemented")
+
                             }
-
+                            if(cartModelArrayList.size==0)
+                            {
+                                emptyIV.visibility=View.VISIBLE
+                            }
+                            else
+                            {
+                                emptyIV.visibility=View.GONE
+                            }
+                        }.addOnFailureListener{
+                            TODO("Not yet implemented")
                         }
+
+                    }
+                    if(cartModelArrayList.size==0)
+                    {
+                        emptyIV.visibility=View.VISIBLE
+                    }
+                    else
+                    {
+                        emptyIV.visibility=View.GONE
                     }
                 }
 
