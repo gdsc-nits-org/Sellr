@@ -32,11 +32,11 @@ class SoldAdapter (
 
             holder.adapterBinding.itemName.text=itemList[position].productName
             holder.adapterBinding.itemPrice.text=itemList[position].price
-            var toDelete:SoldFragment= SoldFragment()
+//            var toDelete:SoldFragment= SoldFragment()
 
-            holder.adapterBinding.deleteButton.setOnClickListener {
-                toDelete.toDelete(itemList[position].pId)
-            }
+//            holder.adapterBinding.deleteButton.setOnClickListener {
+//                toDelete.toDelete(itemList[position].pId)
+//            }
 
 
         }
