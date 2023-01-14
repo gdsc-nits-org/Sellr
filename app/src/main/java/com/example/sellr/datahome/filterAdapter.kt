@@ -13,11 +13,12 @@ import com.bumptech.glide.Glide.init
 import com.example.sellr.R
 import kotlinx.coroutines.NonDisposableHandle.parent
 
-var selectedItemPosition: Int = 0
+
 
 class filterAdapter(private var dataList: ArrayList<filterData>) :
     RecyclerView.Adapter<filterAdapter.MyViewHolder>() {
 
+    var selectedItemPosition: Int = 0
     private lateinit var mListener : onItemClickListener
 
     interface onItemClickListener{

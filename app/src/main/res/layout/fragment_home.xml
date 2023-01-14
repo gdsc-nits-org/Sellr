@@ -25,14 +25,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Home_rc"
-            android:layout_width="416dp"
-            android:layout_height="505dp"
+            android:layout_width="411dp"
+            android:layout_height="518dp"
             android:layout_marginTop="68dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView"
+            app:layout_constraintVertical_bias="0.029"
             tools:listitem="@layout/items_home" />
 
         <Button

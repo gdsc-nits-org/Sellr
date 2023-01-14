@@ -128,6 +128,7 @@ class HomeFragment : Fragment() {
         datalistforfilteredmyAdapter= arrayListOf()
 
         datalistforfilteredmyAdapter.addAll(datalist)
+        searchView.setQuery("", false)
         getUserData()
 
 
