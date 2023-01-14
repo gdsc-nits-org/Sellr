@@ -14,7 +14,7 @@
             android:id="@+id/searchView"
             android:layout_width="379dp"
             android:layout_height="50dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:actionViewClass="android.support.v7.widget.SearchView"
             android:background="@drawable/search_view_bg"
             app:iconifiedByDefault="false"
@@ -26,7 +26,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Home_rc"
             android:layout_width="411dp"
-            android:layout_height="518dp"
+            android:layout_height="495dp"
             android:layout_marginTop="68dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
             android:id="@+id/sell_button"
             android:layout_width="46dp"
             android:layout_height="54dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="40dp"
             android:backgroundTint="#FEC202"
             android:text="+"
             android:textAlignment="center"
@@ -49,7 +49,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/Home_rc"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.821"
+            app:layout_constraintHorizontal_bias="0.854"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

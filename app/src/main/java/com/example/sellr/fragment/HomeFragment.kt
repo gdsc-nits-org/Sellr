@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     private lateinit var dbref: DatabaseReference
 
     //for filer
-    private lateinit var datalistforfilter : kotlin.collections.ArrayList<filterData>
+    private lateinit var datalistforfilter : ArrayList<filterData>
     private lateinit var recylerViewfilter: RecyclerView
 
 
@@ -128,8 +128,9 @@ class HomeFragment : Fragment() {
         datalistforfilteredmyAdapter= arrayListOf()
 
         datalistforfilteredmyAdapter.addAll(datalist)
-        searchView.setQuery("", false)
+
         getUserData()
+
 
 
         //for searching
@@ -224,6 +225,7 @@ class HomeFragment : Fragment() {
 
     private fun getUserData() {
 
+        searchView.setQuery("", false)
         dbref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
             .getReference("Items")
 
@@ -240,6 +242,7 @@ class HomeFragment : Fragment() {
                             }
                         }
                     }
+
 
 
                     searchList.addAll(datalist)
