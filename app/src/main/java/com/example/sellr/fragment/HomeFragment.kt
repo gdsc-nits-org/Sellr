@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
     }
 
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -220,8 +222,6 @@ class HomeFragment : Fragment() {
 
         )
     }
-
-
 
     private fun getUserData() {
 
