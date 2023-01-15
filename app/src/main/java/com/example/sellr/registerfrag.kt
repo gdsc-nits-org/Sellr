@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sellr.AuthActivity
+import com.example.sellr.LoginFragment
 import com.example.sellr.R
 import com.example.sellr.UserModel
 import com.google.firebase.auth.FirebaseAuth
@@ -152,9 +153,18 @@ class RegisterFragment : Fragment() {
 
     private fun updateUI(user: FirebaseUser?) {
 
-        val intent = Intent(requireContext(), AuthActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(requireContext(), AuthActivity::class.java)
+//        startActivity(intent)
+        fragmentload(LoginFragment())
 
+
+    }
+    private fun fragmentload(fragment : Fragment)
+    {
+
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.authFrameLayout, fragment)
+        fragmentTransaction.commit()
 
     }
 
