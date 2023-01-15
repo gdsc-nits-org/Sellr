@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.R
 import com.example.sellr.data.CartModel
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList<CartModel>) :
     RecyclerView.Adapter<CartRVAdapter.ViewHolder>() {
+    var onItemClick: ((CartModel) -> Unit)? = null
     private val cartModelArrayList: ArrayList<CartModel>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // to inflate the layout for each item of recycler view.
@@ -42,19 +45,22 @@ class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList
     private fun deleteModel(model: String){
 
         val database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
-        database.child("9BBFtFinnoUNc388iUKm7AbPKrs2").child("favpost").child(model).removeValue().addOnSuccessListener {
+        database.child(Firebase.auth.currentUser?.uid.toString()).child("favpost").child(model).removeValue().addOnSuccessListener {
             Toast.makeText(context,"Item Removed From Cart",Toast.LENGTH_LONG).show()
         }.addOnFailureListener{
             Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
         }
     }
     // View holder class for initializing of your views such as TextView and Imageview.
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cartIV: ImageView
         val cartNameTV: TextView
         val cartPriceTV: TextView
         val removeButton : ImageButton
         init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(cartModelArrayList[adapterPosition])
+            }
             cartIV = itemView.findViewById(R.id.item_image)
             cartNameTV = itemView.findViewById(R.id.item_name)
             cartPriceTV = itemView.findViewById(R.id.item_price)

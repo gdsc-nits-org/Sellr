@@ -52,7 +52,7 @@ class SplashFragment : Fragment() {
                 // User is signed out
                 fragmentLoad(LoginFragment())
             }
-        }, 2000) // 3000 is the delayed time in milliseconds.
+        }, 2000)
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
     private fun fragmentLoad(fragment : Fragment)
