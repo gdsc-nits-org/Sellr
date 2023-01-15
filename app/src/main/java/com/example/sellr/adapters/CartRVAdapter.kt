@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 
 class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList<CartModel>) :
     RecyclerView.Adapter<CartRVAdapter.ViewHolder>() {
+    var onItemClick: ((CartModel) -> Unit)? = null
     private val cartModelArrayList: ArrayList<CartModel>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // to inflate the layout for each item of recycler view.
@@ -51,12 +52,15 @@ class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList
         }
     }
     // View holder class for initializing of your views such as TextView and Imageview.
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cartIV: ImageView
         val cartNameTV: TextView
         val cartPriceTV: TextView
         val removeButton : ImageButton
         init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(cartModelArrayList[adapterPosition])
+            }
             cartIV = itemView.findViewById(R.id.item_image)
             cartNameTV = itemView.findViewById(R.id.item_name)
             cartPriceTV = itemView.findViewById(R.id.item_price)
