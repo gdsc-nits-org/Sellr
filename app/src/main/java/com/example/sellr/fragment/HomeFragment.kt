@@ -9,12 +9,31 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.sellr.R
 import com.example.sellr.SellActivity
+import android.widget.ImageView
+//import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sellr.R
+import com.example.sellr.databinding.FragmentHomeBinding
+import com.example.sellr.datahome.filterAdapter
+import com.example.sellr.datahome.filterData
+import com.example.sellr.datahome.items_home
+import com.example.sellr.datahome.myAdapterhome
+import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -26,6 +45,22 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    //for items
+    private lateinit var recylerView: RecyclerView
+    private lateinit var datalist: ArrayList<items_home>
+    private lateinit var searchList: ArrayList<items_home>
+    private lateinit var searchView: SearchView
+    private lateinit var dbref: DatabaseReference
+
+    //for filer
+    private lateinit var datalistforfilter : ArrayList<filterData>
+    private lateinit var recylerViewfilter: RecyclerView
+
+
+    //for filtered datalist in myadapterhome
+    private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -33,6 +68,9 @@ class HomeFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +83,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         return view
-    }
+
+        
 
     companion object {
         /**
@@ -66,4 +105,177 @@ class HomeFragment : Fragment() {
                 }
             }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //for filter
+        val layoutManagerfilter = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recylerViewfilter = view.findViewById(R.id.filter)
+        recylerViewfilter.layoutManager = layoutManagerfilter
+
+        datalistforfilter = arrayListOf()
+
+        datalistforfilter.add(filterData("All"))
+        datalistforfilter.add(filterData("Electronics"))
+        datalistforfilter.add(filterData("Books"))
+        datalistforfilter.add(filterData("Vehicles"))
+        datalistforfilter.add(filterData("Clothes"))
+        datalistforfilter.add(filterData("Others"))
+
+        var adapterfilter = filterAdapter(datalistforfilter)
+        recylerViewfilter.adapter = adapterfilter
+
+
+
+        // for items
+        val layoutManager = GridLayoutManager(context, 2)
+        recylerView = view.findViewById(R.id.Home_rc)
+        recylerView.layoutManager = layoutManager
+
+        searchView = view.findViewById(R.id.searchView)
+
+        datalist = arrayListOf()
+        searchList = arrayListOf()
+        datalistforfilteredmyAdapter= arrayListOf()
+
+        datalistforfilteredmyAdapter.addAll(datalist)
+
+        getUserData()
+
+
+
+        //for searching
+
+
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                searchList.clear()
+                val searchText = p0!!.toLowerCase(Locale.getDefault())
+                if(searchText.isNotEmpty()){
+                    datalist.forEach{
+                        if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                            searchList.add(it)
+                        }
+                    }
+                    recylerView.adapter?.notifyDataSetChanged()
+                }
+                else{
+                    searchList.clear()
+                    searchList.addAll(datalist)
+                    recylerView.adapter?.notifyDataSetChanged()
+                }
+                return false
+            }
+
+
+        })
+
+        //koi filter ko press karega toh kya hoga uska code hai
+
+        adapterfilter.setOnItemClickListener(object:filterAdapter.onItemClickListener{
+            override fun onItemClick(category: String) {
+                datalistforfilteredmyAdapter.clear()
+                datalist.forEach{
+                    if(it.category == category){
+                        datalistforfilteredmyAdapter.add(it)
+                    }
+                }
+                if(category == "All"){
+                    datalistforfilteredmyAdapter.addAll(datalist)
+                }
+                recylerView.adapter?.notifyDataSetChanged()
+                recylerView.adapter = myAdapterhome(this@HomeFragment,datalistforfilteredmyAdapter)
+
+                searchView.clearFocus()
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(p0: String?): Boolean {
+                        searchView.clearFocus()
+                        return true
+                    }
+
+                    override fun onQueryTextChange(p0: String?): Boolean {
+                        searchList.clear()
+                        val searchText = p0!!.toLowerCase(Locale.getDefault())
+                        if(searchText.isNotEmpty()){
+                            datalistforfilteredmyAdapter.forEach{
+                                if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                                    searchList.add(it)
+                                }
+                            }
+                            recylerView.adapter?.notifyDataSetChanged()
+                            recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
+                        }
+                        else{
+                            searchList.clear()
+                            searchList.addAll(datalistforfilteredmyAdapter)
+                            recylerView.adapter?.notifyDataSetChanged()
+                            recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
+                        }
+                        return false
+                    }
+
+
+                })
+            }
+
+
+
+        }
+
+
+        )
+    }
+
+    private fun getUserData() {
+
+        searchView.setQuery("", false)
+        dbref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("Items")
+
+        dbref.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+
+                    for(userSnapshot in snapshot.children){
+
+                        val items = userSnapshot.getValue(items_home::class.java)
+                        if (items != null) {
+                            if(items.sold == false) {
+                                datalist.add(items!!)
+                            }
+                        }
+                    }
+
+
+
+                    searchList.addAll(datalist)
+                    recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+                val text = "Error"
+                val duration = Toast.LENGTH_SHORT
+
+                val toast = Toast.makeText(getActivity(), text, duration)
+                toast.show()
+            }
+
+        })
+
+
+
+    }
+
 }
+
