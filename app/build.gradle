@@ -47,6 +47,8 @@ android {
 
 dependencies {
 
+
+    implementation 'com.google.firebase:firebase-database:20.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     def nav_version = "2.5.3"
     //imageSlider
@@ -67,6 +69,11 @@ dependencies {
 
     // smooth navigation bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 
     //firebase
     implementation platform('com.google.firebase:firebase-bom:30.2.0')
