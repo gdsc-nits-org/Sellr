@@ -1,5 +1,6 @@
 package com.example.sellr.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sellr.DescriptionPage
 import com.example.sellr.R
 import com.example.sellr.adapters.CartRVAdapter
 import com.example.sellr.data.CartModel
@@ -35,6 +37,16 @@ class CartFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         cart.layoutManager = linearLayoutManager
         cart.adapter = cartRVAdapter
+        cartRVAdapter.onItemClick = { product ->
+
+            val value = product.itemID
+            val i = Intent(activity, DescriptionPage::class.java)
+            i.putExtra("key", value)
+            startActivity(i)
+        }
+
+
+
         val user = Firebase.auth.currentUser
         val database= FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users").child(
             user?.uid.toString()).child("favpost")
@@ -58,7 +70,8 @@ class CartFragment : Fragment() {
                                     val name=it.child("productName").value
                                     val image=it.child("imagePrimary").value
                                     val key=userSnapshot.key.toString()
-                                    cartModelArrayList.add(CartModel(name.toString(),price.toString(),image.toString(),key))
+                                    val id=it.child("pid").value.toString()
+                                    cartModelArrayList.add(CartModel(name.toString(),price.toString(),image.toString(),key,id))
                                     cartRVAdapter.notifyItemInserted(cartModelArrayList.size-1)
 
                                 }
