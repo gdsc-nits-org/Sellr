@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
-import com.example.sellr.R
 import com.example.sellr.SellActivity
 import android.widget.ImageView
 //import android.widget.SearchView
@@ -28,22 +26,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     //for items
     private lateinit var recylerView: RecyclerView
@@ -61,50 +45,22 @@ class HomeFragment : Fragment() {
     private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view:View= inflater.inflate(R.layout.fragment_home, container, false)
-        view.findViewById<Button>(R.id.button).setOnClickListener{
+        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        view.findViewById<Button>(R.id.sell_button).setOnClickListener {
             val intent = Intent(activity, SellActivity::class.java)
             startActivity(intent)
         }
         return view
 
-        
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -202,10 +158,10 @@ class HomeFragment : Fragment() {
 
                     override fun onQueryTextChange(p0: String?): Boolean {
                         searchList.clear()
-                        val searchText = p0!!.toLowerCase(Locale.getDefault())
+                        val searchText = p0!!.lowercase(Locale.getDefault())
                         if(searchText.isNotEmpty()){
                             datalistforfilteredmyAdapter.forEach{
-                                if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                                if(it.productName?.lowercase(Locale.getDefault())?.contains(searchText) == true){
                                     searchList.add(it)
                                 }
                             }
@@ -247,8 +203,8 @@ class HomeFragment : Fragment() {
 
                         val items = userSnapshot.getValue(items_home::class.java)
                         if (items != null) {
-                            if(items.sold == false) {
-                                datalist.add(items!!)
+                            if(!items.sold) {
+                                datalist.add(items)
                             }
                         }
                     }
@@ -267,7 +223,7 @@ class HomeFragment : Fragment() {
                 val text = "Error"
                 val duration = Toast.LENGTH_SHORT
 
-                val toast = Toast.makeText(getActivity(), text, duration)
+                val toast = Toast.makeText(activity, text, duration)
                 toast.show()
             }
 
