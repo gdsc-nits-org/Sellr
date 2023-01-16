@@ -1,13 +1,16 @@
 package com.example.sellr.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.sellr.AuthActivity
+import com.example.sellr.LoginFragment
 import com.example.sellr.R
 import com.example.sellr.data.UserData
 import com.example.sellr.databinding.FragmentProfileBinding
@@ -25,7 +28,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding=FragmentProfileBinding.inflate(inflater,container,false)
         val view=binding.root
 
@@ -50,6 +53,13 @@ class ProfileFragment : Fragment() {
             fragmentTransaction.replace(R.id.fragmentContainer,onSaleFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
+        }
+        binding.logOut.setOnClickListener {
+            Firebase.auth.signOut()
+            val intent=Intent(activity,AuthActivity::class.java)
+            activity?.startActivity(intent)
+
+
         }
 
         return view
