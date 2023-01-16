@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFeatureSettings="pnum, lnum"
-                    android:text="Navneet"
+                    android:text="-------"
                     android:letterSpacing="0.01"
                     android:textSize="20sp"
                     android:textColor="#4E4637"
@@ -126,7 +126,7 @@
                     android:fontFeatureSettings="pnum, lnum"
                     android:letterSpacing="0.01"
                     android:textSize="20sp"
-                    android:text="2112160"
+                    android:text="-------"
                     android:textColor="#4E4637"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -167,7 +167,7 @@
                     android:fontFeatureSettings="pnum, lnum"
                     android:letterSpacing="0.01"
                     android:textSize="20sp"
-                    android:text="user@gmail.com"
+                    android:text="-------"
                     android:textColor="#4E4637"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -208,7 +208,7 @@
                     android:fontFeatureSettings="pnum, lnum"
                     android:letterSpacing="0.01"
                     android:textSize="20sp"
-                    android:text="6287840639"
+                    android:text="--------"
                     android:textColor="#4E4637"
                     android:textStyle="bold"/>
             </LinearLayout>
