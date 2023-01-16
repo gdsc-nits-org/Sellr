@@ -6,15 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.sellr.Adapters.OnSaleAdapter
 import com.example.sellr.Adapters.SoldAdapter
-import com.example.sellr.R
 import com.example.sellr.data.SellData
-import com.example.sellr.databinding.FragmentOnSaleBinding
 import com.example.sellr.databinding.FragmentSoldBinding
 import com.google.firebase.database.*
-import java.text.FieldPosition
 
 
 class SoldFragment : Fragment() {
@@ -44,13 +39,14 @@ class SoldFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 itemList.clear()   //For clearing when data gets added to database.
-                for(eachItem in snapshot.children){
+                for(eachItem in snapshot.children)
+                {
                     val item=eachItem.getValue(SellData::class.java)
                     if(item!=null && item.userUID=="12122"&& item.sold == true){
                         itemList.add(item)
 
                     }
-                    itemsAdapter=SoldAdapter(activity,itemList)
+                    itemsAdapter=SoldAdapter(itemList)
                     binding.recyclerView.layoutManager= LinearLayoutManager(activity)
                     binding.recyclerView.adapter=itemsAdapter
 

@@ -6,12 +6,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.data.SellData
-import com.example.sellr.databinding.GridLayoutBinding
 import com.example.sellr.databinding.SoldRecyclerLayoutBinding
-import com.example.sellr.fragment.SoldFragment
 
-class SoldAdapter (
-    var context: FragmentActivity?,
+class SoldAdapter(
+
     var itemList:ArrayList<SellData>):
 
     RecyclerView.Adapter<SoldAdapter.ItemsViewHolder>() {
@@ -28,7 +26,8 @@ class SoldAdapter (
         override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
             //holder.adapterBinding.itemImage.setImageResource(itemList[position].imagePrimary)
             val url=itemList[position].imagePrimary
-            context?.let { Glide.with(it).load(url).into(holder.adapterBinding.itemImage) }
+            Glide.with(holder.adapterBinding.itemImage).load(url).centerCrop().into(holder.adapterBinding.itemImage)
+            //context?.let { Glide.with(it).load(url).into(holder.adapterBinding.itemImage) }
 
             holder.adapterBinding.itemName.text=itemList[position].productName
             holder.adapterBinding.itemPrice.text=itemList[position].price

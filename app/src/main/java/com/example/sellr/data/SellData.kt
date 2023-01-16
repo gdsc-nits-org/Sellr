@@ -7,8 +7,9 @@ data class SellData(val productName : String? = null,
                     val usedForTime: String?= null,
                     val price : String? = null,
                     val imagePrimary : String? = null,
-                    val imageList:ArrayList<String>,
-                    val userUID : String? = null,val sold:Boolean?=null,val pId : String? = null,val sellingDate : String? = null){
+                    val imageList:ArrayList<String>?=null,
+                    val userUID : String? = null,val sold:Boolean?=false,val pId : String? = null,val sellingDate : String? = null)
+{
 
 }
 
