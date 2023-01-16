@@ -1,6 +1,5 @@
 package com.example.sellr.datahome
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.R
-import com.example.sellr.data.CartModel
-import com.example.sellr.fragment.HomeFragment
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import java.util.Objects
+import com.google.firebase.ktx.Firebase
 
 class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<items_home>): RecyclerView.Adapter<myAdapterhome.MyViewHolder>() {
     private lateinit var dtb: DatabaseReference
@@ -24,7 +22,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
             parent, false)
         return MyViewHolder(itemView)
     }
-
+    private val user= Firebase.auth.currentUser?.uid.toString()
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         val currentItem = dataList[dataList.size - position - 1]
@@ -36,14 +34,14 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
         var key:String=""
 
 
-        dtb.child("Users").child("9BBFtFinnoUNc388iUKm7AbPKrs2").child("favpost").addValueEventListener(object : ValueEventListener{
+        dtb.child("Users").child(user).child("favpost").addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 var x =0;
                 if(snapshot.exists()){
 
                     for(userSnapshot in snapshot.children){
 
-                        val items = userSnapshot.getValue()
+                        val items = userSnapshot.value
                         if(items == currentItem.pid) {
                             holder.addToFav.setImageResource(R.drawable.add_to_carty)
                             currentItem.addedtofav = true
@@ -90,7 +88,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
                 println("inside pushing")
                 // currentItem.addedtofav = true
                 // holder.addToFav.setImageResource(R.drawable.favorite)
-                dtb.child("Users").child("9BBFtFinnoUNc388iUKm7AbPKrs2").child("favpost").push().setValue(currentItem.pid)
+                dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
 
             }
             else
@@ -99,7 +97,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
                 println("inside removing")
                 currentItem.addedtofav = false
                 holder.addToFav.setImageResource(R.drawable.add_to_cart)
-                dtb.child("Users").child("9BBFtFinnoUNc388iUKm7AbPKrs2").child("favpost").child(currentItem.key.toString()).removeValue()
+                dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString()).removeValue()
 
 
             }                }
