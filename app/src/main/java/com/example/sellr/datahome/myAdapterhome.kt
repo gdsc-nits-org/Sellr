@@ -11,13 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.R
+import com.example.sellr.data.CartModel
 import com.example.sellr.fragment.HomeFragment
 import com.google.firebase.database.*
 import java.util.Objects
 
 class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<items_home>): RecyclerView.Adapter<myAdapterhome.MyViewHolder>() {
     private lateinit var dtb: DatabaseReference
-
+    var onItemClick: ((items_home) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.items_home,
             parent, false)
@@ -110,7 +111,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
         return dataList.size
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         val itemName : TextView = itemView.findViewById(R.id.itemname)
         val photo : ImageView = itemView.findViewById(R.id.item_image)
@@ -118,5 +119,10 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
         val price : TextView = itemView.findViewById(R.id.price)
         val addToFav: ImageView = itemView.findViewById(R.id.addedtofav)
         val newOrOld: TextView = itemView.findViewById(R.id.used)
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(dataList[adapterPosition])
+            }
+        }
     }
 }

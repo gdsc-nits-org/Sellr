@@ -46,7 +46,9 @@ class SplashFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (user != null) {
                 // User is signed in
+
                 val i = Intent(activity,MainActivity::class.java)
+                activity?.finish()
                 startActivity(i)
             } else {
                 // User is signed out

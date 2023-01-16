@@ -1,9 +1,11 @@
 package com.example.sellr.datahome
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.view.menu.MenuView.ItemView
@@ -11,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide.init
 import com.example.sellr.R
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 
@@ -42,16 +45,16 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         val currentItem = dataList[position]
         holder.category.text = currentItem.category
 
-        holder.itemView.setOnClickListener {
+        holder.itemView.findViewById<MaterialButton>(R.id.category).setOnClickListener {
             selectedItemPosition = position
             notifyDataSetChanged()
             mListener.onItemClick(currentItem.category)
         }
 
         if(selectedItemPosition == position)
-            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#FEC202"))
+            holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
         else
-            holder.itemView.findViewById<LinearLayout>(R.id.item_linearl).setBackgroundColor(Color.parseColor("#00A58E"))
+            holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
     }
 
 
@@ -60,7 +63,7 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
     }
 
     class MyViewHolder (itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
-        var category : TextView = itemView.findViewById(R.id.category)
+        var category : MaterialButton = itemView.findViewById(R.id.category)
 
         }
 

@@ -1,30 +1,27 @@
 package com.example.sellr.fragment
 
+//import android.widget.SearchView
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import com.example.sellr.SellActivity
-import android.widget.ImageView
-//import android.widget.SearchView
-import androidx.appcompat.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sellr.DescriptionPage
 import com.example.sellr.R
-import com.example.sellr.databinding.FragmentHomeBinding
+import com.example.sellr.SellActivity
 import com.example.sellr.datahome.filterAdapter
 import com.example.sellr.datahome.filterData
 import com.example.sellr.datahome.items_home
 import com.example.sellr.datahome.myAdapterhome
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.firebase.database.*
 import java.util.*
-import kotlin.collections.ArrayList
-
 
 
 class HomeFragment : Fragment() {
@@ -35,7 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var searchList: ArrayList<items_home>
     private lateinit var searchView: SearchView
     private lateinit var dbref: DatabaseReference
-
+    private lateinit var recyclerViewAdapter:myAdapterhome
     //for filer
     private lateinit var datalistforfilter : ArrayList<filterData>
     private lateinit var recylerViewfilter: RecyclerView
@@ -52,7 +49,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
-        view.findViewById<Button>(R.id.sell_button).setOnClickListener {
+        view.findViewById<ExtendedFloatingActionButton>(R.id.sell_button).setOnClickListener {
             val intent = Intent(activity, SellActivity::class.java)
             startActivity(intent)
         }
@@ -98,6 +95,32 @@ class HomeFragment : Fragment() {
         datalistforfilteredmyAdapter.addAll(datalist)
 
         getUserData()
+        recyclerViewAdapter=myAdapterhome(this@HomeFragment,searchList)
+        recylerView.adapter=recyclerViewAdapter
+        //To hide floating action button
+        //Not tested properly yet
+        recylerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val fab= view.findViewById<ExtendedFloatingActionButton>(R.id.sell_button)
+                if (dy > 10 && fab.isShown) {
+                    fab.hide()
+                }
+                if (dy < -10 && !fab.isShown) {
+                    fab.show()
+                }
+
+            }
+        })
+
+        //for product details
+        recyclerViewAdapter.onItemClick = { product ->
+
+            val value = product.pid
+            val i = Intent(activity, DescriptionPage::class.java)
+            i.putExtra("key", value)
+            startActivity(i)
+        }
 
 
 
@@ -212,7 +235,7 @@ class HomeFragment : Fragment() {
 
 
                     searchList.addAll(datalist)
-                    recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
+                    recyclerViewAdapter.notifyDataSetChanged()
 
                 }
 
