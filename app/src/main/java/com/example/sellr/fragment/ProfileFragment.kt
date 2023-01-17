@@ -9,8 +9,7 @@ import android.view.ViewGroup
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.sellr.AuthActivity
-import com.example.sellr.LoginFragment
+import com.example.sellr.*
 import com.example.sellr.R
 import com.example.sellr.data.UserData
 import com.example.sellr.databinding.FragmentProfileBinding
@@ -37,27 +36,23 @@ class ProfileFragment : Fragment() {
 
 
         binding.soldButton.setOnClickListener {
-            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
-            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
-            val soldFragment=SoldFragment()
-            fragmentTransaction.replace(R.id.fragmentContainer,soldFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            val i = Intent(activity, MainFragmentHolder::class.java)
+            i.putExtra("sold", "sold")
+            startActivity(i)
 
         }
 
         binding.onSaleButton.setOnClickListener {
-            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
-            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
-            val onSaleFragment=OnSaleFragment()
-            fragmentTransaction.replace(R.id.fragmentContainer,onSaleFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            val i = Intent(activity, MainFragmentHolder::class.java)
+            i.putExtra("onSale", "onSale")
+            startActivity(i)
         }
         binding.logOut.setOnClickListener {
             Firebase.auth.signOut()
             val intent=Intent(activity,AuthActivity::class.java)
+            intent.putExtra("splash off","splash off")
             activity?.startActivity(intent)
+            activity?.finish()
 
 
         }

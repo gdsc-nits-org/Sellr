@@ -27,7 +27,7 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         val currentItem = dataList[dataList.size - position - 1]
         holder.newOrOld.text = currentItem.condition
-        Glide.with(fragment).load(currentItem.imagePrimary).into(holder.photo)
+        Glide.with(fragment).load(currentItem.imagePrimary).centerCrop().into(holder.photo)
         holder.itemName.text = currentItem.productName
         holder.price.text = currentItem.price
         holder.symbol

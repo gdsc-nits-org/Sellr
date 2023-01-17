@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sellr.Adapters.SoldAdapter
+import com.example.sellr.adapters.SoldAdapter
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.FragmentSoldBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 
 
 class SoldFragment : Fragment() {
@@ -37,12 +39,12 @@ class SoldFragment : Fragment() {
     private fun retriveDataFromDatabase() {
         myReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                val user= Firebase.auth.currentUser?.uid.toString()
                 itemList.clear()   //For clearing when data gets added to database.
                 for(eachItem in snapshot.children)
                 {
                     val item=eachItem.getValue(SellData::class.java)
-                    if(item!=null && item.userUID=="12122"&& item.sold == true){
+                    if(item!=null && item.userUID==user&& item.sold == true){
                         itemList.add(item)
 
                     }

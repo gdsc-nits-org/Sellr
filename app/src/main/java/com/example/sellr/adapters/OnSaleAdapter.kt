@@ -1,16 +1,13 @@
-package com.example.sellr.Adapters
+package com.example.sellr.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.sellr.MainActivity
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.GridLayoutBinding
 import com.example.sellr.fragment.OnSaleFragment
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 class OnSaleAdapter(
     var context: FragmentActivity?,
