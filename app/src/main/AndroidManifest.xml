@@ -33,6 +33,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".MainFragmentHolder"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
             android:name=".AuthActivity"
             android:exported="true">
             <intent-filter>
