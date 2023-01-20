@@ -14,8 +14,10 @@ import com.example.sellr.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+    //private var hideIcon=true
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main_screen, menu);
+        menuInflater.inflate(R.menu.menu_main_screen, menu)
+        //menu?.findItem(R.id.edit_profile)?.isVisible = !hideIcon
         return true
     }
 
@@ -36,13 +38,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    return(super.onOptionsItemSelected(item));
+    return(super.onOptionsItemSelected(item))
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setDisplayUseLogoEnabled(true)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         val navController = navHostFragment!!.findNavController()
@@ -62,6 +67,16 @@ class MainActivity : AppCompatActivity() {
                     R.id.profileFragment -> "Profile"
                     else -> "Sellr"
                 }
+//                 when(destination.id){
+//                    R.id.profileFragment -> {
+//                        hideIcon=false
+//                        invalidateOptionsMenu()
+//                    }
+//                    else -> {
+//                        hideIcon=true
+//                        invalidateOptionsMenu()
+//                    }
+//                }
             }
 
         })

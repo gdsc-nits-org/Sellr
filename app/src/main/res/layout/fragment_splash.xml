@@ -10,7 +10,7 @@
         android:id="@+id/imageView2"
         android:layout_width="224dp"
         android:layout_height="217dp"
-        android:src="@mipmap/seller_icon"
+        android:src="@drawable/logo_sellr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

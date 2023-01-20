@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item-->
+<!--        android:id="@+id/edit_profile"-->
+<!--        app:showAsAction="always"-->
+<!--        android:icon="@android:drawable/ic_menu_edit"  android:title="add"/>-->
     <item
-        android:id="@+id/reportUsMenu" android:icon="@android:drawable/ic_dialog_info"
+        android:id="@+id/reportUsMenu"
+        app:showAsAction="never"
+        android:icon="@android:drawable/ic_dialog_info"
         android:title="Report an Issue">
     </item>
     <item
         android:id="@+id/aboutUsMenu"
+        app:showAsAction="never"
         android:title="About us">
     </item>
 </menu>
