@@ -10,12 +10,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 // Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private lateinit var dtb: DatabaseReference
+
 
 /**
  * A simple [Fragment] subclass.
@@ -40,16 +44,35 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val user = FirebaseAuth.getInstance().currentUser
+        dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
 
         // Inflate the layout for this fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
             if (user != null) {
+                dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
+                    val check = it.child("infoentered").toString();
+
+                    if(check.contains("no")) {
+                        fragmentload(fragment_extradetails())
+                        //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
+
+                    }
+                    else
+                    {
+
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+
+                        activity?.finish()
+                    }
+
+                }.addOnFailureListener{
+
+                }
                 // User is signed in
 
-                val i = Intent(activity,MainActivity::class.java)
-                activity?.finish()
-                startActivity(i)
+
             } else {
                 // User is signed out
                 fragmentLoad(LoginFragment())
@@ -84,5 +107,13 @@ class SplashFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    private fun fragmentload(fragment : Fragment)
+    {
+
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.authFrameLayout, fragment)
+        fragmentTransaction.commit()
+
     }
 }

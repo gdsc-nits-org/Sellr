@@ -50,6 +50,7 @@ class fragment_extradetails : Fragment() {
                 phonenum.setError("Aestrik fields are required")
             else
             {
+                dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
                 dtb.child("Users").child(user.uid).child("phonenum").setValue(phone)
                         dtb.child("Users").child(user.uid).child("name").setValue(nametxt)
                         dtb.child("Users").child(user.uid).child("scholarid").setValue(id)
