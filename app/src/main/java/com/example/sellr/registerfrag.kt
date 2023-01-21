@@ -117,11 +117,11 @@ class RegisterFragment : Fragment() {
                                 updateUI(user)
 
                             }
-                            // Sign in success, update UI with the signed-in user's information
+
 
 
                         } else {
-                            // If sign in fails, display a message to the user.
+
                             Toast.makeText(
                                 requireContext(),
                                 "Sign Up Unsuccessful",

@@ -109,7 +109,7 @@ class LoginFragment : Fragment() {
 
                                         if(check.contains("no")) {
                                             fragmentload(fragment_extradetails())
-                                            dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
+                                          //  dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
 
                                         }
                                         else
@@ -157,11 +157,7 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
 
-    }
 
     private fun fragmentload(fragment : Fragment)
     {
