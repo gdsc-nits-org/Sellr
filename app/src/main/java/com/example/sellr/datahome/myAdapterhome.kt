@@ -1,5 +1,7 @@
 package com.example.sellr.datahome
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +11,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.sellr.DescriptionPage
 import com.example.sellr.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
-class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<items_home>): RecyclerView.Adapter<myAdapterhome.MyViewHolder>() {
+class myAdapterhome(private val context:Context,val fragment: Fragment, private var dataList: ArrayList<items_home>): RecyclerView.Adapter<myAdapterhome.MyViewHolder>() {
     private lateinit var dtb: DatabaseReference
     var onItemClick: ((items_home) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,7 +35,12 @@ class myAdapterhome(val fragment: Fragment, private var dataList: ArrayList<item
         holder.price.text = currentItem.price
         holder.symbol
         var key:String=""
-
+        holder.itemView.setOnClickListener {
+            val value = currentItem.pid
+            val i = Intent(context, DescriptionPage::class.java)
+            i.putExtra("key", value)
+            context.startActivity(i)
+        }
 
         dtb.child("Users").child(user).child("favpost").addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

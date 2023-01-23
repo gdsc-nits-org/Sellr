@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var searchList: ArrayList<items_home>
     private lateinit var searchView: SearchView
     private lateinit var dbref: DatabaseReference
-    private lateinit var recyclerViewAdapter:myAdapterhome
+
     //for filer
     private lateinit var datalistforfilter : ArrayList<filterData>
     private lateinit var recylerViewfilter: RecyclerView
@@ -47,14 +47,14 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
         view.findViewById<ExtendedFloatingActionButton>(R.id.sell_button).setOnClickListener {
             //Check if user profile is null
             val dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
             dtb.child("Users").child(Firebase.auth.uid.toString()).get().addOnSuccessListener {
-                val check = it.child("infoentered").toString();
+                val check = it.child("infoentered").toString()
 
                 if(check.contains("no")) {
                     Toast.makeText(context,"Please complete your profile info before selling an item",Toast.LENGTH_LONG).show()
@@ -79,48 +79,52 @@ class HomeFragment : Fragment() {
 
     }
 
+    override fun onPause() {
+        searchView.setQuery("", false); // clear the text
+        searchView.clearFocus()
+        searchView.isIconified = true;
+        super.onPause()
+    }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
-        //for filter
-        val layoutManagerfilter = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        recylerViewfilter = view.findViewById(R.id.filter)
-        recylerViewfilter.layoutManager = layoutManagerfilter
+    //for filter
+    val layoutManagerfilter = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+    recylerViewfilter = view.findViewById(R.id.filter)
+    recylerViewfilter.layoutManager = layoutManagerfilter
 
-        datalistforfilter = arrayListOf()
+    datalistforfilter = arrayListOf()
 
-        datalistforfilter.add(filterData("All"))
-        datalistforfilter.add(filterData("Electronics"))
-        datalistforfilter.add(filterData("Books"))
-        datalistforfilter.add(filterData("Vehicles"))
-        datalistforfilter.add(filterData("Clothes"))
-        datalistforfilter.add(filterData("Others"))
+    datalistforfilter.add(filterData("All"))
+    datalistforfilter.add(filterData("Electronics"))
+    datalistforfilter.add(filterData("Books"))
+    datalistforfilter.add(filterData("Vehicles"))
+    datalistforfilter.add(filterData("Clothes"))
+    datalistforfilter.add(filterData("Others"))
 
-        var adapterfilter = filterAdapter(datalistforfilter)
-        recylerViewfilter.adapter = adapterfilter
+    val adapterfilter = filterAdapter(datalistforfilter)
+    recylerViewfilter.adapter = adapterfilter
 
 
 
-        // for items
-        val layoutManager = GridLayoutManager(context, 2)
-        recylerView = view.findViewById(R.id.Home_rc)
-        recylerView.layoutManager = layoutManager
+    // for items
+    val layoutManager = GridLayoutManager(context, 2)
+    recylerView = view.findViewById(R.id.Home_rc)
+    recylerView.layoutManager = layoutManager
 
-        searchView = view.findViewById(R.id.searchView)
+    searchView = view.findViewById(R.id.searchView)
 
-        datalist = arrayListOf()
-        searchList = arrayListOf()
-        datalistforfilteredmyAdapter= arrayListOf()
+    datalist = arrayListOf()
+    searchList = arrayListOf()
+    datalistforfilteredmyAdapter= arrayListOf()
 
-        datalistforfilteredmyAdapter.addAll(datalist)
+    datalistforfilteredmyAdapter.addAll(datalist)
 
-        getUserData()
-        recyclerViewAdapter=myAdapterhome(this@HomeFragment,searchList)
-        recylerView.adapter=recyclerViewAdapter
-        //To hide floating action button
-        //Not tested properly yet
+    getUserData()
+
+    //To hide floating action button
         recylerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -135,104 +139,94 @@ class HomeFragment : Fragment() {
             }
         })
 
-        //for product details
-        recyclerViewAdapter.onItemClick = { product ->
 
-            val value = product.pid
-            val i = Intent(activity, DescriptionPage::class.java)
-            i.putExtra("key", value)
-            startActivity(i)
+    //for searching
+
+
+    searchView.clearFocus()
+    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        override fun onQueryTextSubmit(p0: String?): Boolean {
+            searchView.clearFocus()
+            return true
         }
 
-
-
-        //for searching
-
-
-        searchView.clearFocus()
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                searchView.clearFocus()
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                searchList.clear()
-                val searchText = p0!!.toLowerCase(Locale.getDefault())
-                if(searchText.isNotEmpty()){
-                    datalist.forEach{
-                        if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
-                            searchList.add(it)
-                        }
-                    }
-                    recylerView.adapter?.notifyDataSetChanged()
-                }
-                else{
-                    searchList.clear()
-                    searchList.addAll(datalist)
-                    recylerView.adapter?.notifyDataSetChanged()
-                }
-                return false
-            }
-
-
-        })
-
-        //koi filter ko press karega toh kya hoga uska code hai
-
-        adapterfilter.setOnItemClickListener(object:filterAdapter.onItemClickListener{
-            override fun onItemClick(category: String) {
-                datalistforfilteredmyAdapter.clear()
+        override fun onQueryTextChange(p0: String?): Boolean {
+            searchList.clear()
+            val searchText = p0!!.toLowerCase(Locale.getDefault())
+            if(searchText.isNotEmpty()){
                 datalist.forEach{
-                    if(it.category == category){
-                        datalistforfilteredmyAdapter.add(it)
+                    if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                        searchList.add(it)
                     }
-                }
-                if(category == "All"){
-                    datalistforfilteredmyAdapter.addAll(datalist)
                 }
                 recylerView.adapter?.notifyDataSetChanged()
-                recylerView.adapter = myAdapterhome(this@HomeFragment,datalistforfilteredmyAdapter)
-
-                searchView.clearFocus()
-                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-                    override fun onQueryTextSubmit(p0: String?): Boolean {
-                        searchView.clearFocus()
-                        return true
-                    }
-
-                    override fun onQueryTextChange(p0: String?): Boolean {
-                        searchList.clear()
-                        val searchText = p0!!.lowercase(Locale.getDefault())
-                        if(searchText.isNotEmpty()){
-                            datalistforfilteredmyAdapter.forEach{
-                                if(it.productName?.lowercase(Locale.getDefault())?.contains(searchText) == true){
-                                    searchList.add(it)
-                                }
-                            }
-                            recylerView.adapter?.notifyDataSetChanged()
-                            recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
-                        }
-                        else{
-                            searchList.clear()
-                            searchList.addAll(datalistforfilteredmyAdapter)
-                            recylerView.adapter?.notifyDataSetChanged()
-                            recylerView.adapter = myAdapterhome(this@HomeFragment,searchList)
-                        }
-                        return false
-                    }
-
-
-                })
             }
-
-
-
+            else{
+                searchList.clear()
+                searchList.addAll(datalist)
+                recylerView.adapter?.notifyDataSetChanged()
+            }
+            return false
         }
 
 
-        )
+    })
+
+    //koi filter ko press karega toh kya hoga uska code hai
+
+    adapterfilter.setOnItemClickListener(object:filterAdapter.onItemClickListener{
+        override fun onItemClick(category: String) {
+            datalistforfilteredmyAdapter.clear()
+            datalist.forEach{
+                if(it.category == category){
+                    datalistforfilteredmyAdapter.add(it)
+                }
+            }
+            if(category == "All"){
+                datalistforfilteredmyAdapter.addAll(datalist)
+            }
+            recylerView.adapter?.notifyDataSetChanged()
+            recylerView.adapter = myAdapterhome(requireContext(),this@HomeFragment,datalistforfilteredmyAdapter)
+
+            searchView.clearFocus()
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    searchView.clearFocus()
+                    return true
+                }
+
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    searchList.clear()
+                    val searchText = p0!!.toLowerCase(Locale.getDefault())
+                    if(searchText.isNotEmpty()){
+                        datalistforfilteredmyAdapter.forEach{
+                            if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                                searchList.add(it)
+                            }
+                        }
+                        recylerView.adapter?.notifyDataSetChanged()
+                        recylerView.adapter = myAdapterhome(requireContext(),this@HomeFragment,searchList)
+                    }
+                    else{
+                        searchList.clear()
+                        searchList.addAll(datalistforfilteredmyAdapter)
+                        recylerView.adapter?.notifyDataSetChanged()
+                        recylerView.adapter = myAdapterhome(requireContext(),this@HomeFragment,searchList)
+                    }
+                    return false
+                }
+
+
+            })
+        }
+
+
+
     }
+
+
+    )
+}
 
     private fun getUserData() {
 
@@ -243,21 +237,21 @@ class HomeFragment : Fragment() {
         dbref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
-
+                    datalist.clear()
                     for(userSnapshot in snapshot.children){
 
                         val items = userSnapshot.getValue(items_home::class.java)
                         if (items != null) {
                             if(!items.sold) {
-                                datalist.add(items)
+                                datalist.add(items!!)
                             }
                         }
                     }
 
 
-
+                    searchList.clear()
                     searchList.addAll(datalist)
-                    recyclerViewAdapter.notifyDataSetChanged()
+                    recylerView.adapter = myAdapterhome(requireContext(),this@HomeFragment,searchList)
 
                 }
 
@@ -279,4 +273,3 @@ class HomeFragment : Fragment() {
     }
 
 }
-
