@@ -1,6 +1,7 @@
 package com.example.sellr
 
 import android.content.Intent
+
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private lateinit var dtb: DatabaseReference
-
+private lateinit var auth: FirebaseAuth
 
 /**
  * A simple [Fragment] subclass.
@@ -45,11 +46,12 @@ class SplashFragment : Fragment() {
     ): View? {
         val user = FirebaseAuth.getInstance().currentUser
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
-
+        auth = FirebaseAuth.getInstance()
         // Inflate the layout for this fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
-            if (user != null) {
+            if (user != null && auth.currentUser?.isEmailVerified == true ) {
+
                 dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
                     val check = it.child("infoentered").toString();
 
