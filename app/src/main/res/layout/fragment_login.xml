@@ -54,7 +54,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/login_edit_text_layout"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintHorizontal_bias="1.59"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
