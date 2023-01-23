@@ -14,10 +14,10 @@ import com.example.sellr.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
-    //private var hideIcon=true
+    private var hideIcon=true
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main_screen, menu)
-        //menu?.findItem(R.id.edit_profile)?.isVisible = !hideIcon
+        menu?.findItem(R.id.edit_profile)?.isVisible = !hideIcon
         return true
     }
 
@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
                 val i = Intent(applicationContext,MainFragmentHolder::class.java)
                 i.putExtra("reportUs", "reportUs")
                 startActivity(i)
+            }
+            R.id.edit_profile->{
+
             }
             else -> {
                 Toast.makeText(applicationContext,"none",Toast.LENGTH_LONG).show()
@@ -67,16 +70,16 @@ class MainActivity : AppCompatActivity() {
                     R.id.profileFragment -> "Profile"
                     else -> "Sellr"
                 }
-//                 when(destination.id){
-//                    R.id.profileFragment -> {
-//                        hideIcon=false
-//                        invalidateOptionsMenu()
-//                    }
-//                    else -> {
-//                        hideIcon=true
-//                        invalidateOptionsMenu()
-//                    }
-//                }
+                 when(destination.id){
+                    R.id.profileFragment -> {
+                        hideIcon=false
+                        invalidateOptionsMenu()
+                    }
+                    else -> {
+                        hideIcon=true
+                        invalidateOptionsMenu()
+                    }
+                }
             }
 
         })

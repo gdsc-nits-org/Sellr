@@ -33,6 +33,16 @@ class ProfileFragment : Fragment() {
 
         retriveDataFromDatabase()
 
+//        binding.editButton.setOnClickListener{
+//            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
+//            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
+//            val profileFragment=fragmentEditProfile()
+//            fragmentTransaction.replace(R.id.frame,profileFragment)
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+//
+//        }
+
 
 
         binding.soldButton.setOnClickListener {
