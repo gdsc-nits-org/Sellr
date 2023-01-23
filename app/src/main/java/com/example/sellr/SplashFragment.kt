@@ -51,12 +51,11 @@ class SplashFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
             if ( user!=null && user.isEmailVerified) {
-                println("Inside user not null");
+
                 println(user.uid.toString())
 
                 dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
                     val check = it.child("infoentered").toString();
-                    println("test")
 
                     if(check.contains("no")) {
                         fragmentload(fragment_extradetails())
