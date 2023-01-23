@@ -7,10 +7,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import com.example.sellr.databinding.ActivityMainBinding
+import com.example.sellr.fragment.fragmentEditProfile
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -34,6 +37,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
             }
             R.id.edit_profile->{
+                val fragmentManager: FragmentManager =requireActivity().supportFragmentManager
+                val fragmentTransaction: FragmentTransaction =fragmentManager.beginTransaction()
+                val profileFragment= fragmentEditProfile()
+                fragmentTransaction.replace(R.id.frame,profileFragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
 
             }
             else -> {
