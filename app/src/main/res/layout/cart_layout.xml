@@ -6,7 +6,7 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
     app:cardElevation="3dp"
-    android:backgroundTint="@color/colourSecondary"
+    android:backgroundTint="#9BDCD3"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_margin="10dp"
-            android:src="@drawable/cart"/>
+           />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
-                android:background="@color/colourSecondary"
+                android:background="#9BDCD3"
                 android:src="@drawable/trash_bin" />
 
         </LinearLayout>

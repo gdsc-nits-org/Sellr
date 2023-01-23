@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        tools:ignore="LockedOrientationActivity"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,6 +19,8 @@
         tools:targetApi="31">
         <activity
             android:name=".DescriptionPage"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:label="Item Details"
             android:exported="false">
             <meta-data
@@ -26,6 +29,8 @@
         </activity>
         <activity
             android:name=".SellActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:label="Sell an Item">
             <meta-data
@@ -34,6 +39,8 @@
         </activity>
         <activity
             android:name=".MainFragmentHolder"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:exported="false"
             >
             <meta-data
@@ -43,6 +50,8 @@
 
         <activity
             android:name=".AuthActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,7 +65,10 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:exported="true"
+             />
     </application>
 
 </manifest>

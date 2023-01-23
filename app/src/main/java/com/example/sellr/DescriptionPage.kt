@@ -55,10 +55,6 @@ class DescriptionPage : AppCompatActivity() {
                     {
                         imageList.add(SlideModel(imageArray[i]))
                     }
-                    else
-                    {
-                        imageList.add(SlideModel(primaryImage))
-                    }
                 }
 
                 imageSlider.setImageList(imageList)

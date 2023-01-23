@@ -29,7 +29,7 @@ class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList
         // to set data to textview and imageview of each card layout
         val model: CartModel = cartModelArrayList[position]
         holder.cartNameTV.text=model.item_name
-        holder.cartPriceTV.text=model.item_price
+        holder.cartPriceTV.text="Rs. ${model.item_price}"
         Glide.with(holder.cartIV).load(model.item_image).centerCrop().into(holder.cartIV)
         val btn=holder.removeButton
         btn.setOnClickListener {

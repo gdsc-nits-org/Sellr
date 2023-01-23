@@ -35,6 +35,15 @@ class MainFragmentHolder : AppCompatActivity() {
             title="Report an issue"
             fragmentLoad(ReportUsFragment())
         }
+        else if(intent.hasExtra("extraDetails"))
+        {
+            try {
+                this.supportActionBar!!.hide()
+            } // catch block to handle NullPointerException
+            catch (_: NullPointerException) {
+            }
+            fragmentLoad(fragment_extradetails())
+        }
     }
     private fun fragmentLoad(fragment : Fragment)
     {

@@ -12,15 +12,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sellr.DescriptionPage
+import com.example.sellr.*
 import com.example.sellr.R
-import com.example.sellr.SellActivity
 import com.example.sellr.datahome.filterAdapter
 import com.example.sellr.datahome.filterData
 import com.example.sellr.datahome.items_home
 import com.example.sellr.datahome.myAdapterhome
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -50,8 +51,29 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
         view.findViewById<ExtendedFloatingActionButton>(R.id.sell_button).setOnClickListener {
-            val intent = Intent(activity, SellActivity::class.java)
-            startActivity(intent)
+            //Check if user profile is null
+            val dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+            dtb.child("Users").child(Firebase.auth.uid.toString()).get().addOnSuccessListener {
+                val check = it.child("infoentered").toString();
+
+                if(check.contains("no")) {
+                    Toast.makeText(context,"Please complete your profile info before selling an item",Toast.LENGTH_LONG).show()
+                    val i = Intent(context,MainFragmentHolder::class.java)
+                    i.putExtra("extraDetails", "extraDetails")
+                    startActivity(i)
+
+                }
+                else
+                {
+
+                    val intent = Intent(activity, SellActivity::class.java)
+                    startActivity(intent)
+                }
+
+            }.addOnFailureListener{
+
+            }
+
         }
         return view
 
