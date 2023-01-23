@@ -33,131 +33,150 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class SellActivity : AppCompatActivity(){
-    private lateinit var database : DatabaseReference
-    private var userUID:String?=""
-    private var emailID:String?=""
+class SellActivity : AppCompatActivity() {
+    private lateinit var database: DatabaseReference
+    private var userUID: String? = ""
+    private var emailID: String? = ""
 
     //For SellData Class
-    private var imagePrimary : String? = ""
+    private var imagePrimary: String? = ""
     private var imageArray = ArrayList<String>()
-    private var imageButtonPrimary: ImageButton? =null
-    private var imageButtonSecond: ImageButton? =null
-    private var imageButtonThird: ImageButton? =null
-    private var imageButtonFourth: ImageButton? =null
-    private var progressCircular: ProgressBar? =null
+    private var imageButtonPrimary: ImageButton? = null
+    private var imageButtonSecond: ImageButton? = null
+    private var imageButtonThird: ImageButton? = null
+    private var imageButtonFourth: ImageButton? = null
+    private var progressCircular: ProgressBar? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sell)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         imageArray.add("")
         imageArray.add("")
         imageArray.add("")
         val user = Firebase.auth.currentUser
-        if(user!=null) {
+        if (user != null) {
             emailID = user.email
             userUID = user.uid
-        }
-        else
-        {
+        } else {
             makeToast("Not logged in")
             onBackPressed()
         }
         populateDropDown()
         findViewById<AutoCompleteTextView>(R.id.categoryDropDown).doAfterTextChanged {
-            if(findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()=="Others")
-            {
+            if (findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString() == "Others") {
                 showDialog()
-            }
-            else
-            {
-                findViewById<TextInputLayout>(R.id.inputCategory).helperText=null
+            } else {
+                findViewById<TextInputLayout>(R.id.inputCategory).helperText = null
             }
         }
 
 
-        progressCircular=findViewById(R.id.progress_circular)
+        progressCircular = findViewById(R.id.progress_circular)
         //get images from storage on user click
-        imageButtonPrimary=findViewById(R.id.imageButtonFirst)
-        imageButtonSecond=findViewById(R.id.imageButtonSecond)
-        imageButtonThird=findViewById(R.id.imageButtonThird)
-        imageButtonFourth=findViewById(R.id.imageButtonFourth)
-        imageButtonSecond?.isEnabled=false
-        imageButtonThird?.isEnabled=false
-        imageButtonFourth?.isEnabled=false
-        imageButtonPrimary?.setOnClickListener{
+        imageButtonPrimary = findViewById(R.id.imageButtonFirst)
+        imageButtonSecond = findViewById(R.id.imageButtonSecond)
+        imageButtonThird = findViewById(R.id.imageButtonThird)
+        imageButtonFourth = findViewById(R.id.imageButtonFourth)
+        imageButtonSecond?.isEnabled = false
+        imageButtonThird?.isEnabled = false
+        imageButtonFourth?.isEnabled = false
+        imageButtonPrimary?.setOnClickListener {
 
-            if(checkInternet())
-            {
-                val iGallery=Intent(Intent.ACTION_PICK)
+            if (checkInternet()) {
+                val iGallery = Intent(Intent.ACTION_PICK)
                 iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                startActivityForResult(iGallery,1000)
+                startActivityForResult(iGallery, 1000)
             }
 
         }
 
-        imageButtonSecond?.setOnClickListener{
+        imageButtonSecond?.setOnClickListener {
 
-            if(checkInternet())
-            {
-                val iGallery=Intent(Intent.ACTION_PICK)
+            if (checkInternet()) {
+                val iGallery = Intent(Intent.ACTION_PICK)
                 iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                startActivityForResult(iGallery,2000)
+                startActivityForResult(iGallery, 2000)
             }
 
 
         }
-        imageButtonThird?.setOnClickListener{
+        imageButtonThird?.setOnClickListener {
 
-            if(checkInternet())
-            {
-                val iGallery=Intent(Intent.ACTION_PICK)
+            if (checkInternet()) {
+                val iGallery = Intent(Intent.ACTION_PICK)
                 iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                startActivityForResult(iGallery,3000)
+                startActivityForResult(iGallery, 3000)
 
             }
 
         }
-        imageButtonFourth?.setOnClickListener{
+        imageButtonFourth?.setOnClickListener {
 
-            if(checkInternet())
-            {
-                val iGallery=Intent(Intent.ACTION_PICK)
+            if (checkInternet()) {
+                val iGallery = Intent(Intent.ACTION_PICK)
                 iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                startActivityForResult(iGallery,4000)
+                startActivityForResult(iGallery, 4000)
             }
 
         }
 
         //On used click
-        findViewById<TextInputLayout>(R.id.usedCondition).isEnabled=false
-        val usedChip:Chip=findViewById(R.id.usedChip)
-        val newChip:Chip=findViewById(R.id.newChip)
-        usedChip.setOnClickListener{
+        findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = false
+        val usedChip: Chip = findViewById(R.id.usedChip)
+        val newChip: Chip = findViewById(R.id.newChip)
+        usedChip.setOnClickListener {
             chipClicked()
         }
-        newChip.setOnClickListener{
+        newChip.setOnClickListener {
             chipClicked()
         }
-
 
 
         //On FAB click==data upload
-        val button:ExtendedFloatingActionButton=findViewById(R.id.fab)
-        button.setOnClickListener{
-            if(checkInternet())
-            {
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Are you sure?")
-                builder.setMessage("Your item will be available publicly for buying")
-                builder.setPositiveButton("Yes") { _, _ ->
-                    setData()
+        val button: ExtendedFloatingActionButton = findViewById(R.id.fab)
+        button.setOnClickListener {
+            if (checkInternet()) {
+                setProgressBar()
+                val dtb =
+                    FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+                dtb.child("Users").child(Firebase.auth.uid.toString()).get()
+                    .addOnSuccessListener {
+                        val check = it.child("infoentered").toString()
 
-                }
-                builder.setNegativeButton("No") { _, _ ->
-                }
-                builder.show()
+                        if (check.contains("no")) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Please complete your profile info before selling an item",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            deleteProgressBar()
+                            val i = Intent(applicationContext, MainFragmentHolder::class.java)
+                            i.putExtra("extraDetails", "extraDetails")
+                            startActivity(i)
+
+
+                        } else {
+
+                            deleteProgressBar()
+                            val builder = AlertDialog.Builder(this)
+                            builder.setTitle("Are you sure?")
+                            builder.setMessage("Your item will be available publicly for buying")
+                            builder.setPositiveButton("Yes") { _, _ ->
+                                setData()
+
+                            }
+                            builder.setNegativeButton("No") { _, _ ->
+                            }
+                            builder.show()
+                        }
+
+                    }.addOnFailureListener {
+                        deleteProgressBar()
+
+                    }
+
             }
         }
     }
@@ -182,22 +201,22 @@ class SellActivity : AppCompatActivity(){
             }
         }
     }
-    private fun chipClicked()
-    {
-        val usedClicked=findViewById<Chip>(R.id.usedChip)
+
+    private fun chipClicked() {
+        val usedClicked = findViewById<Chip>(R.id.usedChip)
         findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = usedClicked.isChecked
     }
+
     private fun upDateImage(i: Int, data: Intent?) {
         setProgressBar()
         val storageRef = Firebase.storage.reference
         val imageUri: Uri? = data?.data
 
-        val filename = generateUID(emailID+i.toString())
+        val filename = generateUID(emailID + i.toString())
         val uploadTask = storageRef.child("file/$filename").putFile(imageUri!!)
         Handler(Looper.getMainLooper()).postDelayed({
-            if(progressCircular?.visibility==View.VISIBLE)
-            {
-                Toast.makeText(this,"Time out!!Check Your connection",Toast.LENGTH_LONG).show()
+            if (progressCircular?.visibility == View.VISIBLE) {
+                Toast.makeText(this, "Time out!!Check Your connection", Toast.LENGTH_LONG).show()
                 deleteProgressBar()
                 uploadTask.cancel()
             }
@@ -207,50 +226,46 @@ class SellActivity : AppCompatActivity(){
             storageRef.child("file/$filename").downloadUrl.addOnSuccessListener {
                 when (i) {
                     1 -> {
-                        if(imagePrimary!="")
-                        {
-                            val ref=Firebase.storage.getReferenceFromUrl(imagePrimary!!)
+                        if (imagePrimary != "") {
+                            val ref = Firebase.storage.getReferenceFromUrl(imagePrimary!!)
                             ref.delete()
                         }
                         imageButtonPrimary?.setImageURI(imageUri)
-                        imagePrimary=it.toString()
-                        imageButtonSecond?.isEnabled=true
-                        imageButtonSecond?.visibility= View.VISIBLE
+                        imagePrimary = it.toString()
+                        imageButtonSecond?.isEnabled = true
+                        imageButtonSecond?.visibility = View.VISIBLE
                         imageButtonSecond?.setImageResource(R.drawable.ic_image_placeholder)
 
                     }
                     2 -> {
-                        if(imageArray[0]!="")
-                        {
-                            val ref=Firebase.storage.getReferenceFromUrl(imageArray[0])
+                        if (imageArray[0] != "") {
+                            val ref = Firebase.storage.getReferenceFromUrl(imageArray[0])
                             ref.delete()
                         }
                         imageButtonSecond?.setImageURI(imageUri)
-                        imageArray[0]=it.toString()
-                        imageButtonThird?.isEnabled=true
-                        imageButtonThird?.visibility= View.VISIBLE
+                        imageArray[0] = it.toString()
+                        imageButtonThird?.isEnabled = true
+                        imageButtonThird?.visibility = View.VISIBLE
                         imageButtonThird?.setImageResource(R.drawable.ic_image_placeholder)
                     }
                     3 -> {
                         imageButtonThird?.setImageURI(imageUri)
-                        if(imageArray[1]!="")
-                        {
-                            val ref=Firebase.storage.getReferenceFromUrl(imageArray[2])
+                        if (imageArray[1] != "") {
+                            val ref = Firebase.storage.getReferenceFromUrl(imageArray[2])
                             ref.delete()
                         }
-                        imageArray[1]=it.toString()
-                        imageButtonFourth?.isEnabled=true
-                        imageButtonFourth?.visibility= View.VISIBLE
+                        imageArray[1] = it.toString()
+                        imageButtonFourth?.isEnabled = true
+                        imageButtonFourth?.visibility = View.VISIBLE
                         imageButtonFourth?.setImageResource(R.drawable.ic_image_placeholder)
                     }
                     4 -> {
                         imageButtonFourth?.setImageURI(imageUri)
-                        if(imageArray[2]!="")
-                        {
-                            val ref=Firebase.storage.getReferenceFromUrl(imageArray[2])
+                        if (imageArray[2] != "") {
+                            val ref = Firebase.storage.getReferenceFromUrl(imageArray[2])
                             ref.delete()
                         }
-                        imageArray[2]=it.toString()
+                        imageArray[2] = it.toString()
                     }
                 }
                 deleteProgressBar()
@@ -262,53 +277,58 @@ class SellActivity : AppCompatActivity(){
 
     }
 
-    private fun setProgressBar(){
+    private fun setProgressBar() {
         progressCircular?.visibility = View.VISIBLE
         window.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
 
     }
-    private fun deleteProgressBar(){
+
+    private fun deleteProgressBar() {
         progressCircular?.visibility = View.GONE
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
     }
+
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if(progressCircular?.visibility!=0)
-        {
+        if (progressCircular?.visibility != 0) {
             super.onBackPressed()
 
         }
 
     }
-    private fun setData(){
+
+    private fun setData() {
         setProgressBar()
         val uID: String = generateUID(emailID!!)
-        val dataObject=getData(uID)
-        if(dataObject==null)
-        {
+        val dataObject = getData(uID)
+        if (dataObject == null) {
             deleteProgressBar()
             return
         }
-        database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Items")
-        val uploadData=database.child(uID).setValue(dataObject)
+        database =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("Items")
+        val uploadData = database.child(uID).setValue(dataObject)
         Handler(Looper.getMainLooper()).postDelayed({
-            if(progressCircular?.visibility==View.VISIBLE)
-            {
-                Toast.makeText(this,"Listing Failed, Please try again",Toast.LENGTH_LONG).show()
+            if (progressCircular?.visibility == View.VISIBLE) {
+                Toast.makeText(this, "Listing Failed, Please try again", Toast.LENGTH_LONG).show()
                 deleteProgressBar()
                 FirebaseDatabase.getInstance().purgeOutstandingWrites()
             }
 
         }, 180000)
         uploadData.addOnSuccessListener {
-            database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
-            val upDateUserList=database.child(userUID!!).child("pId").push().setValue(uID)
+            database =
+                FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+                    .getReference("Users")
+            val upDateUserList = database.child(userUID!!).child("pId").push().setValue(uID)
             upDateUserList.addOnSuccessListener {
 
-                makeToast( "Successfully Listed")
+                makeToast("Successfully Listed")
                 deleteProgressBar()
                 onBackPressed()
                 finish()
@@ -322,99 +342,77 @@ class SellActivity : AppCompatActivity(){
         }
 
     }
+
     @SuppressLint("SimpleDateFormat")
-    private fun getData(uID:String): SellData? {
-        var flag=true
-        val productName=findViewById<EditText>(R.id.textFieldName).text.toString().trim()
-        if(productName=="")
-        {
-            findViewById<TextInputLayout>(R.id.inputName).error="This field is required"
+    private fun getData(uID: String): SellData? {
+        var flag = true
+        val productName = findViewById<EditText>(R.id.textFieldName).text.toString().trim()
+        if (productName == "") {
+            findViewById<TextInputLayout>(R.id.inputName).error = "This field is required"
 
-            flag=false
+            flag = false
+        } else {
+            findViewById<TextInputLayout>(R.id.inputName).error = null
         }
-        else
-        {
-            findViewById<TextInputLayout>(R.id.inputName).error=null
-        }
-        val category=findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()
-        val ipCategory=findViewById<TextInputLayout>(R.id.inputCategory)
-        val additionalCategory=ipCategory.helperText.toString()
-        if(category=="")
-        {
-            ipCategory.error="This field is required"
-            flag=false
-        }
-        else if(category=="Others")
-        {
-            if(additionalCategory=="null")
-            {
-                ipCategory.error="Please Specify Item Category"
-                flag=false
+        val category = findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()
+        val ipCategory = findViewById<TextInputLayout>(R.id.inputCategory)
+        val additionalCategory = ipCategory.helperText.toString()
+        if (category == "") {
+            ipCategory.error = "This field is required"
+            flag = false
+        } else if (category == "Others") {
+            if (additionalCategory == "null") {
+                ipCategory.error = "Please Specify Item Category"
+                flag = false
             }
+        } else {
+            ipCategory.error = null
         }
-        else
-        {
-            ipCategory.error=null
+        val productDesc = findViewById<EditText>(R.id.textFieldDesc).text.toString().trim()
+        if (productDesc == "") {
+            findViewById<TextInputLayout>(R.id.inputDesc).error = "This field is required"
+            flag = false
+        } else {
+            findViewById<TextInputLayout>(R.id.inputDesc).error = null
         }
-        val productDesc=findViewById<EditText>(R.id.textFieldDesc).text.toString().trim()
-        if(productDesc=="")
-        {
-            findViewById<TextInputLayout>(R.id.inputDesc).error="This field is required"
-            flag=false
-        }
-        else
-        {
-            findViewById<TextInputLayout>(R.id.inputDesc).error=null
-        }
-        val parentChipGroup:ChipGroup=findViewById(R.id.chipGroup)
-        var condition: String?=null
-        if(parentChipGroup.checkedChipId!=View.NO_ID){
-            findViewById<TextView>(R.id.chipError).visibility=View.GONE
-            condition= parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
-        }
-        else
-        {
-            findViewById<TextView>(R.id.chipError).visibility=View.VISIBLE
-            flag=false
+        val parentChipGroup: ChipGroup = findViewById(R.id.chipGroup)
+        var condition: String? = null
+        if (parentChipGroup.checkedChipId != View.NO_ID) {
+            findViewById<TextView>(R.id.chipError).visibility = View.GONE
+            condition =
+                parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
+        } else {
+            findViewById<TextView>(R.id.chipError).visibility = View.VISIBLE
+            flag = false
         }
 
-        val price=findViewById<EditText>(R.id.price).text.toString()
-        if(price=="")
-        {
-            findViewById<TextInputLayout>(R.id.inputPrice).error="This field is required"
-            flag=false
+        val price = findViewById<EditText>(R.id.price).text.toString()
+        if (price == "") {
+            findViewById<TextInputLayout>(R.id.inputPrice).error = "This field is required"
+            flag = false
+        } else {
+            findViewById<TextInputLayout>(R.id.inputPrice).error = null
         }
-        else
-        {
-            findViewById<TextInputLayout>(R.id.inputPrice).error=null
-        }
-        if(imagePrimary=="")
-        {
-            findViewById<TextView>(R.id.imageError).visibility=View.VISIBLE
-            flag=false
+        if (imagePrimary == "") {
+            findViewById<TextView>(R.id.imageError).visibility = View.VISIBLE
+            flag = false
 
+        } else {
+            findViewById<TextView>(R.id.imageError).visibility = View.GONE
         }
-        else
-        {
-            findViewById<TextView>(R.id.imageError).visibility=View.GONE
-        }
-        var usedTime=""
-        if(condition=="Used")
-        {
-            usedTime=findViewById<EditText>(R.id.textFieldUsedCondition).text.toString()
-            if(usedTime=="")
-            {
-                findViewById<TextInputLayout>(R.id.usedCondition).error="This field is required"
-                flag=false
-            }
-            else
-            {
-                findViewById<TextInputLayout>(R.id.usedCondition).error=null
+        var usedTime = ""
+        if (condition == "Used") {
+            usedTime = findViewById<EditText>(R.id.textFieldUsedCondition).text.toString()
+            if (usedTime == "") {
+                findViewById<TextInputLayout>(R.id.usedCondition).error = "This field is required"
+                flag = false
+            } else {
+                findViewById<TextInputLayout>(R.id.usedCondition).error = null
             }
         }
 
-        if(flag) {
-            val currentDate=SimpleDateFormat("dd-MM-yyyy").format(Date())
+        if (flag) {
+            val currentDate = SimpleDateFormat("dd-MM-yyyy").format(Date())
 
 
             return SellData(
@@ -427,17 +425,16 @@ class SellActivity : AppCompatActivity(){
                 price,
                 imagePrimary,
                 imageArray,
-                userUID, false, uID,currentDate
+                userUID, false, uID, currentDate
             )
-        }
-        else
-        {
+        } else {
             return null
         }
 
 
     }
-    private fun checkInternet():Boolean{
+
+    private fun checkInternet(): Boolean {
         if (CheckInternet.isConnectedToInternet(applicationContext)) {
             Toast.makeText(
                 applicationContext, "Something went wrong! Check your network...",
@@ -447,6 +444,7 @@ class SellActivity : AppCompatActivity(){
         }
         return true
     }
+
     private fun showDialog() {
 
         val dialog = Dialog(this)
@@ -462,36 +460,38 @@ class SellActivity : AppCompatActivity(){
             .setOnClickListener { dialog.dismiss() }
         dialog.findViewById<View>(R.id.btn_submit).setOnClickListener { _: View? ->
             val customCat = etPost.text.toString().trim { it <= ' ' }
-            val update=findViewById<TextInputLayout>(R.id.inputCategory)
-            update.error=null
-            update.helperText=customCat
+            val update = findViewById<TextInputLayout>(R.id.inputCategory)
+            update.error = null
+            update.helperText = customCat
             dialog.dismiss()
         }
         dialog.show()
         dialog.window!!.attributes = lp
 
     }
-    private fun makeToast(value:String){
 
-        Toast.makeText(applicationContext,value,Toast.LENGTH_LONG).show()
+    private fun makeToast(value: String) {
+
+        Toast.makeText(applicationContext, value, Toast.LENGTH_LONG).show()
     }
+
     @SuppressLint("SimpleDateFormat")
-    private fun generateUID(emailID:String):String
-    {
+    private fun generateUID(emailID: String): String {
 
         val dNow = Date()
         val ft = SimpleDateFormat("yyMMddhhmmssMs")
         val datetime: String = ft.format(dNow)
-        return emailID.substringBeforeLast("@")+datetime
+        return emailID.substringBeforeLast("@") + datetime
     }
-    private fun populateDropDown()
-    {
+
+    private fun populateDropDown() {
         //Populate dropDown category list
         val categories = resources.getStringArray(R.array.Categories)
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item,categories)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, categories)
         findViewById<AutoCompleteTextView>(R.id.categoryDropDown).setAdapter(arrayAdapter)
 
     }
+
     override fun onRestart() {
         super.onRestart()
         populateDropDown()
@@ -500,6 +500,10 @@ class SellActivity : AppCompatActivity(){
     override fun onResume() {
         super.onResume()
         populateDropDown()
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 

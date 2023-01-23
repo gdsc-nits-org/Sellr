@@ -90,14 +90,6 @@ class CartFragment : Fragment() {
                         }
 
                     }
-                    if(cartModelArrayList.size==0)
-                    {
-                        emptyIV.visibility=View.VISIBLE
-                    }
-                    else
-                    {
-                        emptyIV.visibility=View.GONE
-                    }
                 }
 
 
