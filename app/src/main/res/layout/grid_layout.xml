@@ -72,35 +72,45 @@
                     android:text="2000" />
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="12sp">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/soldButton"
-                android:background="@drawable/rounded_rectangle"
-                android:elevation="5sp"
-                android:backgroundTint="#FEC202"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
 
-                android:textSize="16sp"
-                android:textColor="#4E4637"
-                android:letterSpacing="0.01"
-                android:text="Sold" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/soldButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@drawable/rounded_rectangle"
+                    android:backgroundTint="#FEC202"
+                    android:elevation="5sp"
+
+                    android:letterSpacing="0.01"
+                    android:text="Sold"
+                    android:textColor="#4E4637"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageButton
                     android:id="@+id/deleteButton"
-                    android:layout_marginStart="90sp"
                     android:layout_width="wrap_content"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:layout_height="45sp"
-                    android:src="@drawable/img_5"
+                    android:adjustViewBounds="true"
                     android:backgroundTint="#98DCD2"
-                    />
-            </LinearLayout>
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.985"
+                    app:layout_constraintStart_toEndOf="@+id/soldButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </LinearLayout>

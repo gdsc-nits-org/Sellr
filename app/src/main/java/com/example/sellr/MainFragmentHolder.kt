@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.sellr.fragment.AboutUsFragment
-import com.example.sellr.fragment.OnSaleFragment
-import com.example.sellr.fragment.ReportUsFragment
-import com.example.sellr.fragment.SoldFragment
+import com.example.sellr.fragment.*
 
 class MainFragmentHolder : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +26,11 @@ class MainFragmentHolder : AppCompatActivity() {
         {
                 title="About us"
             fragmentLoad(AboutUsFragment())
+        }
+        else if(intent.hasExtra("editProfile"))
+        {
+            title="Edit Profile"
+            fragmentLoad(fragmentEditProfile())
         }
         else if(intent.hasExtra("reportUs"))
         {

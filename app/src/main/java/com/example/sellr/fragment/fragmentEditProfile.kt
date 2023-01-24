@@ -12,7 +12,9 @@ import com.example.sellr.R
 import com.example.sellr.data.UserData
 import com.example.sellr.databinding.FragmentEditProfileBinding
 import com.example.sellr.databinding.FragmentProfileBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 
 
 class fragmentEditProfile : Fragment() {
@@ -30,8 +32,6 @@ class fragmentEditProfile : Fragment() {
         setData()
         binding.updateButton.setOnClickListener{
             updateData()
-
-
         }
 
         return binding.root
@@ -42,7 +42,7 @@ class fragmentEditProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //for(eachUser in snapshot.children) {
-                val user = snapshot.child("ybGanSNyMQQMsb7tytZkjyCELOu2").getValue(UserData::class.java)
+                val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
                 if (user != null) {
                     //println("userId: ${user.Email}")
                     binding.editHostelNumber.setText(user.Hostel)
@@ -66,14 +66,14 @@ class fragmentEditProfile : Fragment() {
         val updatedScholarId=binding.editScholarID.text.toString()
         val updatedPhoneNumber=binding.editPhoneNumber.text.toString()
         val updatedHostel=binding.editHostelNumber.text.toString()
-        val userId="ybGanSNyMQQMsb7tytZkjyCELOu2"
-
+        val userId=Firebase.auth.currentUser?.uid.toString()
+        println("userId: ${userId}")
         val userMap= mutableMapOf<String,Any>()
         userMap["Name"]=updatedName
         userMap["Hostel"]=updatedHostel
         userMap["Phone"]=updatedPhoneNumber
         userMap["ScholarId"]=updatedScholarId
-        myReference.child(userId.toString()).updateChildren(userMap).addOnCompleteListener{task->
+        myReference.child(userId).updateChildren(userMap).addOnCompleteListener{ task->
             if(task.isSuccessful){
                 Toast.makeText(activity,"The user has been updated",Toast.LENGTH_LONG).show()
                 val fragmentManager: FragmentManager =requireActivity().supportFragmentManager
