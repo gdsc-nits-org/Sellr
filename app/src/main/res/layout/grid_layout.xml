@@ -4,52 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8sp"
-    android:background="@drawable/recycle_layout"
-    android:layout_margin="10sp"
-    android:orientation="horizontal"
-    app:cardElevation="12dp"
-    android:backgroundTint="#98DCD2"
-    app:cardCornerRadius="10sp">
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="3dp"
+    android:backgroundTint="#9BDCD2"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12sp"
+        android:orientation="horizontal"
+        >
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+        app:shapeAppearance="@style/CornerCut"
             android:id="@+id/itemImage"
-            android:layout_width="135sp"
-            android:layout_height="135sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
             tools:src="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:orientation="vertical">
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/itemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="High Quality Hand Made Doll"
-
                 android:textColor="#4E4637"
-
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                app:layout_constraintVertical_bias="0.0" />
+               />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -72,45 +63,36 @@
                     android:text="2000" />
 
             </LinearLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12sp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/soldButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:background="@drawable/rounded_rectangle"
+                    android:layout_alignParentStart="true"
                     android:backgroundTint="#FEC202"
-                    android:elevation="5sp"
-
-                    android:letterSpacing="0.01"
                     android:text="Sold"
                     android:textColor="#4E4637"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                     />
 
                 <ImageButton
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/deleteButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="45sp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="45dp"
+                    android:layout_gravity="end"
                     android:backgroundTint="#98DCD2"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/img_5"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.985"
-                    app:layout_constraintStart_toEndOf="@+id/soldButton"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:src="@drawable/img_5" />
+
+
+            </RelativeLayout>
+
 
         </LinearLayout>
     </LinearLayout>
