@@ -120,7 +120,7 @@ class OnSaleAdapter(
             override fun onCancelled(databaseError: DatabaseError) {
             }
         })
-
+            Toast.makeText(context, "Item deleted from database", Toast.LENGTH_LONG).show()
 
         }.addOnFailureListener {
             Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()

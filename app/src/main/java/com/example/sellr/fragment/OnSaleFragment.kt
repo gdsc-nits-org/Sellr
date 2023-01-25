@@ -15,8 +15,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class OnSaleFragment : Fragment() {
-    val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-    private val myReference: DatabaseReference =database.reference.child("Items")
+
 
 
     val itemList=ArrayList<SellData>()
@@ -42,30 +41,26 @@ class OnSaleFragment : Fragment() {
 
 
     private fun retriveDataFromDatabase(){
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+        val myReference: DatabaseReference =database.reference.child("Items")
+        myReference.get().addOnSuccessListener {
+            val user=Firebase.auth.currentUser?.uid.toString()
+            itemList.clear()   //For clearing when data gets added to database.
+            for(eachItem in it.children){
+                val item=eachItem.getValue(SellData::class.java)
+                if(item!=null && item.userUID==user&&!item.sold!!){
+                    itemList.add(item)
 
-        myReference.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val user=Firebase.auth.currentUser?.uid.toString()
-                itemList.clear()   //For clearing when data gets added to database.
-                for(eachItem in snapshot.children){
-                    val item=eachItem.getValue(SellData::class.java)
-                    if(item!=null && item.userUID==user&&!item.sold!!){
-                        itemList.add(item)
-
-                    }
-
-                    itemsAdapter=OnSaleAdapter(requireContext(),itemList)
-                    binding.recyclerView.layoutManager=LinearLayoutManager(activity)
-                    binding.recyclerView.adapter=itemsAdapter
                 }
 
+                itemsAdapter=OnSaleAdapter(requireContext(),itemList)
+                binding.recyclerView.layoutManager=LinearLayoutManager(activity)
+                binding.recyclerView.adapter=itemsAdapter
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+        }.addOnFailureListener {
 
-        })
+        }
     }
 
 }
