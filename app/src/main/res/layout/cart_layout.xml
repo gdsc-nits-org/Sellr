@@ -40,13 +40,15 @@
                 android:text="Title"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
+
             <TextView
                 android:id="@+id/item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Price"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textColor="#006153"
+                android:textSize="20sp"
+                android:text="2000" />
 
             <ImageButton
                 android:id="@+id/remove_button"
