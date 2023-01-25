@@ -1,14 +1,17 @@
 package com.example.sellr.adapters
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.sellr.DescriptionPage
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.SoldRecyclerLayoutBinding
 
 class SoldAdapter(
-
+    private val context: Context?,
     var itemList:ArrayList<SellData>):
 
     RecyclerView.Adapter<SoldAdapter.ItemsViewHolder>() {
@@ -35,6 +38,12 @@ class SoldAdapter(
 //            holder.adapterBinding.deleteButton.setOnClickListener {
 //                toDelete.toDelete(itemList[position].pId)
 //            }
+            holder.itemView.setOnClickListener {
+                val value = itemList[position].pid.toString()
+                val i = Intent(context, DescriptionPage::class.java)
+                i.putExtra("key", value)
+                context?.startActivity(i)
+            }
 
 
         }

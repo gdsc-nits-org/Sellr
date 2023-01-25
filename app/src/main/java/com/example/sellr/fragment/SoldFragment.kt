@@ -15,15 +15,13 @@ import com.google.firebase.ktx.Firebase
 
 
 class SoldFragment : Fragment() {
-    val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-    val myReference: DatabaseReference =database.reference.child("Items")
 
 
-    val itemList=ArrayList<SellData>()
+    val itemList = ArrayList<SellData>()
     lateinit var itemsAdapter: SoldAdapter
 
-    private var viewBinding: FragmentSoldBinding?=null
-    private val binding get()= viewBinding!!
+    private var viewBinding: FragmentSoldBinding? = null
+    private val binding get() = viewBinding!!
 
 
     override fun onCreateView(
@@ -36,24 +34,29 @@ class SoldFragment : Fragment() {
         return binding.root
 
     }
+
     private fun retriveDataFromDatabase() {
+        val database: FirebaseDatabase =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+        val myReference: DatabaseReference = database.reference.child("Items")
         myReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val user= Firebase.auth.currentUser?.uid.toString()
+
+                val user = Firebase.auth.currentUser?.uid.toString()
                 itemList.clear()   //For clearing when data gets added to database.
-                for(eachItem in snapshot.children)
-                {
-                    val item=eachItem.getValue(SellData::class.java)
-                    if(item!=null && item.userUID==user&& item.sold == true){
+                for (eachItem in snapshot.children) {
+                    val item = eachItem.getValue(SellData::class.java)
+                    if (item != null && item.userUID == user && item.sold == true) {
                         itemList.add(item)
 
                     }
-                    itemsAdapter=SoldAdapter(itemList)
-                    binding.recyclerView.layoutManager= LinearLayoutManager(activity)
-                    binding.recyclerView.adapter=itemsAdapter
+                    itemsAdapter = SoldAdapter(requireContext(),itemList)
+                    binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+                    binding.recyclerView.adapter = itemsAdapter
 
 
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -62,10 +65,6 @@ class SoldFragment : Fragment() {
 
         })
 
-    }
-
-    fun toDelete(pId: String) {
-        myReference.child(pId).removeValue()
     }
 
 

@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:backgroundTint="#FEC202"
-                    android:text="Sold"
+                    android:text="Mark as Sold"
                     android:textColor="#4E4637"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                      />

@@ -16,11 +16,10 @@ import com.google.firebase.ktx.Firebase
 
 class OnSaleFragment : Fragment() {
     val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-    val myReference: DatabaseReference =database.reference.child("Items")
+    private val myReference: DatabaseReference =database.reference.child("Items")
 
 
     val itemList=ArrayList<SellData>()
-    val updatedList=ArrayList<SellData>()
     lateinit var itemsAdapter:OnSaleAdapter
 
 
@@ -39,14 +38,10 @@ class OnSaleFragment : Fragment() {
 
     }
 
-    fun toSold(pId:String){
-        myReference.child(pId).child("sold").setValue(true)
-
-    }
 
 
 
-    fun retriveDataFromDatabase(){
+    private fun retriveDataFromDatabase(){
 
         myReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,7 +54,7 @@ class OnSaleFragment : Fragment() {
 
                     }
 
-                    itemsAdapter=OnSaleAdapter(activity,itemList)
+                    itemsAdapter=OnSaleAdapter(requireContext(),itemList)
                     binding.recyclerView.layoutManager=LinearLayoutManager(activity)
                     binding.recyclerView.adapter=itemsAdapter
                 }
@@ -71,10 +66,6 @@ class OnSaleFragment : Fragment() {
             }
 
         })
-    }
-
-    fun toDelete(pId: String) {
-        myReference.child(pId).removeValue()
     }
 
 }
