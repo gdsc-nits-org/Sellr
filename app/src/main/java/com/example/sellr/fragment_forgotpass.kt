@@ -1,5 +1,6 @@
 package com.example.sellr
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,6 +32,9 @@ class fragment_forgotpass : Fragment() {
         button= view.findViewById(R.id.submit)
 
         button.setOnClickListener {
+            val pd = ProgressDialog(context);
+            pd.setMessage("Sit back and relax, we are processing")
+            pd.show()
             val emailtxt = email.text.toString().trim()
             if(emailtxt.isBlank() || !emailtxt.contains("nits"))
                 email.setError("Please Enter Valid Email")
@@ -41,6 +45,7 @@ class fragment_forgotpass : Fragment() {
                     "Password reset email link sent",
                     Toast.LENGTH_SHORT
                 ).show()
+                pd.hide()
                 startActivity(Intent(requireContext(), AuthActivity::class.java))
             }
 

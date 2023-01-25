@@ -2,6 +2,7 @@
 package com.example.sellr.fragment
 
 import android.app.ActionBar
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -99,6 +100,9 @@ class RegisterFragment : Fragment() {
                 ct++
             if(ct==5)
             {
+                val pd = ProgressDialog(context)
+                pd.setMessage("Sit back and relax, we are processing")
+                pd.show()
 
 
                 auth.createUserWithEmailAndPassword(emailtxt, passtxt)
@@ -113,6 +117,7 @@ class RegisterFragment : Fragment() {
                                 ).show()
                                 user = auth.currentUser!!
                                 val uid = user.uid.toString()
+                                pd.hide()
                                 saveuserinfo(emailtxt, passtxt, uid)
                                 updateUI(user)
 
@@ -124,9 +129,11 @@ class RegisterFragment : Fragment() {
 
                             Toast.makeText(
                                 requireContext(),
+
                                 "Sign Up Unsuccessful",
                                 Toast.LENGTH_LONG
                             ).show()
+                            pd.hide()
                             //  updateUI(null)
                         }
                     }
