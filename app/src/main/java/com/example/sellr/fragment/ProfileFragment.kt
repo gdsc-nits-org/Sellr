@@ -58,15 +58,6 @@ class ProfileFragment : Fragment() {
             i.putExtra("onSale", "onSale")
             startActivity(i)
         }
-        binding.logOut.setOnClickListener {
-            Firebase.auth.signOut()
-            val intent=Intent(activity,AuthActivity::class.java)
-            intent.putExtra("splash off","splash off")
-            activity?.startActivity(intent)
-            activity?.finish()
-
-
-        }
 
         return view
     }

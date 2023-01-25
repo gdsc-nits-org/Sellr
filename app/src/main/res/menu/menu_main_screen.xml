@@ -5,12 +5,15 @@
         android:id="@+id/edit_profile"
         app:showAsAction="always"
         android:icon="@drawable/logout"  android:title="add"/>
-
+    <item
+        android:id="@+id/logOutMenu"
+        app:showAsAction="never"
+        android:title="Log out">
+    </item>
 
     <item
         android:id="@+id/reportUsMenu"
         app:showAsAction="never"
-        android:icon="@android:drawable/ic_dialog_info"
         android:title="Report an Issue">
     </item>
     <item
