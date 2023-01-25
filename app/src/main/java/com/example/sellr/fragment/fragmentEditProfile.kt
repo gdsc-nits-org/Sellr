@@ -45,7 +45,7 @@ class fragmentEditProfile : Fragment() {
                 val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
                 if (user != null) {
                     //println("userId: ${user.Email}")
-                    binding.editHostelNumber.setText(user.Hostel)
+                   // binding.editHostelNumber.setText(user.Hostel)
                     binding.editUserName.setText(user.name)
                     binding.editScholarID.setText(user.scholarid)
                     binding.editPhoneNumber.setText(user.phonenum)
@@ -65,14 +65,14 @@ class fragmentEditProfile : Fragment() {
         val updatedName=binding.editUserName.text.toString()
         val updatedScholarId=binding.editScholarID.text.toString()
         val updatedPhoneNumber=binding.editPhoneNumber.text.toString()
-        val updatedHostel=binding.editHostelNumber.text.toString()
+        //val updatedHostel=binding.editHostelNumber.text.toString()
         val userId=Firebase.auth.currentUser?.uid.toString()
         println("userId: ${userId}")
         val userMap= mutableMapOf<String,Any>()
-        userMap["Name"]=updatedName
-        userMap["Hostel"]=updatedHostel
-        userMap["Phone"]=updatedPhoneNumber
-        userMap["ScholarId"]=updatedScholarId
+        userMap["name"]=updatedName
+       // userMap["Hostel"]=updatedHostel
+        userMap["phonenum"]=updatedPhoneNumber
+        userMap["scholarid"]=updatedScholarId
         myReference.child(userId).updateChildren(userMap).addOnCompleteListener{ task->
             if(task.isSuccessful){
                 Toast.makeText(activity,"The user has been updated",Toast.LENGTH_LONG).show()
