@@ -87,7 +87,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="end"
-                android:src="@drawable/add_to_cart"
+                android:src="@drawable/add_to_cart_black"
                 />
 
         </LinearLayout>

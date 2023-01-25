@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sellr.adapters.OnSaleAdapter
 import com.example.sellr.adapters.SoldAdapter
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.FragmentSoldBinding
@@ -36,34 +37,26 @@ class SoldFragment : Fragment() {
     }
 
     private fun retriveDataFromDatabase() {
-        val database: FirebaseDatabase =
-            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-        val myReference: DatabaseReference = database.reference.child("Items")
-        myReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                val user = Firebase.auth.currentUser?.uid.toString()
-                itemList.clear()   //For clearing when data gets added to database.
-                for (eachItem in snapshot.children) {
-                    val item = eachItem.getValue(SellData::class.java)
-                    if (item != null && item.userUID == user && item.sold == true) {
-                        itemList.add(item)
-
-                    }
-                    itemsAdapter = SoldAdapter(requireContext(),itemList)
-                    binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-                    binding.recyclerView.adapter = itemsAdapter
-
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+        val myReference: DatabaseReference =database.reference.child("Items")
+        myReference.get().addOnSuccessListener {
+            val user=Firebase.auth.currentUser?.uid.toString()
+            itemList.clear()   //For clearing when data gets added to database.
+            for(eachItem in it.children){
+                val item=eachItem.getValue(SellData::class.java)
+                if(item!=null && item.userUID==user&&item.sold!!){
+                    itemList.add(item)
 
                 }
 
+                itemsAdapter= SoldAdapter(requireContext(),itemList)
+                binding.recyclerView.layoutManager=LinearLayoutManager(activity)
+                binding.recyclerView.adapter=itemsAdapter
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+        }.addOnFailureListener {
 
-        })
+        }
 
     }
 

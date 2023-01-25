@@ -64,7 +64,7 @@ class myAdapterhome(private val context:Context,val fragment: Fragment, private 
                     if(x==0)
                     {
 
-                        holder.addToFav.setImageResource(R.drawable.add_to_cart)
+                        holder.addToFav.setImageResource(R.drawable.add_to_cart_black)
                         currentItem.addedtofav = false
                         println("Item is "+ holder.itemName.text+ "value is "+currentItem.addedtofav)
                     }
@@ -101,10 +101,10 @@ class myAdapterhome(private val context:Context,val fragment: Fragment, private 
             }
             else
             {
-                holder.addToFav.setImageResource(R.drawable.add_to_cart)
+                holder.addToFav.setImageResource(R.drawable.add_to_cart_black)
                 println("inside removing")
                 currentItem.addedtofav = false
-                holder.addToFav.setImageResource(R.drawable.add_to_cart)
+                holder.addToFav.setImageResource(R.drawable.add_to_cart_black)
                 dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString()).removeValue()
 
 
