@@ -1,6 +1,7 @@
 package com.example.sellr
 
 import android.app.ActionBar
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Paint
@@ -40,6 +41,7 @@ class LoginFragment : Fragment() {
 
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +52,7 @@ class LoginFragment : Fragment() {
         register = view.findViewById(R.id.textViewregister)
        register.setPaintFlags(register.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         email = view.findViewById(R.id.editTextTextPersonName)
+
         pass = view.findViewById(R.id.editTextTextPassword)
         forgot = view.findViewById(R.id.textViewforgot)
         forgot.setPaintFlags(forgot.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
@@ -88,6 +91,11 @@ class LoginFragment : Fragment() {
             else
                 ct++
             if(ct==2) {
+                val pd = ProgressDialog(context);
+                pd.setMessage("Sit back and relax,we are processing");
+                pd.show()
+                pd.setCancelable(false)
+
 
 
                 auth.signInWithEmailAndPassword(emailtxt, passtxt)
@@ -117,11 +125,13 @@ class LoginFragment : Fragment() {
 
                                             val intent = Intent(requireContext(), MainActivity::class.java)
                                             startActivity(intent)
+                                            pd.hide()
 
                                             activity?.finish()
                                         }
 
                                     }.addOnFailureListener{
+                                        pd.hide()
 
                                     }
                                 }
@@ -129,17 +139,23 @@ class LoginFragment : Fragment() {
 
 
 
-                            } else
+                            } else{
                                 Toast.makeText(
+
                                     requireContext(), "Email Not Verified",
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                pd.hide()
+
+                            }
+
 
 
                         } else {
                             // If sign in fails, display a message to the user.
                             println("Error reason" + task.exception)
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            pd.hide()
                             Toast.makeText(
                                 requireContext(), "Authentication failed.",
                                 Toast.LENGTH_SHORT
