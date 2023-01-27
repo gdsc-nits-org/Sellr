@@ -14,6 +14,8 @@ import com.example.sellr.data.CartModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList<CartModel>) :
     RecyclerView.Adapter<CartRVAdapter.ViewHolder>() {
@@ -29,6 +31,7 @@ class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList
         // to set data to textview and imageview of each card layout
         val model: CartModel = cartModelArrayList[position]
         holder.cartNameTV.text=model.item_name
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         holder.cartPriceTV.text="Rs. ${model.item_price}"
         Glide.with(holder.cartIV).load(model.item_image).centerCrop().into(holder.cartIV)
         val btn=holder.removeButton

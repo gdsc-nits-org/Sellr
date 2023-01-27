@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,7 +15,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@android:drawable/ic_menu_edit" />
+            android:src="@drawable/categories" />
 
         <View
             android:layout_width="15dp"
@@ -43,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginHorizontal="15dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,16 +52,29 @@
         android:layout_weight="1"
         android:padding="10dp">
 
-        <EditText
-            android:id="@+id/et_post"
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/et_post_holder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="top"
-            android:hint="Write your category ..."
-            android:padding="10dp" />
+            android:layout_height="wrap_content"
+            android:minHeight="70dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            app:boxCornerRadiusTopStart="15dp"
+            android:hint="Write Your Category...">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

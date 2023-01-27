@@ -50,6 +50,7 @@
                 android:textSize="20sp"
                 android:text="2000" />
 
+
             <ImageButton
                 android:id="@+id/remove_button"
                 android:layout_marginTop="5dp"

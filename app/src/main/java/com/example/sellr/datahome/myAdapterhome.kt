@@ -16,6 +16,8 @@ import com.example.sellr.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class myAdapterhome(private val context:Context,val fragment: Fragment, private var dataList: ArrayList<items_home>): RecyclerView.Adapter<myAdapterhome.MyViewHolder>() {
     private lateinit var dtb: DatabaseReference
@@ -31,10 +33,10 @@ class myAdapterhome(private val context:Context,val fragment: Fragment, private 
         val currentItem = dataList[dataList.size - position - 1]
         holder.newOrOld.text = currentItem.condition
         Glide.with(fragment).load(currentItem.imagePrimary).centerCrop().into(holder.photo)
-        holder.itemName.text = currentItem.productName
+        holder.itemName.text = currentItem.productName.toString()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         holder.price.text = currentItem.price
         holder.symbol
-        var key:String=""
         holder.itemView.setOnClickListener {
             val value = currentItem.pid
             val i = Intent(context, DescriptionPage::class.java)
