@@ -95,13 +95,10 @@ class LoginFragment : Fragment() {
                 pd.setMessage("Sit back and relax,we are processing");
                 pd.show()
                 pd.setCancelable(false)
-
-
-
                 auth.signInWithEmailAndPassword(emailtxt, passtxt)
                     .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
-
+                            pd.hide()
                             val isverified = auth.currentUser?.isEmailVerified
                             if (isverified == true) {
                                 Toast.makeText(
@@ -112,6 +109,7 @@ class LoginFragment : Fragment() {
                                 println("UID is " + user?.uid.toString())
 
                                 if (user != null) {
+
                                     dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
                                         val check = it.child("infoentered").toString();
 
@@ -125,13 +123,12 @@ class LoginFragment : Fragment() {
 
                                             val intent = Intent(requireContext(), MainActivity::class.java)
                                             startActivity(intent)
-                                            pd.hide()
+
 
                                             activity?.finish()
                                         }
 
                                     }.addOnFailureListener{
-                                        pd.hide()
 
                                     }
                                 }
@@ -145,7 +142,7 @@ class LoginFragment : Fragment() {
                                     requireContext(), "Email Not Verified",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                pd.hide()
+
 
                             }
 
