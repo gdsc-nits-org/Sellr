@@ -99,56 +99,44 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
                             pd.hide()
-                            val isverified = auth.currentUser?.isEmailVerified
-                            if (isverified == true) {
-                                Toast.makeText(
-                                    requireContext(), "Authentication Successful.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val user = Firebase.auth.currentUser
-                                println("UID is " + user?.uid.toString())
+                            dtb.child("Users").child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {
+                                val check = it.child("infoentered").toString();
 
-                                if (user != null) {
-
-                                    dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
-                                        val check = it.child("infoentered").toString();
-
-                                        if(check.contains("no")) {
-                                            fragmentload(fragment_extradetails())
-                                          //  dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
-
-                                        }
-                                        else
-                                        {
-
-                                            val intent = Intent(requireContext(), MainActivity::class.java)
-                                            startActivity(intent)
+                                if(check.contains("yes")) {
+                                    Toast.makeText(
+                                        requireContext(), "Authentication Successful.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent = Intent(requireContext(), MainActivity::class.java)
+                                    startActivity(intent)
 
 
-                                            activity?.finish()
-                                        }
+                                    activity?.finish()
 
-                                    }.addOnFailureListener{
 
-                                    }
+
+
+
+
+                                }
+                                else
+                                {
+
+
+                                    fragmentload(fragment_extradetails());
+
                                 }
 
+                            }.addOnFailureListener{
 
-
-
-                            } else{
-                                Toast.makeText(
-
-                                    requireContext(), "Email Not Verified",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            }
 
 
                             }
 
 
 
-                        } else {
+                         else {
                             // If sign in fails, display a message to the user.
                             println("Error reason" + task.exception)
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
