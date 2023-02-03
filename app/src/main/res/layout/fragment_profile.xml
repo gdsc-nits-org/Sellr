@@ -16,7 +16,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="260sp"
-        android:background="@drawable/cut_rectangle"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,7 +32,7 @@
         android:layout_height="150dp"
         android:scaleType="centerCrop"
         android:background="@drawable/circle"
-        android:src="@drawable/ic_baseline_profile_image_24"
+        android:src="@drawable/img_13"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="25sp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +62,7 @@
                 android:layout_width="29dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img" />
+                android:src="@drawable/img_6" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -100,9 +101,9 @@
 
             <ImageView
                 android:layout_width="29dp"
-                android:layout_height="33dp"
+                android:layout_height="27dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img_1" />
+                android:src="@drawable/img_12" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -143,7 +144,7 @@
                 android:layout_width="29dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img_2" />
+                android:src="@drawable/img_11" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -181,10 +182,10 @@
             android:layout_marginTop="15sp">
 
             <ImageView
-                android:layout_width="29dp"
+                android:layout_width="22dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img_3" />
+                android:src="@drawable/img_10" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
