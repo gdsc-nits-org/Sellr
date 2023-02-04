@@ -1,11 +1,13 @@
 package com.example.sellr.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sellr.R
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +37,14 @@ class LostAndFound : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lost_and_found, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_lost_and_found, container, false)
+        val listit = view.findViewById<ExtendedFloatingActionButton>(R.id.lostandfoundFab)
+        listit?.setOnClickListener {
+
+            val lostandfoundInput = Intent(context, LostAndFound::class.java)
+            startActivity(lostandfoundInput)
+        }
+        return view
     }
 
     companion object {

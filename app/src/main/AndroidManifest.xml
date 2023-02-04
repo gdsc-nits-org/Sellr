@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        tools:ignore="LockedOrientationActivity"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,13 +14,17 @@
         android:roundIcon="@mipmap/seller_icon_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sellr"
+        tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
+        <activity
+            android:name=".LostAndFoundInput"
+            android:exported="false" />
         <activity
             android:name=".DescriptionPage"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:exported="false"
             android:label="Item Details"
-            android:exported="false">
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -29,9 +32,9 @@
         <activity
             android:name=".SellActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:label="Sell an Item">
+            android:label="Sell an Item"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -39,19 +42,17 @@
         <activity
             android:name=".MainFragmentHolder"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
             android:exported="false"
-            >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".AuthActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,9 +66,8 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
             android:exported="true"
-             />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
