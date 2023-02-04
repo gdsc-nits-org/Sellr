@@ -14,7 +14,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class notification : FirebaseMessagingService() {
 
-    val channelName = "notification channel"
+    val channelName = "Sellr Notification"
     val channelId = "com.example.sellr"
 
     fun generateNotification(title: String, message: String) {
