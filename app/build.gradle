@@ -50,6 +50,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-database:20.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
     def nav_version = "2.5.3"
     //imageSlider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
