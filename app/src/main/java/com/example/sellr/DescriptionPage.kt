@@ -23,6 +23,7 @@ class DescriptionPage : AppCompatActivity() {
     private lateinit var imageList: ArrayList<SlideModel>
     private lateinit var imageSlider: ImageSlider
     //fab idea
+    //test
     private lateinit var backDrop: View
     private lateinit var lytMic: View
     private lateinit var lytCall: View
