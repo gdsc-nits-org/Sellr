@@ -17,6 +17,14 @@
     <string name="list_it">List it!</string>
     <string name="please_upload_images">Please upload at least one image</string>
     <string name="used_for_time">Used for time</string>
+    <string name="object_name">object_name</string>
+    <string name="object_location">object_location</string>
+    <string name="contact_number">contact_number</string>
+    <string name="select_one_please">select_one_please</string>
+    <string name="please_select_one">please_select_one</string>
+    <string name="LOST">LOST</string>
+    <string name="FOUND">FOUND</string>
+    <string name="object_image">object_image</string>
     <string-array name="Categories">
         <item>Books</item>
         <item>Electronics</item>

@@ -6,10 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-import android.view.View
-import android.widget.ImageView
-
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.sellr.data.LostAndFoundData
@@ -24,7 +20,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var storage : FirebaseStorage
     private lateinit var binding : ActivityLostAndFoundInputBinding
-    private lateinit var selectedImg : Uri
+    private var selectedImg : Uri? = null
     private lateinit var dialog: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,9 +51,9 @@ class LostAndFoundInput : AppCompatActivity() {
 
         binding.lostandfoundInputfab.setOnClickListener {
 
-            if(selectedImg == null){
-                findViewById<ImageView>(R.id.lostandfoundObjectimage).visibility = View.GONE
-            }
+            //if(selectedImg == null){
+                //findViewById<ImageView>(R.id.lostandfoundObjectimage).visibility = View.GONE
+            //}
             if(binding.lostandfoundObjectName.text!!.isEmpty()){
                 Toast.makeText(this,"Enter Object Name",Toast.LENGTH_SHORT).show()
             }
@@ -66,6 +62,9 @@ class LostAndFoundInput : AppCompatActivity() {
             }
             else if(binding.lostandfoundInputUserContact.text!!.isEmpty()){
                 Toast.makeText(this,"Enter your contact ",Toast.LENGTH_SHORT).show()
+            }
+            else if (selectedImg == null){
+                uploadInfo("NONE")
             }
             else{
                 uploadData()
@@ -76,8 +75,8 @@ class LostAndFoundInput : AppCompatActivity() {
 
     private fun uploadData() {
         val reference = storage.reference.child("LostAndFoundImages").child(Date().time.toString())
-        reference.putFile(selectedImg).addOnCompleteListener{
-            if(it.isSuccessful){
+        reference.putFile(selectedImg!!).addOnCompleteListener{
+            if(it.isSuccessful) {
                 reference.downloadUrl.addOnSuccessListener { task ->
                     uploadInfo(task.toString())
                 }
