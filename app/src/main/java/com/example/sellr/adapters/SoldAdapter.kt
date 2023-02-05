@@ -16,9 +16,9 @@ class SoldAdapter(
 
     RecyclerView.Adapter<SoldAdapter.ItemsViewHolder>() {
 
-        inner class ItemsViewHolder(val adapterBinding: SoldRecyclerLayoutBinding) : RecyclerView.ViewHolder(adapterBinding.root){}
+        inner class ItemsViewHolder(val adapterBinding: SoldRecyclerLayoutBinding) : RecyclerView.ViewHolder(adapterBinding.root)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
             val binding= SoldRecyclerLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
             return ItemsViewHolder(binding)
 

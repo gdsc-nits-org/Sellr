@@ -55,7 +55,7 @@ class RegisterFragment : Fragment() {
 
         signupbtn.setOnClickListener {
 
-            ct = 0;
+            ct = 0
             emailtxt = email.text.toString().trim()
             passtxt = pass.text.toString().trim()
             cnfrmpasstxt= confrmpass.text.toString().trim()
@@ -63,14 +63,14 @@ class RegisterFragment : Fragment() {
             if(emailtxt.isBlank()) {
                 Toast.makeText(requireContext(), "Please, Enter Valid email", Toast.LENGTH_SHORT)
                     .show()
-                email.setError("Please, Enter Valid email")
+                email.error = "Please, Enter Valid email"
             }
             else
-                ct++;
+                ct++
             if(passtxt.isBlank()) {
                 Toast.makeText(requireContext(), "Password can't be empty", Toast.LENGTH_SHORT)
                     .show()
-                pass.setError("Password can't be empty")
+                pass.error = "Password can't be empty"
             }
             else
                 ct++
@@ -78,21 +78,21 @@ class RegisterFragment : Fragment() {
             {
                 Toast.makeText(requireContext(), "Password Mismatch", Toast.LENGTH_SHORT)
                     .show()
-                confrmpass.setError("Password Mismatch")
+                confrmpass.error = "Password Mismatch"
             }
             else
                 ct++
             if(passtxt.length<6) {
                 Toast.makeText(requireContext(), "Password must be greater than 6 char", Toast.LENGTH_SHORT)
                     .show()
-                pass.setError("Password must be greater than 6 char")
+                pass.error = "Password must be greater than 6 char"
             }
             else
                 ct++
             if( emailtxt.contains("nits")!=true) {
                 Toast.makeText(requireContext(), "Please enter institute email id", Toast.LENGTH_SHORT)
                     .show()
-                email.setError("Please enter institute email id")
+                email.error = "Please enter institute email id"
             }
             else
                 ct++
@@ -104,7 +104,7 @@ class RegisterFragment : Fragment() {
 
 
                 auth.createUserWithEmailAndPassword(emailtxt, passtxt)
-                    .addOnCompleteListener() { task ->
+                    .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
 
                             val otp = (1001..9999).random()

@@ -43,7 +43,7 @@ class fragmentEditProfile : Fragment() {
                     binding.editPhoneNumber.setText(user.phonenum)
                     if(user.scholarid=="-------")
                     {
-                        binding.editScholarID.setText("");
+                        binding.editScholarID.setText("")
                     }
                     else
                     {

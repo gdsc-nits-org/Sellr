@@ -35,10 +35,10 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         mListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): filterAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filter_item,
             parent, false)
-        return filterAdapter.MyViewHolder(itemView,mListener)
+        return MyViewHolder(itemView,mListener)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

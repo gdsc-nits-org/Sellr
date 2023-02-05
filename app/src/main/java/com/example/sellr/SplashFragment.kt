@@ -71,7 +71,7 @@ class SplashFragment : Fragment() {
                 println(user.uid.toString())
 
                 dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
-                    val check = it.child("infoentered").toString();
+                    val check = it.child("infoentered").toString()
 
                     if(check.contains("no")) {
                         fragmentload(fragment_extradetails())
