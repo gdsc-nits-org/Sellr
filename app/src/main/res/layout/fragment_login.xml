@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+   android:background="@drawable/bg"
     tools:context=".LoginFragment">
 
 
@@ -37,7 +37,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa"
         android:text="Sellr"
-        android:visibility="gone"
         android:textColor="#424141"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
@@ -56,6 +55,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/login_edit_text_layout"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintHorizontal_bias="1.59"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -159,8 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="New to Sellr? Register Here"
-        android:textColor="#00B59C"
+        android:text="New User? Register Here"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
