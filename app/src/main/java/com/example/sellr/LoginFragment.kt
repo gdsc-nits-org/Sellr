@@ -50,12 +50,12 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         register = view.findViewById(R.id.textViewregister)
-        register.paintFlags = register.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+       register.setPaintFlags(register.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         email = view.findViewById(R.id.editTextTextPersonName)
 
         pass = view.findViewById(R.id.editTextTextPassword)
         forgot = view.findViewById(R.id.textViewforgot)
-        forgot.paintFlags = forgot.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        forgot.setPaintFlags(forgot.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         signinbtn = view.findViewById(R.id.button)
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
 
@@ -79,24 +79,24 @@ class LoginFragment : Fragment() {
             {
                 Toast.makeText(requireContext(), "Please, Enter Valid email", Toast.LENGTH_SHORT)
                     .show()
-                email.error = "Please, Enter Valid email"
+                email.setError("Please, Enter Valid email")
             }
             else
                 ct++
             if(passtxt.isBlank()) {
                 Toast.makeText(requireContext(), "Password can't be empty", Toast.LENGTH_SHORT)
                     .show()
-                pass.error = "Password can't be empty"
+                pass.setError("Password can't be empty")
             }
             else
                 ct++
             if(ct==2) {
-                val pd = ProgressDialog(context)
-                pd.setMessage("Sit back and relax,we are processing")
+                val pd = ProgressDialog(context);
+                pd.setMessage("Sit back and relax,we are processing");
                 pd.show()
                 pd.setCancelable(false)
                 auth.signInWithEmailAndPassword(emailtxt, passtxt)
-                    .addOnCompleteListener { task ->
+                    .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
                             pd.hide()
                             dtb.child("Users").child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {
@@ -111,10 +111,13 @@ class LoginFragment : Fragment() {
                                     startActivity(intent)
 
 
-                                    dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
-                                        val check = it.child("infoentered").toString()
-
                                     activity?.finish()
+
+
+
+
+
+
                                 }
                                 else
                                 {

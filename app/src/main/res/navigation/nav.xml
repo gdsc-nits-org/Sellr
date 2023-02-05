@@ -18,9 +18,4 @@
         android:name="com.example.sellr.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/lostAndFound"
-        android:name="com.example.sellr.fragment.LostAndFound"
-        android:label="fragment_lost_and_found"
-        tools:layout="@layout/fragment_lost_and_found" />
 </navigation>

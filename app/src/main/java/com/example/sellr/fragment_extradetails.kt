@@ -49,11 +49,6 @@ class fragment_extradetails : Fragment() {
             val nametxt = name.text.toString().trim()
             val otpnum = otp.text.toString().trim()
             val id = scholarid.text.toString().trim()
-            
-
-            if(phone.isBlank()|| nametxt.isBlank())
-                phonenum.error = "Aestrik fields are required"
-
             if(phone.isBlank()|| nametxt.isBlank() || otpnum.isBlank())
             {
                 phonenum.setError("Aestrik fields are required")
@@ -62,6 +57,7 @@ class fragment_extradetails : Fragment() {
 
 
             }
+
             else
             {
                 dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
@@ -100,6 +96,28 @@ class fragment_extradetails : Fragment() {
                 }.addOnFailureListener{
 
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             }
 

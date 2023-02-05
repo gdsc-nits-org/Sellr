@@ -9,6 +9,9 @@ data class SellData(val productName : String? = null,
                     val imagePrimary : String? = null,
                     val imageList:ArrayList<String>?=null,
                     val userUID : String? = null,val sold:Boolean?=false,val pid : String? = null,val sellingDate : String? = null)
+{
+
+}
 
 
 

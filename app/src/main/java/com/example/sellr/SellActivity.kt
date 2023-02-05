@@ -5,7 +5,6 @@ package com.example.sellr
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -17,12 +16,9 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import androidx.core.widget.doAfterTextChanged
-
 import com.example.sellr.data.SellData
 import com.example.sellr.utils.CheckInternet
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -31,14 +27,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
-
-import java.io.ByteArrayOutputStream
-import java.io.File
 import java.text.SimpleDateFormat
-
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SellActivity : AppCompatActivity() {
@@ -56,20 +48,13 @@ class SellActivity : AppCompatActivity() {
     private var progressCircular: ProgressBar? = null
 
 
-    private lateinit var baos:ByteArrayOutputStream
-    private lateinit var uploadTask:UploadTask
-    //private val coreHelper = AnstronCoreHelper(this)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sell)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         imageArray.add("")
         imageArray.add("")
         imageArray.add("")
-
-        //autologin feature
         val user = Firebase.auth.currentUser
         if (user != null) {
             emailID = user.email
@@ -78,7 +63,6 @@ class SellActivity : AppCompatActivity() {
             makeToast("Not logged in")
             onBackPressed()
         }
-
         populateDropDown()
         findViewById<AutoCompleteTextView>(R.id.categoryDropDown).doAfterTextChanged {
             if (findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString() == "Others") {
@@ -91,7 +75,6 @@ class SellActivity : AppCompatActivity() {
 
         progressCircular = findViewById(R.id.progress_circular)
         //get images from storage on user click
-        //until the previous image is selected, the next one is not enabled
         imageButtonPrimary = findViewById(R.id.imageButtonFirst)
         imageButtonSecond = findViewById(R.id.imageButtonSecond)
         imageButtonThird = findViewById(R.id.imageButtonThird)
@@ -99,55 +82,45 @@ class SellActivity : AppCompatActivity() {
         imageButtonSecond?.isEnabled = false
         imageButtonThird?.isEnabled = false
         imageButtonFourth?.isEnabled = false
-
-
-        //picking the image from the gallery and sending an intent
-
-        //as soon as a image is selected by the picker, and intent is passed to identify which image is to be
-        //updated and then it is directly uploaded in the updateImage method
-        //then when final list it is clicked it is linked (FAB onClickListener)
-
-        //the request code is used to identify which image in the array is to be updated
         imageButtonPrimary?.setOnClickListener {
+
             if (checkInternet()) {
- //________________________________________________________________________________
-//                Previous Codes
-//val iGallery = Intent(Intent.ACTION_PICK)
-//                iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-//                    startActivityForResult(iGallery, 1000)
- //_______________________________________________________________________________
-                ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750)
-                    .start(1000)
+                val iGallery = Intent(Intent.ACTION_PICK)
+                iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                startActivityForResult(iGallery, 1000)
             }
+
         }
+
         imageButtonSecond?.setOnClickListener {
+
             if (checkInternet()) {
-                ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750).
-                start(2000)
+                val iGallery = Intent(Intent.ACTION_PICK)
+                iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                startActivityForResult(iGallery, 2000)
             }
+
+
         }
         imageButtonThird?.setOnClickListener {
+
             if (checkInternet()) {
-                ImagePicker.with(this).crop().
-                compress(400)
-                    .maxResultSize(750,750).
-                    start(3000)
+                val iGallery = Intent(Intent.ACTION_PICK)
+                iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                startActivityForResult(iGallery, 3000)
+
             }
+
         }
         imageButtonFourth?.setOnClickListener {
+
             if (checkInternet()) {
-                ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750).
-                start(4000)
+                val iGallery = Intent(Intent.ACTION_PICK)
+                iGallery.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                startActivityForResult(iGallery, 4000)
             }
 
         }
-
 
         //On used click
         findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = false
@@ -162,7 +135,6 @@ class SellActivity : AppCompatActivity() {
 
 
         //On FAB click==data upload
-        //final data upload
         val button: ExtendedFloatingActionButton = findViewById(R.id.fab)
         button.setOnClickListener {
             if (checkInternet()) {
@@ -209,18 +181,12 @@ class SellActivity : AppCompatActivity() {
         }
     }
 
-//    private fun compressImage(pickedImageURI: Uri): Uri{
-//        val filePath = File(SiliCompressor.with(this).compress(pickedImageURI.toString(), File(this.cacheDir, "temp")))
-//        return Uri.fromFile(filePath)
-//}
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 1000 -> {
-
                     upDateImage(1, data)
                 }
                 2000 -> {
@@ -241,39 +207,13 @@ class SellActivity : AppCompatActivity() {
         findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = usedClicked.isChecked
     }
 
-    //updating image in firebase storage
     private fun upDateImage(i: Int, data: Intent?) {
         setProgressBar()
         val storageRef = Firebase.storage.reference
-
         val imageUri: Uri? = data?.data
 
         val filename = generateUID(emailID + i.toString())
-
-
-//___________________________________________________________________________________________________________________
-//          Failed compressor trials
-//        //uploading image in firebase storage
-//        // val sendUri = compressImage(imageUri!!)
-//
-////        SiliCompressor.with
-////            (this).compress(imageUri.toString(),
-////            File(this.cacheDir, "temp"))
-//        val filePath = SiliCompressor.with(this@SellActivity).compress(imageUri.toString(),this.cacheDir)
-//
-//       val sendUri = Uri.parse(filePath)
-//        val bmp :Bitmap = MediaStore.Images.Media.getBitmap(contentResolver,imageUri)
-//        bmp.compress(Bitmap.CompressFormat.JPEG,25,baos)
-//        val bytedata = baos.toByteArray()
-//        uploadTask=storageRef.child("file/$filename").child(coreHelper.getFileNameFromUri(sendUri)).putFile(sendUri)
-//___________________________________________________________________________________________________________________
-
-        uploadTask = storageRef.child("file/$filename").putFile(imageUri!!)
-
-
-        //if even the delay specified the progress bar is still visible
-        //it means that the image was not uploaded
-        //return no connection issue
+        val uploadTask = storageRef.child("file/$filename").putFile(imageUri!!)
         Handler(Looper.getMainLooper()).postDelayed({
             if (progressCircular?.visibility == View.VISIBLE) {
                 Toast.makeText(this, "Time out!!Check Your connection", Toast.LENGTH_LONG).show()
@@ -282,9 +222,6 @@ class SellActivity : AppCompatActivity() {
             }
 
         }, 300000)
-
-
-        //this part is used to update the small image icons in the sell window
         uploadTask.addOnSuccessListener {
             storageRef.child("file/$filename").downloadUrl.addOnSuccessListener {
                 when (i) {
@@ -293,7 +230,6 @@ class SellActivity : AppCompatActivity() {
                             val ref = Firebase.storage.getReferenceFromUrl(imagePrimary!!)
                             ref.delete()
                         }
-
                         imageButtonPrimary?.setImageURI(imageUri)
                         imagePrimary = it.toString()
                         imageButtonSecond?.isEnabled = true
@@ -334,7 +270,6 @@ class SellActivity : AppCompatActivity() {
                 }
                 deleteProgressBar()
             }
-
         }.addOnFailureListener {
             makeToast("Upload Failed")
             deleteProgressBar()
@@ -366,7 +301,6 @@ class SellActivity : AppCompatActivity() {
 
     }
 
-    //this method gets the data about the item and sets it in the firebase
     private fun setData() {
         setProgressBar()
         val uID: String = generateUID(emailID!!)
@@ -410,8 +344,6 @@ class SellActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SimpleDateFormat")
-    //used to get the data from the menu and send an object containing all the information
-    //to the setData() method
     private fun getData(uID: String): SellData? {
         var flag = true
         val productName = findViewById<EditText>(R.id.textFieldName).text.toString().trim()
@@ -461,8 +393,6 @@ class SellActivity : AppCompatActivity() {
         } else {
             findViewById<TextInputLayout>(R.id.inputPrice).error = null
         }
-
-
         if (imagePrimary == "") {
             findViewById<TextView>(R.id.imageError).visibility = View.VISIBLE
             flag = false
@@ -470,8 +400,6 @@ class SellActivity : AppCompatActivity() {
         } else {
             findViewById<TextView>(R.id.imageError).visibility = View.GONE
         }
-
-
         var usedTime = ""
         if (condition == "Used") {
             usedTime = findViewById<EditText>(R.id.textFieldUsedCondition).text.toString()

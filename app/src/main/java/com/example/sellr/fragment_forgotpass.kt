@@ -32,12 +32,12 @@ class fragment_forgotpass : Fragment() {
         button= view.findViewById(R.id.submit)
 
         button.setOnClickListener {
-            val pd = ProgressDialog(context)
+            val pd = ProgressDialog(context);
             pd.setMessage("Sit back and relax, we are processing")
             pd.show()
             val emailtxt = email.text.toString().trim()
             if(emailtxt.isBlank() || !emailtxt.contains("nits"))
-                email.error = "Please Enter Valid Email"
+                email.setError("Please Enter Valid Email")
             else {
                 auth.sendPasswordResetEmail(emailtxt)
                 Toast.makeText(

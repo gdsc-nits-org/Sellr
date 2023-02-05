@@ -7,11 +7,7 @@
     <item android:id="@+id/cartFragment"
         android:title="Cart"
         android:icon="@drawable/cart"/>
-    <item android:id="@+id/lostAndFound"
-        android:title="Lost And Found"
-        android:icon="@drawable/lost_items"/>
     <item android:id="@+id/profileFragment"
         android:title="Profile"
         android:icon="@drawable/profile"/>
-
 </menu>
