@@ -8,6 +8,9 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -60,6 +63,9 @@ class SplashFragment : Fragment() {
         // Inflate the layout for this fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
+            view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
+            view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
+            view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
             if ( user!=null && user.isEmailVerified) {
 
                 println(user.uid.toString())
@@ -84,7 +90,7 @@ class SplashFragment : Fragment() {
                     }
 
                 }.addOnFailureListener{
-
+                    Toast.makeText(context,"Failed to connect to the internet",Toast.LENGTH_SHORT).show()
                 }
                 // User is signed in
 
