@@ -89,6 +89,7 @@ class LostAndFoundInput : AppCompatActivity() {
         val lostAndFoundObject = LostAndFoundData(binding.lostandfoundObjectName.text.toString(),binding.lostandfoundInputObjectLocation.text.toString(),binding.lostandfoundInputUserContact.text.toString(),auth.uid.toString(),imgUrl )
         database.reference.child("LostAndFound")
             .child(auth.uid.toString())
+            .child(auth.uid.toString()+binding.lostandfoundObjectName.text.toString()+Date().time.toString())
             .setValue(lostAndFoundObject)
             .addOnSuccessListener {
                 Toast.makeText(this,"Object listed",Toast.LENGTH_SHORT).show()
