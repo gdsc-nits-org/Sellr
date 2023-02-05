@@ -474,7 +474,7 @@ class SellActivity : AppCompatActivity() {
 
         var usedTime = ""
         if (condition == "Used") {
-            usedTime = findViewById<EditText>(R.id.textFieldUsedCondition).text.toString()
+            usedTime = findViewById<AutoCompleteTextView>(R.id.textFieldUsedCondition).text.toString()
             if (usedTime == "") {
                 findViewById<TextInputLayout>(R.id.usedCondition).error = "This field is required"
                 flag = false
@@ -559,8 +559,11 @@ class SellActivity : AppCompatActivity() {
     private fun populateDropDown() {
         //Populate dropDown category list
         val categories = resources.getStringArray(R.array.Categories)
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, categories)
-        findViewById<AutoCompleteTextView>(R.id.categoryDropDown).setAdapter(arrayAdapter)
+        val categoriesAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, categories)
+        findViewById<AutoCompleteTextView>(R.id.categoryDropDown).setAdapter(categoriesAdapter)
+        val conditions = resources.getStringArray(R.array.Conditions)
+        val conditionsAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, conditions)
+        findViewById<AutoCompleteTextView>(R.id.textFieldUsedCondition).setAdapter(conditionsAdapter)
 
     }
 

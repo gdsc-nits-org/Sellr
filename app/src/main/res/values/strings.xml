@@ -24,4 +24,14 @@
         <item>Vehicles</item>
         <item>Others</item>
     </string-array>
+    <string-array name="Conditions">
+        <item>Less than a week</item>
+        <item>Less than a month</item>
+        <item>Between 1-3 months</item>
+        <item>Between 3-6 months</item>
+        <item>Between 6-9 months</item>
+        <item>Almost an year</item>
+        <item>Almost two years</item>
+        <item>More than two years</item>
+    </string-array>
 </resources>
