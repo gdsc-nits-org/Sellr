@@ -27,18 +27,26 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
     override fun onBindViewHolder(holder: LostAndFoundViewHolder, position: Int) {
 
         val obj = objectList[position]
-        if (obj.imageUrl == "NONE") {
+
+        holder.binding.lostandfoundObject.text= obj.objectName
+        holder.binding.lostandfoundLocation.text = obj.objectLocation
+        holder.binding.lostandfoundUserContact.text = obj.contactNumber
+        if (obj.imageUrl != "NONE") {
+            Glide.with(context).load(obj.imageUrl).into(holder.binding.lostandfoundObjectimage)
+        }
+        else{
             holder.binding.lostandfoundObjectimage.visibility = View.GONE
-            holder.binding.lostandfoundObject.text= obj.objectName
-            holder.binding.lostandfoundLocation.text = obj.objectLocation
-            holder.binding.lostandfoundUserContact.text = obj.contactNumber
+        }
+
+        if(obj.LostOrFound == "LOST"){
+            holder.binding.indicatorGreen.visibility = View.GONE
         }
         else {
-            Glide.with(context).load(obj.imageUrl).into(holder.binding.lostandfoundObjectimage)
-            holder.binding.lostandfoundObject.text= obj.objectName
-            holder.binding.lostandfoundLocation.text = obj.objectLocation
-            holder.binding.lostandfoundUserContact.text = obj.contactNumber
+            holder.binding.indicatorRed.visibility = View.GONE
         }
+
+
+
     }
     override fun getItemCount(): Int {
         return objectList.size

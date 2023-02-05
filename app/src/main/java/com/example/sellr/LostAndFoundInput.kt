@@ -6,10 +6,14 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.ActivityLostAndFoundInputBinding
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -21,6 +25,7 @@ class LostAndFoundInput : AppCompatActivity() {
 
     private var userUID: String? = ""
     private var emailID: String? = ""
+    var chipState:String? = ""
 
     private lateinit var database : FirebaseDatabase
     private lateinit var auth: FirebaseAuth
@@ -66,6 +71,8 @@ class LostAndFoundInput : AppCompatActivity() {
             //startActivityForResult(intent, 69)
         }
 
+        val parentChipGroup: ChipGroup = findViewById(R.id.lostandfoundChipGroup)
+
         binding.lostandfoundInputfab.setOnClickListener {
 
             //if(selectedImg == null){
@@ -80,7 +87,19 @@ class LostAndFoundInput : AppCompatActivity() {
             else if(binding.lostandfoundInputUserContact.text!!.isEmpty()){
                 Toast.makeText(this,"Enter your contact ",Toast.LENGTH_SHORT).show()
             }
-            else if (selectedImg == null){
+
+            if (parentChipGroup.checkedChipId != View.NO_ID) {
+                findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.GONE
+                chipState =
+                    parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
+            } else {
+                findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.VISIBLE
+            }
+
+
+
+
+            if (selectedImg == null){
                 uploadInfo("NONE")
             }
             else{
@@ -103,7 +122,8 @@ class LostAndFoundInput : AppCompatActivity() {
     }
 
     private fun uploadInfo(imgUrl: String) {
-        val lostAndFoundObject = LostAndFoundData(binding.lostandfoundObjectName.text.toString(),binding.lostandfoundInputObjectLocation.text.toString(),binding.lostandfoundInputUserContact.text.toString(),auth.uid.toString(),imgUrl )
+
+        val lostAndFoundObject = LostAndFoundData(binding.lostandfoundObjectName.text.toString(),binding.lostandfoundInputObjectLocation.text.toString(),binding.lostandfoundInputUserContact.text.toString(),auth.uid.toString(),imgUrl,chipState )
         database.reference.child("LostAndFound")
             .child(emailID!!.substringBeforeLast("@")+Date().time.toString())
             .setValue(lostAndFoundObject)

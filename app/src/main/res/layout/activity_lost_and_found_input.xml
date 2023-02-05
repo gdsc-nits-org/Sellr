@@ -173,7 +173,7 @@
                     android:textAlignment="center"
                     android:theme="@style/Theme.MaterialComponents.Light" />
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/found"
+                    android:id="@+id/foundChip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
