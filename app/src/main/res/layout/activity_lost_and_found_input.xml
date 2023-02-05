@@ -23,6 +23,20 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <ProgressBar
+        android:id="@+id/lostandfoundprogress_circular"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="10dp"
+        android:visibility="gone"
+        android:progress="10"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/colourPrimary"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +58,7 @@
             android:layout_marginTop="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
-            android:hint="object name">
+            android:hint="@string/object_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lostandfoundObjectName"
@@ -69,7 +83,7 @@
             android:layout_marginTop="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
-            android:hint="object location">
+            android:hint="@string/object_location">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lostandfoundInputObjectLocation"
@@ -94,7 +108,7 @@
             android:layout_marginTop="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
-            android:hint="contact number">
+            android:hint="@string/contact_number">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lostandfoundInputUserContact"
@@ -117,7 +131,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select One please "
+                android:text="@string/select_one_please"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:layout_marginStart="25dp"
@@ -129,7 +143,7 @@
                 android:id="@+id/lostandfoundChipError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="please select one"
+                android:text="@string/please_select_one"
                 android:textSize="12sp"
                 android:textColor="@color/error"
                 android:visibility="gone"
@@ -153,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:minWidth="90dp"
                     app:chipBackgroundColor="@color/chiplost"
-                    android:text="LOST"
+                    android:text="@string/lost"
                     android:textSize="16sp"
                     android:textColor="@color/textColorPrimary"
                     android:textAlignment="center"
@@ -165,12 +179,12 @@
                     android:layout_height="wrap_content"
                     android:minWidth="90dp"
                     app:chipBackgroundColor="@color/chipfound"
-                    android:text="FOUND"
+                    android:text="@string/found"
                     android:textSize="16sp"
                     android:textColor="@color/textColorPrimary"
                     android:textAlignment="center"
                     android:theme="@style/Theme.MaterialComponents.Light"
-                    android:layout_marginLeft="16dp"/>
+                    android:layout_marginStart="16dp"/>
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -203,10 +217,11 @@
                 android:id="@+id/lostandfoundImageButton"
                 android:tag="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/object_image"
                 android:src="@drawable/ic_image_placeholder"
                 tools:ignore="NestedWeights" />
 
