@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellr.adapters.OnSaleAdapter
 import com.example.sellr.data.SellData
@@ -54,7 +55,7 @@ class OnSaleFragment : Fragment() {
                 }
 
                 itemsAdapter=OnSaleAdapter(requireContext(),itemList)
-                binding.recyclerView.layoutManager=LinearLayoutManager(activity)
+                binding.recyclerView.layoutManager=GridLayoutManager(context,2)
                 binding.recyclerView.adapter=itemsAdapter
             }
 

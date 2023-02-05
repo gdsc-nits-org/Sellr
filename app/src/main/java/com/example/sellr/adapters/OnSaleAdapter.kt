@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.sellr.DescriptionPage
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.GridLayoutBinding
+import com.example.sellr.databinding.GridViewBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
@@ -22,11 +23,11 @@ class OnSaleAdapter(
 ) :
     RecyclerView.Adapter<OnSaleAdapter.ItemsViewHolder>() {
 
-    inner class ItemsViewHolder(val adapterBinding: GridLayoutBinding) :
+    inner class ItemsViewHolder(val adapterBinding: GridViewBinding) :
         RecyclerView.ViewHolder(adapterBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
-        val binding = GridLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = GridViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemsViewHolder(binding)
 
 
