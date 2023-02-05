@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.sellr.LostAndFoundInput
 import com.example.sellr.R
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
@@ -35,13 +36,13 @@ class LostAndFound : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_lost_and_found, container, false)
         val listit = view.findViewById<ExtendedFloatingActionButton>(R.id.lostandfoundFab)
         listit?.setOnClickListener {
 
-            val lostandfoundInput = Intent(context, LostAndFound::class.java)
+            val lostandfoundInput = Intent(context, LostAndFoundInput::class.java)
             startActivity(lostandfoundInput)
         }
         return view
