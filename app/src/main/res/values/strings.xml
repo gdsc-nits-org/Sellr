@@ -25,6 +25,12 @@
     <string name="LOST">LOST</string>
     <string name="FOUND">FOUND</string>
     <string name="object_image">object_image</string>
+    <string name="item_image">item image</string>
+    <string name="object">Object</string>
+    <string name="location_of_lost_or_found">Location of Lost or Found</string>
+    <string name="contact">contact</string>
+    <string name="indicator_lost">indicator lost</string>
+    <string name="indicator_found">indicator found</string>
     <string-array name="Categories">
         <item>Books</item>
         <item>Electronics</item>

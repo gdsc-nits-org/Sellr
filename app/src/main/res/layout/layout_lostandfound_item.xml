@@ -17,13 +17,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="180dp"
             android:padding="2dp">
 
             <ImageView
+                android:contentDescription="@string/item_image"
                 android:id="@+id/lostandfoundObjectimage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="180dp"
+                android:layout_height="200dp"
                 android:layout_margin="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +44,10 @@
 
                 <TextView
                     android:id="@+id/lostandfoundObject"
-                    android:layout_width="210dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Object"
+                    android:text="@string/object"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -55,10 +56,10 @@
 
                 <TextView
                     android:id="@+id/lostandfoundLocation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Location of Lost or Found"
+                    android:text="@string/location_of_lost_or_found"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/parent"
@@ -69,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="contact"
+                    android:text="@string/contact"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/parent"
@@ -84,14 +85,13 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout2"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/indicator_red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:contentDescription="@string/indicator_lost"
                     app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout2"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
@@ -99,6 +99,7 @@
                     app:srcCompat="@drawable/red_indicator" />
 
                 <ImageView
+                    android:contentDescription="@string/indicator_found"
                     android:id="@+id/indicator_green"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

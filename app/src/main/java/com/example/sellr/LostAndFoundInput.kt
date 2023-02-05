@@ -11,11 +11,17 @@ import androidx.appcompat.app.AlertDialog
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.ActivityLostAndFoundInputBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
 class LostAndFoundInput : AppCompatActivity() {
+
+    private var userUID: String? = ""
+    private var emailID: String? = ""
+
     private lateinit var database : FirebaseDatabase
     private lateinit var auth: FirebaseAuth
     private lateinit var storage : FirebaseStorage
@@ -27,6 +33,17 @@ class LostAndFoundInput : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLostAndFoundInputBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val user = Firebase.auth.currentUser
+
+        if (user != null) {
+            emailID = user.email
+            userUID = user.uid
+        } else {
+            Toast.makeText(this,"Not Logged IN",Toast.LENGTH_SHORT).show()
+            onBackPressed()
+        }
 
 
         dialog = AlertDialog.Builder(this)
@@ -88,8 +105,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private fun uploadInfo(imgUrl: String) {
         val lostAndFoundObject = LostAndFoundData(binding.lostandfoundObjectName.text.toString(),binding.lostandfoundInputObjectLocation.text.toString(),binding.lostandfoundInputUserContact.text.toString(),auth.uid.toString(),imgUrl )
         database.reference.child("LostAndFound")
-            .child(auth.uid.toString())
-            .child(auth.uid.toString()+binding.lostandfoundObjectName.text.toString()+Date().time.toString())
+            .child(emailID!!.substringBeforeLast("@")+Date().time.toString())
             .setValue(lostAndFoundObject)
             .addOnSuccessListener {
                 Toast.makeText(this,"Object listed",Toast.LENGTH_SHORT).show()
