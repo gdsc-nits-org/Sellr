@@ -47,7 +47,7 @@ class fragment_extradetails : Fragment() {
             val nametxt = name.text.toString().trim()
             val id = scholarid.text.toString().trim()
             if(phone.isBlank()|| nametxt.isBlank())
-                phonenum.setError("Aestrik fields are required")
+                phonenum.error = "Aestrik fields are required"
             else
             {
                 dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")

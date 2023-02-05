@@ -46,7 +46,7 @@ class myAdapterhome(private val context:Context,val fragment: Fragment, private 
 
         dtb.child("Users").child(user).child("favpost").addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                var x =0;
+                var x =0
                 if(snapshot.exists()){
 
                     for(userSnapshot in snapshot.children){
@@ -57,7 +57,7 @@ class myAdapterhome(private val context:Context,val fragment: Fragment, private 
                             currentItem.addedtofav = true
                             currentItem.key = userSnapshot.key
                             println("Item is " + holder.itemName.text + "value is " + currentItem.addedtofav + "under for loop")
-                            x = 1;
+                            x = 1
                             break
                         }
 

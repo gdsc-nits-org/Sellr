@@ -63,9 +63,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onPause() {
-        searchView.setQuery("", false); // clear the text
+        searchView.setQuery("", false) // clear the text
         searchView.clearFocus()
-        searchView.isIconified = true;
+        searchView.isIconified = true
         super.onPause()
     }
 
@@ -135,10 +135,10 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         override fun onQueryTextChange(p0: String?): Boolean {
             searchList.clear()
-            val searchText = p0!!.toLowerCase(Locale.getDefault())
+            val searchText = p0!!.lowercase(Locale.getDefault())
             if(searchText.isNotEmpty()){
                 datalist.forEach{
-                    if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                    if(it.productName?.lowercase(Locale.getDefault())?.contains(searchText) == true){
                         searchList.add(it)
                     }
                 }
@@ -180,10 +180,10 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
                 override fun onQueryTextChange(p0: String?): Boolean {
                     searchList.clear()
-                    val searchText = p0!!.toLowerCase(Locale.getDefault())
+                    val searchText = p0!!.lowercase(Locale.getDefault())
                     if(searchText.isNotEmpty()){
                         datalistforfilteredmyAdapter.forEach{
-                            if(it.productName?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                            if(it.productName?.lowercase(Locale.getDefault())?.contains(searchText) == true){
                                 searchList.add(it)
                             }
                         }
@@ -226,7 +226,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                         val items = userSnapshot.getValue(items_home::class.java)
                         if (items != null) {
                             if(!items.sold) {
-                                datalist.add(items!!)
+                                datalist.add(items)
                             }
                         }
                     }

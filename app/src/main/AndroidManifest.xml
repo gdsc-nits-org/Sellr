@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
     <application
         tools:ignore="LockedOrientationActivity"
@@ -21,7 +24,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:label="Item Details"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -30,7 +33,7 @@
             android:name=".SellActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:exported="false"
+            android:exported="true"
             android:label="Sell an Item">
             <meta-data
                 android:name="android.app.lib_name"
