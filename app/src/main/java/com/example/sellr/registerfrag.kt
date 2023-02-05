@@ -11,14 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sellr.AuthActivity
-import com.example.sellr.LoginFragment
-import com.example.sellr.R
-import com.example.sellr.UserModel
+import com.example.sellr.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import papaya.`in`.sendmail.SendMail
 
 
 class RegisterFragment : Fragment() {
@@ -109,19 +107,30 @@ class RegisterFragment : Fragment() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
 
-                            auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                            val otp = (1001..9999).random()
+
+                            val mail = SendMail(
+                                "sam33rzaidi@gmail.com", "fiqaisqjpdtxulap",
+                                emailtxt,
+                                "Sellr OTP Verification ",
+                                "Hey User!\nYour OTP for Sellr is \n$otp"
+                            )
+                            mail.execute()
+                            println("mail sent")
+
+
                                 Toast.makeText(
                                     requireContext(),
-                                    "Verification Link Sent, Please Verify",
+                                    "OTP Email Sent, Please Verify!",
                                     Toast.LENGTH_LONG
                                 ).show()
                                 user = auth.currentUser!!
                                 val uid = user.uid.toString()
                                 pd.hide()
-                                saveuserinfo(emailtxt, passtxt, uid)
+                                saveuserinfo(emailtxt, passtxt, uid,otp.toString())
                                 updateUI(user)
 
-                            }
+
 
 
 
@@ -151,9 +160,9 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun saveuserinfo(emailtxt: String, passtxt: String, uid: String) {
+    private fun saveuserinfo(emailtxt: String, passtxt: String, uid: String , otp:String) {
 
-        val user = UserModel(emailtxt,passtxt,null,null,null,"no")
+        val user = UserModel(emailtxt,passtxt,null,null,null, otp,"no")
         database.child("Users").child(uid).setValue(user)
 
     }
@@ -162,7 +171,7 @@ class RegisterFragment : Fragment() {
 
 //        val intent = Intent(requireContext(), AuthActivity::class.java)
 //        startActivity(intent)
-        fragmentload(LoginFragment())
+        fragmentload(fragment_extradetails())
 
 
     }

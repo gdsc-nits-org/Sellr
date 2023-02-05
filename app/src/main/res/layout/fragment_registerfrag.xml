@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- android:background="@drawable/bg"
+
     tools:context=".registerfrag">
 
 
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa"
         android:text="Sellr"
+        android:visibility="gone"
         android:textColor="#424141"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
