@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/splashContainer"
     tools:context=".SplashFragment">
 
 
@@ -24,6 +25,7 @@
         app:layout_constraintVertical_bias="0.429" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/appNameSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +34,6 @@
         android:layout_marginBottom="112dp"
         android:text="Seller"
         android:textAllCaps="true"
-        android:textColor="#636262"
         android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,7 +46,8 @@
             android:id="@+id/gdscNameSplash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Google Developer Students Club"
+            android:text="Google Developer Students Club\nNIT Silchar"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -13,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.sellr.utils.CheckInternet
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -48,9 +50,7 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val user = FirebaseAuth.getInstance().currentUser
-        dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
-        auth = FirebaseAuth.getInstance()
+
 //        val mail = SendMail(
 //            "sam33rzaidi@gmail.com", "nfvshodcoxiwknas",
 //            "sameer21_ug@ece.nits.ac.in",
@@ -63,45 +63,79 @@ class SplashFragment : Fragment() {
         // Inflate the layout for this fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
-            view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
-            view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
-            view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
-            if ( user!=null && user.isEmailVerified) {
-
-                println(user.uid.toString())
-
-                dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
-                    val check = it.child("infoentered").toString();
-
-                    if(check.contains("no")) {
-                        fragmentload(fragment_extradetails())
-                        println("loading ez")
-                        //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
-
-                    }
-                    else
-                    {
+            checkForDetails()
 
 
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-
-                        activity?.finish()
-                    }
-
-                }.addOnFailureListener{
-                    Toast.makeText(context,"Failed to connect to the internet",Toast.LENGTH_SHORT).show()
-                }
-                // User is signed in
-
-
-            } else {
-                // User is signed out
-                fragmentLoad(LoginFragment())
-            }
         }, 2000)
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
+
+    private fun checkForDetails():Boolean {
+        if(context?.let { CheckInternet.isConnectedToInternet(it) } == true)
+        {
+            val contextView=view?.findViewById<View>(R.id.splashContainer)
+            if (contextView != null) {
+                Snackbar.make(contextView, "No Internet Available", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Retry") {
+                        // Responds to click on the action
+                        checkForDetails()
+                    }
+                    .show()
+            }
+            return false
+        }
+        val user = FirebaseAuth.getInstance().currentUser
+        dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+        auth = FirebaseAuth.getInstance()
+        view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
+        view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
+        view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
+        if ( user!=null && user.isEmailVerified) {
+
+            println(user.uid.toString())
+
+            dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
+                val check = it.child("infoentered").toString();
+
+                if(check.contains("no")) {
+                    fragmentload(fragment_extradetails())
+                    println("loading ez")
+                    //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
+
+                }
+                else
+                {
+
+
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+
+                    activity?.finish()
+                }
+
+            }.addOnFailureListener{
+                Toast.makeText(context,"Failed to connect to the internet",Toast.LENGTH_SHORT).show()
+            }
+            // User is signed in
+
+
+        } else {
+            // User is signed out
+            fragmentLoad(LoginFragment())
+        }
+        return true
+    }
+
+    //    private fun checkInternet(): Boolean {
+//        if (CheckInternet.isConnectedToInternet(applicationContext)) {
+//            Toast.makeText(
+//                applicationContext, "Something went wrong! Check your network...",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//            return false
+//        }
+//        return true
+//    }
     private fun fragmentLoad(fragment : Fragment)
     {
 
