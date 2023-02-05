@@ -8,15 +8,11 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import papaya.`in`.sendmail.SendMail
 
 
 // Rename parameter arguments, choose names that match
@@ -51,21 +47,9 @@ class SplashFragment : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         auth = FirebaseAuth.getInstance()
-//        val mail = SendMail(
-//            "sam33rzaidi@gmail.com", "nfvshodcoxiwknas",
-//            "sameer21_ug@ece.nits.ac.in",
-//            "Testing Email Sending",
-//            "Yes, it's working well\nI will use it alwayswithotp123."
-//        )
-//        mail.execute()
-//        println("email sent")
-        // Token : usingforsellr123 ---- // nfvshodcoxiwknas
         // Inflate the layout for this fragment
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
-            view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
-            view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
-            view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
             if ( user!=null && user.isEmailVerified) {
 
                 println(user.uid.toString())
@@ -75,7 +59,6 @@ class SplashFragment : Fragment() {
 
                     if(check.contains("no")) {
                         fragmentload(fragment_extradetails())
-                        println("loading ez")
                         //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
 
                     }
@@ -90,7 +73,7 @@ class SplashFragment : Fragment() {
                     }
 
                 }.addOnFailureListener{
-                    Toast.makeText(context,"Failed to connect to the internet",Toast.LENGTH_SHORT).show()
+
                 }
                 // User is signed in
 

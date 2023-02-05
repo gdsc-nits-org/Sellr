@@ -99,17 +99,16 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
                             pd.hide()
-                            dtb.child("Users").child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {
-                                val check = it.child("infoentered").toString();
+                            val isverified = auth.currentUser?.isEmailVerified
+                            if (isverified == true) {
+                                Toast.makeText(
+                                    requireContext(), "Authentication Successful.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val user = Firebase.auth.currentUser
+                                println("UID is " + user?.uid.toString())
 
-                                if(check.contains("yes")) {
-                                    Toast.makeText(
-                                        requireContext(), "Authentication Successful.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    val intent = Intent(requireContext(), MainActivity::class.java)
-                                    startActivity(intent)
-
+                                if (user != null) {
 
                                     activity?.finish()
 
@@ -123,20 +122,30 @@ class LoginFragment : Fragment() {
                                 {
 
 
-                                    fragmentload(fragment_extradetails());
+                                            activity?.finish()
+                                        }
 
+                                    }.addOnFailureListener{
+
+                                    }
                                 }
 
-                            }.addOnFailureListener{
+
+
+
+                            } else{
+                                Toast.makeText(
+
+                                    requireContext(), "Email Not Verified",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
 
                             }
 
 
-                            }
 
-
-
-                         else {
+                        } else {
                             // If sign in fails, display a message to the user.
                             println("Error reason" + task.exception)
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
