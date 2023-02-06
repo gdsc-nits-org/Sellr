@@ -67,6 +67,7 @@ class HomeFragment : Fragment() {
         searchView.setQuery("", false); // clear the text
         searchView.clearFocus()
         searchView.isIconified = true;
+        defaultFilter="All"
         super.onPause()
     }
     var defaultFilter="All"
