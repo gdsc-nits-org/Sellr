@@ -31,6 +31,7 @@
     <string name="contact">contact</string>
     <string name="indicator_lost">indicator lost</string>
     <string name="indicator_found">indicator found</string>
+    <string name="object_description">Object Description</string>
     <string-array name="Categories">
         <item>Books</item>
         <item>Electronics</item>

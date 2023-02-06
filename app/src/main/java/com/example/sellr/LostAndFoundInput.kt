@@ -85,10 +85,12 @@ class LostAndFoundInput : AppCompatActivity() {
             else if(binding.lostandfoundInputObjectLocation.text!!.isEmpty()){
                 Toast.makeText(this,"Enter Object Location",Toast.LENGTH_SHORT).show()
             }
-            else if(binding.lostandfoundInputUserContact.text!!.isEmpty()){
-                Toast.makeText(this,"Enter your contact ",Toast.LENGTH_SHORT).show()
+            //else if(binding.lostandfoundInputUserContact.text!!.isEmpty()){
+                //Toast.makeText(this,"Enter your contact ",Toast.LENGTH_SHORT).show()
+            //}
+            else if(binding.lostandfoundObjectDesc.text!!.isEmpty()){
+                Toast.makeText(this,"Enter the item description",Toast.LENGTH_SHORT).show()
             }
-
             else if (parentChipGroup.checkedChipId == View.NO_ID) {
                 findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.VISIBLE
             }
@@ -127,7 +129,7 @@ class LostAndFoundInput : AppCompatActivity() {
 
     private fun uploadInfo(imgUrl: String) {
 
-        val lostAndFoundObject = LostAndFoundData(binding.lostandfoundObjectName.text.toString(),binding.lostandfoundInputObjectLocation.text.toString(),binding.lostandfoundInputUserContact.text.toString(),auth.uid.toString(),imgUrl,chipState )
+        val lostAndFoundObject = LostAndFoundData(binding.lostandfoundObjectName.text.toString(),binding.lostandfoundInputObjectLocation.text.toString(),binding.lostandfoundObjectDesc.text.toString(),auth.uid.toString(),imgUrl,chipState )
         database.reference.child("LostAndFound")
             .child(emailID!!.substringBeforeLast("@")+Date().time.toString())
             .setValue(lostAndFoundObject)

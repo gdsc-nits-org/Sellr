@@ -80,7 +80,6 @@
             app:boxCornerRadiusTopEnd="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             android:hint="@string/object_location">
@@ -93,7 +92,10 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <!-- disabling contact input-->
         <com.google.android.material.textfield.TextInputLayout
+            android:visibility="gone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/contactInput"
             android:layout_width="match_parent"
@@ -105,7 +107,6 @@
             app:boxCornerRadiusTopEnd="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             android:hint="@string/contact_number">
@@ -116,6 +117,32 @@
                 android:layout_height="match_parent"
                 android:inputType="number"
                 android:singleLine="true"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="70dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            android:id="@+id/ObjectDesc"
+            android:hint="Description"
+            tools:ignore="HardcodedText">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lostandfoundObjectDesc"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,9 +220,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_margin="20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/condition_layout"
