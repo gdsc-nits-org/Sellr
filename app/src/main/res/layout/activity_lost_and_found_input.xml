@@ -6,6 +6,246 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LostAndFoundInput">
 
+
+
+    <ProgressBar
+        android:id="@+id/lostandfoundprogress_circular"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="10dp"
+        android:visibility="gone"
+        android:progress="10"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/colourPrimary"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/ObjectInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                android:layout_margin="20dp"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                android:hint="@string/object_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lostandfoundObjectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:singleLine="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/locationInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                android:hint="@string/object_location">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lostandfoundInputObjectLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:singleLine="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- disabling contact input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:visibility="gone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/contactInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                android:hint="@string/contact_number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lostandfoundInputUserContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:singleLine="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                android:id="@+id/ObjectDesc"
+                android:hint="Description"
+                tools:ignore="HardcodedText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lostandfoundObjectDesc"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/condition_layout">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_one_please"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginBottom="5dp"
+                    />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lostandfoundChipError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/please_select_one"
+                    android:textSize="12sp"
+                    android:textColor="@color/error"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginBottom="5dp"
+                    />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/lostandfoundChipGroup"
+                    app:singleSelection="true">
+
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lostChip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="90dp"
+                        app:chipBackgroundColor="@color/bg_chip_state_lost"
+                        android:text="@string/LOST"
+                        android:textSize="16sp"
+                        android:textColor="@color/textColorPrimary"
+                        android:textAlignment="center"
+                        android:theme="@style/Theme.MaterialComponents.Light" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/foundChip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="90dp"
+                        app:chipBackgroundColor="@color/bg_chip_state_found"
+                        android:text="@string/FOUND"
+                        android:textSize="16sp"
+                        android:textColor="@color/textColorPrimary"
+                        android:textAlignment="center"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        android:layout_marginStart="16dp"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/condition_layout"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload_image"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginBottom="5dp"
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/lostandfoundImageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/object_image"
+                    android:src="@drawable/ic_image_placeholder"
+                  />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,240 +262,4 @@
             />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <ProgressBar
-        android:id="@+id/lostandfoundprogress_circular"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_centerInParent="true"
-        android:layout_marginVertical="10dp"
-        android:visibility="gone"
-        android:progress="10"
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/colourPrimary"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/ObjectInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="70dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            android:hint="@string/object_name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lostandfoundObjectName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/locationInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="70dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            android:hint="@string/object_location">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lostandfoundInputObjectLocation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <!-- disabling contact input-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:visibility="gone"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/contactInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="70dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            android:hint="@string/contact_number">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lostandfoundInputUserContact"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:singleLine="true"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="70dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            android:id="@+id/ObjectDesc"
-            android:hint="Description"
-            tools:ignore="HardcodedText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lostandfoundObjectDesc"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/condition_layout">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select_one_please"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_marginStart="25dp"
-                android:layout_marginBottom="5dp"
-                />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lostandfoundChipError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/please_select_one"
-                android:textSize="12sp"
-                android:textColor="@color/error"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:layout_marginStart="25dp"
-                android:layout_marginBottom="5dp"
-                />
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:id="@+id/lostandfoundChipGroup"
-                app:singleSelection="true">
-
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/lostChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="90dp"
-                    app:chipBackgroundColor="@color/chiplost"
-                    android:text="@string/LOST"
-                    android:textSize="16sp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textAlignment="center"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/foundChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="90dp"
-                    app:chipBackgroundColor="@color/chipfound"
-                    android:text="@string/FOUND"
-                    android:textSize="16sp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textAlignment="center"
-                    android:theme="@style/Theme.MaterialComponents.Light"
-                    android:layout_marginStart="16dp"/>
-
-            </com.google.android.material.chip.ChipGroup>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/condition_layout"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/upload_image"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginBottom="5dp"
-                />
-
-
-            <ImageButton
-                android:id="@+id/lostandfoundImageButton"
-                android:tag="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:contentDescription="@string/object_image"
-                android:src="@drawable/ic_image_placeholder"
-                tools:ignore="NestedWeights" />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
 </RelativeLayout>
