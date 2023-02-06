@@ -25,7 +25,7 @@ class LostAndFoundInput : AppCompatActivity() {
 
     private var userUID: String? = ""
     private var emailID: String? = ""
-    var chipState:String? = ""
+    private var chipState:String? = ""
 
     private lateinit var database : FirebaseDatabase
     private lateinit var auth: FirebaseAuth
@@ -71,7 +71,8 @@ class LostAndFoundInput : AppCompatActivity() {
             //startActivityForResult(intent, 69)
         }
 
-        val parentChipGroup: ChipGroup = findViewById(R.id.lostandfoundChipGroup)
+        //val parentChipGroup: ChipGroup = findViewById(R.id.lostandfoundChipGroup)
+        val parentChipGroup: ChipGroup = binding.lostandfoundChipGroup
 
         binding.lostandfoundInputfab.setOnClickListener {
 
@@ -88,24 +89,27 @@ class LostAndFoundInput : AppCompatActivity() {
                 Toast.makeText(this,"Enter your contact ",Toast.LENGTH_SHORT).show()
             }
 
-            if (parentChipGroup.checkedChipId != View.NO_ID) {
-                findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.GONE
-                chipState =
-                    parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
-            } else {
+            else if (parentChipGroup.checkedChipId == View.NO_ID) {
                 findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.VISIBLE
             }
+            else if(parentChipGroup.checkedChipId != View.NO_ID) {
 
+                findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.GONE
+                chipState = parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
 
-
-
-            if (selectedImg == null){
+                if (selectedImg == null){
+                    uploadInfo("NONE")
+                }
+                else{
+                    uploadData()
+                }
+            }
+            else if (selectedImg == null){
                 uploadInfo("NONE")
             }
             else{
                 uploadData()
             }
-
         }
     }
 
