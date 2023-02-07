@@ -9,12 +9,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import com.bumptech.glide.Glide
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.ActivityLostAndFoundInputBinding
 import com.example.sellr.utils.CheckInternet
@@ -70,7 +67,6 @@ class LostAndFoundInput : AppCompatActivity() {
             compress(400).
             maxResultSize(750,750)
                 .start(1000)
-
         }
 
 
@@ -83,8 +79,6 @@ class LostAndFoundInput : AppCompatActivity() {
 
                 }
             }
-
-
         }
     }
 
@@ -213,5 +207,4 @@ class LostAndFoundInput : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
 }

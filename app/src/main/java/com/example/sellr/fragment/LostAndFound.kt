@@ -21,6 +21,8 @@ class LostAndFound : Fragment() {
     lateinit var binding :FragmentLostAndFoundBinding
     private var database : FirebaseDatabase ? = null
     lateinit var objectList: ArrayList<LostAndFoundData>
+    lateinit var foundList : ArrayList<LostAndFoundData>
+    lateinit var lostList : ArrayList<LostAndFoundData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +35,12 @@ class LostAndFound : Fragment() {
             val lostandfoundInput = Intent(context, LostAndFoundInput::class.java)
             startActivity(lostandfoundInput)
         }
+        
 
         database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         objectList = ArrayList()
+        lostList = ArrayList()
+        foundList = ArrayList()
 
         database!!.reference.child("LostAndFound")
             .addValueEventListener(object : ValueEventListener{
@@ -47,10 +52,33 @@ class LostAndFound : Fragment() {
                         if (obj != null) {
                             objectList.add(obj)
                         }
+
+                        if (obj?.LostOrFound == "FOUND") {
+                            foundList.add(obj)
+                        }
+                        else if (obj?.LostOrFound == "LOST") {
+                            lostList.add(obj)
+                        }
                     }
                     binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
 
+                    binding.lostandfoundFilterFound.setOnClickListener{
+                        binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),foundList)
+
+                    }
+                    binding.filterlost.setOnClickListener {
+                        binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
+                    }
+                    binding.lostandfoundFilterAll.setOnClickListener {
+                        binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                    }
+
                 }
+
+
 
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")

@@ -8,6 +8,53 @@
     tools:context=".fragment.LostAndFound">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lostandfoundfilterLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/lostandfoundFilterAll"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:text="All"
+            android:textColor="@color/colorAccent"
+            android:layout_marginStart="10sp"
+            android:backgroundTint="#0dd6d6"
+            android:layout_marginTop="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/filterlost"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12sp"
+            android:text="@string/LOST"
+            android:backgroundTint="#F44336"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
+            app:layout_constraintStart_toEndOf="@id/lostandfoundFilterAll"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/lostandfoundFilterFound"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:text="@string/FOUND"
+            android:backgroundTint="#08b49c"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="12sp"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/lostandfoundFab"
         android:layout_width="wrap_content"
@@ -29,6 +76,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lostandfoundfilterLinear"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
