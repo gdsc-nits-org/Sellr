@@ -39,12 +39,12 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
             holder.binding.lostandfoundObjectimage.visibility = View.GONE
         }
 
-        if(obj.LostOrFound == "FOUND"){
+        if(obj.lostOrFound == "FOUND"){
             holder.binding.indicatorRed.visibility = View.GONE
         }
         else {
             holder.binding.indicatorGreen.visibility = View.GONE
-            println("THE OBJECT WAS : ${obj.LostOrFound}" )
+            println("THE OBJECT WAS : ${obj.lostOrFound}" )
         }
 
 

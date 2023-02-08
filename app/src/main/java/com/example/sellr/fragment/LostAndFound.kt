@@ -53,13 +53,15 @@ class LostAndFound : Fragment() {
                             objectList.add(obj)
                         }
 
-                        if (obj?.LostOrFound == "FOUND") {
+                        if (obj?.lostOrFound == "FOUND") {
                             foundList.add(obj)
                         }
-                        else if (obj?.LostOrFound == "LOST") {
+                        else if (obj?.lostOrFound == "LOST") {
                             lostList.add(obj)
                         }
                     }
+
+
                     binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
 
                     binding.lostandfoundFilterFound.setOnClickListener{
