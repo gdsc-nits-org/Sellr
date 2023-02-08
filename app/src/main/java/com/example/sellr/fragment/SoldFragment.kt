@@ -37,16 +37,18 @@ class SoldFragment : Fragment() {
     }
 
     private fun retriveDataFromDatabase() {
+
         val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         val myReference: DatabaseReference =database.reference.child("Items")
+
         myReference.get().addOnSuccessListener {
             val user=Firebase.auth.currentUser?.uid.toString()
             itemList.clear()   //For clearing when data gets added to database.
+
             for(eachItem in it.children){
                 val item=eachItem.getValue(SellData::class.java)
                 if(item!=null && item.userUID==user&&item.sold!!){
                     itemList.add(item)
-
                 }
 
                 itemsAdapter= SoldAdapter(requireContext(),itemList)
