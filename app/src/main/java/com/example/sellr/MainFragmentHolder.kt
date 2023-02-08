@@ -37,6 +37,11 @@ class MainFragmentHolder : AppCompatActivity() {
             title="Report an issue"
             fragmentLoad(ReportUsFragment())
         }
+        else if(intent.hasExtra("lostAndFoundList")){
+            title="Items Lost/Found"
+            fragmentLoad(UserItemLostAndFound())
+
+        }
         else if(intent.hasExtra("extraDetails"))
         {
             try {
