@@ -46,6 +46,7 @@ class userItemLostFoundAdapter(
 
         holder.adapterBinding.itemName.text = itemList[position].objectName
         holder.adapterBinding.lostndFoundStatus.text = itemList[position].lostOrFound
+        holder.adapterBinding.lostndFoundLocation.text = itemList[position].objectLocation
 
 
 //        holder.adapterBinding.soldButton.setOnClickListener {
@@ -73,7 +74,7 @@ class userItemLostFoundAdapter(
             builder.setTitle("Are you sure?")
             builder.setMessage("Your item will be deleted permanently from the database")
             builder.setPositiveButton("Yes") { _, _ ->
-                deleteModel(itemList[position].uid.toString())
+                deleteModel(itemList[position].objectName.toString())
                 itemList.removeAt(position)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemList.size)
@@ -116,10 +117,17 @@ class userItemLostFoundAdapter(
         val databaseProd =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference("LostAndFound")
+
+
         databaseProd.child(model).removeValue().addOnSuccessListener {
 
             val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
-            val query: Query = ref.child("uid").orderByValue().equalTo(model)
+            val query: Query = ref.child("objectName").equalTo(model)
+
+
+
+//            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
+//            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("objectName").orderByValue().equalTo(model)
 
             query.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
