@@ -140,8 +140,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:text="Product Category"
-                        android:textStyle="bold" />
+                        android:text="Product Category" />
 
                     <TextView
                         android:id="@+id/product_condition"
