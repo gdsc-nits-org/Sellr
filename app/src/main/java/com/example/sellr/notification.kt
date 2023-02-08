@@ -30,7 +30,7 @@ class notification : FirebaseMessagingService() {
 
         //getRemoteView function to pass RemoteViews
         fun getRemoteView(title:String ,message:String ): RemoteViews{
-            val remoteView = RemoteViews("com.example.sellr",R.layout.notificatioin_layout)
+            val remoteView = RemoteViews("com.example.sellr",R.layout.notification_layout)
 
             remoteView.setTextViewText(R.id.name, title)
             remoteView.setTextViewText(R.id.message, message)
