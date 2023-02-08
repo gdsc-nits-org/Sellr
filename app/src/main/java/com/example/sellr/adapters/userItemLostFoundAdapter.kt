@@ -115,11 +115,11 @@ class userItemLostFoundAdapter(
 
         val databaseProd =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("Items")
+                .getReference("LostAndFound")
         databaseProd.child(model).removeValue().addOnSuccessListener {
 
-            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
-            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("pId").orderByValue().equalTo(model)
+            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
+            val query: Query = ref.child("uid").orderByValue().equalTo(model)
 
             query.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {

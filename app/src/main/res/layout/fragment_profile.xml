@@ -7,9 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ProfileFragment"
     android:background="@color/white">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        >
 
 
     <LinearLayout
@@ -214,55 +216,70 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50sp"
-            android:layout_marginStart="10sp"
-            android:layout_marginEnd="10dp">
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15sp"
+                android:padding="5dp"
+
+                android:layout_gravity="center"
+                >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/soldButton"
+                    android:background="@drawable/rounded_rectangle"
+                    android:elevation="5sp"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/accept"
+                    android:backgroundTint="#FEC202"
+                    android:text="SOLD ITEMS"
+                    android:textColor="#4E4637"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="17dp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/onSaleButton"
+                    android:background="@drawable/rounded_rectangle"
+                    android:elevation="5sp"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/accept"
+                    android:backgroundTint="#FEC202"
+                    android:text="ITEM ON SALE"
+                    android:layout_marginStart="20sp"
+                    android:textColor="#4E4637"
+                    android:textSize="16sp"
+                    android:layout_gravity="end"/>
+            </LinearLayout>
+
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/soldButton"
-                android:background="@drawable/rounded_rectangle"
-                android:elevation="5sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/accept"
-                android:backgroundTint="#FEC202"
-                android:text="SOLD ITEMS"
-                android:textColor="#4E4637"
-                android:textSize="16sp"
-                android:layout_gravity="start"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/onSaleButton"
-                android:background="@drawable/rounded_rectangle"
-                android:elevation="5sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/accept"
-                android:backgroundTint="#FEC202"
-                android:text="ITEM ON SALE"
-                android:layout_marginStart="20sp"
-                android:textColor="#4E4637"
-                android:textSize="16sp"/>
-            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/lostndFoundButton"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_rectangle"
                 android:elevation="5sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/accept"
                 android:backgroundTint="#FEC202"
                 android:text="LOST/FOUND ITEMS"
-                android:layout_marginStart="20sp"
                 android:textColor="#4E4637"
-                android:textSize="16sp"/>
-
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal"
+                />
         </LinearLayout>
+
+
 
 
     </LinearLayout>
