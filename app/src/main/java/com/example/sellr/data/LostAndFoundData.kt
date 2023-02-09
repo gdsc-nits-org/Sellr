@@ -8,6 +8,7 @@ data class LostAndFoundData(
     val imageUrl: String? = null,
     val lostOrFound: String? = null,
     val pid : String? = null
-) {
+)
+{
 
 }
