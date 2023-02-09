@@ -17,41 +17,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/lostandfoundFilterAll"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="All"
             android:textColor="@color/colorAccent"
             android:layout_marginStart="10sp"
             android:backgroundTint="#0dd6d6"
             android:layout_marginTop="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+
+        </Button>
+
+        <Button
             android:id="@+id/filterlost"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12sp"
             android:text="@string/LOST"
             android:backgroundTint="#F44336"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
             app:layout_constraintStart_toEndOf="@id/lostandfoundFilterAll"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+
+        </Button>
+
+        <Button
             android:id="@+id/lostandfoundFilterFound"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/FOUND"
             android:backgroundTint="#08b49c"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="12sp"
+            android:textAlignment="center"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
