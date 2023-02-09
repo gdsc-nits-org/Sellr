@@ -140,14 +140,15 @@ class LostAndFoundInput : AppCompatActivity() {
     }
 
     private fun uploadInfo() {
-
         val lostAndFoundObject = LostAndFoundData(
             binding.lostandfoundObjectName.text.toString(),
             binding.lostandfoundInputObjectLocation.text.toString(),
             binding.lostandfoundObjectDesc.text.toString(),
             auth.uid.toString(),
             imgUrl,
-            chipState
+            chipState,
+            emailID!!.substringBeforeLast("@") + Date().time.toString()
+
         )
         setProgressBar()
         database.reference.child("LostAndFound")

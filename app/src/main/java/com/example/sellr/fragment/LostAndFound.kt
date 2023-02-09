@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sellr.LostAndFoundInput
 import com.example.sellr.adapters.LostAndFoundAdapter
 import com.example.sellr.data.LostAndFoundData
@@ -23,8 +24,12 @@ class LostAndFound : Fragment() {
     lateinit var objectList: ArrayList<LostAndFoundData>
     lateinit var foundList : ArrayList<LostAndFoundData>
     lateinit var lostList : ArrayList<LostAndFoundData>
+    lateinit var refreshLostAndFound : SwipeRefreshLayout
 
     override fun onCreateView(
+
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
@@ -35,8 +40,9 @@ class LostAndFound : Fragment() {
             val lostandfoundInput = Intent(context, LostAndFoundInput::class.java)
             startActivity(lostandfoundInput)
         }
-        
 
+
+        refreshLostAndFound = binding.lostandfoundSwipeRefresh
         database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         objectList = ArrayList()
         lostList = ArrayList()
@@ -64,18 +70,44 @@ class LostAndFound : Fragment() {
 
                     binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
 
+                    refreshLostAndFound.setOnRefreshListener {
+                        binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                        refreshLostAndFound.isRefreshing = false
+
+                    }
+                    binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+
                     binding.lostandfoundFilterFound.setOnClickListener{
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),foundList)
+
+                        refreshLostAndFound.setOnRefreshListener {
+                            binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),foundList)
+                            refreshLostAndFound.isRefreshing = false
+                        }
 
                     }
                     binding.filterlost.setOnClickListener {
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
+
+                        refreshLostAndFound.setOnRefreshListener {
+                            binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
+                            refreshLostAndFound.isRefreshing = false
+                        }
                     }
                     binding.lostandfoundFilterAll.setOnClickListener {
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+
+                        refreshLostAndFound.setOnRefreshListener {
+                            binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                            refreshLostAndFound.isRefreshing = false
+                        }
                     }
 
                 }

@@ -41,8 +41,9 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
 
         if(obj.lostOrFound == "FOUND"){
             holder.binding.indicatorRed.visibility = View.GONE
+            println("THE OBJECT WAS : ${obj.lostOrFound}" )
         }
-        else {
+        else if (obj.lostOrFound == "LOST") {
             holder.binding.indicatorGreen.visibility = View.GONE
             println("THE OBJECT WAS : ${obj.lostOrFound}" )
         }
@@ -53,6 +54,4 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
     override fun getItemCount(): Int {
         return objectList.size
     }
-
-
 }

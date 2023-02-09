@@ -109,27 +109,27 @@
 
                 <ImageView
                     android:id="@+id/indicator_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/indicator_lost"
                     app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout2"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
                     app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/red_indicator" />
+                    app:srcCompat="@drawable/red_pin" />
 
                 <ImageView
                     android:contentDescription="@string/indicator_found"
                     android:id="@+id/indicator_green"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.666"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout2"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout2"
                     app:layout_constraintVertical_bias="0.028"
-                    app:srcCompat="@drawable/green_indicator" />
+                    app:srcCompat="@drawable/pin" />
             </LinearLayout>
 
 
