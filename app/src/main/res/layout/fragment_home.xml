@@ -23,9 +23,9 @@
             android:id="@+id/sell_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="@color/colourAccent"
-            android:text="Sell Item"
+            android:layout_marginEnd="15dp"
             app:icon="@drawable/car_ui_icon_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -43,6 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="Search here" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Home_rc"
             android:layout_width="match_parent"
@@ -50,20 +51,20 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/filter"
+            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/items_home" />
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/filter"
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView"
             tools:listitem="@layout/filter_item" />
