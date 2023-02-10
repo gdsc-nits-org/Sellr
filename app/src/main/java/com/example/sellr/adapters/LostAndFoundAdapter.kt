@@ -13,6 +13,7 @@ import com.example.sellr.databinding.LayoutLostandfoundItemBinding
 class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndFoundData> ):
     RecyclerView.Adapter<LostAndFoundAdapter.LostAndFoundViewHolder>() {
 
+
     inner class LostAndFoundViewHolder(val view: View):RecyclerView.ViewHolder(view){
 
         var binding : LayoutLostandfoundItemBinding = LayoutLostandfoundItemBinding.bind(view)
@@ -31,6 +32,8 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
         holder.binding.lostandfoundObject.text= obj.objectName
         holder.binding.lostandfoundLocation.text = obj.objectLocation
         //holder.binding.lostandfoundUserContact.text = obj.contactNumber
+
+        holder.binding.lostandfoundPosterUserName.text =  obj.user_poster
         holder.binding.lostandfoundDescription.text = obj.objectDescription
         if (obj.imageUrl != "NONE") {
             Glide.with(context).load(obj.imageUrl).into(holder.binding.lostandfoundObjectimage)

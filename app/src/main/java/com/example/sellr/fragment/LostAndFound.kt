@@ -62,6 +62,7 @@ class LostAndFound : Fragment() {
                         if (obj?.lostOrFound == "FOUND") {
                             foundList.add(obj)
                         }
+
                         else if (obj?.lostOrFound == "LOST") {
                             lostList.add(obj)
                         }
@@ -111,9 +112,6 @@ class LostAndFound : Fragment() {
                     }
 
                 }
-
-
-
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }

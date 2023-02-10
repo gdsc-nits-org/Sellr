@@ -117,11 +117,8 @@ class LostAndFoundInput : AppCompatActivity() {
             findViewById<TextView>(R.id.lostandfoundChipError).visibility = View.GONE
             chipState =
                 parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
-
-
         }
         return isEmpty
-
     }
 
     private fun uploadData() {
@@ -150,7 +147,8 @@ class LostAndFoundInput : AppCompatActivity() {
             auth.uid.toString(),
             imgUrl,
             chipState,
-            pid
+            pid,
+            "Prateek Mogha"
         )
         setProgressBar()
         database.reference.child("LostAndFound")
