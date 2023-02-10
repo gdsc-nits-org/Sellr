@@ -168,6 +168,10 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
 
                 val objectImage = dataSnapshot.child("imagePrimary").value.toString()
                 Glide.with(this).load("objectImage").into(binding.objectImage)
+
+
+                val uid = dataSnapshot.child("userUID").value
+                fillUser(uid)
             }
         }.addOnFailureListener {
             TODO("Not yet implemented")
