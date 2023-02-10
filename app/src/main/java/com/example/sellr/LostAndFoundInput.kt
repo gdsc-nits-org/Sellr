@@ -140,6 +140,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private fun uploadInfo() {
 
         pid = emailID!!.substringBeforeLast("@") + Date().time.toString()
+
         val lostAndFoundObject = LostAndFoundData(
             binding.lostandfoundObjectName.text.toString(),
             binding.lostandfoundInputObjectLocation.text.toString(),

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.DescriptionPage
+import com.example.sellr.LostAndFoundDescriptionPage
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.GridLayoutBinding
@@ -74,7 +75,7 @@ class userItemLostFoundAdapter(
             builder.setTitle("Are you sure?")
             builder.setMessage("Your item will be deleted permanently from the database")
             builder.setPositiveButton("Yes") { _, _ ->
-                deleteModel(itemList[position].objectName.toString())
+                deleteModel(itemList[position].pid.toString())
                 itemList.removeAt(position)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemList.size)
@@ -86,14 +87,14 @@ class userItemLostFoundAdapter(
 
         }
 
-        //commented out because item description screen of lost and found data not yet created
+        //click the recycler view to open the description page
 
-//        holder.itemView.setOnClickListener {
-//            val value = itemList[position].uid.toString()
-//            val i = Intent(context, DescriptionPage::class.java)
-//            i.putExtra("key", value)
-//            context?.startActivity(i)
-//        }
+           holder.itemView.setOnClickListener {
+           val value = itemList[position].pid.toString()
+           val i = Intent(context, LostAndFoundDescriptionPage::class.java)
+           i.putExtra("key", value)
+            context?.startActivity(i)
+        }
 
     }
 
@@ -114,31 +115,34 @@ class userItemLostFoundAdapter(
     private fun deleteModel(model: String) {
 
 
+             print( model);
         val databaseProd =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("LostAndFound")
+                .getReference("LostAndFound").child(model.toString())
 
 
-        databaseProd.child(model).removeValue().addOnSuccessListener {
+        databaseProd.removeValue().addOnSuccessListener {
+//
+//            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
+//
+//            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("pid").orderByValue().equalTo(model)
 
-            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
-            val query: Query = ref.child("objectName").equalTo(model)
-
+           // Toast.makeText(context,query.toString(),Toast.LENGTH_SHORT).show()
 
 
 //            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
 //            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("objectName").orderByValue().equalTo(model)
 
-            query.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (snapshot in dataSnapshot.children) {
-                        snapshot.ref.removeValue()
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
-            })
+//            query.addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                    for (snapshot in dataSnapshot.children) {
+//                        snapshot.ref.removeValue()
+//                    }
+//                }
+//
+//                override fun onCancelled(databaseError: DatabaseError) {
+//                }
+//            })
             Toast.makeText(context, "Item deleted from database", Toast.LENGTH_LONG).show()
 
         }.addOnFailureListener {
