@@ -31,11 +31,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
-
-
-
-
-
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="0dp"
@@ -70,31 +65,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/location_of_lost_or_found"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- disabling contact  -->
-                <TextView
-                    android:id="@+id/lostandfoundUserContact"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/contact"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-                <TextView
-                    android:id="@+id/lostandfoundDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/object_description"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/parent"
@@ -103,7 +75,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginTop="30dp">
 
                     <TextView
                         android:id="@+id/Postedby"
@@ -124,7 +96,6 @@
                         android:text="@string/lostandfoundposter"
                         android:textColor="@color/textColorPrimary"
                         android:textSize="16sp"
-                        android:textStyle="italic"
                         app:layout_constraintStart_toEndOf="@id/Postedby"
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
                 </LinearLayout>

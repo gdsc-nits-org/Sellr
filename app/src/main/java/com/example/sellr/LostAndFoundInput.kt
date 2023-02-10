@@ -38,6 +38,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private var selectedImg: Uri? = null
     private var progressCircular: ProgressBar? = null
     private lateinit var pid : String
+    private var posterUser: String?= ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -140,7 +141,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private fun uploadInfo() {
 
         pid = emailID!!.substringBeforeLast("@") + Date().time.toString()
-
+        posterUser = emailID!!.substringBeforeLast("@")
         val lostAndFoundObject = LostAndFoundData(
             binding.lostandfoundObjectName.text.toString(),
             binding.lostandfoundInputObjectLocation.text.toString(),
@@ -149,7 +150,7 @@ class LostAndFoundInput : AppCompatActivity() {
             imgUrl,
             chipState,
             pid,
-            "Prateek Mogha"
+            posterUser
         )
         setProgressBar()
         database.reference.child("LostAndFound")
