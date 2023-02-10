@@ -17,9 +17,9 @@
             android:id="@+id/item_linearl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:background="#9BDCD3"
             android:padding="11dp">
 
 
@@ -74,7 +74,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rs. "
-                            android:textColor="#006153"
+                            android:textStyle="bold"
+                            android:textColor="#2CC0AD"
                             android:textSize="15sp">
                         </TextView>
 
@@ -83,7 +84,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="price"
-                            android:textColor="#006153"
+                            android:textStyle="bold"
+                            android:textColor="#2CC0AD"
                             android:textSize="15sp"
                             android:maxWidth="190dp"
                             android:paddingBottom="5dp">
