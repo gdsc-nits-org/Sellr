@@ -7,14 +7,14 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
     app:cardElevation="3dp"
-    android:backgroundTint="#9BDCD2"
+    android:backgroundTint="#ffffff"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -23,13 +23,14 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
             tools:src="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="2"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
             >
 
@@ -103,11 +104,12 @@
                     android:layout_alignParentEnd="true"
                     android:id="@+id/deleteButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="end"
-                    android:backgroundTint="#98DCD2"
+                    android:backgroundTint="#ffffff"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/img_5" />
+                    android:src="@drawable/img_5"
+                    />
 
 
             </RelativeLayout>
