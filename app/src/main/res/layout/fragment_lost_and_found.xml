@@ -20,13 +20,13 @@
         <Button
             android:id="@+id/lostandfoundFilterAll"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="All"
             android:textColor="@color/colorAccent"
             android:layout_marginStart="10sp"
             android:backgroundTint="#0dd6d6"
             android:layout_marginTop="12sp"
-
+            app:cornerRadius = "20dp"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" >
@@ -37,10 +37,11 @@
         <Button
             android:id="@+id/filterlost"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="12sp"
             android:text="@string/LOST"
             android:backgroundTint="#F44336"
+            app:cornerRadius = "20dp"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
@@ -53,10 +54,11 @@
         <Button
             android:id="@+id/lostandfoundFilterFound"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="@string/FOUND"
             android:backgroundTint="#08b49c"
             android:layout_marginEnd="10dp"
+            app:cornerRadius = "20dp"
             android:layout_marginTop="12sp"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
