@@ -17,6 +17,9 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
+            android:name=".LostAndFoundDescriptionPage"
+            android:exported="false" />
+        <activity
             android:name=".LostAndFoundInput"
             android:exported="false" />
         <activity
