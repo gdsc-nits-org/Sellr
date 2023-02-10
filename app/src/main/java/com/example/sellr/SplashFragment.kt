@@ -90,7 +90,7 @@ class SplashFragment : Fragment() {
         view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
         view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
         view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
-        if ( user!=null && user.isEmailVerified) {
+        if ( user!=null ) {
 
             println(user.uid.toString())
 
