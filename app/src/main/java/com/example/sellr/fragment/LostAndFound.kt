@@ -40,6 +40,7 @@ class LostAndFound : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentLostAndFoundBinding.inflate(layoutInflater)
         val listit = binding.lostandfoundFab
+        getActivity()?.setTitle("Lost And Found");
         listit.setOnClickListener {
             val lostandfoundInput = Intent(context, LostAndFoundInput::class.java)
             startActivity(lostandfoundInput)

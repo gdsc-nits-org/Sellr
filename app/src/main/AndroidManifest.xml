@@ -21,7 +21,8 @@
             android:exported="false" />
         <activity
             android:name=".LostAndFoundInput"
-            android:exported="false" />
+            android:exported="false"
+            android:label="List a Lost or Found item"/>
         <activity
             android:name=".DescriptionPage"
             android:configChanges="orientation"
