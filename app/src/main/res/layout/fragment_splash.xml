@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/splash_anim"
+        app:lottie_rawRes="@raw/seller_splash_screen_anim"
         android:outlineAmbientShadowColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
