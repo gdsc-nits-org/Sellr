@@ -1,13 +1,17 @@
 package com.example.sellr.fragment
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sellr.LostAndFoundInput
+import com.example.sellr.R
 import com.example.sellr.adapters.LostAndFoundAdapter
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.FragmentLostAndFoundBinding
@@ -27,9 +31,6 @@ class LostAndFound : Fragment() {
     lateinit var refreshLostAndFound : SwipeRefreshLayout
 
     override fun onCreateView(
-
-
-
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
@@ -79,7 +80,6 @@ class LostAndFound : Fragment() {
                         refreshLostAndFound.isRefreshing = false
 
                     }
-                    binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
 
                     binding.lostandfoundFilterFound.setOnClickListener{
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
@@ -93,6 +93,9 @@ class LostAndFound : Fragment() {
 
                     }
                     binding.filterlost.setOnClickListener {
+                        binding.filterlost.isSelected != binding.filterlost.isSelected
+
+
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
 

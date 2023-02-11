@@ -5,7 +5,7 @@
         android:title="Home"
         android:icon="@drawable/home"/>
     <item android:id="@+id/lostAndFound"
-        android:title="Lost And Found"
+        android:title="Lost/Found"
         android:icon="@drawable/lost_found"/>
     <item android:id="@+id/cartFragment"
         android:title="Cart"
