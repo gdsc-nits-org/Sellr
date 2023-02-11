@@ -98,6 +98,7 @@ class myAdapterhome(private val context:Context,val fragment: Fragment, private 
                 println("inside pushing")
                 // currentItem.addedtofav = true
                 // holder.addToFav.setImageResource(R.drawable.favorite)
+                Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
                 dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
 
             }

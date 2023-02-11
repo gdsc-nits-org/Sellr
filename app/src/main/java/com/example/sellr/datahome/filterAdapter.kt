@@ -54,7 +54,7 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         if(selectedItemPosition == position)
             holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
         else
-            holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
+            holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
     }
 
 
@@ -63,7 +63,7 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
     }
 
     class MyViewHolder (itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
-        var category : MaterialButton = itemView.findViewById(R.id.category)
+        var category : Button = itemView.findViewById(R.id.category)
 
         }
 

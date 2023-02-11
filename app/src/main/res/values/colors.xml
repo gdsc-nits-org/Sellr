@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="lblack">#BDBDBD</color>
+
+
+
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="yellowWalaColor">#FEC202</color>
@@ -43,6 +49,8 @@
     <color name="theme_shadow_color">#7A31C3</color>
     <color name="warning_color">#BDBA0B</color>
     <color name="error">#B00020</color>
-
+    <color name = "textColorPrimary">#4A4637</color>
+    <color name ="chipfound">#00B59C</color>
+    <color name = "chiplost">#EE4B68</color>
 
 </resources>

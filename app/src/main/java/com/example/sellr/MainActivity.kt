@@ -97,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                 title = when (destination.id) {
                     R.id.cartFragment -> "My Cart"
                     R.id.profileFragment -> "Profile"
+                    R.id.lostAndFound->"Lost/Found"
                     else -> "Sellr"
                 }
                 when (destination.id) {

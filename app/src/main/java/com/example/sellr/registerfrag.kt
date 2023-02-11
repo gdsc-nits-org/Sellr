@@ -30,6 +30,7 @@ class RegisterFragment : Fragment() {
     private lateinit var cnfrmpasstxt:String
     private lateinit var user:FirebaseUser
     private lateinit var database:DatabaseReference
+    private lateinit var token:String
     var ct:Int = 0
     lateinit var register: TextView
     lateinit var actionbar: ActionBar
@@ -102,6 +103,12 @@ class RegisterFragment : Fragment() {
                 pd.setMessage("Sit back and relax, we are processing")
                 pd.show()
 
+                database.child("SMTPToken").get().addOnSuccessListener {
+                    token = it.getValue().toString();
+                    println("Token is  "+ token);
+
+                }
+
 
                 auth.createUserWithEmailAndPassword(emailtxt, passtxt)
                     .addOnCompleteListener() { task ->
@@ -109,8 +116,9 @@ class RegisterFragment : Fragment() {
 
                             val otp = (1001..9999).random()
 
+
                             val mail = SendMail(
-                                "sam33rzaidi@gmail.com", "fiqaisqjpdtxulap",
+                                "sam33rzaidi@gmail.com", token,
                                 emailtxt,
                                 "Sellr OTP Verification ",
                                 "Hey User!\nYour OTP for Sellr is \n$otp"

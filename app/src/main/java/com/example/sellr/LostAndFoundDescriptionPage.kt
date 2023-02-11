@@ -6,50 +6,41 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.models.SlideModel
-import com.example.sellr.databinding.ActivityDescrptionPageBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.bumptech.glide.Glide
+import com.example.sellr.databinding.ActivityLostAndFoundDescriptionPageBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
 
-class DescriptionPage : AppCompatActivity() {
-    private lateinit var binding: ActivityDescrptionPageBinding
-    private lateinit var imageList: ArrayList<SlideModel>
-    private lateinit var imageSlider: ImageSlider
-    //fab idea
-    //test
+class LostAndFoundDescriptionPage : AppCompatActivity() {
+    private lateinit var binding: ActivityLostAndFoundDescriptionPageBinding
     private lateinit var backDrop: View
     private lateinit var lytMic: View
     private lateinit var lytCall: View
     private var rotate = false
-    private var emailSeller=""
-    private var phoneSeller=""
+
+    private var emailUser = ""
+    private var phoneUser = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        binding = ActivityDescrptionPageBinding.inflate(layoutInflater)
+        binding = ActivityLostAndFoundDescriptionPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         try {
             this.supportActionBar!!.hide()
         } // catch block to handle NullPointerException
         catch (_: NullPointerException) {
         }
+
         val extras = intent.extras
         if (extras != null) {
             val value = extras.getString("key").toString()
             fetchDataFromDataBase(value)
         }
-
-        imageList = ArrayList()
-        imageSlider = findViewById(R.id.image_slider)
-
-
-
         backDrop = binding.backDrop
         lytMic = binding.lytMic
         lytCall = binding.lytCall
@@ -70,35 +61,34 @@ class DescriptionPage : AppCompatActivity() {
         backDrop.setOnClickListener {
             toggleFabMode(fabAdd)
         }
-
         lytMic.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
-            intent.data = Uri.parse("mailto:$emailSeller")
+            intent.data = Uri.parse("mailto:$emailUser")
             startActivity(intent)
         }
 
         lytCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:$phoneSeller")
+            intent.data = Uri.parse("tel:$phoneUser")
             startActivity(intent)
         }
         fabMic.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
-            intent.data = Uri.parse("mailto:$emailSeller")
+            intent.data = Uri.parse("mailto:$emailUser")
             startActivity(intent)
         }
 
         fabCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:$phoneSeller")
+            intent.data = Uri.parse("tel:$phoneUser")
             startActivity(intent)
         }
+
     }
 
 
-    //For fab group display
     private fun toggleFabMode(v: View) {
-        rotate =  !rotate
+        rotate = !rotate
         if (rotate) {
             showIn(lytMic)
             showIn(lytCall)
@@ -149,88 +139,60 @@ class DescriptionPage : AppCompatActivity() {
     }
 
 
-
-
-    private fun fetchDataFromDataBase(items:String)
-    {
-        val databaseItem = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Items")
+    private fun fetchDataFromDataBase(items: String) {
+        val databaseItem =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("LostAndFound")
         databaseItem.child(items).get().addOnSuccessListener { dataSnapshot ->
 
             if (dataSnapshot.exists()) {
-                val primaryImage = dataSnapshot.child("imagePrimary").value.toString()
-                imageList.add(SlideModel(primaryImage))
-                val imageArray = ArrayList<String>()
-                imageArray.add(dataSnapshot.child("imageList").child("0").value.toString())
-                imageArray.add(dataSnapshot.child("imageList").child("1").value.toString())
-                imageArray.add(dataSnapshot.child("imageList").child("2").value.toString())
-                for (i in imageArray.indices) {
-                    if (imageArray[i] != "") {
-                        imageList.add(SlideModel(imageArray[i]))
-                    }
-                }
-
-                imageSlider.setImageList(imageList)
-                var sold = dataSnapshot.child("sold").value.toString()
-                if (sold == "false") {
-                    sold = "Available"
-                    binding.status.text = sold
-                } else {
-                    sold = "Sold"
-                    binding.status.text = sold
-                }
-                binding.productName.text = dataSnapshot.child("productName").value.toString()
+                binding.objectName.text = dataSnapshot.child("objectName").value.toString()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
-                binding.productCondition.text = dataSnapshot.child("condition").value.toString()
+                val category = dataSnapshot.child("lostOrFound").value.toString()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                binding.descriptionHeading.text = dataSnapshot.child("productDesc").value.toString()
-                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                var category = dataSnapshot.child("category").value.toString()
-                val addlCat = dataSnapshot.child("additionalCategory").value.toString()
-                if (addlCat != "null") {
-                    category = "$category($addlCat)"
-                }
                 binding.productCategory.text = category
-                val date = "Selling Date: " + dataSnapshot.child("sellingDate").value.toString()
-                binding.statusDate.text = date
-                val price = "Rs. " + dataSnapshot.child("price").value.toString()
-                binding.productPrice.text = price
-                var useTime = dataSnapshot.child("usedForTime").value.toString()
-                if (useTime == "") {
-                    useTime = "-"
-                }
-                binding.productUsedFor.text = useTime
-                val uid = dataSnapshot.child("userUID").value
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                binding.description.text = dataSnapshot.child("objectDescription").value.toString()
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
+
+                binding.objectLocation.text = dataSnapshot.child("objectLocation").value.toString()
+
+                val objectImg = dataSnapshot.child("imageUrl").value.toString()
+                if (objectImg=="NONE")
+                    binding.objectImage.setImageResource(R.drawable.no_image)
+                else
+                    Glide.with(this).load(objectImg).into(binding.objectImage)
+
+                val uid = dataSnapshot.child("uid").value
                 fillUser(uid)
-
-
             }
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             TODO("Not yet implemented")
         }
 
     }
 
     private fun fillUser(uid: Any?) {
-        val databaseUser = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
+        val databaseUser =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("Users")
         databaseUser.child(uid.toString()).get().addOnSuccessListener { snapshot ->
 
-            if (snapshot.exists()){
+            if (snapshot.exists()) {
                 val email = snapshot.child("email").value.toString()
-                val phone=snapshot.child("phonenum").value.toString()
-                val name=snapshot.child("name").value.toString()
+                val phone = snapshot.child("phonenum").value.toString()
+                val name = snapshot.child("name").value.toString()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                binding.sellerName.text=name
-                binding.sellerEmail.text=email
-                binding.sellerPhone.text=phone
-                phoneSeller=phone
-                emailSeller=email
+                binding.userName.text = name
+                binding.userEmail.text = email
+                binding.userPhone.text = phone
+                phoneUser = phone
+                emailUser = email
             }
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             TODO("Not yet implemented")
         }
     }
-
-
-
 }
