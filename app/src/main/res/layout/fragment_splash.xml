@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="112dp"
-        android:text="Seller"
+        android:text="Sellr"
         android:textAllCaps="true"
         android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
