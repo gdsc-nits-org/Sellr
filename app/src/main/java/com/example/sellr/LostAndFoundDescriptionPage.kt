@@ -16,6 +16,15 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.sellr.databinding.ActivityDescrptionPageBinding
 import com.example.sellr.databinding.ActivityLostAndFoundDescriptionPageBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
+
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+
+import com.example.sellr.databinding.ActivityLostAndFoundDescriptionPageBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
@@ -32,9 +41,11 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
     private var phoneUser = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityLostAndFoundDescriptionPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         try {
             this.supportActionBar!!.hide()
         } // catch block to handle NullPointerException
@@ -164,8 +175,14 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
 
                 binding.objectLocation.text = dataSnapshot.child("objectLocation").value.toString()
 
-                val objectImage = dataSnapshot.child("imagePrimary").value.toString()
-                Glide.with(this).load("objectImage").into(binding.objectImage)
+                val objectImg = dataSnapshot.child("imageUrl").value.toString()
+                if (objectImg=="NONE")
+                    binding.objectImage.setImageResource(R.drawable.no_image)
+                else
+                    Glide.with(this).load(objectImg).into(binding.objectImage)
+
+                val uid = dataSnapshot.child("uid").value
+                fillUser(uid)
             }
         }.addOnFailureListener {
             TODO("Not yet implemented")
@@ -194,6 +211,4 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
             TODO("Not yet implemented")
         }
     }
-
 }
-

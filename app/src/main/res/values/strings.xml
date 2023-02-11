@@ -13,10 +13,26 @@
     <string name="item_condition">Item Condition</string>
     <string name="please_choose_item_condition">Please choose item condition</string>
     <string name="price">Price</string>
-    <string name="upload_image">Upload images</string>
+    <string name="upload_image">Upload image</string>
     <string name="list_it">List it!</string>
     <string name="please_upload_images">Please upload at least one image</string>
     <string name="used_for_time">Used for time</string>
+    <string name="object_name">Object Name</string>
+    <string name="object_location">Object Location</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="select_one_please">Select One</string>
+    <string name="please_select_one">Please Select One</string>
+    <string name="LOST">LOST</string>
+    <string name="FOUND">FOUND</string>
+    <string name="object_image">object_image</string>
+    <string name="item_image">item image</string>
+    <string name="object">Object</string>
+    <string name="location_of_lost_or_found">Location of Lost or Found</string>
+    <string name="contact">contact</string>
+    <string name="indicator_lost">indicator lost</string>
+    <string name="indicator_found">indicator found</string>
+    <string name="object_description">Object Description</string>
+    <string name="lostandfoundposter">lostandfoundposter</string>
     <string-array name="Categories">
         <item>Books</item>
         <item>Electronics</item>

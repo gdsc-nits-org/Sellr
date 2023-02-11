@@ -59,6 +59,13 @@ class ProfileFragment : Fragment() {
             startActivity(i)
         }
 
+        binding.lostndFoundButton.setOnClickListener {
+
+            val i = Intent(activity, MainFragmentHolder::class.java)
+            i.putExtra("lostAndFoundList", "lostAndFoundList")
+            startActivity(i)
+        }
+
         return view
     }
 
