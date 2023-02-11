@@ -41,58 +41,67 @@ class AboutUsFragment : Fragment() {
         }
 
         binding.deep.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/deep.saikia.102977/",
                 "https://www.instagram.com/_deep_saikia/","https://www.linkedin.com/in/deep-saikia",
                 "https://github.com/saikiaDeep")
         }
 
         binding.sameer.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/SyedSameerZaidi123/",
                 "https://www.instagram.com/_interstellar07_/","https://www.linkedin.com/in/sameer-zaidi-541261226/",
                 "https://github.com/Interstellar07")
         }
 
         binding.prateek.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/profile.php?id=100009794079455",
                 "https://www.instagram.com/_urdidact_/","https://www.linkedin.com/in/prateek-mogha-5b44b9229/",
                 "https://github.com/Shadow-of-sundered-star")
         }
 
         binding.arpit.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/profile.php?id=100076062140725",
                 "","https://www.linkedin.com/in/arpit-saikia-b82093241",
                 "https://github.com/AS-Saikia")
         }
 
         binding.dipan.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/Dipan017",
                 "https://www.instagram.com/dipanpatgiri_/","https://www.linkedin.com/in/dipan-patgiri-a04473148/",
                 "https://github.com/Dipan-17")
         }
 
         binding.diptabh.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/profile.php?id=100076196678788&mibextid=ZbWKwL",
                 "https://instagram.com/diptabhm?igshid=ZDdkNTZiNTM=","https://www.linkedin.com/in/diptabh-medhi-4836a8229/",
                 "https://github.com/diptabhm")
         }
 
         binding.bibhas.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://m.facebook.com/100076159796676/",
                 "https://www.instagram.com/bibhas.naskar_/","http://www.linkedin.com/in/bibhas-naskar-6596aa22b",
                 "https://github.com/Bibhas-programmed")
         }
 
         binding.hritika.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
+            bottomSheetFunction("https://www.facebook.com/profile.php?id=100070065316811&mibextid=ZbWKwL",
                 "https://www.instagram.com/hrxclarachan/","https://www.linkedin.com/in/hritika-roy-56696923b",
                 "https://github.com/hritika1404")
+        }
+
+        binding.hritika.setOnClickListener{
+            bottomSheetFunction("https://www.facebook.com/profile.php?id=100076107792266",
+                "https://www.instagram.com/_somya02/?next=%2F","https://www.linkedin.com/in/somya-kasaudhan-365133229",
+                "https://www.behance.net/somyakasaudhan")
         }
         return binding.root
     }
 
     private fun gotoUrl(url: String) {
-        val uri = Uri.parse(url)
-        startActivity(Intent(Intent.ACTION_VIEW, uri))
+        var URL=url
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            URL = "http://$url";
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(URL))
+        startActivity(browserIntent)
     }
 
     private fun bottomSheetFunction(
