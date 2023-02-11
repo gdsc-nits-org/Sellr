@@ -52,6 +52,8 @@ class LostAndFound : Fragment() {
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     objectList.clear()
+                    foundList.clear()
+                    lostList.clear()
 
                     for(snapshot1 in snapshot.children){
                         val obj = snapshot1.getValue(LostAndFoundData::class.java)

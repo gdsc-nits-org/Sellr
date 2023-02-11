@@ -1,11 +1,13 @@
 package com.example.sellr.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.sellr.LostAndFoundDescriptionPage
 import com.example.sellr.R
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.LayoutLostandfoundItemBinding
@@ -29,10 +31,12 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
 
         val obj = objectList[position]
 
-
         holder.binding.lostandfoundObject.text= obj.objectName
         holder.binding.lostandfoundLocation.text = obj.objectLocation
-        holder.binding.lostandfoundPosterUserName.text = obj.posterUser
+        //holder.binding.lostandfoundUserContact.text = obj.contactNumber
+
+        //holder.binding.lostandfoundPosterUserName.text =  obj.userPoster
+       // holder.binding.lostandfoundDescription.text = obj.objectDescription
         if (obj.imageUrl != "NONE") {
             Glide.with(context).load(obj.imageUrl).into(holder.binding.lostandfoundObjectimage)
         }
@@ -43,12 +47,20 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
         if(obj.lostOrFound == "FOUND"){
             holder.binding.indicatorRed.visibility = View.GONE
             println("THE OBJECT WAS : ${obj.lostOrFound}" )
-            println("user poster was : ${obj.posterUser}" )
         }
         else if (obj.lostOrFound == "LOST") {
             holder.binding.indicatorGreen.visibility = View.GONE
             println("THE OBJECT WAS : ${obj.lostOrFound}" )
         }
+
+        holder.itemView.setOnClickListener {
+            val value = objectList[position].pid.toString()
+            val i = Intent(context, LostAndFoundDescriptionPage::class.java)
+            i.putExtra("key", value)
+            context?.startActivity(i)
+        }
+
+
     }
     override fun getItemCount(): Int {
         return objectList.size
