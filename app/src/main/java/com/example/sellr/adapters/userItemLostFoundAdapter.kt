@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.DescriptionPage
 import com.example.sellr.LostAndFoundDescriptionPage
+import com.example.sellr.R
+import com.example.sellr.binding
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.GridLayoutBinding
@@ -40,7 +42,12 @@ class userItemLostFoundAdapter(
     override fun onBindViewHolder(holder: userItemLostFoundAdapter.ItemsViewHolder, position: Int) {
         //holder.adapterBinding.itemImage.setImageResource(itemList[position].imagePrimary)
         val url = itemList[position].imageUrl
-        context?.let { Glide.with(it).load(url).into(holder.adapterBinding.itemImage) }
+        if (url=="NONE")
+        {
+            holder.adapterBinding.itemImage.setImageResource(R.drawable.no_image)
+        }
+        else{
+        context?.let { Glide.with(it).load(url).into(holder.adapterBinding.itemImage) }}
 
         holder.adapterBinding.itemName.text = itemList[position].objectName
         holder.adapterBinding.lostndFoundStatus.text = itemList[position].lostOrFound
