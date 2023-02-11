@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_lost_and_found.xml"
+    tools:context=".fragment.LostAndFound"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.LostAndFound">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,50 +25,45 @@
             android:id="@+id/lostandfoundFilterAll"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginStart="10sp"
             android:background="@drawable/search_view_bg"
             android:text="All"
-            android:textColor="@color/colorAccent"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="12sp"
-            app:cornerRadius = "20dp"
             android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
-
-
+            app:layout_constraintTop_toTopOf="parent">
         </Button>
 
         <Button
             android:id="@+id/filterlost"
-            android:background="@drawable/search_view_bg"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="12sp"
+            android:background="@drawable/search_view_bg"
             android:text="@string/LOST"
-            app:cornerRadius = "20dp"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
             app:layout_constraintStart_toEndOf="@id/lostandfoundFilterAll"
             app:layout_constraintTop_toTopOf="parent">
-
-
         </Button>
 
         <Button
             android:id="@+id/lostandfoundFilterFound"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="@string/FOUND"
             android:layout_marginEnd="10dp"
             android:background="@drawable/search_view_bg"
-            app:cornerRadius = "20dp"
-            android:layout_marginTop="12sp"
+            android:text="@string/FOUND"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
         </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -81,21 +80,20 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/lostandfoundSwipeRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lostandfoundSwipeRefresh"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lostandfoundfilterLinear"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lostandfoundfilterLinear"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lostandfoundRecycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
