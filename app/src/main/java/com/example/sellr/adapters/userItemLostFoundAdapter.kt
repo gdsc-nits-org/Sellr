@@ -19,25 +19,22 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
 
-
-
-
 class userItemLostFoundAdapter(
     private val context: Context?,
     private var itemList: ArrayList<LostAndFoundData>
 ) :
     RecyclerView.Adapter<userItemLostFoundAdapter.ItemsViewHolder>() {
 
-    inner class ItemsViewHolder(val adapterBinding:LostFoundItemCardBinding) :
+    inner class ItemsViewHolder(val adapterBinding: LostFoundItemCardBinding) :
         RecyclerView.ViewHolder(adapterBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
-        val binding = LostFoundItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            LostFoundItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemsViewHolder(binding)
 
 
     }
-
 
 
     override fun onBindViewHolder(holder: userItemLostFoundAdapter.ItemsViewHolder, position: Int) {
@@ -80,6 +77,7 @@ class userItemLostFoundAdapter(
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemList.size)
 
+
             }
             builder.setNegativeButton("No") { _, _ ->
             }
@@ -89,10 +87,10 @@ class userItemLostFoundAdapter(
 
         //click the recycler view to open the description page
 
-           holder.itemView.setOnClickListener {
-           val value = itemList[position].pid.toString()
-           val i = Intent(context, LostAndFoundDescriptionPage::class.java)
-           i.putExtra("key", value)
+        holder.itemView.setOnClickListener {
+            val value = itemList[position].pid.toString()
+            val i = Intent(context, LostAndFoundDescriptionPage::class.java)
+            i.putExtra("key", value)
             context?.startActivity(i)
         }
 
@@ -113,36 +111,33 @@ class userItemLostFoundAdapter(
 //    }
 
     private fun deleteModel(model: String) {
-
-
-             print( model);
         val databaseProd =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("LostAndFound").child(model.toString())
+                .getReference("LostAndFound")
 
-
-        databaseProd.removeValue().addOnSuccessListener {
+        databaseProd.child(model).removeValue().addOnSuccessListener {
+////
+////            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
+////
+////            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("pid").orderByValue().equalTo(model)
 //
-//            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
+//           // Toast.makeText(context,query.toString(),Toast.LENGTH_SHORT).show()
 //
-//            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("pid").orderByValue().equalTo(model)
-
-           // Toast.makeText(context,query.toString(),Toast.LENGTH_SHORT).show()
-
-
-//            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
-//            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("objectName").orderByValue().equalTo(model)
-
-//            query.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                    for (snapshot in dataSnapshot.children) {
-//                        snapshot.ref.removeValue()
-//                    }
-//                }
 //
-//                override fun onCancelled(databaseError: DatabaseError) {
-//                }
-//            })
+////            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("LostAndFound")
+////            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("objectName").orderByValue().equalTo(model)
+//
+////            query.addListenerForSingleValueEvent(object : ValueEventListener {
+////                override fun onDataChange(dataSnapshot: DataSnapshot) {
+////                    for (snapshot in dataSnapshot.children) {
+////                        snapshot.ref.removeValue()
+////                    }
+////                }
+////
+////                override fun onCancelled(databaseError: DatabaseError) {
+////                }
+////            })
+
             Toast.makeText(context, "Item deleted from database", Toast.LENGTH_LONG).show()
 
         }.addOnFailureListener {
