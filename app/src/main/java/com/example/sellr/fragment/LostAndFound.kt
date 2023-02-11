@@ -15,6 +15,7 @@ import com.example.sellr.R
 import com.example.sellr.adapters.LostAndFoundAdapter
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.FragmentLostAndFoundBinding
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -76,6 +77,7 @@ class LostAndFound : Fragment() {
 
                     refreshLostAndFound.setOnRefreshListener {
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
                         refreshLostAndFound.isRefreshing = false
 
@@ -84,6 +86,11 @@ class LostAndFound : Fragment() {
                     binding.lostandfoundFilterFound.setOnClickListener{
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),foundList)
+
+
+                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#08b49c"))
+                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
+                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
@@ -99,6 +106,11 @@ class LostAndFound : Fragment() {
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
 
+
+                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
+                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F44336"))
+                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
+
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                             binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
@@ -108,6 +120,11 @@ class LostAndFound : Fragment() {
                     binding.lostandfoundFilterAll.setOnClickListener {
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
                         binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+
+                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
+                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#00A58E"))
+                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))
+
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()

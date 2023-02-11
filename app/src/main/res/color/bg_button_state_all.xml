@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--When Button is in pressed state -->
-    <item android:state_pressed="true" android:color="#0dd6d6" />
-    <item android:color="@color/white" />
-
-</selector>
