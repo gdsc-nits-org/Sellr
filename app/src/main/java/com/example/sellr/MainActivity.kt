@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
 
             }
+
             R.id.logOutMenu -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Are you sure?")

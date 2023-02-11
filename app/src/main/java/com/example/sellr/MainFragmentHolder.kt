@@ -37,6 +37,7 @@ class MainFragmentHolder : AppCompatActivity() {
             title="Report an issue"
             fragmentLoad(ReportUsFragment())
         }
+
         else if(intent.hasExtra("extraDetails"))
         {
             try {
