@@ -163,8 +163,12 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
                 binding.objectLocation.text = dataSnapshot.child("objectLocation").value.toString()
 
                 val objectImg = dataSnapshot.child("imageUrl").value.toString()
-                Glide.with(this).load(objectImg).into(binding.objectImage)
-
+                if (objectImg=="NONE")
+                {
+                    binding.objectImage.setImageResource(R.drawable.no_image)
+                }else {
+                    Glide.with(this).load(objectImg).into(binding.objectImage)
+                }
 
                 val uid = dataSnapshot.child("uid").value
                 fillUser(uid)

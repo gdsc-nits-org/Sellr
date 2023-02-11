@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/object_image"
                 android:layout_width="match_parent"
-                android:layout_height="260dp" />
+                android:layout_height="260dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
