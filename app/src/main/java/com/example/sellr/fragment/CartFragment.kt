@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sellr.DescriptionPage
@@ -34,9 +35,11 @@ class CartFragment : Fragment() {
         val emptyIV=view.findViewById<ConstraintLayout>(R.id.emptyIV)
         val cartModelArrayList: ArrayList<CartModel> = ArrayList()
         val cartRVAdapter = CartRVAdapter(context, cartModelArrayList)
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        //name is linear but view is in grid
+        val linearLayoutManager = GridLayoutManager(context, 2)
         cart.layoutManager = linearLayoutManager
         cart.adapter = cartRVAdapter
+
         cartRVAdapter.onItemClick = { product ->
 
             val value = product.itemID
