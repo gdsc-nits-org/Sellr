@@ -100,6 +100,8 @@
                     app:cornerRadius="50dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#5C5C5C"
                     app:icon="@drawable/add_to_cart_black" />
             </RelativeLayout>
 

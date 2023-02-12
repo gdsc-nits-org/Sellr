@@ -52,5 +52,6 @@
     <color name = "textColorPrimary">#4A4637</color>
     <color name ="chipfound">#00B59C</color>
     <color name = "chiplost">#EE4B68</color>
+    <color name="golden_yellow">#FFC819</color>
 
 </resources>
