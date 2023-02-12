@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="10dp"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="12dp"
     android:id="@+id/item_card"
-    app:cardElevation="5dp">
-
-
-
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#5C5C5C">
 
         <LinearLayout
             android:id="@+id/item_linearl"
@@ -22,19 +21,15 @@
             android:orientation="vertical"
             android:padding="11dp">
 
-
-
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:background="@color/white"
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ayush_bhaiya"
                 android:adjustViewBounds="true"
-                >
-
-            </ImageView>
+                app:shapeAppearance="@style/ImageViewRoundedCorner"/>
 
             <TextView
                 android:id="@+id/itemname"
@@ -54,8 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_alignParentStart="true"
-                    >
+                    android:layout_alignParentStart="true">
                     <TextView
                         android:id="@+id/used"
                         android:layout_width="wrap_content"
@@ -90,30 +84,29 @@
                             android:maxWidth="190dp"
                             android:paddingBottom="5dp">
                         </TextView>
-
-
-
-
-
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/addedtofav"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="7dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/add_to_cart_black"
-                    />
+                    app:iconPadding="0dp"
+                    android:minWidth="0dp"
+                    app:cornerRadius="50dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:icon="@drawable/add_to_cart_black" />
             </RelativeLayout>
 
 
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
