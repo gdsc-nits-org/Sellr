@@ -190,6 +190,17 @@
         app:strokeColor="#5B97C6"
         app:strokeWidth="1dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tip: Consider using mobile data over proxy to avoid any issue!"
+        android:textStyle="bold"
+        android:fontFamily="@font/comfortaa"
+        android:layout_margin="9sp"
+
+
+        app:layout_constraintTop_toBottomOf="@+id/signup_confirm_password_edittext" />/
+
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
