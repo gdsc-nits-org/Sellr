@@ -57,6 +57,8 @@ class fragment_extradetails : Fragment() {
 
 
             }
+            else if(phone.length!=10)
+                phonenum.setError("Number should be of 10 digits")
 
             else
             {
