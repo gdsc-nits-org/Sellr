@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellr.adapters.OnSaleAdapter
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.FragmentOnSaleBinding
@@ -60,6 +60,7 @@ class OnSaleFragment : Fragment() {
             }
 
         }.addOnFailureListener {
+            Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show()
 
         }
     }
