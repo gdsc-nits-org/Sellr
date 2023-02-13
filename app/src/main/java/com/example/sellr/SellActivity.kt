@@ -117,32 +117,32 @@ class SellActivity : AppCompatActivity() {
 //                    startActivityForResult(iGallery, 1000)
                 //_______________________________________________________________________________
                 ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750)
+                compress(250).
+                maxResultSize(600,600)
                     .start(1000)
             }
         }
         imageButtonSecond?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750).
+                compress(250).
+                maxResultSize(600,600).
                 start(2000)
             }
         }
         imageButtonThird?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
-                compress(400)
-                    .maxResultSize(750,750).
+                compress(250).
+                maxResultSize(600,600).
                     start(3000)
             }
         }
         imageButtonFourth?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750).
+                compress(250).
+                maxResultSize(600,600).
                 start(4000)
             }
 

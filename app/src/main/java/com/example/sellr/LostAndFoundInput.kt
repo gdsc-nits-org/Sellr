@@ -66,8 +66,8 @@ class LostAndFoundInput : AppCompatActivity() {
 
         binding.lostandfoundImageButton.setOnClickListener {
             ImagePicker.with(this).crop().
-            compress(400).
-            maxResultSize(750,750)
+            compress(250).
+            maxResultSize(600,600)
                 .start(1000)
         }
 
