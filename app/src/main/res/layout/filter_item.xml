@@ -27,8 +27,6 @@
 <!--            android:padding="11dp">-->
 
 
-
-
 <!--            <TextView-->
 <!--                android:id="@+id/category"-->
 <!--                android:layout_width="120dp"-->
@@ -46,25 +44,25 @@
 <!--    </androidx.cardview.widget.CardView>-->
 
 <!--</LinearLayout>-->
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_marginStart="5dp"
-android:layout_marginEnd="5dp"
-android:id="@+id/item_linearl"
-xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <Button
-    android:id="@+id/category"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_linearl"
     android:layout_width="wrap_content"
-        android:background="@drawable/search_view_bg"
-    android:layout_height="50dp"
-        android:textSize="13dp"
-    app:cornerRadius="20dp"
-    android:textColor="#353535"
-    android:text="item_name"
-    android:textAlignment="center">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp">
 
-    </Button>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
+        tools:text="item_name"
+        android:textAlignment="center"
+        android:textColor="#353535"
+        app:cornerRadius="20dp">
+
+    </com.google.android.material.button.MaterialButton>
 </LinearLayout>
