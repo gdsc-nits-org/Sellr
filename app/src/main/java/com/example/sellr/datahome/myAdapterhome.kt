@@ -97,6 +97,14 @@ class myAdapterhome(
                 Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
                 dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
             } else {
+                holder.addToFav.apply {
+                    icon = context.getDrawable(R.drawable.add_to_cart_black)
+                    setBackgroundColor(context.resources.getColor(R.color.icbg))
+                    iconTint =
+                        ColorStateList.valueOf(context.resources.getColor(R.color.white))
+                }
+                println("inside removing")
+                currentItem.addedtofav = false
                 dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString())
                     .removeValue()
             }

@@ -15,6 +15,7 @@
     <color name="black">#FF000000</color>
 
     <color name="bg_login">#F8F7F7</color>
+    <color name="icbg">#00B49B</color>
     <color name="colourPrimary">#00b59c</color>
     <color name="colourSecondary">#00efd2</color>
     <color name="colourAccent">#fec202</color>
