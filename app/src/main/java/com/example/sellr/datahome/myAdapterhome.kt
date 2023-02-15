@@ -75,7 +75,12 @@ class myAdapterhome(
                             }
                         }
                         if (x == 0) {
-                            holder.addToFav.icon = context.getDrawable(R.drawable.add_to_cart_black)
+                            holder.addToFav.apply {
+                                icon = context.getDrawable(R.drawable.add_to_cart_black)
+                                setBackgroundColor(context.resources.getColor(R.color.icbg))
+                                iconTint =
+                                    ColorStateList.valueOf(context.resources.getColor(R.color.white))
+                            }
                             currentItem.addedtofav = false
                             println("Item is " + holder.itemName.text + "value is " + currentItem.addedtofav)
                         }
