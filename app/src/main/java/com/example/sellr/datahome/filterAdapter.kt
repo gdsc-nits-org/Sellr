@@ -52,7 +52,7 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         }
 
         if(selectedItemPosition == position)
-            holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
+            holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F9CD08"))
         else
             holder.itemView.findViewById<MaterialButton>(R.id.category).backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
     }
