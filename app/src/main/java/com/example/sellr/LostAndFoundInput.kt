@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.ActivityLostAndFoundInputBinding
 import com.example.sellr.utils.CheckInternet
@@ -38,7 +39,6 @@ class LostAndFoundInput : AppCompatActivity() {
     private var selectedImg: Uri? = null
     private var progressCircular: ProgressBar? = null
     private lateinit var pid : String
-    private var posterUser: String?= ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,8 +77,17 @@ class LostAndFoundInput : AppCompatActivity() {
             {
                 val isEmpty:Boolean = prepareData()
                 if (!isEmpty) {
-                    uploadInfo()
 
+                    deleteProgressBar()
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Are you sure?")
+                    builder.setMessage("This post will be made public")
+                    builder.setPositiveButton("Yes") { _, _ ->
+                        uploadInfo()
+                    }
+                    builder.setNegativeButton("No") { _, _ ->
+                    }
+                    builder.show()
                 }
             }
         }
@@ -135,13 +144,12 @@ class LostAndFoundInput : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun uploadInfo() {
 
         pid = emailID!!.substringBeforeLast("@") + Date().time.toString()
-        posterUser = emailID!!.substringBeforeLast("@")
+
         val lostAndFoundObject = LostAndFoundData(
             binding.lostandfoundObjectName.text.toString(),
             binding.lostandfoundInputObjectLocation.text.toString(),
@@ -149,8 +157,7 @@ class LostAndFoundInput : AppCompatActivity() {
             auth.uid.toString(),
             imgUrl,
             chipState,
-            pid,
-            posterUser
+            pid
         )
         setProgressBar()
         database.reference.child("LostAndFound")

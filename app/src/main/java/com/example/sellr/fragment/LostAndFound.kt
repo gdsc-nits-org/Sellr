@@ -94,6 +94,7 @@ class LostAndFound : Fragment() {
 
                     binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
 
+
                     binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                     binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                     binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))

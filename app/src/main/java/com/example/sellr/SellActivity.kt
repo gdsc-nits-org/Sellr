@@ -195,7 +195,6 @@ class SellActivity : AppCompatActivity() {
                             builder.setMessage("Your item will be available publicly for buying")
                             builder.setPositiveButton("Yes") { _, _ ->
                                 setData()
-
                             }
                             builder.setNegativeButton("No") { _, _ ->
                             }
