@@ -324,7 +324,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="#EEEEEE"
+                app:cardBackgroundColor="#F9CD08"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="2dp"
                 app:contentPadding="5dp">
@@ -350,7 +350,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/accept"
                 android:tint="@color/colourAccent"
-                app:backgroundTint="#EEEEEE"
+                app:backgroundTint="#F9CD08"
                 app:rippleColor="@android:color/black"
                 app:srcCompat="@drawable/email_icon_custom_dynamic" />
 
@@ -371,7 +371,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="#EEEEEE"
+                app:cardBackgroundColor="#F9CD08"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="2dp"
                 app:contentPadding="5dp">
@@ -397,7 +397,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/accept"
                 android:tint="#EEEEEE"
-                app:backgroundTint="#EEEEEE"
+                app:backgroundTint="#F9CD08"
                 app:rippleColor="@android:color/black"
                 app:srcCompat="@drawable/phone_android_custom_dynamic" />
 
@@ -418,7 +418,7 @@
             android:clickable="true"
             android:contentDescription="@string/accept"
             android:tint="#EEEEEE"
-            app:backgroundTint="#EEEEEE"
+            app:backgroundTint="#F9CD08"
             app:srcCompat="@drawable/phone_call" />
 
     </LinearLayout>
