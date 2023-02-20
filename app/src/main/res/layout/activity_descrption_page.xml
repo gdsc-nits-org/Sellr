@@ -21,6 +21,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_slider"
                 android:layout_width="match_parent"
@@ -51,6 +53,7 @@
                     android:textSize="23sp"
                     android:textStyle="bold" />
 
+
                 <TextView
                     android:id="@+id/product_price"
                     android:layout_width="match_parent"
@@ -69,12 +72,22 @@
                     android:gravity="end"
                     android:text="Date of Selling/Availability"
                     android:textStyle="italic" />
+                <ImageButton
+                    android:id="@+id/cartAddButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="5dp"
+                    android:scaleType="fitStart"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/add_to_cart_black"
+                    android:background="@color/white"
+                    />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="#787878" />
 

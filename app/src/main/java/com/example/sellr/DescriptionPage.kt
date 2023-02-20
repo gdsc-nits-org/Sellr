@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.RectF
@@ -13,6 +14,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.ImageSlider
@@ -20,7 +22,9 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.sellr.databinding.ActivityDescrptionPageBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -28,7 +32,7 @@ class DescriptionPage : AppCompatActivity() {
     private lateinit var binding: ActivityDescrptionPageBinding
     private lateinit var imageList: ArrayList<SlideModel>
     private lateinit var imageSlider: ImageSlider
-
+    private lateinit var dtb: DatabaseReference
     //fab idea
     //test
     private lateinit var backDrop: View
@@ -38,6 +42,8 @@ class DescriptionPage : AppCompatActivity() {
     private var emailSeller = ""
     private var phoneSeller = ""
     private lateinit var expanded_image: ImageView
+    private var cartAddStatus=false
+    private lateinit var itemID:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDescrptionPageBinding.inflate(layoutInflater)
@@ -49,8 +55,8 @@ class DescriptionPage : AppCompatActivity() {
         }
         val extras = intent.extras
         if (extras != null) {
-            val value = extras.getString("key").toString()
-            fetchDataFromDataBase(value)
+            itemID = extras.getString("key").toString()
+            fetchDataFromDataBase(itemID)
         }
         expanded_image = binding.expandedImage
         imageList = ArrayList()
@@ -100,6 +106,48 @@ class DescriptionPage : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:$phoneSeller")
             startActivity(intent)
+        }
+
+
+
+        //ADD TO CART
+        val user = Firebase.auth.currentUser?.uid.toString()
+        dtb =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+        val currentCartStatus=dtb.child("Users").child(user).child("favpost").get()
+        currentCartStatus.addOnSuccessListener {
+            val snap=it.value.toString()
+            cartAddStatus = snap.contains(itemID)
+            if(cartAddStatus)
+            {
+                binding.cartAddButton.setImageResource(R.drawable.add_to_carty)
+            }
+        }
+        binding.cartAddButton.setOnClickListener {
+            if (!cartAddStatus) {
+                dtb.child("Users").child(user).child("favpost").push().setValue(itemID).addOnSuccessListener {
+                    cartAddStatus=true
+                    Toast.makeText(applicationContext, "Item Added to Cart", Toast.LENGTH_SHORT).show()
+                    binding.cartAddButton.setImageResource(R.drawable.add_to_carty)
+                }
+            } else {
+
+                val query: Query = dtb.child("Users").child(user).child("favpost").orderByValue().equalTo(itemID)
+
+                query.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (snapshot in dataSnapshot.children) {
+                            snapshot.ref.removeValue()
+                        }
+                        cartAddStatus=false
+                        Toast.makeText(applicationContext, "Item Removed from Cart", Toast.LENGTH_SHORT).show()
+                        binding.cartAddButton.setImageResource(R.drawable.add_to_cart_black)
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                    }
+                })
+            }
         }
     }
 
