@@ -251,6 +251,10 @@ class HomeFragment : Fragment() {
                         if (items != null) {
                             if (!items.sold) {
                                 datalist.add(items!!)
+                                datalist.forEach{
+                                    it.spid = it.pid?.substringAfterLast("_ug")
+                                }
+                                datalist.sortBy { it.spid }
                             }
                         }
                     }
