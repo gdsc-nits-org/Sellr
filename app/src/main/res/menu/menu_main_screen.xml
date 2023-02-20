@@ -4,7 +4,7 @@
     <item
         android:id="@+id/edit_profile"
         app:showAsAction="always"
-        android:icon="@drawable/logout"  android:title="add"/>
+        android:icon="@drawable/edit_icon_action_bar"  android:title="add"/>
     <item
         android:id="@+id/logOutMenu"
         app:showAsAction="never"

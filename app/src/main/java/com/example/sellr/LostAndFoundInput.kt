@@ -3,6 +3,8 @@
 package com.example.sellr
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -47,6 +49,7 @@ class LostAndFoundInput : AppCompatActivity() {
         setContentView(binding.root)
         progressCircular=binding.lostandfoundprogressCircular
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         val user = Firebase.auth.currentUser
 
         if (user != null) {
