@@ -37,11 +37,19 @@
                     android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="8dp">
-                    <ImageView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
-                        android:src="@drawable/ayush_bhaiya"
-                        android:adjustViewBounds="true"/>
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="140dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ayush_bhaiya"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -587,7 +595,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
+                        android:text="Shreya Das"
                         android:textColor="#4E4637"
                         android:layout_gravity="center_horizontal"/>
                     <TextView

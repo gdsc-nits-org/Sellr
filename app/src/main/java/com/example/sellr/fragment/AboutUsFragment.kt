@@ -26,7 +26,7 @@ class AboutUsFragment : Fragment() {
         viewBinding=FragmentAboutUsBinding.inflate(inflater,container,false)
         binding.ayush.setOnClickListener{
             bottomSheetFunction("https://www.facebook.com/profile.php?id=100058445922286",
-                "instagram.com/the.ayush.gupta/","https://www.linkedin.com/in/gupta--ayush/",
+                "https://www.instagram.com/a_y_u_s_h_g__/","https://www.linkedin.com/in/gupta--ayush/",
             "https://github.com/ayush-gupta-git")
         }
         binding.bhaskar.setOnClickListener{
