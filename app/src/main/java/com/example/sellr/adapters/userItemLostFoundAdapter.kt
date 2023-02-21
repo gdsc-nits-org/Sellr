@@ -49,7 +49,19 @@ class userItemLostFoundAdapter(
         else{
         context?.let { Glide.with(it).load(url).into(holder.adapterBinding.itemImage) }}
 
-        holder.adapterBinding.itemName.text = itemList[position].objectName
+
+
+        //holder.adapterBinding.itemName.text = itemList[position].objectName
+
+        if(itemList[position].objectName!!.length >= 15){
+            val dots="..."
+            val textRqrd=itemList[position].objectName?.substring(0,12)+dots
+            holder.adapterBinding.itemName.text=textRqrd
+
+        }
+        else{
+            holder.adapterBinding.itemName.text = itemList[position].objectName
+        }
         holder.adapterBinding.lostndFoundStatus.text = itemList[position].lostOrFound
         holder.adapterBinding.lostndFoundLocation.text = itemList[position].objectLocation
 
