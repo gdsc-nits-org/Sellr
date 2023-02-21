@@ -43,8 +43,13 @@ class myAdapterhome(
         val currentItem = dataList[dataList.size - position - 1]
         holder.newOrOld.text = currentItem.condition
         Glide.with(fragment).load(currentItem.imagePrimary).centerCrop().into(holder.photo)
+
+
         holder.itemName.text = currentItem.productName.toString()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
+
+
         holder.price.text = currentItem.price
         holder.symbol
         holder.itemView.setOnClickListener {
