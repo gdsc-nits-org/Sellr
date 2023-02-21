@@ -30,9 +30,9 @@ class AboutUsFragment : Fragment() {
             "https://github.com/ayush-gupta-git")
         }
         binding.bhaskar.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/bhaskar.wary.100",
+            bottomSheetFunctionDesigners("https://www.facebook.com/bhaskar.wary.100",
                 "https://instagram.com/wary_bhaskar?igshid=YmMyMTA2M2Y=","https://www.linkedin.com/in/bhaskar-wary/",
-                "https://github.com/ayush-gupta-git")
+                "https://www.behance.net/bhaskarwary")
         }
         binding.navneet.setOnClickListener{
             bottomSheetFunction("https://www.facebook.com/profile.php?id=100080411300265",
@@ -88,8 +88,8 @@ class AboutUsFragment : Fragment() {
                 "https://github.com/hritika1404")
         }
 
-        binding.hritika.setOnClickListener{
-            bottomSheetFunction("https://www.facebook.com/profile.php?id=100076107792266",
+        binding.soumya.setOnClickListener{
+            bottomSheetFunctionDesigners("https://www.facebook.com/profile.php?id=100076107792266",
                 "https://www.instagram.com/_somya02/?next=%2F","https://www.linkedin.com/in/somya-kasaudhan-365133229",
                 "https://www.behance.net/somyakasaudhan")
         }
@@ -123,6 +123,55 @@ class AboutUsFragment : Fragment() {
         val facebook = bottomsheet.findViewById<ImageView>(R.id.facebook_icon)
         github.setOnClickListener {
             githubUrl?.let { gotoUrl(it) } ?: Toast.makeText(
+                activity,
+                "Not Available",
+                Toast.LENGTH_SHORT
+            )
+        }
+        linkedin.setOnClickListener {
+            linkedInUrl?.let { gotoUrl(it) } ?: Toast.makeText(
+                activity,
+                "Not Available",
+                Toast.LENGTH_SHORT
+            )
+        }
+        instagram.setOnClickListener {
+            instaUrl?.let { gotoUrl(it) } ?: Toast.makeText(
+                activity,
+                "Not Available",
+                Toast.LENGTH_SHORT
+            )
+        }
+        facebook.setOnClickListener {
+            facebookUrl?.let { gotoUrl(it) } ?: Toast.makeText(
+                activity,
+                "Not Available",
+                Toast.LENGTH_SHORT
+            )
+        }
+        bottomSheetDialog.setContentView(bottomsheet)
+        bottomSheetDialog.show()
+    }
+
+    private fun bottomSheetFunctionDesigners(
+        facebookUrl: String?,
+        instaUrl: String?,
+        linkedInUrl: String?,
+        behanceUrl: String?
+    ) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+        val bottomsheet: View = LayoutInflater.from(context).inflate(
+            R.layout.fragment_bottom_sheet_design_team,
+            requireView().findViewById<View>(R.id.bottom_sheet_container) as? ConstraintLayout
+        )
+
+        //hooks
+        val behance = bottomsheet.findViewById<ImageView>(R.id.behance_icon)
+        val linkedin = bottomsheet.findViewById<ImageView>(R.id.linked_icon)
+        val instagram = bottomsheet.findViewById<ImageView>(R.id.instagram_icon)
+        val facebook = bottomsheet.findViewById<ImageView>(R.id.facebook_icon)
+        behance.setOnClickListener {
+            behanceUrl?.let { gotoUrl(it) } ?: Toast.makeText(
                 activity,
                 "Not Available",
                 Toast.LENGTH_SHORT
