@@ -590,7 +590,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="140dp"
-                        android:src="@drawable/pichai"
+                        android:src="@drawable/shreya"
                         android:adjustViewBounds="true"/>
                     <TextView
                         android:layout_width="wrap_content"

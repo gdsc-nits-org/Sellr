@@ -93,6 +93,11 @@ class AboutUsFragment : Fragment() {
                 "https://www.instagram.com/_somya02/?next=%2F","https://www.linkedin.com/in/somya-kasaudhan-365133229",
                 "https://www.behance.net/somyakasaudhan")
         }
+        binding.shreya.setOnClickListener{
+            bottomSheetFunctionDesigners("https://www.facebook.com/profile.php?id=100014422471346",
+                "https://www.instagram.com/shreyadas615/","https://www.linkedin.com/in/shreya-das-85b71a228/",
+                "https://www.behance.net/onboarding")
+        }
         return binding.root
     }
 
