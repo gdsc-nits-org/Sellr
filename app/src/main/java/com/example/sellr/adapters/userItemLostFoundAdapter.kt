@@ -8,17 +8,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.sellr.DescriptionPage
 import com.example.sellr.LostAndFoundDescriptionPage
 import com.example.sellr.R
-import com.example.sellr.binding
 import com.example.sellr.data.LostAndFoundData
-import com.example.sellr.data.SellData
-import com.example.sellr.databinding.GridLayoutBinding
 import com.example.sellr.databinding.LostFoundItemCardBinding
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 
 
 class userItemLostFoundAdapter(
@@ -41,7 +35,7 @@ class userItemLostFoundAdapter(
 
     override fun onBindViewHolder(holder: userItemLostFoundAdapter.ItemsViewHolder, position: Int) {
         //holder.adapterBinding.itemImage.setImageResource(itemList[position].imagePrimary)
-        val url = itemList[position].imageUrl
+        val url = itemList[position].imagePrimary
         if (url=="NONE")
         {
             holder.adapterBinding.itemImage.setImageResource(R.drawable.no_image)
@@ -49,7 +43,19 @@ class userItemLostFoundAdapter(
         else{
         context?.let { Glide.with(it).load(url).into(holder.adapterBinding.itemImage) }}
 
-        holder.adapterBinding.itemName.text = itemList[position].objectName
+
+
+        //holder.adapterBinding.itemName.text = itemList[position].objectName
+
+        if(itemList[position].objectName!!.length >= 15){
+            val dots="..."
+            val textRqrd=itemList[position].objectName?.substring(0,12)+dots
+            holder.adapterBinding.itemName.text=textRqrd
+
+        }
+        else{
+            holder.adapterBinding.itemName.text = itemList[position].objectName
+        }
         holder.adapterBinding.lostndFoundStatus.text = itemList[position].lostOrFound
         holder.adapterBinding.lostndFoundLocation.text = itemList[position].objectLocation
 

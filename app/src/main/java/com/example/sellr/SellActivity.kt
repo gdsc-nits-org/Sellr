@@ -5,39 +5,34 @@ package com.example.sellr
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import androidx.core.widget.doAfterTextChanged
-
 import com.example.sellr.data.SellData
+import com.example.sellr.databinding.ActivitySellBinding
 import com.example.sellr.utils.CheckInternet
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
-
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.text.SimpleDateFormat
-
 import java.util.*
 
 
@@ -59,12 +54,13 @@ class SellActivity : AppCompatActivity() {
     private lateinit var baos:ByteArrayOutputStream
     private lateinit var uploadTask:UploadTask
     //private val coreHelper = AnstronCoreHelper(this)
-
+    lateinit var binding : ActivitySellBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sell)
+        binding = ActivitySellBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         imageArray.add("")
         imageArray.add("")
         imageArray.add("")
@@ -80,22 +76,20 @@ class SellActivity : AppCompatActivity() {
         }
 
         populateDropDown()
-        findViewById<AutoCompleteTextView>(R.id.categoryDropDown).doAfterTextChanged {
-            if (findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString() == "Others") {
+        binding.categoryDropDown.doAfterTextChanged {
+            if (binding.categoryDropDown.text.toString() == "Others") {
                 showDialog()
             } else {
-                findViewById<TextInputLayout>(R.id.inputCategory).helperText = null
+                binding.inputCategory.helperText = null
             }
         }
-
-
-        progressCircular = findViewById(R.id.progress_circular)
+        progressCircular = binding.progressCircular
         //get images from storage on user click
         //until the previous image is selected, the next one is not enabled
-        imageButtonPrimary = findViewById(R.id.imageButtonFirst)
-        imageButtonSecond = findViewById(R.id.imageButtonSecond)
-        imageButtonThird = findViewById(R.id.imageButtonThird)
-        imageButtonFourth = findViewById(R.id.imageButtonFourth)
+        imageButtonPrimary = binding.imageButtonFirst
+        imageButtonSecond =  binding.imageButtonSecond
+        imageButtonThird =  binding.imageButtonThird
+        imageButtonFourth =  binding.imageButtonFourth
         imageButtonSecond?.isEnabled = false
         imageButtonThird?.isEnabled = false
         imageButtonFourth?.isEnabled = false
@@ -117,32 +111,32 @@ class SellActivity : AppCompatActivity() {
 //                    startActivityForResult(iGallery, 1000)
                 //_______________________________________________________________________________
                 ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750)
+                compress(250).
+                maxResultSize(600,600)
                     .start(1000)
             }
         }
         imageButtonSecond?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750).
+                compress(250).
+                maxResultSize(600,600).
                 start(2000)
             }
         }
         imageButtonThird?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
-                compress(400)
-                    .maxResultSize(750,750).
+                compress(250).
+                maxResultSize(600,600).
                     start(3000)
             }
         }
         imageButtonFourth?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
-                compress(400).
-                maxResultSize(750,750).
+                compress(250).
+                maxResultSize(600,600).
                 start(4000)
             }
 
@@ -150,9 +144,9 @@ class SellActivity : AppCompatActivity() {
 
 
         //On used click
-        findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = false
-        val usedChip: Chip = findViewById(R.id.usedChip)
-        val newChip: Chip = findViewById(R.id.newChip)
+        binding.usedCondition.isEnabled = false
+        val usedChip: Chip = binding.usedChip
+        val newChip: Chip =  binding.newChip
         usedChip.setOnClickListener {
             chipClicked()
         }
@@ -163,7 +157,7 @@ class SellActivity : AppCompatActivity() {
 
         //On FAB click==data upload
         //final data upload
-        val button: ExtendedFloatingActionButton = findViewById(R.id.fab)
+        val button: ExtendedFloatingActionButton =  binding.fab
         button.setOnClickListener {
             if (checkInternet()) {
                 setProgressBar()
@@ -193,7 +187,6 @@ class SellActivity : AppCompatActivity() {
                             builder.setMessage("Your item will be available publicly for buying")
                             builder.setPositiveButton("Yes") { _, _ ->
                                 setData()
-
                             }
                             builder.setNegativeButton("No") { _, _ ->
                             }
@@ -237,8 +230,8 @@ class SellActivity : AppCompatActivity() {
     }
 
     private fun chipClicked() {
-        val usedClicked = findViewById<Chip>(R.id.usedChip)
-        findViewById<TextInputLayout>(R.id.usedCondition).isEnabled = usedClicked.isChecked
+        val usedClicked = binding.usedChip
+        binding.usedCondition.isEnabled = usedClicked.isChecked
     }
 
     //updating image in firebase storage
@@ -414,16 +407,16 @@ class SellActivity : AppCompatActivity() {
     //to the setData() method
     private fun getData(uID: String): SellData? {
         var flag = true
-        val productName = findViewById<EditText>(R.id.textFieldName).text.toString().trim()
+        val productName =  binding.textFieldName.text.toString().trim()
         if (productName == "") {
-            findViewById<TextInputLayout>(R.id.inputName).error = "This field is required"
+            binding.inputName.error = "This field is required"
 
             flag = false
         } else {
-            findViewById<TextInputLayout>(R.id.inputName).error = null
+            binding.inputName.error = null
         }
-        val category = findViewById<AutoCompleteTextView>(R.id.categoryDropDown).text.toString()
-        val ipCategory = findViewById<TextInputLayout>(R.id.inputCategory)
+        val category =  binding.categoryDropDown.text.toString()
+        val ipCategory =  binding.inputCategory
         val additionalCategory = ipCategory.helperText.toString()
         if (category == "") {
             ipCategory.error = "This field is required"
@@ -436,50 +429,50 @@ class SellActivity : AppCompatActivity() {
         } else {
             ipCategory.error = null
         }
-        val productDesc = findViewById<EditText>(R.id.textFieldDesc).text.toString().trim()
+        val productDesc = binding.textFieldDesc.text.toString().trim()
         if (productDesc == "") {
-            findViewById<TextInputLayout>(R.id.inputDesc).error = "This field is required"
+            binding.inputDesc.error = "This field is required"
             flag = false
         } else {
-            findViewById<TextInputLayout>(R.id.inputDesc).error = null
+            binding.inputDesc.error = null
         }
-        val parentChipGroup: ChipGroup = findViewById(R.id.chipGroup)
+        val parentChipGroup: ChipGroup =  binding.chipGroup
         var condition: String? = null
         if (parentChipGroup.checkedChipId != View.NO_ID) {
-            findViewById<TextView>(R.id.chipError).visibility = View.GONE
+            binding.chipError.visibility = View.GONE
             condition =
                 parentChipGroup.findViewById<Chip>(parentChipGroup.checkedChipId).text.toString()
         } else {
-            findViewById<TextView>(R.id.chipError).visibility = View.VISIBLE
+            binding.chipError.visibility = View.VISIBLE
             flag = false
         }
 
-        val price = findViewById<EditText>(R.id.price).text.toString()
+        val price = binding.price.text.toString()
         if (price == "") {
-            findViewById<TextInputLayout>(R.id.inputPrice).error = "This field is required"
+            binding.inputPrice.error = "This field is required"
             flag = false
         } else {
-            findViewById<TextInputLayout>(R.id.inputPrice).error = null
+            binding.inputPrice.error = null
         }
 
 
         if (imagePrimary == "") {
-            findViewById<TextView>(R.id.imageError).visibility = View.VISIBLE
+            binding.imageError.visibility = View.VISIBLE
             flag = false
 
         } else {
-            findViewById<TextView>(R.id.imageError).visibility = View.GONE
+            binding.imageError.visibility = View.GONE
         }
 
 
         var usedTime = ""
         if (condition == "Used") {
-            usedTime = findViewById<AutoCompleteTextView>(R.id.textFieldUsedCondition).text.toString()
+            usedTime =  binding.textFieldUsedCondition.text.toString()
             if (usedTime == "") {
-                findViewById<TextInputLayout>(R.id.usedCondition).error = "This field is required"
+                binding.usedCondition.error = "This field is required"
                 flag = false
             } else {
-                findViewById<TextInputLayout>(R.id.usedCondition).error = null
+                binding.usedCondition.error = null
             }
         }
 
@@ -502,8 +495,6 @@ class SellActivity : AppCompatActivity() {
         } else {
             return null
         }
-
-
     }
 
     private fun checkInternet(): Boolean {
@@ -532,7 +523,7 @@ class SellActivity : AppCompatActivity() {
             .setOnClickListener { dialog.dismiss() }
         dialog.findViewById<View>(R.id.btn_submit).setOnClickListener { _: View? ->
             val customCat = etPost.text.toString().trim { it <= ' ' }
-            val update = findViewById<TextInputLayout>(R.id.inputCategory)
+            val update = binding.inputCategory;
             update.error = null
             update.helperText = customCat
             dialog.dismiss()
@@ -560,10 +551,10 @@ class SellActivity : AppCompatActivity() {
         //Populate dropDown category list
         val categories = resources.getStringArray(R.array.Categories)
         val categoriesAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, categories)
-        findViewById<AutoCompleteTextView>(R.id.categoryDropDown).setAdapter(categoriesAdapter)
+        binding.categoryDropDown.setAdapter(categoriesAdapter)
         val conditions = resources.getStringArray(R.array.Conditions)
         val conditionsAdapter = ArrayAdapter(this, R.layout.dropdown_menu_category_item, conditions)
-        findViewById<AutoCompleteTextView>(R.id.textFieldUsedCondition).setAdapter(conditionsAdapter)
+        binding.textFieldUsedCondition.setAdapter(conditionsAdapter)
 
     }
 

@@ -1,6 +1,8 @@
 package com.example.sellr
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         supportActionBar?.setDisplayUseLogoEnabled(true)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)

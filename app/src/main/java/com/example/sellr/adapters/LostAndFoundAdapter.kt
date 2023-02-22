@@ -11,6 +11,9 @@ import com.example.sellr.LostAndFoundDescriptionPage
 import com.example.sellr.R
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.LayoutLostandfoundItemBinding
+import com.google.firebase.database.FirebaseDatabase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndFoundData> ):
     RecyclerView.Adapter<LostAndFoundAdapter.LostAndFoundViewHolder>() {
@@ -29,20 +32,30 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
 
     override fun onBindViewHolder(holder: LostAndFoundViewHolder, position: Int) {
 
-        val obj = objectList[position]
+        val obj = objectList[objectList.size - position - 1]
 
+        val databaseUser =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("Users")
+        databaseUser.child(obj.uid.toString()).get().addOnSuccessListener { snapshot ->
+
+            if (snapshot.exists()) {
+                val name = snapshot.child("name").value.toString()
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                holder.binding.lostandfoundPosterUserName.text = name
+            }
+        }.addOnFailureListener {
+            TODO("Not yet implemented")
+        }
         holder.binding.lostandfoundObject.text= obj.objectName
         holder.binding.lostandfoundLocation.text = obj.objectLocation
-        //holder.binding.lostandfoundUserContact.text = obj.contactNumber
+        if (obj.imagePrimary != "") {
+            Glide.with(context).load(obj.imagePrimary).into(holder.binding.lostandfoundObjectimage)
+        }
+       else{
+           Glide.with(context).load(R.drawable.no_image).into(holder.binding.lostandfoundObjectimage)
 
-        holder.binding.lostandfoundPosterUserName.text =  obj.posterUser
-       // holder.binding.lostandfoundDescription.text = obj.objectDescription
-        if (obj.imageUrl != "NONE") {
-            Glide.with(context).load(obj.imageUrl).into(holder.binding.lostandfoundObjectimage)
-        }
-        else{
-            holder.binding.lostandfoundObjectimage.visibility = View.GONE
-        }
+       }
 
         if(obj.lostOrFound == "FOUND"){
             holder.binding.indicatorRed.visibility = View.GONE
@@ -54,13 +67,11 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
         }
 
         holder.itemView.setOnClickListener {
-            val value = objectList[position].pid.toString()
+            val value = objectList[objectList.size - position - 1].pid.toString()
             val i = Intent(context, LostAndFoundDescriptionPage::class.java)
             i.putExtra("key", value)
-            context?.startActivity(i)
+            context.startActivity(i)
         }
-
-
     }
     override fun getItemCount(): Int {
         return objectList.size

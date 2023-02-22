@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="10dp"
-
     tools:context=".DescriptionPage">
-
-
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ScrollView
+
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,15 +21,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_slider"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
-                android:clickable="true"
-                android:focusable="true"
-                app:iss_auto_cycle="true"
-                app:iss_delay="0"
-                app:iss_period="1000" />
+                app:iss_placeholder="@drawable/loading_desc"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -54,6 +53,7 @@
                     android:textSize="23sp"
                     android:textStyle="bold" />
 
+
                 <TextView
                     android:id="@+id/product_price"
                     android:layout_width="match_parent"
@@ -72,12 +72,22 @@
                     android:gravity="end"
                     android:text="Date of Selling/Availability"
                     android:textStyle="italic" />
+                <ImageButton
+                    android:id="@+id/cartAddButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitStart"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/add_to_cart_black"
+                    android:background="@color/white"
+                    />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="#787878" />
 
@@ -276,28 +286,10 @@
                 android:layout_height="90dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-              />
+                />
 
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -332,7 +324,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="#EEEEEE"
+                app:cardBackgroundColor="#F9CD08"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="2dp"
                 app:contentPadding="5dp">
@@ -358,7 +350,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/accept"
                 android:tint="@color/colourAccent"
-                app:backgroundTint="#EEEEEE"
+                app:backgroundTint="#F9CD08"
                 app:rippleColor="@android:color/black"
                 app:srcCompat="@drawable/email_icon_custom_dynamic" />
 
@@ -379,7 +371,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="#EEEEEE"
+                app:cardBackgroundColor="#F9CD08"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="2dp"
                 app:contentPadding="5dp">
@@ -405,7 +397,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/accept"
                 android:tint="#EEEEEE"
-                app:backgroundTint="#EEEEEE"
+                app:backgroundTint="#F9CD08"
                 app:rippleColor="@android:color/black"
                 app:srcCompat="@drawable/phone_android_custom_dynamic" />
 
@@ -426,8 +418,24 @@
             android:clickable="true"
             android:contentDescription="@string/accept"
             android:tint="#EEEEEE"
-            app:backgroundTint="#EEEEEE"
+            app:backgroundTint="#F9CD08"
             app:srcCompat="@drawable/phone_call" />
 
     </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    <!--    Black magic in layout(Image expansion)-->
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

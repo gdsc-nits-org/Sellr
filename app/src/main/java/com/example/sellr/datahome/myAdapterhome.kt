@@ -43,8 +43,13 @@ class myAdapterhome(
         val currentItem = dataList[dataList.size - position - 1]
         holder.newOrOld.text = currentItem.condition
         Glide.with(fragment).load(currentItem.imagePrimary).centerCrop().into(holder.photo)
+
+
         holder.itemName.text = currentItem.productName.toString()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
+
+
         holder.price.text = currentItem.price
         holder.symbol
         holder.itemView.setOnClickListener {
@@ -75,7 +80,12 @@ class myAdapterhome(
                             }
                         }
                         if (x == 0) {
-                            holder.addToFav.icon = context.getDrawable(R.drawable.add_to_cart_black)
+                            holder.addToFav.apply {
+                                icon = context.getDrawable(R.drawable.add_to_cart_black)
+                                setBackgroundColor(context.resources.getColor(R.color.icbg))
+                                iconTint =
+                                    ColorStateList.valueOf(context.resources.getColor(R.color.white))
+                            }
                             currentItem.addedtofav = false
                             println("Item is " + holder.itemName.text + "value is " + currentItem.addedtofav)
                         }
@@ -97,6 +107,14 @@ class myAdapterhome(
                 Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
                 dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
             } else {
+                holder.addToFav.apply {
+                    icon = context.getDrawable(R.drawable.add_to_cart_black)
+                    setBackgroundColor(context.resources.getColor(R.color.icbg))
+                    iconTint =
+                        ColorStateList.valueOf(context.resources.getColor(R.color.white))
+                }
+                println("inside removing")
+                currentItem.addedtofav = false
                 dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString())
                     .removeValue()
             }

@@ -105,7 +105,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/price"
-                    android:maxLength="10"
+                    android:maxLength="6"
                     android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
