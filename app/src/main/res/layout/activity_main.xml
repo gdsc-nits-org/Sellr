@@ -22,7 +22,6 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:backgroundColor="@color/colourPrimary"
         app:iconMargin="8dp"
         app:iconSize="24dp"
         app:indicatorRadius="15dp"
@@ -30,6 +29,13 @@
         app:layout_constraintTop_toBottomOf="@id/fragmentContainer"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        app:backgroundColor="@color/white"
+        app:indicatorColor="#E8E6EA"
+        app:textColor="@color/black"
+        app:iconTint="@color/black"
+        app:iconTintActive="@color/colourPrimary"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,23 +15,27 @@
         android:orientation="vertical"
         >
 
+
         <com.google.android.material.imageview.ShapeableImageView
-            app:shapeAppearance="@style/CornerCut"
+            android:background="@color/white"
             android:id="@+id/item_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center_horizontal"
-           />
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:shapeAppearance="@style/ImageViewRoundedCorner"
+            android:padding="11dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="2"
             android:layout_marginStart="10dp"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+
             >
 
             <TextView
@@ -39,15 +43,16 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Title"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_gravity="start"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 >
 
@@ -57,6 +62,7 @@
                     android:id="@+id/item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:textColor="#9BDCD3"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -73,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:src="@drawable/remove_from_cart_buton"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="20dp"
                     />
 
             </LinearLayout>

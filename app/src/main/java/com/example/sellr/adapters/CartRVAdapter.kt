@@ -30,8 +30,27 @@ class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // to set data to textview and imageview of each card layout
         val model: CartModel = cartModelArrayList[position]
-        holder.cartNameTV.text=model.item_name
+
+        var textRqrd=model.item_name
+        if(textRqrd.length >=11){
+            val dots="..."
+            textRqrd=textRqrd.substring(0,11)+dots
+        }
+
+        holder.cartNameTV.text=textRqrd
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
+//        if(itemList[position].objectName!!.length >= 15){
+//            val dots="..."
+//            val textRqrd=itemList[position].objectName?.substring(0,12)+dots
+//            holder.adapterBinding.itemName.text=textRqrd
+//
+//        }
+//        else{
+//            holder.adapterBinding.itemName.text = itemList[position].objectName
+//        }
+//
+
         holder.cartPriceTV.text="Rs. ${model.item_price}"
         Glide.with(holder.cartIV).load(model.item_image).centerCrop().into(holder.cartIV)
         val btn=holder.removeButton
