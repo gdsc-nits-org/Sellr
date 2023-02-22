@@ -11,7 +11,7 @@
         android:id="@+id/imageView5"
         android:layout_width="103dp"
         android:layout_height="120dp"
-        android:src="@drawable/logo_sellr"
+        android:src="@drawable/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline"
