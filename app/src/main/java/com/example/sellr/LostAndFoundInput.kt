@@ -28,7 +28,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
@@ -39,15 +38,12 @@ class LostAndFoundInput : AppCompatActivity() {
     private var userUID: String? = ""
     private var emailID: String? = ""
     private var chipState: String? = ""
-    //private var imgUrl:String?="NONE"
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
-    private lateinit var storage: FirebaseStorage
     private lateinit var binding: ActivityLostAndFoundInputBinding
-    //private var selectedImg: Uri? = null
     private var progressCircular: ProgressBar? = null
     private lateinit var pid : String
-    private var imagePrimary: String? = "NONE"
+    private var imagePrimary: String? = ""
     private var imageArray = ArrayList<String>()
     private var imageButtonPrimary: ImageButton? = null
     private var imageButtonSecond: ImageButton? = null
@@ -84,7 +80,6 @@ class LostAndFoundInput : AppCompatActivity() {
 
         database =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        storage = FirebaseStorage.getInstance("gs://sellr-7a02b.appspot.com")
         auth = FirebaseAuth.getInstance()
 
 
@@ -98,16 +93,16 @@ class LostAndFoundInput : AppCompatActivity() {
         imageButtonFourth?.isEnabled = false
 
 
-        imageButtonPrimary!!.setOnClickListener {
+        imageButtonPrimary?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
                 compress(250).
                 maxResultSize(600,600).
-                start(2000)
+                start(1000)
             }
         }
 
-        imageButtonSecond!!.setOnClickListener {
+        imageButtonSecond?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
                 compress(250).
@@ -115,7 +110,7 @@ class LostAndFoundInput : AppCompatActivity() {
                 start(2000)
             }
         }
-        imageButtonThird!!.setOnClickListener {
+        imageButtonThird?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
                 compress(250).
@@ -123,7 +118,7 @@ class LostAndFoundInput : AppCompatActivity() {
                 start(3000)
             }
         }
-        imageButtonFourth!!.setOnClickListener {
+        imageButtonFourth?.setOnClickListener {
             if (checkInternet()) {
                 ImagePicker.with(this).crop().
                 compress(250).
@@ -230,8 +225,27 @@ class LostAndFoundInput : AppCompatActivity() {
     }
 
 
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            when (requestCode) {
+                1000 -> {
 
-
+                    upDateImage(1, data)
+                }
+                2000 -> {
+                    upDateImage(2, data)
+                }
+                3000 -> {
+                    upDateImage(3, data)
+                }
+                4000 -> {
+                    upDateImage(4, data)
+                }
+            }
+        }
+    }
 
     private fun upDateImage(i: Int, data: Intent?) {
         setProgressBar()
@@ -240,6 +254,7 @@ class LostAndFoundInput : AppCompatActivity() {
         val imageUri: Uri? = data?.data
 
         val filename = generateUID(emailID + i.toString())
+
         uploadTask = storageRef.child("LostAndFoundImages/$filename").putFile(imageUri!!)
 
 
@@ -314,6 +329,12 @@ class LostAndFoundInput : AppCompatActivity() {
 
     }
 
+    private fun makeToast(value: String) {
+
+        Toast.makeText(applicationContext, value, Toast.LENGTH_LONG).show()
+    }
+
+
     @SuppressLint("SimpleDateFormat")
     private fun generateUID(emailID: String): String {
 
@@ -323,34 +344,8 @@ class LostAndFoundInput : AppCompatActivity() {
         return emailID.substringBeforeLast("@") + datetime
     }
 
-    private fun makeToast(value: String) {
-
-        Toast.makeText(applicationContext, value, Toast.LENGTH_LONG).show()
-    }
 
 
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                1000 -> {
-
-                    upDateImage(1, data)
-                }
-                2000 -> {
-                    upDateImage(2, data)
-                }
-                3000 -> {
-                    upDateImage(3, data)
-                }
-                4000 -> {
-                    upDateImage(4, data)
-                }
-            }
-        }
-    }
     private fun setProgressBar() {
         progressCircular?.visibility = View.VISIBLE
         window.setFlags(

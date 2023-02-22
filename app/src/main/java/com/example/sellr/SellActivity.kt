@@ -5,43 +5,34 @@ package com.example.sellr
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import androidx.core.widget.doAfterTextChanged
-
 import com.example.sellr.data.SellData
-import com.example.sellr.databinding.ActivityAuthBinding
 import com.example.sellr.databinding.ActivitySellBinding
 import com.example.sellr.utils.CheckInternet
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
-
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.text.SimpleDateFormat
-
 import java.util.*
 
 
@@ -92,8 +83,6 @@ class SellActivity : AppCompatActivity() {
                 binding.inputCategory.helperText = null
             }
         }
-
-
         progressCircular = binding.progressCircular
         //get images from storage on user click
         //until the previous image is selected, the next one is not enabled
