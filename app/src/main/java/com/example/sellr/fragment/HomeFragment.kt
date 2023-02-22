@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
     private lateinit var datalistforfilter: ArrayList<filterData>
     private lateinit var recylerViewfilter: RecyclerView
 
+    private lateinit var emptyH : ConstraintLayout
 
     //for filtered datalist in myadapterhome
     private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
@@ -75,6 +77,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        emptyH = view.findViewById(R.id.emptyhome)
 
         //for filter
         val layoutManagerfilter =
@@ -147,8 +151,9 @@ class HomeFragment : Fragment() {
                             searchList.add(it)
                         }
                     }
-                    recylerView.adapter?.notifyDataSetChanged()
+
                 } else {
+
                     searchList.clear()
                     searchList.addAll(datalist)
                     recylerView.adapter?.notifyDataSetChanged()
@@ -196,9 +201,17 @@ class HomeFragment : Fragment() {
         if (category == "All") {
             datalistforfilteredmyAdapter.addAll(datalist)
         }
+
+        if(datalistforfilteredmyAdapter.isEmpty())
+            emptyH.visibility = View.VISIBLE
+        else
+            emptyH.visibility = View.INVISIBLE
+
         recylerView.adapter?.notifyDataSetChanged()
         recylerView.adapter =
             myAdapterhome(requireContext(), this@HomeFragment, datalistforfilteredmyAdapter)
+
+
 
         searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -262,9 +275,17 @@ class HomeFragment : Fragment() {
 
                     searchList.clear()
                     searchList.addAll(datalist)
+
+                    if(searchList.isEmpty())
+                        emptyH.visibility = View.VISIBLE
+                    else
+                        emptyH.visibility = View.INVISIBLE
+
                     recylerView.adapter =
                         myAdapterhome(requireContext(), this@HomeFragment, searchList)
                     filterItemClick(defaultFilter)
+
+
 
                 }
 

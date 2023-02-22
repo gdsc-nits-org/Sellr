@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.sellr.databinding.ActivityLostAndFoundDescriptionPageBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
@@ -16,6 +19,8 @@ import java.util.*
 
 class LostAndFoundDescriptionPage : AppCompatActivity() {
     private lateinit var binding: ActivityLostAndFoundDescriptionPageBinding
+    private lateinit var imageList: ArrayList<SlideModel>
+    private lateinit var imageSlider: ImageSlider
     private lateinit var backDrop: View
     private lateinit var lytMic: View
     private lateinit var lytCall: View
@@ -41,6 +46,10 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
             val value = extras.getString("key").toString()
             fetchDataFromDataBase(value)
         }
+
+        imageList = ArrayList()
+        imageSlider = findViewById(R.id.image_slider)
+
         backDrop = binding.backDrop
         lytMic = binding.lytMic
         lytCall = binding.lytCall
@@ -146,6 +155,25 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
         databaseItem.child(items).get().addOnSuccessListener { dataSnapshot ->
 
             if (dataSnapshot.exists()) {
+                val primaryImage = dataSnapshot.child("imagePrimary").value.toString()
+                if (primaryImage == "") {
+                    imageList.add(SlideModel(R.drawable.no_image))
+                } else {
+                    imageList.add(SlideModel(primaryImage))
+                    val imageArray = ArrayList<String>()
+
+                    imageArray.add(dataSnapshot.child("imageList").child("0").value.toString())
+                    imageArray.add(dataSnapshot.child("imageList").child("1").value.toString())
+                    imageArray.add(dataSnapshot.child("imageList").child("2").value.toString())
+                    for (i in imageArray.indices) {
+                        if (imageArray[i] != "") {
+                            imageList.add(SlideModel(imageArray[i]))
+                        }
+                    }
+                }
+                val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
+                imageSlider.setImageList(imageList)
+
                 binding.objectName.text = dataSnapshot.child("objectName").value.toString()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
@@ -158,12 +186,6 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
 
 
                 binding.objectLocation.text = dataSnapshot.child("objectLocation").value.toString()
-
-                val objectImg = dataSnapshot.child("imageUrl").value.toString()
-                if (objectImg=="NONE")
-                    binding.objectImage.setImageResource(R.drawable.no_image)
-                else
-                    Glide.with(this).load(objectImg).into(binding.objectImage)
 
                 val uid = dataSnapshot.child("uid").value
                 fillUser(uid)
