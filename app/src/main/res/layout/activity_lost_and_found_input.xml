@@ -215,19 +215,69 @@
                     android:layout_marginBottom="5dp"
                     />
 
-
-                <ImageButton
-                    android:id="@+id/lostandfoundImageButton"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/object_image"
-                    android:src="@drawable/ic_image_placeholder"
-                  />
+                    android:padding="10dp"
+                    android:layout_height="300dp"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
+                        <ImageButton
+                            android:id="@+id/lostandfoundImageButtonFirst"
+                            android:tag="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_image_placeholder"
+                            tools:ignore="NestedWeights" />
+
+                        <ImageButton
+                            android:id="@+id/lostandfoundImageButtonThird"
+                            android:visibility="invisible"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/lostandfoundImageButtonSecond"
+                            android:visibility="invisible"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            tools:ignore="NestedWeights" />
+
+                        <ImageButton
+                            android:id="@+id/lostandfoundImageButtonFourth"
+                            android:visibility="invisible"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 

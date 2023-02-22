@@ -503,8 +503,6 @@ class SellActivity : AppCompatActivity() {
         } else {
             return null
         }
-
-
     }
 
     private fun checkInternet(): Boolean {

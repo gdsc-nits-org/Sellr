@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.LostAndFoundDescriptionPage
 import com.example.sellr.R
-import com.example.sellr.binding
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.LayoutLostandfoundItemBinding
 import com.google.firebase.database.FirebaseDatabase
@@ -50,12 +49,12 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
         }
         holder.binding.lostandfoundObject.text= obj.objectName
         holder.binding.lostandfoundLocation.text = obj.objectLocation
-        if (obj.imageUrl != "NONE") {
-            Glide.with(context).load(obj.imageUrl).into(holder.binding.lostandfoundObjectimage)
+        if (obj.imagePrimary != "NONE") {
+            Glide.with(context).load(obj.imagePrimary).into(holder.binding.lostandfoundObjectimage)
         }
-        else{
-            holder.binding.lostandfoundObjectimage.visibility = View.GONE
-        }
+//        else{
+//            holder.binding.lostandfoundObjectimage.visibility = View.GONE
+//        }
 
         if(obj.lostOrFound == "FOUND"){
             holder.binding.indicatorRed.visibility = View.GONE
