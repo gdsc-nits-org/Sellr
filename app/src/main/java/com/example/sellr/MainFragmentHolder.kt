@@ -27,8 +27,14 @@ class MainFragmentHolder : AppCompatActivity() {
         }
         else if(intent.hasExtra("aboutUs"))
         {
-                title="About us"
+                title="About"
             fragmentLoad(AboutFragment())
+        }
+
+        else if(intent.hasExtra("developers"))
+        {
+            title="Developers"
+            fragmentLoad(AboutUsFragment())
         }
         else if(intent.hasExtra("editProfile"))
         {
