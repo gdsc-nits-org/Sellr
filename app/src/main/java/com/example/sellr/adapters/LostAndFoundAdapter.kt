@@ -52,9 +52,10 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
         if (obj.imagePrimary != "NONE") {
             Glide.with(context).load(obj.imagePrimary).into(holder.binding.lostandfoundObjectimage)
         }
-//        else{
-//            holder.binding.lostandfoundObjectimage.visibility = View.GONE
-//        }
+       else{
+           Glide.with(context).load(R.drawable.no_image).into(holder.binding.lostandfoundObjectimage)
+
+       }
 
         if(obj.lostOrFound == "FOUND"){
             holder.binding.indicatorRed.visibility = View.GONE
