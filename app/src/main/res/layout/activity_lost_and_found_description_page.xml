@@ -19,10 +19,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/object_image"
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
                 android:layout_width="match_parent"
-                android:layout_height="260dp"/>
+                android:layout_height="260dp"
+                app:iss_placeholder="@drawable/loading_desc"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -46,10 +48,20 @@
                     android:textColor="@color/black"
                     android:textSize="23sp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/status_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="end"
+                    android:text="Date of finding/losing"
+                    android:textStyle="italic" />
 
 
 
             </LinearLayout>
+
+
 
 
             <TextView
@@ -276,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="#EEEEEE"
+                app:cardBackgroundColor="#F9CD08"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="2dp"
                 app:contentPadding="5dp">
@@ -302,7 +314,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/accept"
                 android:tint="@color/colourAccent"
-                app:backgroundTint="#EEEEEE"
+                app:backgroundTint="#F9CD08"
                 app:rippleColor="@android:color/black"
                 app:srcCompat="@drawable/email_icon_custom_dynamic" />
 
@@ -323,7 +335,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="#EEEEEE"
+                app:cardBackgroundColor="#F9CD08"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="2dp"
                 app:contentPadding="5dp">
@@ -348,8 +360,8 @@
                 android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:contentDescription="@string/accept"
-                android:tint="#EEEEEE"
-                app:backgroundTint="#EEEEEE"
+                android:tint="#F9CD08"
+                app:backgroundTint="#F9CD08"
                 app:rippleColor="@android:color/black"
                 app:srcCompat="@drawable/phone_android_custom_dynamic" />
 
@@ -369,8 +381,8 @@
             android:layout_marginBottom="10dp"
             android:clickable="true"
             android:contentDescription="@string/accept"
-            android:tint="#EEEEEE"
-            app:backgroundTint="#EEEEEE"
+            android:tint="#F9CD08"
+            app:backgroundTint="#F9CD08"
             app:srcCompat="@drawable/phone_call" />
 
     </LinearLayout>
