@@ -15,6 +15,7 @@
 
 
     <LinearLayout
+        android:layout_marginTop="30sp"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="150sp"
