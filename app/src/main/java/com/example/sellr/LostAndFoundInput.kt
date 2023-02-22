@@ -308,7 +308,7 @@ class LostAndFoundInput : AppCompatActivity() {
             }
 
         }.addOnFailureListener {
-            makeToast("Upload Failed")
+            Toast.makeText(applicationContext, "upload failed", Toast.LENGTH_LONG).show()
             deleteProgressBar()
         }
 
@@ -322,12 +322,6 @@ class LostAndFoundInput : AppCompatActivity() {
         val datetime: String = ft.format(dNow)
         return emailID.substringBeforeLast("@") + datetime
     }
-
-    private fun makeToast(value: String) {
-
-        Toast.makeText(applicationContext, value, Toast.LENGTH_LONG).show()
-    }
-
 
 
     @Deprecated("Deprecated in Java")
