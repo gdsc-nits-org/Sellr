@@ -5,8 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +20,9 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
+            android:name=".Zooming"
+            android:exported="false" />
+        <activity
             android:name=".LostAndFoundDescriptionPage"
             android:exported="false" />
 
@@ -34,7 +36,7 @@
         <activity
             android:name=".LostAndFoundInput"
             android:exported="false"
-            android:label="List a Lost or Found item"/>
+            android:label="List a Lost or Found item" />
         <activity
             android:name=".DescriptionPage"
             android:configChanges="orientation"
