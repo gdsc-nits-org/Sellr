@@ -274,6 +274,7 @@ class LostAndFoundInput : AppCompatActivity() {
         //this part is used to update the small image icons in the sell window
         uploadTask.addOnSuccessListener {
             storageRef.child("LostAndFoundImages/$filename").downloadUrl.addOnSuccessListener {
+
                 when (i) {
                     1 -> {
                         if (imagePrimary != "") {

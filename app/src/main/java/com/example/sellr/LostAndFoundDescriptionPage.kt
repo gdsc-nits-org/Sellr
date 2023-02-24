@@ -42,17 +42,6 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
         binding = ActivityLostAndFoundDescriptionPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
-
-
-
-
-
-
-
-
         try {
             this.supportActionBar!!.hide()
         } // catch block to handle NullPointerException

@@ -58,6 +58,7 @@ class CartFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 count++
+
                 if(snapshot.exists()){
                     for(userSnapshot in snapshot.children){
 
