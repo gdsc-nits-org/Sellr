@@ -196,13 +196,19 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="8dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#808080"
                 >
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
 
@@ -211,8 +217,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:layout_height="wrap_content"
-                        android:background="#808080"
-                        android:text="Choose date"
+                        android:background="#73a92d"
+                        android:text="+ PICK DATE"
                         android:textSize="16sp"
                         android:textColor="@color/textColorPrimary"
                         android:textAlignment="center"
@@ -221,11 +227,12 @@
                     <TextView
                         android:id="@+id/chosen_date"
                         android:layout_width="0dp"
-                        android:text="chosen date"
-                        android:textAllCaps="true"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
                         android:gravity="center"
-                        android:layout_weight="2"
-                        android:layout_height="match_parent"/>
+                        android:text="Picked Lost/Found Date"
+                        android:textSize="10dp"
+                        android:textAllCaps="true" />
 
                 </LinearLayout>
 
