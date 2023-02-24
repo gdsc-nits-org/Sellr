@@ -51,6 +51,11 @@ class MainFragmentHolder : AppCompatActivity() {
             title="User Lost and Found"
             fragmentLoad(UserItemLostAndFound())
         }
+        else if(intent.hasExtra("profile"))
+        {
+            title="Profile"
+            fragmentLoad(ProfileFragment())
+        }
 
         else if(intent.hasExtra("extraDetails"))
         {

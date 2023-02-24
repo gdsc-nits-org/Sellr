@@ -89,32 +89,24 @@ class MainActivity : AppCompatActivity() {
         popupMenu.inflate(R.menu.bottom_nav)
         binding.bottomBar.setupWithNavController(popupMenu.menu, navController)
 
-        navController.addOnDestinationChangedListener(object :
-            NavController.OnDestinationChangedListener {
-            override fun onDestinationChanged(
-                controller: NavController,
-                destination: NavDestination,
-                arguments: Bundle?
-            ) {
-                title = when (destination.id) {
-                    R.id.cartFragment -> "My Cart"
-                    R.id.profileFragment -> "Profile"
-                    R.id.lostAndFound->"Lost/Found"
-                    else -> "Sellr"
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            title = when (destination.id) {
+                R.id.cartFragment -> "My Cart"
+                R.id.profileFragment -> "Profile"
+                R.id.lostAndFound -> "Lost/Found"
+                else -> "Sellr"
+            }
+            when (destination.id) {
+                R.id.profileFragment -> {
+                    hideIcon = false
+                    invalidateOptionsMenu()
                 }
-                when (destination.id) {
-                    R.id.profileFragment -> {
-                        hideIcon = false
-                        invalidateOptionsMenu()
-                    }
-                    else -> {
-                        hideIcon = true
-                        invalidateOptionsMenu()
-                    }
+                else -> {
+                    hideIcon = true
+                    invalidateOptionsMenu()
                 }
             }
-
-        })
+        }
 
     }
     private var doubleBackToExitPressedOnce = false
