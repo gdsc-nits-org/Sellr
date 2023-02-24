@@ -51,7 +51,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private var imageButtonThird: ImageButton? = null
     private var imageButtonFourth: ImageButton? = null
     private lateinit var uploadTask: UploadTask
-
+    private var selectedDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -165,7 +165,7 @@ class LostAndFoundInput : AppCompatActivity() {
         val dpd= DatePickerDialog(this,
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->
 
-                val selectedDate="$selectedDayOfMonth/${selectedMonth+1}/$selectedYear ";
+                 selectedDate="$selectedDayOfMonth/${selectedMonth+1}/$selectedYear ";
                 binding.chosenDate.text =selectedDate
             },
             year,
@@ -241,7 +241,8 @@ class LostAndFoundInput : AppCompatActivity() {
             imagePrimary,
             imageArray,
             chipState,
-            pid
+            pid,
+            selectedDate
         )
         setProgressBar()
         database.reference.child("LostAndFound")

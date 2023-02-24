@@ -8,7 +8,8 @@ data class LostAndFoundData(
     val imagePrimary : String? = null,
     val imageList:ArrayList<String>?=null,
     val lostOrFound: String? = null,
-    val pid : String? = null
+    val pid : String? = null,
+    val pickedDate: String? = null
 )
 {
 

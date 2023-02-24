@@ -212,6 +212,12 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
 
                 binding.objectLocation.text = dataSnapshot.child("objectLocation").value.toString()
 
+                if(dataSnapshot.child("pickedDate").value==null){
+                    binding.objectDate.text = "Date Unavailable"
+                }
+                else{
+                    binding.objectDate.text = dataSnapshot.child("pickedDate").value.toString()
+                }
                 val uid = dataSnapshot.child("uid").value
                 fillUser(uid)
 
