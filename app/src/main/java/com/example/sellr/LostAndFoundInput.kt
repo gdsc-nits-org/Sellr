@@ -3,6 +3,7 @@
 package com.example.sellr
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -146,6 +147,36 @@ class LostAndFoundInput : AppCompatActivity() {
                 }
             }
         }
+
+        binding.datePickButton.setOnClickListener {
+            clickDatePicker()
+        }
+    }
+
+    private fun clickDatePicker(){
+
+        val myCalendar = Calendar.getInstance();
+        val year=myCalendar.get(Calendar.YEAR);
+        val month=myCalendar.get(Calendar.MONTH);
+        val day=myCalendar.get(Calendar.DAY_OF_MONTH);
+
+
+
+        val dpd= DatePickerDialog(this,
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+
+                val selectedDate="$selectedDayOfMonth/${selectedMonth+1}/$selectedYear ";
+                binding.chosenDate.text =selectedDate
+            },
+            year,
+            month,
+            day
+
+        )
+        //we are setting the date picker so that dates before yesterday cant be picked
+        //system.currentTimesMillis gives the current time and 86400000 is the number of milliseconds in a day
+        dpd.datePicker.maxDate = System.currentTimeMillis()-8640000
+        dpd.show();
     }
 
     private fun prepareData(): Boolean {

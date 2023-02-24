@@ -193,6 +193,47 @@
 
             </LinearLayout>
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/datePickButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:background="#808080"
+                        android:text="Choose date"
+                        android:textSize="16sp"
+                        android:textColor="@color/textColorPrimary"
+                        android:textAlignment="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/chosen_date"
+                        android:layout_width="0dp"
+                        android:text="chosen date"
+                        android:textAllCaps="true"
+                        android:gravity="center"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
