@@ -48,14 +48,16 @@
                     android:textColor="@color/black"
                     android:textSize="23sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/status_date"
+
+                <View
+                    android:id="@+id/backDrop"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="end"
-                    android:text="Date of finding/losing"
-                    android:textStyle="italic" />
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:contentDescription="@string/accept"
+                    android:fitsSystemWindows="true" />
+
+
 
 
 
@@ -95,6 +97,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="Object Location" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Lost/ Found  Date" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -118,6 +125,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="Location" />
+                    <TextView
+                        android:id="@+id/object_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Date" />
 
 
                 </LinearLayout>
@@ -238,34 +251,6 @@
     </ScrollView>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <View
-        android:id="@+id/backDrop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:contentDescription="@string/accept"
-        android:fitsSystemWindows="true" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -386,4 +371,21 @@
             app:srcCompat="@drawable/phone_call" />
 
     </LinearLayout>
+
+
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

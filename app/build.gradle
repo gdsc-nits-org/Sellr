@@ -109,4 +109,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.3.3"
     //swipe to refresh
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //imageZooming
+    implementation 'com.jsibbold:zoomage:1.3.1'
 }

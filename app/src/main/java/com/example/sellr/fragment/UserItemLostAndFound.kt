@@ -44,9 +44,12 @@ class UserItemLostAndFound : Fragment() {
         val database: FirebaseDatabase =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         val myReference: DatabaseReference = database.reference.child("LostAndFound")
+
         myReference.get().addOnSuccessListener {
             val user = Firebase.auth.currentUser?.uid.toString()
+
             itemList.clear()   //For clearing when data gets added to database.
+
             for (eachItem in it.children) {
                 val item = eachItem.getValue(LostAndFoundData::class.java)
                 if (item != null && item.uid == user) {
@@ -54,10 +57,15 @@ class UserItemLostAndFound : Fragment() {
 
                 }
 
-                itemsAdapter = userItemLostFoundAdapter(requireContext(), itemList)
-                binding.recyclerView.layoutManager = GridLayoutManager(activity,2)
-                binding.recyclerView.adapter = itemsAdapter
             }
+
+            if(itemList.isEmpty()){
+                binding.emptylostAndFound.visibility=View.VISIBLE
+            }
+
+            itemsAdapter = userItemLostFoundAdapter(requireContext(), itemList)
+            binding.recyclerView.layoutManager = GridLayoutManager(activity,2)
+            binding.recyclerView.adapter = itemsAdapter
 
         }.addOnFailureListener {
 

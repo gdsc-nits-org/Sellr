@@ -49,6 +49,7 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
         }
         holder.binding.lostandfoundObject.text= obj.objectName
         holder.binding.lostandfoundLocation.text = obj.objectLocation
+
         if (obj.imagePrimary != "") {
             Glide.with(context).load(obj.imagePrimary).into(holder.binding.lostandfoundObjectimage)
         }

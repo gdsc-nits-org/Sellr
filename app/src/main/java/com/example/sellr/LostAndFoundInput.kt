@@ -3,6 +3,7 @@
 package com.example.sellr
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -50,7 +51,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private var imageButtonThird: ImageButton? = null
     private var imageButtonFourth: ImageButton? = null
     private lateinit var uploadTask: UploadTask
-
+    private var selectedDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,6 +147,36 @@ class LostAndFoundInput : AppCompatActivity() {
                 }
             }
         }
+
+        binding.datePickButton.setOnClickListener {
+            clickDatePicker()
+        }
+    }
+
+    private fun clickDatePicker(){
+
+        val myCalendar = Calendar.getInstance();
+        val year=myCalendar.get(Calendar.YEAR);
+        val month=myCalendar.get(Calendar.MONTH);
+        val day=myCalendar.get(Calendar.DAY_OF_MONTH);
+
+
+
+        val dpd= DatePickerDialog(this,
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+
+                 selectedDate="$selectedDayOfMonth/${selectedMonth+1}/$selectedYear ";
+                binding.chosenDate.text =selectedDate
+            },
+            year,
+            month,
+            day
+
+        )
+        //we are setting the date picker so that dates before yesterday cant be picked
+        //system.currentTimesMillis gives the current time and 86400000 is the number of milliseconds in a day
+        dpd.datePicker.maxDate = System.currentTimeMillis()-8640000
+        dpd.show();
     }
 
     private fun prepareData(): Boolean {
@@ -210,7 +241,8 @@ class LostAndFoundInput : AppCompatActivity() {
             imagePrimary,
             imageArray,
             chipState,
-            pid
+            pid,
+            selectedDate
         )
         setProgressBar()
         database.reference.child("LostAndFound")
@@ -274,6 +306,7 @@ class LostAndFoundInput : AppCompatActivity() {
         //this part is used to update the small image icons in the sell window
         uploadTask.addOnSuccessListener {
             storageRef.child("LostAndFoundImages/$filename").downloadUrl.addOnSuccessListener {
+
                 when (i) {
                     1 -> {
                         if (imagePrimary != "") {
