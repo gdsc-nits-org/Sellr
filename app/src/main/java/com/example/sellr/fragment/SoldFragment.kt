@@ -55,6 +55,8 @@ class SoldFragment : Fragment() {
                 itemsAdapter= SoldAdapter(requireContext(),itemList)
                 binding.recyclerView.layoutManager=GridLayoutManager(context,2)
                 binding.recyclerView.adapter=itemsAdapter
+                binding.emptyState.visibility = if (itemList.isEmpty()) View.VISIBLE else View.GONE
+                binding.recyclerView.visibility = if (itemList.isEmpty()) View.GONE else View.VISIBLE
             }
 
         }.addOnFailureListener {
