@@ -1,14 +1,19 @@
 package com.example.sellr.adapters
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.DescriptionPage
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.SoldRecyclerLayoutBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 
 class SoldAdapter(
     private val context: Context?,
@@ -33,11 +38,24 @@ class SoldAdapter(
 
             holder.adapterBinding.itemName.text=itemList[position].productName
             holder.adapterBinding.itemPrice.text=itemList[position].price
-//            var toDelete:SoldFragment= SoldFragment()
 
-//            holder.adapterBinding.deleteButton.setOnClickListener {
-//                toDelete.toDelete(itemList[position].pId)
-//            }
+            holder.adapterBinding.deleteButton.setOnClickListener {
+                println("position to delete ${itemList[position]}")
+                val builder = AlertDialog.Builder(context!!)
+                builder.setTitle("Are you sure?")
+                builder.setMessage("Your item will be deleted permanently from the database")
+                builder.setPositiveButton("Yes") { _, _ ->
+                    deleteModel(itemList[position].pid.toString())
+                    itemList.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, itemList.size)
+
+                }
+                builder.setNegativeButton("No") { _, _ ->
+                }
+                builder.show()
+            }
+
             holder.itemView.setOnClickListener {
                 val value = itemList[position].pid.toString()
                 val i = Intent(context, DescriptionPage::class.java)
@@ -47,8 +65,36 @@ class SoldAdapter(
 
 
         }
+    private fun deleteModel(model: String) {
 
-        override fun getItemCount(): Int {
+
+        val databaseProd =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("Items")
+        databaseProd.child(model).removeValue().addOnSuccessListener {
+
+            val ref = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Users")
+            val query: Query = ref.child(Firebase.auth.currentUser?.uid.toString()).child("pId").orderByValue().equalTo(model)
+
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (snapshot in dataSnapshot.children) {
+                        snapshot.ref.removeValue()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
+            })
+            Toast.makeText(context, "Item deleted from database", Toast.LENGTH_LONG).show()
+
+        }.addOnFailureListener {
+            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    override fun getItemCount(): Int {
             return itemList.size
         }
 }
