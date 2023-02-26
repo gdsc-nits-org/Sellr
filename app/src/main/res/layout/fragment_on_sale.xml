@@ -5,6 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.OnSaleFragment">
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/emptyImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="284dp"
+            android:src="@drawable/empty_cart"
+            android:layout_marginTop="55dp"/>
+
+        <TextView
+            android:id="@+id/noItemTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Item On Sale"
+            android:textColor="#A0A0A0"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Looks like you haven't any item on sale"
+            android:textColor="#A0A0A0"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/sellNowTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sell it Now!"
+            android:textColor="#A0A0A0"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -19,5 +62,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/grid_layout" />
+        tools:listitem="@layout/grid_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

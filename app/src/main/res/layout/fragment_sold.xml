@@ -7,6 +7,49 @@
     android:background="@color/white"
     tools:context=".fragment.SoldFragment">
 
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/emptyImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="284dp"
+            android:src="@drawable/empty_cart"
+            android:layout_marginTop="55dp"/>
+
+        <TextView
+            android:id="@+id/noItemTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Item On Sale"
+            android:textColor="#A0A0A0"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Looks like you haven't any item on sale"
+            android:textColor="#A0A0A0"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/sellNowTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sell it Now!"
+            android:textColor="#A0A0A0"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

@@ -51,18 +51,18 @@
 
         <Button
             android:id="@+id/onSaleButton"
+            android:layout_marginTop="8sp"
+            android:layout_marginStart="18sp"
+            android:layout_marginEnd="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18sp"
-            android:layout_marginTop="8sp"
-            android:layout_marginEnd="18sp"
             android:backgroundTint="@color/white"
-            android:elevation="20sp"
+            android:text="Items On Sale"
             android:fontFamily="@font/poppins"
-            android:text="Items Currently On Sale"
+            android:textColor="@color/black"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black" />
+            android:elevation="20sp"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/soldButton"
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:text="Already Sold Items"
+            android:text="Sold Items"
             android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textAlignment="textStart"
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:text="Lost and Found Items Posted"
+            android:text="Lost and Found"
             android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textAlignment="textStart"
