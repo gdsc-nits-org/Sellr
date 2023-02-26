@@ -19,7 +19,7 @@
             android:layout_marginTop="8sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Navneet"
+            android:text="User"
             android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"
