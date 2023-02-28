@@ -1,5 +1,8 @@
 package com.example.sellr.adapters
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +19,45 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.ArrayList
+
+private fun checkForInternet(context: Context?): Boolean {
+
+    // register activity with the connectivity manager service
+    val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    // if the android version is equal to M
+    // or greater we need to use the
+    // NetworkCapabilities to check what type of
+    // network has the internet connection
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        // Returns a Network object corresponding to
+        // the currently active default data network.
+        val network = connectivityManager.activeNetwork ?: return false
+
+        // Representation of the capabilities of an active network.
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return when {
+            // Indicates this network uses a Wi-Fi transport,
+            // or WiFi has network connectivity
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+            // Indicates this network uses a Cellular transport. or
+            // Cellular has network connectivity
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+            // else return false
+            else -> false
+        }
+    } else {
+        // if the android version is below M
+        @Suppress("DEPRECATION") val networkInfo =
+            connectivityManager.activeNetworkInfo ?: return false
+        @Suppress("DEPRECATION")
+        return networkInfo.isConnected
+    }
+}
 
 class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList<CartModel>) :
     RecyclerView.Adapter<CartRVAdapter.ViewHolder>() {
@@ -55,10 +97,15 @@ class CartRVAdapter(private val context: Context?, cartModelArrayList: ArrayList
         Glide.with(holder.cartIV).load(model.item_image).centerCrop().into(holder.cartIV)
         val btn=holder.removeButton
         btn.setOnClickListener {
-            cartModelArrayList.removeAt(position)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, cartModelArrayList.size)
-            deleteModel(model.key)
+            if(checkForInternet(context)){
+                cartModelArrayList.removeAt(position)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, cartModelArrayList.size)
+                deleteModel(model.key)
+            }
+            else{
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show()
+            }
         }
     }
     override fun getItemCount(): Int {
