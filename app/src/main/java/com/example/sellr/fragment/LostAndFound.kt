@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sellr.LostAndFoundInput
@@ -16,6 +17,7 @@ import com.example.sellr.R
 import com.example.sellr.adapters.LostAndFoundAdapter
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.FragmentLostAndFoundBinding
+import com.example.sellr.utils.CheckInternet
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.firebase.database.DataSnapshot
@@ -100,9 +102,20 @@ class LostAndFound : Fragment() {
                     binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))
 
                     refreshLostAndFound.setOnRefreshListener {
-                        binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+                        if (CheckInternet.isConnectedToInternet(requireContext())) {
+                            Toast.makeText(
+                                context, "Couldn't refresh! Check your network...",
+                                Toast.LENGTH_LONG
+                            ).show()
 
-                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                        }
+                        else
+                        {
+                            binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
+
+                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                        }
+
                         refreshLostAndFound.isRefreshing = false
 
                     }

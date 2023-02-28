@@ -180,12 +180,22 @@ class HomeFragment : Fragment() {
         //adding swipe refresh layout
         val swipe: SwipeRefreshLayout = view.findViewById(R.id.swipeToRefresh)
         swipe.setOnRefreshListener {
+            if (CheckInternet.isConnectedToInternet(requireContext())) {
+                Toast.makeText(
+                   context, "Couldn't refresh! Check your network...",
+                    Toast.LENGTH_LONG
+                ).show()
 
-            datalist.clear()
-            searchList.clear()
-            datalistforfilteredmyAdapter.clear()
-            recylerView.adapter?.notifyDataSetChanged()
-            getUserData()
+            }
+            else
+            {
+                datalist.clear()
+                searchList.clear()
+                datalistforfilteredmyAdapter.clear()
+                recylerView.adapter?.notifyDataSetChanged()
+                getUserData()
+            }
+
 
             swipe.isRefreshing = false
             //Toast.makeText(context,"Home Refreshed", Toast.LENGTH_LONG).show()
