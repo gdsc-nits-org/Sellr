@@ -4,12 +4,16 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.RectF
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
@@ -27,6 +31,44 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
+private fun checkForInternet(context: Context): Boolean {
+
+    // register activity with the connectivity manager service
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    // if the android version is equal to M
+    // or greater we need to use the
+    // NetworkCapabilities to check what type of
+    // network has the internet connection
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        // Returns a Network object corresponding to
+        // the currently active default data network.
+        val network = connectivityManager.activeNetwork ?: return false
+
+        // Representation of the capabilities of an active network.
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return when {
+            // Indicates this network uses a Wi-Fi transport,
+            // or WiFi has network connectivity
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+            // Indicates this network uses a Cellular transport. or
+            // Cellular has network connectivity
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+            // else return false
+            else -> false
+        }
+    } else {
+        // if the android version is below M
+        @Suppress("DEPRECATION") val networkInfo =
+            connectivityManager.activeNetworkInfo ?: return false
+        @Suppress("DEPRECATION")
+        return networkInfo.isConnected
+    }
+}
 
 class DescriptionPage : AppCompatActivity() {
     private lateinit var binding: ActivityDescrptionPageBinding
@@ -123,32 +165,51 @@ class DescriptionPage : AppCompatActivity() {
                 binding.cartAddButton.setImageResource(R.drawable.add_to_carty)
             }
         }
-        binding.cartAddButton.setOnClickListener {
-            if (!cartAddStatus) {
-                dtb.child("Users").child(user).child("favpost").push().setValue(itemID).addOnSuccessListener {
-                    cartAddStatus=true
-                    Toast.makeText(applicationContext, "Item Added to Cart", Toast.LENGTH_SHORT).show()
-                    binding.cartAddButton.setImageResource(R.drawable.add_to_carty)
+
+
+            binding.cartAddButton.setOnClickListener {
+                if (checkForInternet(this)) {
+                    if (!cartAddStatus) {
+                        dtb.child("Users").child(user).child("favpost").push().setValue(itemID)
+                            .addOnSuccessListener {
+                                cartAddStatus = true
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Item Added to Cart",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                binding.cartAddButton.setImageResource(R.drawable.add_to_carty)
+                            }
+                    } else {
+
+                        val query: Query =
+                            dtb.child("Users").child(user).child("favpost").orderByValue()
+                                .equalTo(itemID)
+
+                        query.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (snapshot in dataSnapshot.children) {
+                                    snapshot.ref.removeValue()
+                                }
+                                cartAddStatus = false
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Item Removed from Cart",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                binding.cartAddButton.setImageResource(R.drawable.add_to_cart_black)
+                            }
+
+                            override fun onCancelled(databaseError: DatabaseError) {
+                            }
+                        })
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Connection failed", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            } else {
-
-                val query: Query = dtb.child("Users").child(user).child("favpost").orderByValue().equalTo(itemID)
-
-                query.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        for (snapshot in dataSnapshot.children) {
-                            snapshot.ref.removeValue()
-                        }
-                        cartAddStatus=false
-                        Toast.makeText(applicationContext, "Item Removed from Cart", Toast.LENGTH_SHORT).show()
-                        binding.cartAddButton.setImageResource(R.drawable.add_to_cart_black)
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                    }
-                })
             }
-        }
+
     }
 
 

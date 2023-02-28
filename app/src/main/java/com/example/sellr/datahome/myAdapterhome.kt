@@ -3,6 +3,9 @@ package com.example.sellr.datahome
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +24,45 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.ArrayList
 
+private fun checkForInternet(context: Context): Boolean {
+
+    // register activity with the connectivity manager service
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    // if the android version is equal to M
+    // or greater we need to use the
+    // NetworkCapabilities to check what type of
+    // network has the internet connection
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        // Returns a Network object corresponding to
+        // the currently active default data network.
+        val network = connectivityManager.activeNetwork ?: return false
+
+        // Representation of the capabilities of an active network.
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return when {
+            // Indicates this network uses a Wi-Fi transport,
+            // or WiFi has network connectivity
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+            // Indicates this network uses a Cellular transport. or
+            // Cellular has network connectivity
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+            // else return false
+            else -> false
+        }
+    } else {
+        // if the android version is below M
+        @Suppress("DEPRECATION") val networkInfo =
+            connectivityManager.activeNetworkInfo ?: return false
+        @Suppress("DEPRECATION")
+        return networkInfo.isConnected
+    }
+}
+
 class myAdapterhome(
     private val context: Context,
     val fragment: Fragment,
@@ -35,6 +77,7 @@ class myAdapterhome(
         )
         return MyViewHolder(itemView)
     }
+
 
     private val user = Firebase.auth.currentUser?.uid.toString()
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -58,6 +101,9 @@ class myAdapterhome(
             i.putExtra("key", value)
             context.startActivity(i)
         }
+
+
+
 
         dtb.child("Users").child(user).child("favpost")
             .addValueEventListener(object : ValueEventListener {
@@ -100,25 +146,31 @@ class myAdapterhome(
             })
 
         holder.addToFav.setOnClickListener {
-            if (currentItem.addedtofav == false) {
-                println("inside pushing")
-                // currentItem.addedtofav = true
-                // holder.addToFav.setImageResource(R.drawable.favorite)
-                Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
-                dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
-            } else {
-                holder.addToFav.apply {
-                    icon = context.getDrawable(R.drawable.add_to_cart_black)
-                    setBackgroundColor(context.resources.getColor(R.color.icbg))
-                    iconTint =
-                        ColorStateList.valueOf(context.resources.getColor(R.color.white))
+            if(checkForInternet(context)){
+                if (currentItem.addedtofav == false) {
+                    println("inside pushing")
+                    // currentItem.addedtofav = true
+                    // holder.addToFav.setImageResource(R.drawable.favorite)
+                    Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
+                    dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
+                } else {
+                    holder.addToFav.apply {
+                        icon = context.getDrawable(R.drawable.add_to_cart_black)
+                        setBackgroundColor(context.resources.getColor(R.color.icbg))
+                        iconTint =
+                            ColorStateList.valueOf(context.resources.getColor(R.color.white))
+                    }
+                    println("inside removing")
+                    currentItem.addedtofav = false
+                    dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString())
+                        .removeValue()
                 }
-                println("inside removing")
-                currentItem.addedtofav = false
-                dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString())
-                    .removeValue()
             }
-        }
+            else{
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show()
+            }
+            }
+
 
 
     }
