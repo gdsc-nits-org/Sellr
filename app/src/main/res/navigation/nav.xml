@@ -19,6 +19,11 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_fragement_settings" />
     <fragment
+        android:id="@+id/profile"
+        android:name="com.example.sellr.fragment.ProfileFragment"
+        android:label="profile"
+        tools:layout="@layout/fragment_fragement_settings" />
+    <fragment
         android:id="@+id/lostAndFound"
         android:name="com.example.sellr.fragment.LostAndFound"
         android:label="fragment_lost_and_found"

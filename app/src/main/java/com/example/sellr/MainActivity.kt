@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main_screen, menu)
         menu?.findItem(R.id.edit_profile)?.isVisible = !hideIcon
-        menu?.findItem(R.id.logOutMenu)?.isVisible = !hideIcon
+       // menu?.findItem(R.id.logOutMenu)?.isVisible = !hideIcon
         return true
     }
 
@@ -48,24 +48,24 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            R.id.logOutMenu -> {
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Are you sure?")
-                builder.setMessage("You will be logged out of your account")
-                builder.setPositiveButton("Yes") { _, _ ->
-                    Firebase.auth.signOut()
-                    val intent = Intent(applicationContext, AuthActivity::class.java)
-                    intent.putExtra("splash off", "splash off")
-                    startActivity(intent)
-                    finish()
-
-                }
-                builder.setNegativeButton("No") { _, _ ->
-                }
-                builder.show()
-
-
-            }
+//            R.id.logOutMenu -> {
+//                val builder = AlertDialog.Builder(this)
+//                builder.setTitle("Are you sure?")
+//                builder.setMessage("You will be logged out of your account")
+//                builder.setPositiveButton("Yes") { _, _ ->
+//                    Firebase.auth.signOut()
+//                    val intent = Intent(applicationContext, AuthActivity::class.java)
+//                    intent.putExtra("splash off", "splash off")
+//                    startActivity(intent)
+//                    finish()
+//
+//                }
+//                builder.setNegativeButton("No") { _, _ ->
+//                }
+//                builder.show()
+//
+//
+//            }
             else -> {
                 Toast.makeText(applicationContext, "none", Toast.LENGTH_LONG).show()
             }
@@ -92,12 +92,13 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             title = when (destination.id) {
                 R.id.cartFragment -> "My Cart"
-                R.id.profileFragment -> "Profile"
+                R.id.profile -> "Profile"
+
                 R.id.lostAndFound -> "Lost/Found"
                 else -> "Sellr"
             }
             when (destination.id) {
-                R.id.profileFragment -> {
+                R.id.profile -> {
                     hideIcon = false
                     invalidateOptionsMenu()
                 }
