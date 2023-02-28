@@ -98,7 +98,7 @@ class SplashFragment : Fragment() {
                 val check = it.child("infoentered").toString();
 
                 if(check.contains("no")) {
-                    fragmentload(fragment_extradetails())
+                    fragmentload(LoginFragment())
                     println("loading ez")
                     //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
 
