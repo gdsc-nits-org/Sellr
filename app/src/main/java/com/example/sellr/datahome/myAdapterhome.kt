@@ -88,9 +88,14 @@ class myAdapterhome(
         Glide.with(fragment).load(currentItem.imagePrimary).centerCrop().into(holder.photo)
 
 
-        holder.itemName.text = currentItem.productName.toString()
-            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+        var textRqrd=currentItem.productName.toString()
+        if(textRqrd.length >=11){
+            val dots="..."
+            textRqrd=textRqrd.substring(0,11)+dots
+        }
 
+        holder.itemName.text = textRqrd
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
 
         holder.price.text = currentItem.price

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellr.adapters.OnSaleAdapter
 import com.example.sellr.adapters.SoldAdapter
@@ -52,8 +53,10 @@ class SoldFragment : Fragment() {
                 }
 
                 itemsAdapter= SoldAdapter(requireContext(),itemList)
-                binding.recyclerView.layoutManager=LinearLayoutManager(activity)
+                binding.recyclerView.layoutManager=GridLayoutManager(context,2)
                 binding.recyclerView.adapter=itemsAdapter
+                binding.emptyState.visibility = if (itemList.isEmpty()) View.VISIBLE else View.GONE
+                binding.recyclerView.visibility = if (itemList.isEmpty()) View.GONE else View.VISIBLE
             }
 
         }.addOnFailureListener {

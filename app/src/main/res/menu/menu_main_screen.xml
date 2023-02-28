@@ -5,11 +5,7 @@
         android:id="@+id/edit_profile"
         app:showAsAction="always"
         android:icon="@drawable/edit_icon_action_bar"  android:title="add"/>
-    <item
-        android:id="@+id/logOutMenu"
-        app:showAsAction="never"
-        android:title="Log out">
-    </item>
+
 
     <item
         android:id="@+id/reportUsMenu"

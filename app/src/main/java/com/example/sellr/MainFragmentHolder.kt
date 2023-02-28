@@ -27,7 +27,13 @@ class MainFragmentHolder : AppCompatActivity() {
         }
         else if(intent.hasExtra("aboutUs"))
         {
-                title="About us"
+                title="About Us"
+            fragmentLoad(AboutFragment())
+        }
+
+        else if(intent.hasExtra("developers"))
+        {
+            title="Developers"
             fragmentLoad(AboutUsFragment())
         }
         else if(intent.hasExtra("editProfile"))
@@ -44,6 +50,11 @@ class MainFragmentHolder : AppCompatActivity() {
         {
             title="User Lost and Found"
             fragmentLoad(UserItemLostAndFound())
+        }
+        else if(intent.hasExtra("profile"))
+        {
+            title="Profile"
+            fragmentLoad(ProfileFragment())
         }
 
         else if(intent.hasExtra("extraDetails"))

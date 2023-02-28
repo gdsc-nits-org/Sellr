@@ -46,25 +46,25 @@ class ProfileFragment : Fragment() {
 
 
 
-        binding.soldButton.setOnClickListener {
-            val i = Intent(activity, MainFragmentHolder::class.java)
-            i.putExtra("sold", "sold")
-            startActivity(i)
-
-        }
-
-        binding.onSaleButton.setOnClickListener {
-            val i = Intent(activity, MainFragmentHolder::class.java)
-            i.putExtra("onSale", "onSale")
-            startActivity(i)
-        }
-
-        binding.lostndFoundButton.setOnClickListener {
-
-            val i = Intent(activity, MainFragmentHolder::class.java)
-            i.putExtra("lostAndFoundList", "lostAndFoundList")
-            startActivity(i)
-        }
+//        binding.soldButton.setOnClickListener {
+//            val i = Intent(activity, MainFragmentHolder::class.java)
+//            i.putExtra("sold", "sold")
+//            startActivity(i)
+//
+//        }
+//
+//        binding.onSaleButton.setOnClickListener {
+//            val i = Intent(activity, MainFragmentHolder::class.java)
+//            i.putExtra("onSale", "onSale")
+//            startActivity(i)
+//        }
+//
+//        binding.lostndFoundButton.setOnClickListener {
+//
+//            val i = Intent(activity, MainFragmentHolder::class.java)
+//            i.putExtra("lostAndFoundList", "lostAndFoundList")
+//            startActivity(i)
+//        }
 
         return view
     }

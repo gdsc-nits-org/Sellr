@@ -56,7 +56,9 @@ class CartFragment : Fragment() {
         var count=0
         database.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 count++
+
                 if(snapshot.exists()){
                     for(userSnapshot in snapshot.children){
 
@@ -80,20 +82,22 @@ class CartFragment : Fragment() {
                                 }
 
                             }
-                            if(cartModelArrayList.size==0)
-                            {
-                                emptyIV.visibility=View.VISIBLE
-                            }
-                            else
-                            {
-                                emptyIV.visibility=View.GONE
-                            }
+//                            if(cartModelArrayList.size==0)
+//                            {
+//                                emptyIV.visibility=View.VISIBLE
+//                            }
+//                            else
+//                            {
+//                                emptyIV.visibility=View.GONE
+//                            }
                         }.addOnFailureListener{
                             TODO("Not yet implemented")
                         }
 
                     }
                 }
+                else
+                    emptyIV.visibility=View.VISIBLE
 
 
             }

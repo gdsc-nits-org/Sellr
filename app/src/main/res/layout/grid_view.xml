@@ -1,83 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_constraintDimensionRatio="1:1"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="1dp"
+    android:backgroundTint="#ffffff"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:strokeWidth="1dp"
+    app:strokeColor="#5C5C5C">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
+        android:orientation="vertical"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearance="@style/CornerCut"
             android:id="@+id/itemImage"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_margin="5dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/pichai"
-        />
-    <TextView
-        android:id="@+id/itemName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#4E4637"
-        android:text="Nihar Doll"
+            tools:src="@tools:sample/avatars" />
 
-        android:textStyle="bold"
-        />
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#00B59C"
-            android:text="Rs. "
-
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/itemPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#00B59C"
-            android:text="5000"
-            android:textStyle="bold"
-            />
+            android:layout_margin="10dp"
+            android:gravity="start"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="High Quality Hand Made Doll"
+                android:textColor="#4E4637"
+                android:textSize="20sp"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#006153"
+                    android:textSize="15sp"
+                    android:text="Rs " />
+
+                <TextView
+                    android:id="@+id/itemPrice"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#006153"
+                    android:textSize="15sp"
+                    android:text="5000" />
+
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/soldButton"
+                    android:background="@drawable/rounded_rectangle"
+                    android:elevation="5sp"
+                    android:backgroundTint="#FEC202"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+
+                    android:textSize="16sp"
+                    android:textColor="#4E4637"
+                    android:letterSpacing="0.01"
+                    android:text="Sold" />
+
+                <ImageButton
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:backgroundTint="#ffffff"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_5"
+                    />
+
+
+            </RelativeLayout>
+
+
         </LinearLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/soldButton"
-            android:background="@drawable/rounded_rectangle"
-            android:elevation="5sp"
-            android:backgroundTint="#FEC202"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-
-            android:textSize="16sp"
-            android:textColor="#4E4637"
-            android:letterSpacing="0.01"
-            android:text="Sold" />
-        <ImageButton
-            android:layout_alignParentEnd="true"
-            android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_gravity="end"
-            android:backgroundTint="@color/white"
-            android:scaleType="fitCenter"
-            android:src="@drawable/img_5"
-            />
-    </RelativeLayout>
-</LinearLayout>
+    </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -36,7 +36,8 @@ class userItemLostFoundAdapter(
     override fun onBindViewHolder(holder: userItemLostFoundAdapter.ItemsViewHolder, position: Int) {
         //holder.adapterBinding.itemImage.setImageResource(itemList[position].imagePrimary)
         val url = itemList[position].imagePrimary
-        if (url=="NONE")
+
+        if (url=="")
         {
             holder.adapterBinding.itemImage.setImageResource(R.drawable.no_image)
         }

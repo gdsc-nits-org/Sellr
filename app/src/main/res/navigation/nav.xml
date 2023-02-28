@@ -15,9 +15,14 @@
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.sellr.fragment.ProfileFragment"
+        android:name="com.example.sellr.fragment.FragementSettings"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_fragement_settings" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.sellr.fragment.ProfileFragment"
+        android:label="profile"
+        tools:layout="@layout/fragment_fragement_settings" />
     <fragment
         android:id="@+id/lostAndFound"
         android:name="com.example.sellr.fragment.LostAndFound"
