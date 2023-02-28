@@ -2,6 +2,7 @@ package com.example.sellr
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
 import com.example.sellr.databinding.ActivityZoomingBinding
 
@@ -34,6 +35,9 @@ class Zooming : AppCompatActivity() {
             Glide.with(this).load(primaryImage).into(binding.primaryImage)
         } else {
             Glide.with(this).load(R.drawable.no_image).into(binding.primaryImage)
+            binding.primaryImage.isZoomable = false
+            binding.previous.visibility = View.GONE
+            binding.next.visibility = View.GONE
         }
 
         if (image0 != "") {
