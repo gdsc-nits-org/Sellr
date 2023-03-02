@@ -4,6 +4,7 @@ package com.example.sellr
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -229,9 +231,13 @@ class LostAndFoundInput : AppCompatActivity() {
 //        }
 //    }
 
+    @SuppressLint("SimpleDateFormat")
     private fun uploadInfo() {
 
-        pid = emailID!!.substringBeforeLast("@") + Date().time.toString()
+        val dNow = Date()
+        val ft = SimpleDateFormat("yyMMddhhmmssMs")
+        val datetime: String = ft.format(dNow)
+        pid = emailID!!.substringBeforeLast("@") + datetime
 
         val lostAndFoundObject = LostAndFoundData(
             binding.lostandfoundObjectName.text.toString(),
@@ -250,9 +256,19 @@ class LostAndFoundInput : AppCompatActivity() {
             .setValue(lostAndFoundObject)
             .addOnSuccessListener {
                 deleteProgressBar()
+                closeKeyboard()
+                binding.LandFScrollView.visibility=View.GONE
+                binding.successAnimationViewLnf.visibility=View.VISIBLE
+                binding.lostandfoundInputfab.visibility=View.INVISIBLE
+                supportActionBar?.hide()
                 Toast.makeText(this, "Object Successfully listed", Toast.LENGTH_SHORT).show()
-                onBackPressed()
-                finish()
+                binding.successAnimationViewLnf.playAnimation()
+                Handler(Looper.getMainLooper()).postDelayed({
+
+                    onBackPressed()
+                    finish()
+                }, 2000)
+
             }
     }
 
@@ -413,5 +429,27 @@ class LostAndFoundInput : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+    private fun closeKeyboard() {
+        // this will give us the view
+        // which is currently focus
+        // in this layout
+        val view = this.currentFocus
+
+        // if nothing is currently
+        // focus then this will protect
+        // the app from crash
+        if (view != null) {
+
+            // now assign the system
+            // service to InputMethodManager
+            val manager: InputMethodManager = getSystemService(
+                Context.INPUT_METHOD_SERVICE
+            ) as InputMethodManager
+            manager
+                .hideSoftInputFromWindow(
+                    view.windowToken, 0
+                )
+        }
     }
 }

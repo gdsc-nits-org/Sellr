@@ -9,7 +9,8 @@ data class LostAndFoundData(
     val imageList:ArrayList<String>?=null,
     val lostOrFound: String? = null,
     val pid : String? = null,
-    val pickedDate: String? = null
+    val pickedDate: String? = null,
+    var dateAdded: Long? = System.currentTimeMillis()
 )
 {
 
