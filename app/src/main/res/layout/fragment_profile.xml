@@ -9,12 +9,28 @@
     android:background="@color/white"
     >
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            android:layout_centerInParent="true"
+            />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         >
+
+
 
 
     <LinearLayout
@@ -31,6 +47,7 @@
         app:layout_constraintVertical_bias="0.0"
         android:orientation="horizontal">
 
+>
     </LinearLayout>
 
     <ImageView
@@ -47,6 +64,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         />
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -291,6 +310,9 @@
 
 
     </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
 
 </ScrollView>

@@ -39,7 +39,7 @@
                     app:cornerRadius="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></Button>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/filterlost"
@@ -53,7 +53,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
                     app:layout_constraintStart_toEndOf="@id/lostandfoundFilterAll"
-                    app:layout_constraintTop_toTopOf="parent"></Button>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/lostandfoundFilterFound"
@@ -67,7 +67,7 @@
                     app:cornerRadius="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></Button>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

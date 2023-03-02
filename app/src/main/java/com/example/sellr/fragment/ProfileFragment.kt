@@ -73,6 +73,7 @@ class ProfileFragment : Fragment() {
     fun retriveDataFromDatabase(){
         myReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                binding.progressBar.visibility = View.VISIBLE
 
                 //for(eachUser in snapshot.children) {
 
@@ -85,6 +86,7 @@ class ProfileFragment : Fragment() {
                         binding.SCHOLAR.text=user.scholarid
                         binding.PHONE.text=user.phonenum
                     }
+                binding.progressBar.visibility = View.GONE
                 //}
 
             }
