@@ -1,0 +1,175 @@
+{
+  "Items": {
+    "deep21_ug2212261051431243": {
+      "category": "Electronics",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261051271227?alt=media&token=a05a0738-75cc-41f3-8c26-4411d72ae1ee",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261051321232?alt=media&token=0bfe215b-7d90-4e94-ba3a-53cfdb79d0db",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261051381238?alt=media&token=c4bf63d5-a577-4955-8aa1-a8e6a4ead74d",
+      "pid": "deep21_ug2212261051431243",
+      "price": "2000",
+      "productDesc": "Headphone for sell",
+      "productName": "headphone",
+      "sold": true,
+      "userUID": "12122"
+    },
+    "deep21_ug2212261055311231": {
+      "category": "Electronics",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug221226105503123?alt=media&token=38d6b7f5-0558-44cc-af95-f57a333da48a",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261055101210?alt=media&token=f3369b7c-27d5-4007-8362-3cce900ca87e",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261055271227?alt=media&token=982cd2f2-2172-4bba-9e3a-0647e0739886",
+      "pid": "deep21_ug2212261055311231",
+      "price": "20000",
+      "productDesc": "iPhone new for sale by english prof",
+      "productName": "Iphone",
+      "sold": false,
+      "userUID": "1234567"
+    },
+    "deep21_ug2212261118371237": {
+      "category": "Others",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug221226111809129?alt=media&token=8eb0175f-345f-438d-bd2b-e81c096a965d",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261118171217?alt=media&token=2c4241f8-da72-40d8-9551-ef8f2f6d3b9c",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261118331233?alt=media&token=a95a6dd3-8be3-4f5d-a703-244ec22656e9",
+      "pid": "deep21_ug2212261118371237",
+      "price": "99999",
+      "productDesc": "checking if everything is working after merge",
+      "productName": "New item after login",
+      "sold": false,
+      "userUID": "1234567"
+    },
+    "deep21_ug2212261136251225": {
+      "category": "Others",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug221226113604124?alt=media&token=1daaf1c6-8094-4a51-8310-4c602473df73",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261136131213?alt=media&token=4c15a6bf-eab3-43b9-8e0a-bd7df0ae9f61",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261136211221?alt=media&token=100b0605-703d-45f4-8ef8-e2c9c1caf043",
+      "pid": "deep21_ug2212261136251225",
+      "price": "66",
+      "productDesc": "test test",
+      "productName": "test item 1",
+      "sold": false,
+      "userUID": "9BBFtFinnoUNc388iUKm7AbPKrs2"
+    },
+    "deep21_ug221226113806126": {
+      "category": "Others",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261137451245?alt=media&token=41086091-111e-4ca9-9ec5-615e4cc0cd92",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug2212261137531253?alt=media&token=fe71e5c8-36da-4189-a900-8c367ed97cdd",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug221226113801121?alt=media&token=5b49ca7d-aad7-4062-96cf-ca4514f5ce5e",
+      "pid": "deep21_ug221226113806126",
+      "price": "99",
+      "productDesc": "test test",
+      "productName": "test 2",
+      "sold": false,
+      "userUID": "9BBFtFinnoUNc388iUKm7AbPKrs2"
+    },
+    "deep21_ug230103085431131": {
+      "category": "Clothes",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230103085338138?alt=media&token=1d6041a1-02aa-4169-9dd1-9a2e7f7548e4",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230103085413113?alt=media&token=62f908bd-6227-4324-b5e7-b4dc20f7171b",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230103085425125?alt=media&token=d82e222b-f2c2-49e9-82ab-e7187ba62bf5",
+      "pid": "deep21_ug230103085431131",
+      "price": "88",
+      "productDesc": "hahsjsk",
+      "productName": "check this out",
+      "sold": false,
+      "userUID": "9BBFtFinnoUNc388iUKm7AbPKrs2"
+    },
+    "deep21_ug230104091351151": {
+      "category": "Electronics",
+      "condition": "new",
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230104091327127?alt=media&token=b07295b3-ba08-48f0-94cb-06e3f812fe08",
+      "imageSecond": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230104091337137?alt=media&token=52154a95-8978-4f49-a92e-30b95839e4f0",
+      "imageThird": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230104091346146?alt=media&token=e9865825-38da-4cc5-86fb-7fed3f87b471",
+      "pid": "deep21_ug230104091351151",
+      "price": "55",
+      "productDesc": "hhh",
+      "productName": "date addwd",
+      "sellingDate": "04-01-2023",
+      "sold": false,
+      "userUID": "9BBFtFinnoUNc388iUKm7AbPKrs2"
+    },
+    "deep21_ug230110073759159": {
+      "category": "Vehicles",
+      "condition": "new",
+      "imageList": [
+        "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug23011007370919?alt=media&token=f3316b6e-b296-4df4-8608-35e0de34211e",
+        "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230110073734134?alt=media&token=761769a6-60d4-49e2-b9c8-812773c163db",
+        "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230110073742142?alt=media&token=cc68ec8b-6f84-4db7-a19e-935add1cf12d"
+      ],
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug23011007360515?alt=media&token=9f7c2877-ae90-4739-b9f7-bedeb24594a3",
+      "pid": "deep21_ug230110073759159",
+      "price": "56",
+      "productDesc": "ggg",
+      "productName": "bb",
+      "sellingDate": "10-01-2023",
+      "sold": false,
+      "userUID": "9BBFtFinnoUNc388iUKm7AbPKrs2"
+    },
+    "deep21_ug230110104125125": {
+      "additionalCategory": "Computer",
+      "category": "Others",
+      "condition": "Used",
+      "imageList": [
+        "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug23011010410212?alt=media&token=5a593647-4eeb-490e-b504-10aa29f421a1",
+        "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230110104110110?alt=media&token=144f7f48-6a15-4a0d-91d6-0ae89fc583d2",
+        "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230110104117117?alt=media&token=0049cf41-84ab-4685-8b22-fe8293b1ed5c"
+      ],
+      "imagePrimary": "https://firebasestorage.googleapis.com/v0/b/sellr-7a02b.appspot.com/o/file%2Fdeep21_ug230110103829129?alt=media&token=e2040217-d8a5-4a03-a5ca-237a9b158ca7",
+      "pid": "deep21_ug230110104125125",
+      "price": "33333",
+      "productDesc": "used laptop",
+      "productName": "Lenovo Legion",
+      "sellingDate": "10-01-2023",
+      "sold": false,
+      "usedForTime": "2 years",
+      "userUID": "9BBFtFinnoUNc388iUKm7AbPKrs2"
+    }
+  },
+  "Users": {
+    "12122": {
+      "Hostel": "",
+      "Name": "hdhjnsm",
+      "Phone": "",
+      "ScholarId": ""
+    },
+    "9BBFtFinnoUNc388iUKm7AbPKrs2": {
+      "email": "deep21_ug@cse.nits.ac.in",
+      "name": "f",
+      "pId": {
+        "-NKEafR7aalhIE_2_zvY": "deep21_ug2212261136251225",
+        "-NKEb3HLNYrLsrLhe-6A": "deep21_ug221226113806126",
+        "-NKsDzIHBz51usgPcBXu": "deep21_ug230103085431131",
+        "-NKxS-K-jBGBkuQNhhXh": "deep21_ug230104091351151",
+        "-NLR-aXh0nVoKmkSLFbk": "deep21_ug230110073759159",
+        "-NLRe_XGWzCF1rf4XgRD": "deep21_ug230110104125125"
+      },
+      "password": "gdscnits",
+      "phonenum": "5",
+      "scholarid": "0"
+    },
+    "BVrvnfGQTYQzNOnooHKItNXolsw1": {
+      "email": "sharthak21_ug@cse.nits.ac.in",
+      "infoentered": "yes",
+      "name": "deep saikia",
+      "password": "gdscnits",
+      "phonenum": "8638050827",
+      "scholarid": "2112129"
+    },
+    "ybGanSNyMQQMsb7tytZkjyCELOu2": {
+      "Hostel": "9",
+      "Name": "Navneet",
+      "Phone": "6204724424",
+      "ScholarId": "2112160",
+      "email": "sameer21_ug@ece.nits.ac.in",
+      "infoentered": "yes",
+      "name": "Sameer",
+      "password": "123456",
+      "phonenum": "8887584264",
+      "scholarid": "2114051"
+    }
+  }
+}

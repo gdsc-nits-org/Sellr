@@ -4,6 +4,7 @@ package com.example.sellr
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +15,7 @@ import android.os.Looper
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -386,11 +388,20 @@ class SellActivity : AppCompatActivity() {
                     .getReference("Users")
             val upDateUserList = database.child(userUID!!).child("pId").push().setValue(uID)
             upDateUserList.addOnSuccessListener {
-
                 makeToast("Successfully Listed")
                 deleteProgressBar()
-                onBackPressed()
-                finish()
+                closeKeyboard()
+                binding.sellMainScrollView.visibility=View.GONE
+                binding.successAnimationView.visibility=View.VISIBLE
+                binding.fab.visibility=View.INVISIBLE
+                supportActionBar?.hide()
+                binding.successAnimationView.playAnimation()
+                Handler(Looper.getMainLooper()).postDelayed({
+
+                    onBackPressed()
+                    finish()
+                }, 2000)
+
             }.addOnFailureListener {
                 makeToast("Listing Failed, Please try again")
                 deleteProgressBar()
@@ -557,7 +568,28 @@ class SellActivity : AppCompatActivity() {
         binding.textFieldUsedCondition.setAdapter(conditionsAdapter)
 
     }
+    private fun closeKeyboard() {
+        // this will give us the view
+        // which is currently focus
+        // in this layout
+        val view = this.currentFocus
 
+        // if nothing is currently
+        // focus then this will protect
+        // the app from crash
+        if (view != null) {
+
+            // now assign the system
+            // service to InputMethodManager
+            val manager: InputMethodManager = getSystemService(
+                Context.INPUT_METHOD_SERVICE
+            ) as InputMethodManager
+            manager
+                .hideSoftInputFromWindow(
+                    view.windowToken, 0
+                )
+        }
+    }
     override fun onRestart() {
         super.onRestart()
         populateDropDown()

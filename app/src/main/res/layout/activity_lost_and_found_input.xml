@@ -6,10 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LostAndFoundInput">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/success_animation_view_lnf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:outlineAmbientShadowColor="#000"
+        android:visibility="invisible"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/upload_success">
 
 
-
+    </com.airbnb.lottie.LottieAnimationView>
     <ScrollView
+        android:id="@+id/LandFScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout

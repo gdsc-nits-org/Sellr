@@ -66,7 +66,7 @@ class SplashFragment : Fragment() {
             checkForDetails()
 
 
-        }, 2000)
+        }, 4000)
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
