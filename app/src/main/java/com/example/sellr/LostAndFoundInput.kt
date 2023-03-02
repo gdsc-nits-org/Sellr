@@ -229,9 +229,13 @@ class LostAndFoundInput : AppCompatActivity() {
 //        }
 //    }
 
+    @SuppressLint("SimpleDateFormat")
     private fun uploadInfo() {
 
-        pid = emailID!!.substringBeforeLast("@") + Date().time.toString()
+        val dNow = Date()
+        val ft = SimpleDateFormat("yyMMddhhmmssMs")
+        val datetime: String = ft.format(dNow)
+        pid = emailID!!.substringBeforeLast("@") + datetime
 
         val lostAndFoundObject = LostAndFoundData(
             binding.lostandfoundObjectName.text.toString(),

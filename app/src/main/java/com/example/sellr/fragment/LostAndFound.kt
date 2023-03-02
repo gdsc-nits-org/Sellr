@@ -94,6 +94,12 @@ class LostAndFound : Fragment() {
                         }
                     }
 
+                    objectList.sortBy {
+                        it.pid?.substringAfterLast("_ug")
+                    }
+
+
+
                     binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
 
 
