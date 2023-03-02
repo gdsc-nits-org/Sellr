@@ -100,7 +100,8 @@ class LostAndFound : Fragment() {
 
 
 
-                    binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                    binding.lostandfoundRecycler.adapter =
+                        context?.let { LostAndFoundAdapter(it,objectList) }
 
 
                     binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
@@ -108,7 +109,7 @@ class LostAndFound : Fragment() {
                     binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))
 
                     refreshLostAndFound.setOnRefreshListener {
-                        if (CheckInternet.isConnectedToInternet(requireContext())) {
+                        if (requireContext()?.let { CheckInternet.isConnectedToInternet(it) }) {
                             Toast.makeText(
                                 context, "Couldn't refresh! Check your network...",
                                 Toast.LENGTH_LONG
@@ -119,7 +120,8 @@ class LostAndFound : Fragment() {
                         {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
 
-                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                            binding.lostandfoundRecycler.adapter =
+                                context?.let { LostAndFoundAdapter(it,objectList) }
                         }
 
                         refreshLostAndFound.isRefreshing = false
@@ -128,7 +130,8 @@ class LostAndFound : Fragment() {
 
                     binding.lostandfoundFilterFound.setOnClickListener{
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
-                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),foundList)
+                        binding.lostandfoundRecycler.adapter =
+                            context?.let { it1 -> LostAndFoundAdapter(it1,foundList) }
 
 
                         binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#08b49c"))
@@ -137,7 +140,8 @@ class LostAndFound : Fragment() {
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
-                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),foundList)
+                            binding.lostandfoundRecycler.adapter =
+                                context?.let { it1 -> LostAndFoundAdapter(it1,foundList) }
                             refreshLostAndFound.isRefreshing = false
                         }
 
@@ -147,7 +151,8 @@ class LostAndFound : Fragment() {
 
 
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
-                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
+                        binding.lostandfoundRecycler.adapter =
+                            context?.let { it1 -> LostAndFoundAdapter(it1,lostList) }
 
 
                         binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
@@ -156,13 +161,15 @@ class LostAndFound : Fragment() {
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
-                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),lostList)
+                            binding.lostandfoundRecycler.adapter =
+                                context?.let { it1 -> LostAndFoundAdapter(it1,lostList) }
                             refreshLostAndFound.isRefreshing = false
                         }
                     }
                     binding.lostandfoundFilterAll.setOnClickListener {
                         binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
-                        binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                        binding.lostandfoundRecycler.adapter =
+                            context?.let { it1 -> LostAndFoundAdapter(it1,objectList) }
 
                         binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                         binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
@@ -171,7 +178,8 @@ class LostAndFound : Fragment() {
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
-                            binding.lostandfoundRecycler.adapter = LostAndFoundAdapter(requireContext(),objectList)
+                            binding.lostandfoundRecycler.adapter =
+                                context?.let { it1 -> LostAndFoundAdapter(it1,objectList) }
                             refreshLostAndFound.isRefreshing = false
                         }
                     }

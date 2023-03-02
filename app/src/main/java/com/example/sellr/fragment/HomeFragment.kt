@@ -219,7 +219,7 @@ class HomeFragment : Fragment() {
 
         recylerView.adapter?.notifyDataSetChanged()
         recylerView.adapter =
-            myAdapterhome(requireContext(), this@HomeFragment, datalistforfilteredmyAdapter)
+            context?.let { myAdapterhome(it, this@HomeFragment, datalistforfilteredmyAdapter) }
 
 
 
@@ -243,13 +243,13 @@ class HomeFragment : Fragment() {
                     }
                     recylerView.adapter?.notifyDataSetChanged()
                     recylerView.adapter =
-                        myAdapterhome(requireContext(), this@HomeFragment, searchList)
+                        context?.let { myAdapterhome(it, this@HomeFragment, searchList) }
                 } else {
                     searchList.clear()
                     searchList.addAll(datalistforfilteredmyAdapter)
                     recylerView.adapter?.notifyDataSetChanged()
                     recylerView.adapter =
-                        myAdapterhome(requireContext(), this@HomeFragment, searchList)
+                        context?.let { myAdapterhome(it, this@HomeFragment, searchList) }
                 }
                 return false
             }
@@ -292,7 +292,7 @@ class HomeFragment : Fragment() {
                         emptyH.visibility = View.INVISIBLE
 
                     recylerView.adapter =
-                        myAdapterhome(requireContext(), this@HomeFragment, searchList)
+                        context?.let { myAdapterhome(it, this@HomeFragment, searchList) }
                     filterItemClick(defaultFilter)
 
 
