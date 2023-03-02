@@ -36,6 +36,7 @@ class Zooming : AppCompatActivity() {
         } else {
             Glide.with(this).load(R.drawable.no_image).into(binding.primaryImage)
             binding.primaryImage.isZoomable = false
+            binding.primaryImage.doubleTapToZoom = false
             binding.previous.visibility = View.GONE
             binding.next.visibility = View.GONE
         }

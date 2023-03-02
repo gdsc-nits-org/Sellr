@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 import kotlin.collections.ArrayList
 
-class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndFoundData> ):
+class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAndFoundData> ):
     RecyclerView.Adapter<LostAndFoundAdapter.LostAndFoundViewHolder>() {
 
 
@@ -32,7 +32,7 @@ class LostAndFoundAdapter(val context: Context,val objectList:ArrayList<LostAndF
 
     override fun onBindViewHolder(holder: LostAndFoundViewHolder, position: Int) {
 
-        val obj = objectList[objectList.size - position - 1]
+        val obj = objectList.sortedByDescending { it.dateAdded }[objectList.size - position - 1]
 
         val databaseUser =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
