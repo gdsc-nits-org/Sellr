@@ -5,60 +5,75 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sellr.fragment.*
 
 class MainFragmentHolder : AppCompatActivity() {
+    private var editScreen: Boolean = false
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.edit_menu, menu)
+        menu?.findItem(R.id.edit_profile)?.isVisible = editScreen
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.edit_profile -> {
+                val i = Intent(applicationContext, MainFragmentHolder::class.java)
+                i.putExtra("editProfile", "editProfile")
+                startActivity(i)
+
+            }
+        }
+
+        return (super.onOptionsItemSelected(item))
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_fragment_holder)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         val intent: Intent = intent
-        if(intent.hasExtra("sold"))
-        {
-            title="Sold items"
+        if (intent.hasExtra("sold")) {
+            
+            title = "Sold items"
             fragmentLoad(SoldFragment())
-        }
-        else if(intent.hasExtra("onSale"))
-        {
-            title="Item on sale"
+        } else if (intent.hasExtra("onSale")) {
+            
+            title = "Item on sale"
             fragmentLoad(OnSaleFragment())
-        }
-        else if(intent.hasExtra("aboutUs"))
-        {
-                title="About Us"
+        } else if (intent.hasExtra("aboutUs")) {
+            
+            title = "About Us"
             fragmentLoad(AboutFragment())
-        }
-
-        else if(intent.hasExtra("developers"))
-        {
-            title="Developers"
+        } else if (intent.hasExtra("developers")) {
+            
+            title = "Developers"
             fragmentLoad(AboutUsFragment())
-        }
-        else if(intent.hasExtra("editProfile"))
-        {
-            title="Edit Profile"
+        } else if (intent.hasExtra("editProfile")) {
+            
+            title = "Edit Profile"
             fragmentLoad(fragmentEditProfile())
-        }
-        else if(intent.hasExtra("reportUs"))
-        {
-            title="Report an issue"
+        } else if (intent.hasExtra("reportUs")) {
+            
+            title = "Report an issue"
             fragmentLoad(ReportUsFragment())
-        }
-        else if(intent.hasExtra("lostAndFoundList"))
-        {
-            title="User Lost and Found"
+        } else if (intent.hasExtra("lostAndFoundList")) {
+            
+            title = "User Lost and Found"
             fragmentLoad(UserItemLostAndFound())
-        }
-        else if(intent.hasExtra("profile"))
-        {
-            title="Profile"
+        } else if (intent.hasExtra("profile")) {
+            editScreen=true
+            title = "Profile"
             fragmentLoad(ProfileFragment())
-        }
-
-        else if(intent.hasExtra("extraDetails"))
-        {
+        } else if (intent.hasExtra("extraDetails")) {
+            
             try {
                 this.supportActionBar!!.hide()
             } // catch block to handle NullPointerException
@@ -67,11 +82,11 @@ class MainFragmentHolder : AppCompatActivity() {
             fragmentLoad(fragment_extradetails())
         }
     }
-    private fun fragmentLoad(fragment : Fragment)
-    {
+
+    private fun fragmentLoad(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        val fragmentTransaction= fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.mainAlterFrameLayout,fragment)
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.mainAlterFrameLayout, fragment)
         fragmentTransaction.commit()
 
     }
