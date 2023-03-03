@@ -32,7 +32,7 @@ class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAn
 
     override fun onBindViewHolder(holder: LostAndFoundViewHolder, position: Int) {
 
-        val obj = objectList.sortedByDescending { it.dateAdded }[objectList.size - position - 1]
+        val obj = objectList[objectList.size - position - 1]
 
         val databaseUser =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
