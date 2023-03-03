@@ -187,17 +187,20 @@ class LostAndFoundDescriptionPage : AppCompatActivity() {
                 }
                 val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
                 imageSlider.setImageList(imageList)
-                imageSlider.setItemClickListener(object : ItemClickListener {
-                    override fun onItemSelected(position: Int) {
-                        val intent = Intent(applicationContext, Zooming::class.java).also {
-                            it.putExtra("PrimaryImage", primaryImage)
-                            it.putExtra("Image0", Image0)
-                            it.putExtra("Image1", Image1)
-                            it.putExtra("Image2", Image2)
+
+                if(primaryImage!="") {
+                    imageSlider.setItemClickListener(object : ItemClickListener {
+                        override fun onItemSelected(position: Int) {
+                            val intent = Intent(applicationContext, Zooming::class.java).also {
+                                it.putExtra("PrimaryImage", primaryImage)
+                                it.putExtra("Image0", Image0)
+                                it.putExtra("Image1", Image1)
+                                it.putExtra("Image2", Image2)
+                            }
+                            startActivity(intent)
                         }
-                        startActivity(intent)
-                    }
-                })
+                    })
+                }
 
                 binding.objectName.text = dataSnapshot.child("objectName").value.toString()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
