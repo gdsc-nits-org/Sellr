@@ -23,9 +23,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-
-                android:padding="1dp"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -47,9 +44,7 @@
                     app:cornerRadius="20dp"
 
 
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    />
 
                 <View
                     android:layout_width="0dp"
@@ -67,10 +62,7 @@
                     android:textColor="#353535"
                     app:cornerRadius="20dp"
                     android:elevation="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
-                    app:layout_constraintStart_toEndOf="@id/lostandfoundFilterAll"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    />
 
                 <View
                     android:layout_width="0dp"
@@ -88,9 +80,7 @@
                     android:elevation="15dp"
                     android:textColor="#353535"
                     app:cornerRadius="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                     />
 
             </LinearLayout>
 

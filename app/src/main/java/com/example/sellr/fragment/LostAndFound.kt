@@ -121,8 +121,8 @@ class LostAndFound : Fragment() {
                     goToTopButton.setOnClickListener {
                         binding.lostandfoundRecycler.smoothScrollToPosition(0)
                     }
-                    binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
-                    binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                    binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
+                    binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
                     binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
 
                     refreshLostAndFound.setOnRefreshListener {
@@ -152,8 +152,8 @@ class LostAndFound : Fragment() {
 
 
                         binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#23ba29"))
-                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
-                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
+                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
@@ -172,9 +172,9 @@ class LostAndFound : Fragment() {
                             context?.let { it1 -> LostAndFoundAdapter(it1,lostList) }
 
 
-                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
                         binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F44336"))
-                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
 
                         refreshLostAndFound.setOnRefreshListener {
                             binding.lostandfoundRecycler.adapter?.notifyDataSetChanged()
@@ -188,8 +188,8 @@ class LostAndFound : Fragment() {
                         binding.lostandfoundRecycler.adapter =
                             context?.let { it1 -> LostAndFoundAdapter(it1,objectList) }
 
-                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
-                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
+                        binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#d1cfcf"))
                         binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
 
 
