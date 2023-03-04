@@ -17,59 +17,72 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:id="@+id/lostandfoundfilterLinear"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
 
-                <Button
+                >
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/lostandfoundFilterAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="5sp"
                     android:background="@drawable/search_view_bg"
                     android:text="All"
                     android:textAlignment="center"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="#353535"
+                    android:elevation="15dp"
                     app:cornerRadius="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
+
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="0.10"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/filterlost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/search_view_bg"
                     android:text="@string/LOST"
                     android:textAlignment="center"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="#353535"
                     app:cornerRadius="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/lostandfoundFilterFound"
-                    app:layout_constraintStart_toEndOf="@id/lostandfoundFilterAll"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:elevation="15dp"
+                    />
 
-                <Button
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="0.10"
+                    android:layout_height="match_parent"/>
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/lostandfoundFilterFound"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
                     android:background="@drawable/search_view_bg"
                     android:text="@string/FOUND"
                     android:textAlignment="center"
-                    android:textColor="@color/colorAccent"
+                    android:elevation="15dp"
+                    android:textColor="#353535"
                     app:cornerRadius="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                     />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/loadingAnimation"
