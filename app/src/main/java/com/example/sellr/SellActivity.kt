@@ -357,7 +357,7 @@ class SellActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (progressCircular?.visibility != 0) {
+        if (progressCircular?.visibility != 0 && !binding.successAnimationView.isAnimating) {
             super.onBackPressed()
 
         }
