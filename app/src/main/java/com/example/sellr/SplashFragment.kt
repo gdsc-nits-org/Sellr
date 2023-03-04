@@ -38,7 +38,9 @@ class SplashFragment : Fragment() {
     // Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private var animOver=false
+    private var loadingOver=false
+    private var goToMainScreen=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,13 +64,41 @@ class SplashFragment : Fragment() {
 //        println("email sent")
         // Token : usingforsellr123 ---- // nfvshodcoxiwknas
         // Inflate the layout for this fragment
+
+
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Handler(Looper.getMainLooper()).postDelayed({
+            animOver=true
+            if(loadingOver)
+            {
+                endSplash()
+            }
+            else
+            {
+                view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
+                view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
+                view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
+            }
             checkForDetails()
 
 
         }, 4000)
         return inflater.inflate(R.layout.fragment_splash, container, false)
+    }
+
+    private fun endSplash() {
+        if(!goToMainScreen) {
+            fragmentload(LoginFragment())
+            println("loading ez")
+            //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
+
+        }
+        else
+        {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
     }
 
     private fun checkForDetails():Boolean {
@@ -88,31 +118,22 @@ class SplashFragment : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         auth = FirebaseAuth.getInstance()
-        view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
-        view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
-        view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
+
         if ( user!=null ) {
 
             println(user.uid.toString())
 
             dtb.child("Users").child(user.uid.toString()).get().addOnSuccessListener {
                 val check = it.child("infoentered").toString();
-
-                if(check.contains("no")) {
-                    fragmentload(LoginFragment())
-                    println("loading ez")
-                    //dtb.child("Users").child(user.uid.toString()).child("infoentered").setValue("yes")
-
+                if(!check.contains("no")) {
+                    goToMainScreen=true
                 }
-                else
+                loadingOver=true
+                if(animOver)
                 {
-
-
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-
-                    activity?.finish()
+                    endSplash()
                 }
+
 
             }.addOnFailureListener{
                 Toast.makeText(context,"Failed to connect to the internet",Toast.LENGTH_SHORT).show()
