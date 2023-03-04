@@ -123,7 +123,7 @@ class LostAndFound : Fragment() {
                     }
                     binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                     binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
-                    binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))
+                    binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
 
                     refreshLostAndFound.setOnRefreshListener {
                         if (requireContext()?.let { CheckInternet.isConnectedToInternet(it) }) {
@@ -151,7 +151,7 @@ class LostAndFound : Fragment() {
                             context?.let { it1 -> LostAndFoundAdapter(it1,foundList) }
 
 
-                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#08b49c"))
+                        binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#23ba29"))
                         binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                         binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
 
@@ -190,7 +190,7 @@ class LostAndFound : Fragment() {
 
                         binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                         binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
-                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))
+                        binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FEC202"))
 
 
                         refreshLostAndFound.setOnRefreshListener {
