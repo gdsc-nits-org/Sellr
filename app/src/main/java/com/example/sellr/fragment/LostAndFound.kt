@@ -34,7 +34,7 @@ class LostAndFound : Fragment() {
     lateinit var foundList : ArrayList<LostAndFoundData>
     lateinit var lostList : ArrayList<LostAndFoundData>
     lateinit var refreshLostAndFound : SwipeRefreshLayout
-
+    private lateinit var goToTopButton: ExtendedFloatingActionButton
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +47,7 @@ class LostAndFound : Fragment() {
             val lostandfoundInput = Intent(context, LostAndFoundInput::class.java)
             startActivity(lostandfoundInput)
         }
+        goToTopButton=binding.topScrollButton
 
 
 
@@ -60,6 +61,12 @@ class LostAndFound : Fragment() {
                 }
                 if (dy < -10 && !fab.isShown) {
                     fab.show()
+                }
+                if(dy<-25 && goToTopButton.isShown){
+                    goToTopButton.hide()
+                }
+                if(dy>25 && !goToTopButton.isShown){
+                    goToTopButton.show()
                 }
 
             }
@@ -111,8 +118,9 @@ class LostAndFound : Fragment() {
 
                     binding.lostandfoundRecycler.adapter =
                         context?.let { LostAndFoundAdapter(it,objectList) }
-
-
+                    goToTopButton.setOnClickListener {
+                        binding.lostandfoundRecycler.smoothScrollToPosition(0)
+                    }
                     binding.lostandfoundFilterFound.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                     binding.filterlost.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                     binding.lostandfoundFilterAll.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#0dd6d6"))
