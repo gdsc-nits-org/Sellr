@@ -102,7 +102,20 @@
             android:layout_marginEnd="15dp"
             app:icon="@drawable/car_ui_icon_add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/top_scroll_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colourAccent"
+                android:layout_marginEnd="15dp"
+                app:icon="@drawable/scroll_top_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="invisible"/>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
