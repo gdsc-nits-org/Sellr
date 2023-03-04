@@ -12,32 +12,10 @@ import androidx.fragment.app.Fragment
 import com.example.sellr.fragment.*
 
 class MainFragmentHolder : AppCompatActivity() {
-    private var editScreen: Boolean = false
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.edit_menu, menu)
-        menu?.findItem(R.id.edit_profile)?.isVisible = editScreen
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.edit_profile -> {
-                val i = Intent(applicationContext, MainFragmentHolder::class.java)
-                i.putExtra("editProfile", "editProfile")
-                startActivity(i)
-
-            }
-        }
-
-        return (super.onOptionsItemSelected(item))
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_fragment_holder)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         val intent: Intent = intent
         if (intent.hasExtra("sold")) {
@@ -69,11 +47,9 @@ class MainFragmentHolder : AppCompatActivity() {
             title = "User Lost and Found"
             fragmentLoad(UserItemLostAndFound())
         } else if (intent.hasExtra("profile")) {
-            editScreen=true
             title = "Profile"
             fragmentLoad(ProfileFragment())
         } else if (intent.hasExtra("extraDetails")) {
-            
             try {
                 this.supportActionBar!!.hide()
             } // catch block to handle NullPointerException
