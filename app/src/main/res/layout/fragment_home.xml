@@ -23,6 +23,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+            <LinearLayout
+                android:id="@+id/loadingAnimation_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="240dp"
+                android:orientation="vertical"
+
+                app:layout_constraintBottom_toBottomOf="@+id/Home_rc"
+                app:layout_constraintTop_toTopOf="@id/filter"
+                app:layout_constraintVertical_bias="0.0">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/loading" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Fetching....."
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Please Check your conncection"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/emptyhome"
             android:visibility="invisible"
@@ -35,7 +73,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/cart_empty"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,19 +120,19 @@
             app:queryHint="Search here" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Home_rc"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filter"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/items_home" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Home_rc"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter"
+                app:layout_constraintVertical_bias="0.0"
+                tools:listitem="@layout/items_home" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/filter"

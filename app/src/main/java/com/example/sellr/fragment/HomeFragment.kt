@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
     private lateinit var recylerViewfilter: RecyclerView
 
     private lateinit var emptyH : ConstraintLayout
+    private lateinit var loadingAnimationControl : LinearLayout
 
     //for filtered datalist in myadapterhome
     private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
@@ -79,6 +81,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         emptyH = view.findViewById(R.id.emptyhome)
+        loadingAnimationControl=view.findViewById(R.id.loadingAnimation_home)
 
         //for filter
         val layoutManagerfilter =
@@ -212,10 +215,15 @@ class HomeFragment : Fragment() {
             datalistforfilteredmyAdapter.addAll(datalist)
         }
 
-        if(datalistforfilteredmyAdapter.isEmpty())
+        if(datalistforfilteredmyAdapter.isEmpty()){
+            loadingAnimationControl.visibility=View.GONE
             emptyH.visibility = View.VISIBLE
-        else
+        }
+        else{
+            loadingAnimationControl.visibility=View.GONE
             emptyH.visibility = View.INVISIBLE
+        }
+
 
         recylerView.adapter?.notifyDataSetChanged()
         recylerView.adapter =
