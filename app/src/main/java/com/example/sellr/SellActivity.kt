@@ -20,6 +20,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
+import com.airbnb.lottie.LottieAnimationView
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.ActivitySellBinding
 import com.example.sellr.utils.CheckInternet
@@ -50,7 +51,7 @@ class SellActivity : AppCompatActivity() {
     private var imageButtonSecond: ImageButton? = null
     private var imageButtonThird: ImageButton? = null
     private var imageButtonFourth: ImageButton? = null
-    private var progressCircular: ProgressBar? = null
+    private var progressCircular: LottieAnimationView? = null
 
 
     private lateinit var baos:ByteArrayOutputStream
@@ -85,7 +86,7 @@ class SellActivity : AppCompatActivity() {
                 binding.inputCategory.helperText = null
             }
         }
-        progressCircular = binding.progressCircular
+        progressCircular = binding.progressAnimationView
         //get images from storage on user click
         //until the previous image is selected, the next one is not enabled
         imageButtonPrimary = binding.imageButtonFirst
@@ -339,6 +340,7 @@ class SellActivity : AppCompatActivity() {
 
     private fun setProgressBar() {
         progressCircular?.visibility = View.VISIBLE
+        progressCircular?.playAnimation()
         window.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
@@ -348,13 +350,14 @@ class SellActivity : AppCompatActivity() {
 
     private fun deleteProgressBar() {
         progressCircular?.visibility = View.GONE
+        progressCircular?.cancelAnimation()
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
     }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (progressCircular?.visibility != 0) {
+        if (progressCircular?.visibility != 0 && !binding.successAnimationView.isAnimating) {
             super.onBackPressed()
 
         }

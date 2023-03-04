@@ -21,6 +21,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.airbnb.lottie.LottieAnimationView
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.ActivityLostAndFoundInputBinding
 import com.example.sellr.utils.CheckInternet
@@ -44,7 +45,7 @@ class LostAndFoundInput : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityLostAndFoundInputBinding
-    private var progressCircular: ProgressBar? = null
+    private var progressCircular: LottieAnimationView? = null
     private lateinit var pid : String
     private var imagePrimary: String? = ""
     private var imageArray = ArrayList<String>()
@@ -59,7 +60,7 @@ class LostAndFoundInput : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLostAndFoundInputBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        progressCircular=binding.lostandfoundprogressCircular
+        progressCircular=binding.progressAnimationViewLnf
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         val user = Firebase.auth.currentUser
@@ -263,6 +264,7 @@ class LostAndFoundInput : AppCompatActivity() {
                 supportActionBar?.hide()
                 Toast.makeText(this, "Object Successfully listed", Toast.LENGTH_SHORT).show()
                 binding.successAnimationViewLnf.playAnimation()
+
                 Handler(Looper.getMainLooper()).postDelayed({
 
                     onBackPressed()
@@ -396,6 +398,7 @@ class LostAndFoundInput : AppCompatActivity() {
 
 
     private fun setProgressBar() {
+        progressCircular?.playAnimation()
         progressCircular?.visibility = View.VISIBLE
         window.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -405,14 +408,14 @@ class LostAndFoundInput : AppCompatActivity() {
     }
 
     private fun deleteProgressBar() {
+        progressCircular?.cancelAnimation()
         progressCircular?.visibility = View.GONE
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
     }
     override fun onBackPressed() {
-        if (progressCircular?.visibility != 0) {
+        if (progressCircular?.visibility != 0 && !binding.successAnimationViewLnf.isAnimating) {
             super.onBackPressed()
-
         }
 
     }

@@ -33,7 +33,11 @@ class ProfileFragment : Fragment() {
         val view=binding.root
 
         retriveDataFromDatabase()
-
+        binding.editProfile.setOnClickListener {
+            val i = Intent(context, MainFragmentHolder::class.java)
+            i.putExtra("editProfile", "editProfile")
+            startActivity(i)
+        }
 //        binding.editButton.setOnClickListener{
 //            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
 //            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()

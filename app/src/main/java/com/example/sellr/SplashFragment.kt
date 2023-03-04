@@ -89,7 +89,7 @@ class SplashFragment : Fragment() {
         dtb = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         auth = FirebaseAuth.getInstance()
         view?.findViewById<TextView>(R.id.appNameSplash)?.visibility=View.INVISIBLE
-        view?.findViewById<LottieAnimationView>(R.id.splashAnimatedText)?.visibility=View.INVISIBLE
+        view?.findViewById<TextView>(R.id.gdscNameSplash)?.visibility=View.INVISIBLE
         view?.findViewById<ProgressBar>(R.id.progressBarSplash)?.visibility=View.VISIBLE
         if ( user!=null ) {
 
