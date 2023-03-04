@@ -58,13 +58,19 @@ class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAn
 
        }
 
-        if(obj.lostOrFound == "FOUND"){
-            holder.binding.indicatorRed.visibility = View.GONE
-            println("THE OBJECT WAS : ${obj.lostOrFound}" )
-        }
-        else if (obj.lostOrFound == "LOST") {
-            holder.binding.indicatorGreen.visibility = View.GONE
-            println("THE OBJECT WAS : ${obj.lostOrFound}" )
+        when (obj.lostOrFound) {
+            "FOUND" -> {
+                holder.binding.indicatorRed.setImageResource(R.drawable.found_newtag)
+                println("THE OBJECT WAS : ${obj.lostOrFound} ${obj.objectName}" )
+            }
+            "LOST" -> {
+                holder.binding.indicatorRed.setImageResource(R.drawable.lost_newtag)
+                println("THE OBJECT WAS : ${obj.lostOrFound} ${obj.objectName}" )
+            }
+            else -> {
+                //holder.binding.indicatorRed.visibility = View.VISIBLE
+                println("THE OBJECT WAS end case : ${obj.lostOrFound} ${obj.objectName}" )
+            }
         }
 
         holder.itemView.setOnClickListener {

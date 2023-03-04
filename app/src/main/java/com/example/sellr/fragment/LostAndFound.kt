@@ -113,10 +113,10 @@ class LostAndFound : Fragment() {
                     lostList.sortBy {
                         it.dateAdded
                     }
-                    for(i in objectList)
-                    {
-                        println(i.objectName)
-                    }
+//                    for(i in objectList)
+//                    {
+//                        println(i.objectName)
+//                    }
 
 
 
