@@ -79,6 +79,9 @@ class LostAndFound : Fragment() {
                     foundList.clear()
                     lostList.clear()
 
+                    binding.loadingAnimation.visibility=View.GONE
+                    binding.lostandfoundFab.visibility=View.VISIBLE
+
                     for(snapshot1 in snapshot.children){
                         val obj = snapshot1.getValue(LostAndFoundData::class.java)
                         if (obj != null) {
