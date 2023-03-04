@@ -105,13 +105,17 @@ class LostAndFound : Fragment() {
                     }
 
                     objectList.sortBy {
-                        it.pid?.substringAfterLast("_ug")
+                        it.dateAdded
                     }
                     foundList.sortBy {
-                        it.pid?.substringAfterLast("_ug")
+                        it.dateAdded
                     }
                     lostList.sortBy {
-                        it.pid?.substringAfterLast("_ug")
+                        it.dateAdded
+                    }
+                    for(i in objectList)
+                    {
+                        println(i.objectName)
                     }
 
 
