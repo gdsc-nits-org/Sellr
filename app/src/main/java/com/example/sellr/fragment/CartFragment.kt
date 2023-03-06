@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sellr.adapters.CartRVAdapter
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.FragmentCartBinding
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
 
@@ -48,11 +46,14 @@ class CartFragment : Fragment() {
         val database= FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         val myReference: DatabaseReference =database.reference.child("Users").child(
             user?.uid.toString()).child("favpost")
-        myReference.get().addOnSuccessListener{
+        myReference.addValueEventListener(object : ValueEventListener{
 
-            cartModelArrayList.clear()
-            //println(it.toString())
-            for(cartItemIDs in it.children){
+            override fun onDataChange(snapshot: DataSnapshot) {
+                cartModelArrayList.clear()
+
+
+                //println(it.toString())
+                for (cartItemIDs in snapshot.children) {
 //                val item=cartItem.getValue(SellData::class.java)
 //                if(item!=null )
 //                {
@@ -62,15 +63,23 @@ class CartFragment : Fragment() {
 //                    }
 //
 //                }
-                //get item ids to fetch
-                fetchIndividualItems(cartItemIDs.value.toString())
-                println(cartItemIDs.value.toString())
+                    //get item ids to fetch
+                    fetchIndividualItems(cartItemIDs.value.toString())
+                    println(cartItemIDs.value.toString())
+                }
+                binding.idRVCourse.adapter?.notifyDataSetChanged()
+                binding.emptyIV.visibility = if (cartModelArrayList.isEmpty()) View.VISIBLE else View.GONE
+                binding.idRVCourse.visibility = if (cartModelArrayList.isEmpty()) View.GONE else View.VISIBLE
 
             }
 
-        }.addOnFailureListener {
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
         }
+        )
+
 
 //        database.addValueEventListener(object: ValueEventListener {
 //            override fun onDataChange(snapshot: DataSnapshot) {
@@ -132,23 +141,26 @@ class CartFragment : Fragment() {
 
         val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         val myReference: DatabaseReference =database.reference.child("Items").child(itemID)
-        myReference.get().addOnSuccessListener {
+        myReference.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val item=snapshot.getValue(SellData::class.java)
+                if (item != null) {
+                    if(item.sold != true){
+                        cartModelArrayList.add(item)
 
-            val item=it.getValue(SellData::class.java)
-            if (item != null) {
-                if(item.sold != true){
-                    cartModelArrayList.add(item)
-                    binding.idRVCourse.adapter?.notifyItemInserted(cartModelArrayList.size-1)
+                    }
                 }
+                binding.idRVCourse.adapter?.notifyDataSetChanged()
+                binding.emptyIV.visibility = if (cartModelArrayList.isEmpty()) View.VISIBLE else View.GONE
+                binding.idRVCourse.visibility = if (cartModelArrayList.isEmpty()) View.GONE else View.VISIBLE
             }
 
-            binding.emptyIV.visibility = if (cartModelArrayList.isEmpty()) View.VISIBLE else View.GONE
-            binding.idRVCourse.visibility = if (cartModelArrayList.isEmpty()) View.GONE else View.VISIBLE
+            override fun onCancelled(error: DatabaseError) {
 
-        }.addOnFailureListener {
-            Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show()
+            }
 
-        }
+        })
+
     }
 
 }

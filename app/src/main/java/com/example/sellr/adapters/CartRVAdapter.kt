@@ -102,9 +102,9 @@ class CartRVAdapter(private val context: Context?,
             if (checkForInternet(context)) {
                 println(model.pid.toString())
                 deleteModel(model.pid.toString())
-                cartModelArrayList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, cartModelArrayList.size)
+                //cartModelArrayList.removeAt(position)
+                //notifyItemRemoved(position)
+                //notifyItemRangeChanged(position, cartModelArrayList.size)
 
             } else {
                 Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show()
