@@ -11,7 +11,7 @@
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     app:strokeWidth="1dp"
-    app:strokeColor="#5C5C5C">
+    app:strokeColor="#D4D4D4">
 
     <LinearLayout
         android:layout_width="match_parent"

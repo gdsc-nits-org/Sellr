@@ -1,12 +1,15 @@
 package com.example.sellr.fragment
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -32,7 +35,13 @@ class ProfileFragment : Fragment() {
         viewBinding=FragmentProfileBinding.inflate(inflater,container,false)
         val view=binding.root
 
-        retriveDataFromDatabase()
+        if (isNetworkConnected(requireContext())) {
+            retriveDataFromDatabase()
+        } else {
+            binding.emptyState.visibility=View.VISIBLE
+            binding.mainBody.visibility=View.GONE
+            Toast.makeText(requireContext(), "No internet connection", Toast.LENGTH_LONG).show()
+        }
         binding.editProfile.setOnClickListener {
             val i = Intent(context, MainFragmentHolder::class.java)
             i.putExtra("editProfile", "editProfile")
@@ -72,6 +81,12 @@ class ProfileFragment : Fragment() {
 
         return view
     }
+    private fun isNetworkConnected(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
 
 
     fun retriveDataFromDatabase(){
@@ -96,7 +111,7 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
         })
     }
