@@ -160,7 +160,7 @@ class HomeFragment : Fragment() {
                             goToTopButton.hide()
                         }
 
-                    }, 3000)
+                    }, 1000)
                 }
 
 
