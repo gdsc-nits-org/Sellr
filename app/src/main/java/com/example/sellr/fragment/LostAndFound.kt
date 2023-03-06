@@ -4,21 +4,20 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sellr.LostAndFoundInput
-import com.example.sellr.R
 import com.example.sellr.adapters.LostAndFoundAdapter
 import com.example.sellr.data.LostAndFoundData
 import com.example.sellr.databinding.FragmentLostAndFoundBinding
 import com.example.sellr.utils.CheckInternet
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -62,12 +61,29 @@ class LostAndFound : Fragment() {
                 if (dy < -10 && !fab.isShown) {
                     fab.show()
                 }
-                if(dy<-25 && goToTopButton.isShown){
+                if(dy<-10 && goToTopButton.isShown){
                     goToTopButton.hide()
                 }
-                if(dy>25 && !goToTopButton.isShown){
+                if(dy>10 && !goToTopButton.isShown){
                     goToTopButton.show()
                 }
+
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(newState==RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val isScrollStopped=binding.lostandfoundRecycler.scrollState==RecyclerView.SCROLL_STATE_IDLE
+                        if(goToTopButton.isShown && isScrollStopped )
+                        {
+                            goToTopButton.hide()
+                        }
+
+                    }, 3000)
+                }
+
 
             }
         })
