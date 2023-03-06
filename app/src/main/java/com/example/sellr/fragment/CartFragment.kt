@@ -65,6 +65,7 @@ class CartFragment : Fragment() {
                 //get item ids to fetch
                 fetchIndividualItems(cartItemIDs.value.toString())
                 println(cartItemIDs.value.toString())
+
             }
 
         }.addOnFailureListener {
@@ -137,9 +138,10 @@ class CartFragment : Fragment() {
             if (item != null) {
                 if(item.sold != true){
                     cartModelArrayList.add(item)
+                    binding.idRVCourse.adapter?.notifyItemInserted(cartModelArrayList.size-1)
                 }
             }
-            binding.idRVCourse.adapter?.notifyDataSetChanged()
+
             binding.emptyIV.visibility = if (cartModelArrayList.isEmpty()) View.VISIBLE else View.GONE
             binding.idRVCourse.visibility = if (cartModelArrayList.isEmpty()) View.GONE else View.VISIBLE
 

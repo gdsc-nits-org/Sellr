@@ -6,21 +6,15 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.DescriptionPage
-import com.example.sellr.R
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.CartLayoutBinding
-import com.example.sellr.databinding.GridViewBinding
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
@@ -106,10 +100,11 @@ class CartRVAdapter(private val context: Context?,
         val btn = holder.adapterBinding.removeButton
         btn.setOnClickListener {
             if (checkForInternet(context)) {
-                deleteModel(model.pid!!)
+                println(model.pid.toString())
+                deleteModel(model.pid.toString())
                 cartModelArrayList.removeAt(position)
                 notifyItemRemoved(position)
-                 notifyItemRangeChanged(position, cartModelArrayList.size)
+                notifyItemRangeChanged(position, cartModelArrayList.size)
 
             } else {
                 Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show()
@@ -127,17 +122,30 @@ class CartRVAdapter(private val context: Context?,
         return cartModelArrayList.size
     }
 
-    private fun deleteModel(model: String) {
+    private fun deleteModel(itemID: String) {
+        val user = Firebase.auth.currentUser?.uid.toString()
+        val dtb =
+            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+        val query: Query =
+            dtb.child("Users").child(user).child("favpost").orderByValue()
+                .equalTo(itemID)
 
-        val database =
-            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("Users")
-        database.child(Firebase.auth.currentUser?.uid.toString()).child("favpost").child(model)
-            .removeValue().addOnSuccessListener {
-            Toast.makeText(context, "Item Removed From Cart", Toast.LENGTH_LONG).show()
-        }.addOnFailureListener {
-            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
-        }
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    snapshot.ref.removeValue()
+                }
+
+                Toast.makeText(
+                    context,
+                    "Item Removed from Cart",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
     }
 
 }
