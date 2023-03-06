@@ -27,16 +27,6 @@ class CartFragment : Fragment() {
         fetchDataFromDataBase()
         return binding.root
     }
-//    private fun retriveDataFromDatabase(){
-//        val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-//        val myReference: DatabaseReference =database.reference.child("Items")
-//        myReference.get().addOnSuccessListener {
-//            val user=Firebase.auth.currentUser?.uid.toString()
-//            itemList.clear()   //For clearing when data gets added to database.
-//            for(eachItem in it.children){
-//                val item=eachItem.getValue(SellData::class.java)
-//                if(item!=null && item.userUID==user&&!item.sold!!){
-//                    itemList.add(item)
 
     private fun fetchDataFromDataBase() {
         binding.idRVCourse.adapter= context?.let {it1-> CartRVAdapter(it1,cartModelArrayList) }
@@ -47,96 +37,29 @@ class CartFragment : Fragment() {
         val myReference: DatabaseReference =database.reference.child("Users").child(
             user?.uid.toString()).child("favpost")
         myReference.addValueEventListener(object : ValueEventListener{
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 cartModelArrayList.clear()
-
-
-                //println(it.toString())
-                for (cartItemIDs in snapshot.children) {
-//                val item=cartItem.getValue(SellData::class.java)
-//                if(item!=null )
-//                {
-//                    if(!item.sold!!)
-//                    {
-//                        cartModelArrayList.add(item)
-//                    }
-//
-//                }
-                    //get item ids to fetch
-                    fetchIndividualItems(cartItemIDs.value.toString())
-                    println(cartItemIDs.value.toString())
+                if(snapshot.exists())
+                {
+                    for (cartItemIDs in snapshot.children) {
+                        //get item ids to fetch
+                        fetchIndividualItems(cartItemIDs.value.toString())
+                        println(cartItemIDs.value.toString())
+                    }
                 }
-                binding.idRVCourse.adapter?.notifyDataSetChanged()
-                binding.emptyIV.visibility = if (cartModelArrayList.isEmpty()) View.VISIBLE else View.GONE
-                binding.idRVCourse.visibility = if (cartModelArrayList.isEmpty()) View.GONE else View.VISIBLE
-
+                else
+                {
+                    binding.emptyIV.visibility = if (cartModelArrayList.isEmpty()) View.VISIBLE else View.GONE
+                    binding.idRVCourse.visibility = if (cartModelArrayList.isEmpty()) View.GONE else View.VISIBLE
+                }
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
         }
         )
-
-
-//        database.addValueEventListener(object: ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                cartModelArrayList.clear()
-//                if(snapshot.exists()){
-//                    for(userSnapshot in snapshot.children){
-//
-//                        val items = userSnapshot.value.toString()
-//
-//                        val databaseItem = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Items")
-//                        databaseItem.child(items).get().addOnSuccessListener {
-//
-//                            if (it.exists()){
-//                                val sold=it.child("sold").value.toString()
-//                                if(sold=="false")
-//                                {
-//                                    val price = it.child("price").value
-//                                    val name=it.child("productName").value
-//                                    val image=it.child("imagePrimary").value
-//                                    val key=userSnapshot.key.toString()
-//                                    val id=it.child("pid").value.toString()
-//                                    cartModelArrayList.add(CartModel(name.toString(),price.toString(),image.toString(),key,id))
-//
-//                                }
-//
-//                            }
-////                            if(cartModelArrayList.size==0)
-////                            {
-////                                emptyIV.visibility=View.VISIBLE
-////                            }
-////                            else
-////                            {
-////                                emptyIV.visibility=View.GONE
-////                            }
-//                        }.addOnFailureListener{
-//                            TODO("Not yet implemented")
-//                        }
-//
-//                    }
-//                }
-//                else
-//                {
-//                    binding.emptyIV.visibility=View.VISIBLE
-//                }
-//                cartRVAdapter.notifyDataSetChanged()
-//
-//
-//
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
     }
-
     private fun fetchIndividualItems(itemID:String) {
 
         val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
@@ -147,7 +70,6 @@ class CartFragment : Fragment() {
                 if (item != null) {
                     if(item.sold != true){
                         cartModelArrayList.add(item)
-
                     }
                 }
                 binding.idRVCourse.adapter?.notifyDataSetChanged()
