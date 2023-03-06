@@ -32,7 +32,7 @@ class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAn
 
     override fun onBindViewHolder(holder: LostAndFoundViewHolder, position: Int) {
 
-        val obj = objectList.sortedByDescending { it.dateAdded }[objectList.size - position - 1]
+        val obj = objectList[objectList.size-position-1]
 
         val databaseUser =
             FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
@@ -58,17 +58,23 @@ class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAn
 
        }
 
-        if(obj.lostOrFound == "FOUND"){
-            holder.binding.indicatorRed.visibility = View.GONE
-            println("THE OBJECT WAS : ${obj.lostOrFound}" )
-        }
-        else if (obj.lostOrFound == "LOST") {
-            holder.binding.indicatorGreen.visibility = View.GONE
-            println("THE OBJECT WAS : ${obj.lostOrFound}" )
+        when (obj.lostOrFound) {
+            "FOUND" -> {
+                holder.binding.indicatorRed.setImageResource(R.drawable.found_newtag)
+                println("THE OBJECT WAS : ${obj.lostOrFound} ${obj.objectName}" )
+            }
+            "LOST" -> {
+                holder.binding.indicatorRed.setImageResource(R.drawable.lost_newtag)
+                println("THE OBJECT WAS : ${obj.lostOrFound} ${obj.objectName}" )
+            }
+            else -> {
+                //holder.binding.indicatorRed.visibility = View.VISIBLE
+                println("THE OBJECT WAS end case : ${obj.lostOrFound} ${obj.objectName}" )
+            }
         }
 
         holder.itemView.setOnClickListener {
-            val value = objectList[objectList.size - position - 1].pid.toString()
+            val value = obj.pid.toString()
             val i = Intent(context, LostAndFoundDescriptionPage::class.java)
             i.putExtra("key", value)
             context.startActivity(i)

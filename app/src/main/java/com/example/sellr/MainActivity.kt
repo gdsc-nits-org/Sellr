@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     private var hideIcon = true
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main_screen, menu)
-        menu?.findItem(R.id.edit_profile)?.isVisible = !hideIcon
        // menu?.findItem(R.id.logOutMenu)?.isVisible = !hideIcon
         return true
     }
@@ -41,12 +40,7 @@ class MainActivity : AppCompatActivity() {
                 i.putExtra("reportUs", "reportUs")
                 startActivity(i)
             }
-            R.id.edit_profile -> {
-                val i = Intent(applicationContext, MainFragmentHolder::class.java)
-                i.putExtra("editProfile", "editProfile")
-                startActivity(i)
 
-            }
 
 //            R.id.logOutMenu -> {
 //                val builder = AlertDialog.Builder(this)

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -42,10 +43,12 @@ class HomeFragment : Fragment() {
     private lateinit var recylerViewfilter: RecyclerView
 
     private lateinit var emptyH : ConstraintLayout
+    private lateinit var loadingAnimationControl : LinearLayout
 
     //for filtered datalist in myadapterhome
     private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
 
+    private lateinit var goToTopButton: ExtendedFloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,12 +82,22 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         emptyH = view.findViewById(R.id.emptyhome)
+        loadingAnimationControl=view.findViewById(R.id.loadingAnimation_home)
+        goToTopButton=view.findViewById(R.id.top_scroll_button)
+
+
 
         //for filter
         val layoutManagerfilter =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recylerViewfilter = view.findViewById(R.id.filter)
         recylerViewfilter.layoutManager = layoutManagerfilter
+
+        //to scroll back to top
+        goToTopButton.setOnClickListener {
+            recylerView.smoothScrollToPosition(0)
+        }
+
 
         datalistforfilter = arrayListOf()
 
@@ -124,6 +137,15 @@ class HomeFragment : Fragment() {
                 }
                 if (dy < -10 && !fab.isShown) {
                     fab.show()
+                }
+
+                val goToTop=view.findViewById<ExtendedFloatingActionButton>(R.id.top_scroll_button)
+
+                if(dy<-25 && goToTop.isShown){
+                    goToTop.hide()
+                }
+                if(dy>25 && !goToTop.isShown){
+                    goToTop.show()
                 }
 
             }
@@ -212,10 +234,15 @@ class HomeFragment : Fragment() {
             datalistforfilteredmyAdapter.addAll(datalist)
         }
 
-        if(datalistforfilteredmyAdapter.isEmpty())
+        if(datalistforfilteredmyAdapter.isEmpty()){
+
             emptyH.visibility = View.VISIBLE
-        else
+        }
+        else{
+
             emptyH.visibility = View.INVISIBLE
+        }
+
 
         recylerView.adapter?.notifyDataSetChanged()
         recylerView.adapter =
@@ -266,6 +293,7 @@ class HomeFragment : Fragment() {
 
         dbref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                loadingAnimationControl.visibility=View.GONE
                 if (snapshot.exists()) {
                     datalist.clear()
                     for (userSnapshot in snapshot.children) {
