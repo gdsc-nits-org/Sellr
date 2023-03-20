@@ -91,16 +91,16 @@
         app:strokeColor="#5B97C6"
         app:strokeWidth="1dp" />
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/imageView5"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/otpverification"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.636"
-   android:src="@mipmap/seller_icon_foreground"
-        />
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
