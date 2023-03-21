@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".noInternet">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        android:id="@+id/nointernet"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.265"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/nointernet" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/retrybutton"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:backgroundTint="#fec202"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:text="Retry"
+
+        android:textColor="#4e4637"
+        android:textSize="18dp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/nointernet"
+        app:layout_constraintTop_toBottomOf="@+id/nointernet"
+        app:layout_goneMarginBottom="2dp"
+        app:rippleColor="#BCA250"
+        app:strokeColor="#5B97C6"
+        app:strokeWidth="1dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
