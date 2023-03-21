@@ -38,46 +38,12 @@ class ProfileFragment : Fragment() {
         if (isNetworkConnected(requireContext())) {
             retriveDataFromDatabase()
         } else {
-            binding.emptyState.visibility=View.VISIBLE
-            binding.mainBody.visibility=View.GONE
+
+            binding.progressBar.visibility=View.VISIBLE
+
             Toast.makeText(requireContext(), "No internet connection", Toast.LENGTH_LONG).show()
         }
-        binding.editProfile.setOnClickListener {
-            val i = Intent(context, MainFragmentHolder::class.java)
-            i.putExtra("editProfile", "editProfile")
-            startActivity(i)
-        }
-//        binding.editButton.setOnClickListener{
-//            val fragmentManager:FragmentManager=requireActivity().supportFragmentManager
-//            val fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
-//            val profileFragment=fragmentEditProfile()
-//            fragmentTransaction.replace(R.id.frame,profileFragment)
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
-//
-//        }
 
-
-
-//        binding.soldButton.setOnClickListener {
-//            val i = Intent(activity, MainFragmentHolder::class.java)
-//            i.putExtra("sold", "sold")
-//            startActivity(i)
-//
-//        }
-//
-//        binding.onSaleButton.setOnClickListener {
-//            val i = Intent(activity, MainFragmentHolder::class.java)
-//            i.putExtra("onSale", "onSale")
-//            startActivity(i)
-//        }
-//
-//        binding.lostndFoundButton.setOnClickListener {
-//
-//            val i = Intent(activity, MainFragmentHolder::class.java)
-//            i.putExtra("lostAndFoundList", "lostAndFoundList")
-//            startActivity(i)
-//        }
 
         return view
     }
@@ -89,25 +55,29 @@ class ProfileFragment : Fragment() {
     }
 
 
-    fun retriveDataFromDatabase(){
-        myReference.addValueEventListener(object : ValueEventListener{
+    fun retriveDataFromDatabase() {
+        val startTime = System.currentTimeMillis()
+
+        myReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.progressBar.visibility = View.VISIBLE
 
-                //for(eachUser in snapshot.children) {
+                val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
+                if (user != null) {
+                    binding.EMAIL.text = user.email
+                    binding.USERNAME.text = user.name
+                    binding.SCHOLAR.text = user.scholarid
+                    binding.PHONE.text = user.phonenum
+                }
 
-                    val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
-                    if (user != null) {
-                        //println("userId: ${user.Email}")
-                        binding.EMAIL.text=user.email
-                       // binding.HOSTEL.text=user.Hostel
-                        binding.USERNAME.text=user.name
-                        binding.SCHOLAR.text=user.scholarid
-                        binding.PHONE.text=user.phonenum
-                    }
-                binding.progressBar.visibility = View.GONE
-                //}
+                val endTime = System.currentTimeMillis()
+                val duration = endTime - startTime
 
+                if (duration > 5000) {
+                    Toast.makeText(requireContext(), "Slow Internet Connection", Toast.LENGTH_LONG).show()
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -115,4 +85,5 @@ class ProfileFragment : Fragment() {
             }
         })
     }
+
 }
