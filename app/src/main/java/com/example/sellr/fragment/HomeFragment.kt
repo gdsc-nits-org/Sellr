@@ -3,6 +3,8 @@ package com.example.sellr.fragment
 //import android.widget.SearchView
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +17,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.sellr.*
 import com.example.sellr.R
+import com.example.sellr.SellActivity
 import com.example.sellr.datahome.filterAdapter
 import com.example.sellr.datahome.filterData
 import com.example.sellr.datahome.items_home
 import com.example.sellr.datahome.myAdapterhome
 import com.example.sellr.utils.CheckInternet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -141,12 +141,28 @@ class HomeFragment : Fragment() {
 
                 val goToTop=view.findViewById<ExtendedFloatingActionButton>(R.id.top_scroll_button)
 
-                if(dy<-25 && goToTop.isShown){
+                if(dy<-10 && goToTop.isShown){
                     goToTop.hide()
                 }
-                if(dy>25 && !goToTop.isShown){
+                if(dy>10 && !goToTop.isShown){
                     goToTop.show()
                 }
+
+            }
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(newState==RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val isScrollStopped=recyclerView.scrollState==RecyclerView.SCROLL_STATE_IDLE
+                        if(goToTopButton.isShown && isScrollStopped )
+                        {
+                            goToTopButton.hide()
+                        }
+
+                    }, 1000)
+                }
+
 
             }
         })

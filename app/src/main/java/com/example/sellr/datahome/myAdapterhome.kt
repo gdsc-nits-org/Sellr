@@ -22,7 +22,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import java.util.*
-import kotlin.collections.ArrayList
 
 private fun checkForInternet(context: Context): Boolean {
 
@@ -153,22 +152,28 @@ class myAdapterhome(
         holder.addToFav.setOnClickListener {
             if(checkForInternet(context)){
                 if (currentItem.addedtofav == false) {
-                    println("inside pushing")
-                    // currentItem.addedtofav = true
-                    // holder.addToFav.setImageResource(R.drawable.favorite)
-                    Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
+
                     dtb.child("Users").child(user).child("favpost").push().setValue(currentItem.pid)
+                        .addOnSuccessListener {
+                            println("inside pushing")
+                            // currentItem.addedtofav = true
+                            // holder.addToFav.setImageResource(R.drawable.favorite)
+                            Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
+                        }
                 } else {
-                    holder.addToFav.apply {
-                        icon = context.getDrawable(R.drawable.add_to_cart_black)
-                        setBackgroundColor(context.resources.getColor(R.color.icbg))
-                        iconTint =
-                            ColorStateList.valueOf(context.resources.getColor(R.color.white))
-                    }
-                    println("inside removing")
+
                     currentItem.addedtofav = false
                     dtb.child("Users").child(user).child("favpost").child(currentItem.key.toString())
                         .removeValue()
+                        .addOnSuccessListener {
+                            holder.addToFav.apply {
+                                icon = context.getDrawable(R.drawable.add_to_cart_black)
+                                setBackgroundColor(context.resources.getColor(R.color.icbg))
+                                iconTint =
+                                    ColorStateList.valueOf(context.resources.getColor(R.color.white))
+                            }
+                            Toast.makeText(context, "Item Removed from Cart", Toast.LENGTH_SHORT).show()
+                        }
                 }
             }
             else{

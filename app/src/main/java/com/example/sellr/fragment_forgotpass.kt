@@ -34,11 +34,12 @@ class fragment_forgotpass : Fragment() {
         button.setOnClickListener {
             val pd = ProgressDialog(context);
             pd.setMessage("Sit back and relax, we are processing")
-            pd.show()
+
             val emailtxt = email.text.toString().trim()
             if(emailtxt.isBlank() || !emailtxt.contains("nits"))
                 email.setError("Please Enter Valid Email")
             else {
+                pd.show()
                 auth.sendPasswordResetEmail(emailtxt)
                 Toast.makeText(
                     requireContext(),
@@ -46,11 +47,20 @@ class fragment_forgotpass : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 pd.hide()
-                startActivity(Intent(requireContext(), AuthActivity::class.java))
+                fragmentload(LoginFragment())
+                //startActivity(Intent(requireContext(), AuthActivity::class.java))
             }
 
         }
         return view
+
+    }
+    private fun fragmentload(fragment : Fragment)
+    {
+
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.authFrameLayout, fragment)
+        fragmentTransaction.commit()
 
     }
 
