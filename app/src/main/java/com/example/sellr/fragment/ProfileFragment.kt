@@ -5,10 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 
 import androidx.fragment.app.FragmentManager
@@ -28,6 +26,27 @@ class ProfileFragment : Fragment() {
     val myReference:DatabaseReference=database.reference.child("Users")
     private var viewBinding: FragmentProfileBinding?=null
     private val binding get()= viewBinding!!
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.edit_profile, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.edit -> {
+                val i = Intent(context, MainFragmentHolder::class.java)
+                i.putExtra("editProfile", "editProfile")
+                startActivity(i)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
