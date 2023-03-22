@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.example.sellr.databinding.FragmentNoInternetBinding
 import com.example.sellr.databinding.FragmentProfileBinding
 
@@ -24,13 +25,23 @@ class noInternet : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                println("No Internet Bruh!")
+            } })
+
+
+
+
         viewBinding=FragmentNoInternetBinding.inflate(inflater,container,false)
         val view=binding.root
+
         binding.retrybutton.setOnClickListener {
             if (isNetworkConnected(requireContext())){
 
                 val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("splash off", "splash off")
                 startActivity(intent)
 
 
