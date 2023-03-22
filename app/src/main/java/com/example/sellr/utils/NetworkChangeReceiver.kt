@@ -36,15 +36,20 @@ class NetworkChangeReceiver(private val fragmentManager: FragmentManager) : Broa
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun isNetworkConnected(context: Context?): Boolean {
         val connectivityManager =
             context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork
-        if (network != null) {
-            val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
-            return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork
+            if (network != null) {
+                val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+                return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+            }
+            return false
+        } else {
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected
         }
-        return false
     }
 }
