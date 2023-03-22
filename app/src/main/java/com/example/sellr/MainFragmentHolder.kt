@@ -42,7 +42,13 @@ class MainFragmentHolder : AppCompatActivity() {
             
             title = "Report an issue"
             fragmentLoad(ReportUsFragment())
-        } else if (intent.hasExtra("lostAndFoundList")) {
+        }
+        else if (intent.hasExtra("nointernet")) {
+
+            title = "Connection Error"
+            fragmentLoad(noInternet())
+        }
+        else if (intent.hasExtra("lostAndFoundList")) {
             
             title = "User Lost and Found"
             fragmentLoad(UserItemLostAndFound())

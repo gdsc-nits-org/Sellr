@@ -2,8 +2,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
+import com.example.sellr.MainActivity
+import com.example.sellr.MainFragmentHolder
 import com.example.sellr.R
 import com.example.sellr.noInternet
 
@@ -21,11 +24,14 @@ class NetworkChangeReceiver(private val fragmentManager: FragmentManager) : Broa
             }
         } else {
             // Internet is not available
-            fragmentManager.beginTransaction()
-                .replace(R.id.profileFragment, noInternet())
-                .commit()
+            val i = Intent(context, MainFragmentHolder::class.java)
+            i.putExtra("nointernet", "nointernet")
+            if (context != null) {
+                context.startActivity(i)
+            }
         }
     }
+
 
     private fun isNetworkConnected(context: Context?): Boolean {
         val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
