@@ -1,8 +1,11 @@
 package com.example.sellr
 
+import NetworkChangeReceiver
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +23,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
+
+    private var networkChangeReceiver: NetworkChangeReceiver? = null
     private lateinit var binding: ActivityMainBinding
     private var hideIcon = true
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -103,6 +108,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+         networkChangeReceiver = NetworkChangeReceiver(supportFragmentManager)
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkChangeReceiver, filter)
+
     }
     private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {
@@ -115,5 +124,10 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
 
         Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(networkChangeReceiver)
+        super.onDestroy()
     }
 }

@@ -16,24 +16,23 @@ class noInternet : Fragment() {
 
 
     private var viewBinding: FragmentNoInternetBinding?=null
+    private var lastState: Bundle? = null
     private val binding get()= viewBinding!!
 
-    private var previousFragmentName: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewBinding=FragmentNoInternetBinding.inflate(inflater,container,false)
         val view=binding.root
-
-        arguments?.let {
-            previousFragmentName = it.getString("previousFragmentName")
-        }
         binding.retrybutton.setOnClickListener {
             if (isNetworkConnected(requireContext())){
-                previousFragmentName?.let {
-                    parentFragmentManager.popBackStack(it, 0)
-                }
+
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("splash off", "splash off")
+                startActivity(intent)
+
 
             }
             else{
@@ -43,6 +42,12 @@ class noInternet : Fragment() {
 
         return view
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        lastState = outState
+    }
+
+
 
     private fun isNetworkConnected(context: Context): Boolean {
         val connectivityManager =

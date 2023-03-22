@@ -2,16 +2,20 @@ package com.example.sellr.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sellr.DescriptionPage
 import com.example.sellr.data.SellData
 import com.example.sellr.databinding.GridLayoutBinding
 import com.example.sellr.databinding.GridViewBinding
+import com.example.sellr.noInternet
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
@@ -62,20 +66,27 @@ class OnSaleAdapter(
         }
 
         holder.adapterBinding.deleteButton.setOnClickListener {
-            println("position to delete ${itemList[position]}")
-            val builder = AlertDialog.Builder(context!!)
-            builder.setTitle("Are you sure?")
-            builder.setMessage("Your item will be deleted permanently from the database")
-            builder.setPositiveButton("Yes") { _, _ ->
-                deleteModel(itemList[position].pid.toString())
-                itemList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemList.size)
 
+            if (context?.let { it1 -> isNetworkConnected(it1) } == true) {
+                println("position to delete ${itemList[position]}")
+                val builder = AlertDialog.Builder(context!!)
+                builder.setTitle("Are you sure?")
+                builder.setMessage("Your item will be deleted permanently from the database")
+                builder.setPositiveButton("Yes") { _, _ ->
+                    deleteModel(itemList[position].pid.toString())
+                    itemList.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, itemList.size)
+
+                }
+                builder.setNegativeButton("No") { _, _ ->
+                }
+                builder.show()
             }
-            builder.setNegativeButton("No") { _, _ ->
+
+            else{
+                Toast.makeText(context, "Please Check Your Internet and Try again.", Toast.LENGTH_LONG).show()
             }
-            builder.show()
 
         }
         holder.itemView.setOnClickListener {
@@ -130,6 +141,13 @@ class OnSaleAdapter(
 
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    private fun isNetworkConnected(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
 }

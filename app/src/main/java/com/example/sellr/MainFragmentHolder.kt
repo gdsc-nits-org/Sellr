@@ -49,6 +49,9 @@ class MainFragmentHolder : AppCompatActivity() {
         } else if (intent.hasExtra("profile")) {
             title = "Profile"
             fragmentLoad(ProfileFragment())
+        } else if (intent.hasExtra("home")) {
+            title = "Sellr"
+            fragmentLoad(HomeFragment())
         } else if (intent.hasExtra("extraDetails")) {
             try {
                 this.supportActionBar!!.hide()
