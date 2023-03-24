@@ -10,7 +10,6 @@
         <item name="cornerSizeTopRight">15%</item>
         <item name="cornerSizeBottomLeft">15%</item>
         <item name="cornerSizeBottomRight">15%</item>
-
     </style>
         <!-- Base application theme. -->
         <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">

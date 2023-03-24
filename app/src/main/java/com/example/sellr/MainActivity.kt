@@ -21,8 +21,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.sellr.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import okhttp3.OkHttpClient
+import java.net.InetSocketAddress
+import java.net.Proxy
 
 class MainActivity : AppCompatActivity() {
+
+    val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("172.16.199.20", 8080))
+
+    val okHttpClient = OkHttpClient.Builder()
+        .proxy(proxy)
+        .build()
 
     private var networkChangeReceiver: NetworkChangeReceiver? = null
     private lateinit var binding: ActivityMainBinding

@@ -95,7 +95,7 @@ class fragmentEditProfile : Fragment() {
             userMap["scholarid"]=updatedScholarId
             myReference.child(userId).updateChildren(userMap).addOnCompleteListener{ task->
                 if(task.isSuccessful){
-                    Toast.makeText(activity,"The user data has been updated",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),"The user data has been updated",Toast.LENGTH_SHORT).show()
                     activity?.onBackPressed()
 
                 }
