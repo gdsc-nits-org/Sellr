@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -26,6 +27,7 @@ class ProfileFragment : Fragment() {
     val myReference:DatabaseReference=database.reference.child("Users")
     private var viewBinding: FragmentProfileBinding?=null
     private val binding get()= viewBinding!!
+    private var valueEventListener: ValueEventListener? = null
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.edit_profile, menu)
@@ -66,18 +68,31 @@ class ProfileFragment : Fragment() {
 
         return view
     }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        valueEventListener?.let { myReference.removeEventListener(it) }
+    }
     private fun isNetworkConnected(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
+    override fun onResume() {
+        super.onResume()
+        if (isNetworkConnected(requireContext())) {
+            retriveDataFromDatabase()
+        }
+    }
+
 
 
     fun retriveDataFromDatabase() {
-        val startTime = System.currentTimeMillis()
+        val startTime = SystemClock.elapsedRealtime()
 
-        myReference.addValueEventListener(object : ValueEventListener {
+        valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.progressBar.visibility = View.VISIBLE
 
@@ -87,23 +102,27 @@ class ProfileFragment : Fragment() {
                     binding.USERNAME.text = user.name
                     binding.SCHOLAR.text = user.scholarid
                     binding.PHONE.text = user.phonenum
-                    binding.progressBar.visibility = View.GONE
+                   // binding.progressBar.visibility = View.GONE
                 }
 
-//                val endTime = System.currentTimeMillis()
-//                val duration = endTime - startTime
+                val endTime = SystemClock.elapsedRealtime()
+                val duration = endTime - startTime
 
-//                if (duration > 5000) {
-//                    Toast.makeText(requireContext(), "Slow Internet Connection", Toast.LENGTH_LONG).show()
-//                } else {
-//                    viewBinding?.progressBar?.visibility = View.GONE
-//                }
+                if (duration > 10000) {
+                    Toast.makeText(requireContext(), "Slow Internet Connection", Toast.LENGTH_LONG).show()
+                } else {
+                    viewBinding?.progressBar?.visibility = View.GONE
+
+                }
+                myReference.removeEventListener(this)
             }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
-        })
+
+        }
+        myReference.addValueEventListener(valueEventListener!!)
     }
 
 
