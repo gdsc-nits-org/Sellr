@@ -87,16 +87,17 @@ class ProfileFragment : Fragment() {
                     binding.USERNAME.text = user.name
                     binding.SCHOLAR.text = user.scholarid
                     binding.PHONE.text = user.phonenum
-                }
-
-                val endTime = System.currentTimeMillis()
-                val duration = endTime - startTime
-
-                if (duration > 5000) {
-                    Toast.makeText(requireContext(), "Slow Internet Connection", Toast.LENGTH_LONG).show()
-                } else {
                     binding.progressBar.visibility = View.GONE
                 }
+
+//                val endTime = System.currentTimeMillis()
+//                val duration = endTime - startTime
+
+//                if (duration > 5000) {
+//                    Toast.makeText(requireContext(), "Slow Internet Connection", Toast.LENGTH_LONG).show()
+//                } else {
+//                    viewBinding?.progressBar?.visibility = View.GONE
+//                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -104,5 +105,6 @@ class ProfileFragment : Fragment() {
             }
         })
     }
+
 
 }
