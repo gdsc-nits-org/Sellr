@@ -120,7 +120,7 @@ class RegisterFragment : Fragment() {
                                 "sellr.gdscnits@gmail.com", token,
                                 emailtxt,
                                 "Sellr OTP Verification ",
-                                "Hey User! \n\nThank you for using our platform. To ensure the security of your account, we require you to enter a One-Time Password (OTP) to verify your identity. \nYour OTP for Sellr is \n$otp \n\n\nIf you are facing any problems with Login/Signup, please contact us at the following email addresses.\nsellrgdsc@gmail.com\nzaidisameer02@gmail.com \n\n Best Regards, \n Team Sellr"
+                                "Hey User! \n\nThank you for using our platform. To ensure the security of your account, we require you to enter a One-Time Password (OTP) to verify your identity. \nYour OTP for Sellr is \n$otp \n\n\nIf you are facing any problems with Login/Signup, please contact us at the following email addresses.\nsellr.gdscnits@gmail.com\nzaidisameer02@gmail.com \n\n Best Regards, \n Team Sellr"
                             )
                             mail.execute()
 
