@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.sellr"
+        applicationId "com.gdsc.sellr"
         minSdk 21
         targetSdk 32
         versionCode 1

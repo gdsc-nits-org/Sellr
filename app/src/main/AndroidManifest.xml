@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.sellr">
+    package="com.gdsc.sellr">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -22,10 +22,10 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
-            android:name=".Zooming"
+            android:name="com.gdsc.sellr.Zooming"
             android:exported="false" />
         <activity
-            android:name=".LostAndFoundDescriptionPage"
+            android:name="com.gdsc.sellr.LostAndFoundDescriptionPage"
             android:exported="false" />
 
         <meta-data
@@ -36,11 +36,11 @@
             android:resource="@color/blue" />
 
         <activity
-            android:name=".LostAndFoundInput"
+            android:name="com.gdsc.sellr.LostAndFoundInput"
             android:exported="false"
             android:label="List a Lost or Found item" />
         <activity
-            android:name=".DescriptionPage"
+            android:name="com.gdsc.sellr.DescriptionPage"
             android:configChanges="orientation"
             android:exported="false"
             android:label="Item Details"
@@ -50,7 +50,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SellActivity"
+            android:name="com.gdsc.sellr.SellActivity"
             android:configChanges="orientation"
             android:exported="false"
             android:label="Sell an Item"
@@ -60,7 +60,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainFragmentHolder"
+            android:name="com.gdsc.sellr.MainFragmentHolder"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait">
@@ -69,7 +69,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AuthActivity"
+            android:name="com.gdsc.sellr.AuthActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -84,13 +84,13 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.gdsc.sellr.MainActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".notification"
+            android:name="com.gdsc.sellr.notification"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

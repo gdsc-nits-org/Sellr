@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "269585391818",
+    "firebase_url": "https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "sellr-7a02b",
     "storage_bucket": "sellr-7a02b.appspot.com"
   },
@@ -10,6 +11,43 @@
         "mobilesdk_app_id": "1:269585391818:android:2c3c721de80084a63e1433",
         "android_client_info": {
           "package_name": "com.example.sellr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269585391818-lie56f142nj1v8nsni879bm6acgfrr17.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sellr",
+            "certificate_hash": "0806cae3f6b59af31c681936db2d33c8587c2bd2"
+          }
+        },
+        {
+          "client_id": "269585391818-8vhnm72go54k81qr00ostgingaqj48i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwGBzPRStvq2Kd3VFmNxWxg_us6gdGnq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269585391818-8vhnm72go54k81qr00ostgingaqj48i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269585391818:android:334c2ef69775074a3e1433",
+        "android_client_info": {
+          "package_name": "com.gdsc.sellr"
         }
       },
       "oauth_client": [
