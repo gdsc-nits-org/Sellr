@@ -57,9 +57,8 @@ class fragment_extradetails : Fragment() {
             }
             else if(phone.length!=10)
                 phonenum.setError("Number should be of 10 digits")
-            else if(id.isNotEmpty())
+            else if(id.isNotEmpty() && id.length<7 || id.length>8 )
             {
-                if(id.length<7 || id.length>8)
                     scholarid.setError("ID should be 7/8 Digits")
 
             }
