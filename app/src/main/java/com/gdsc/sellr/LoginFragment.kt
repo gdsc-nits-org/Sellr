@@ -139,7 +139,7 @@ class LoginFragment : Fragment() {
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
                             pd.hide()
                             Toast.makeText(
-                                requireContext(), "Authentication failed.",
+                                requireContext(), "Authentication failed." + task.exception,
                                 Toast.LENGTH_SHORT
                             ).show()
                             // updateUI(null)

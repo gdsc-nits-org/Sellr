@@ -10,10 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gdsc.sellr.LostAndFoundInput
+import com.gdsc.sellr.R
 import com.gdsc.sellr.adapters.LostAndFoundAdapter
 import com.gdsc.sellr.data.LostAndFoundData
 import com.gdsc.sellr.databinding.FragmentLostAndFoundBinding
@@ -28,6 +30,7 @@ class LostAndFound : Fragment() {
 
 
     lateinit var binding :FragmentLostAndFoundBinding
+    private lateinit var emptyH : ConstraintLayout
     private var database : FirebaseDatabase ? = null
     lateinit var objectList: ArrayList<LostAndFoundData>
     lateinit var foundList : ArrayList<LostAndFoundData>
@@ -38,6 +41,7 @@ class LostAndFound : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         // Inflate the layout for this fragment
         binding = FragmentLostAndFoundBinding.inflate(layoutInflater)
         val listit = binding.lostandfoundFab
@@ -88,7 +92,7 @@ class LostAndFound : Fragment() {
             }
         })
 
-
+        emptyH = binding.emptyhome
         refreshLostAndFound = binding.lostandfoundSwipeRefresh
         database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
         objectList = ArrayList()
@@ -120,6 +124,10 @@ class LostAndFound : Fragment() {
                             lostList.add(obj)
                         }
                     }
+                    if(objectList.isEmpty())
+                        emptyH.visibility = View.VISIBLE
+                    else
+                        emptyH.visibility = View.GONE
 
                     objectList.sortBy {
                         it.dateAdded
