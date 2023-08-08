@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 
-import com.gdsc.sellr.adapters.userItemLostFoundAdapter
-import com.gdsc.sellr.data.LostAndFoundData
+import com.gdsc.sellr.adapters.UserLNFAdapter
+import com.gdsc.sellr.dataModels.LostAndFoundDataModel
 
 import com.gdsc.sellr.databinding.FragmentUserItemLostAndFoundBinding
 import com.google.firebase.auth.ktx.auth
@@ -19,8 +19,8 @@ import com.google.firebase.ktx.Firebase
 class UserItemLostAndFound : Fragment() {
 
 
-    val itemList = ArrayList<LostAndFoundData>()
-    lateinit var itemsAdapter: userItemLostFoundAdapter
+    val itemList = ArrayList<LostAndFoundDataModel>()
+    lateinit var itemsAdapter: UserLNFAdapter
 
 
     private var viewBinding: FragmentUserItemLostAndFoundBinding? = null
@@ -50,7 +50,7 @@ class UserItemLostAndFound : Fragment() {
             itemList.clear()   //For clearing when data gets added to database.
 
             for (eachItem in it.children) {
-                val item = eachItem.getValue(LostAndFoundData::class.java)
+                val item = eachItem.getValue(LostAndFoundDataModel::class.java)
                 if (item != null && item.uid == user) {
                     itemList.add(item)
 
@@ -62,7 +62,7 @@ class UserItemLostAndFound : Fragment() {
                 binding.emptylostAndFound.visibility=View.VISIBLE
             }
 
-            itemsAdapter = userItemLostFoundAdapter(requireContext(), itemList)
+            itemsAdapter = UserLNFAdapter(requireContext(), itemList)
             binding.recyclerView.layoutManager = GridLayoutManager(activity,2)
             binding.recyclerView.adapter = itemsAdapter
 

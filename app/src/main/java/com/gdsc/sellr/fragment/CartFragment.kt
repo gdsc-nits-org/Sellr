@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.gdsc.sellr.adapters.CartRVAdapter
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.adapters.CartScreenAdapter
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.FragmentCartBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -17,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 class CartFragment : Fragment() {
 
     lateinit var binding : FragmentCartBinding
-    private val cartModelArrayList=ArrayList<SellData>()
+    private val cartModelArrayList=ArrayList<SellDataModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class CartFragment : Fragment() {
     }
 
     private fun fetchDataFromDataBase() {
-        binding.idRVCourse.adapter= context?.let {it1-> CartRVAdapter(it1,cartModelArrayList) }
+        binding.idRVCourse.adapter= context?.let {it1-> CartScreenAdapter(it1,cartModelArrayList) }
         binding.idRVCourse.layoutManager= GridLayoutManager(context,2)
         println("Fetching data for cart screen")
         val user = Firebase.auth.currentUser
@@ -66,7 +66,7 @@ class CartFragment : Fragment() {
         val myReference: DatabaseReference =database.reference.child("Items").child(itemID)
         myReference.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val item=snapshot.getValue(SellData::class.java)
+                val item=snapshot.getValue(SellDataModel::class.java)
                 if (item != null) {
                     if(item.sold != true){
                         cartModelArrayList.add(item)

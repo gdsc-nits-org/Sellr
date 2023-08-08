@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.gdsc.sellr.adapters.SoldAdapter
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.adapters.SoldItemsAdapter
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.FragmentSoldBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -17,8 +17,8 @@ import com.google.firebase.ktx.Firebase
 class SoldFragment : Fragment() {
 
 
-    val itemList = ArrayList<SellData>()
-    lateinit var itemsAdapter: SoldAdapter
+    val itemList = ArrayList<SellDataModel>()
+    lateinit var itemsAdapter: SoldItemsAdapter
 
     private var viewBinding: FragmentSoldBinding? = null
     private val binding get() = viewBinding!!
@@ -45,12 +45,12 @@ class SoldFragment : Fragment() {
             itemList.clear()   //For clearing when data gets added to database.
 
             for(eachItem in it.children){
-                val item=eachItem.getValue(SellData::class.java)
+                val item=eachItem.getValue(SellDataModel::class.java)
                 if(item!=null && item.userUID==user&&item.sold!!){
                     itemList.add(item)
                 }
 
-                itemsAdapter= SoldAdapter(requireContext(),itemList)
+                itemsAdapter= SoldItemsAdapter(requireContext(),itemList)
                 binding.recyclerView.layoutManager=GridLayoutManager(context,2)
                 binding.recyclerView.adapter=itemsAdapter
                 binding.emptyState.visibility = if (itemList.isEmpty()) View.VISIBLE else View.GONE

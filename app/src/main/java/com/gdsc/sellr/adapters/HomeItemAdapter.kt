@@ -1,4 +1,4 @@
-package com.gdsc.sellr.datahome
+package com.gdsc.sellr.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -16,65 +16,66 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gdsc.sellr.DescriptionPage
+import com.gdsc.sellr.R
+import com.gdsc.sellr.dataModels.ItemsHomeDataModel
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.ktx.auth
-import com.gdsc.sellr.R
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
-private fun checkForInternet(context: Context): Boolean {
-
-    // register activity with the connectivity manager service
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    // if the android version is equal to M
-    // or greater we need to use the
-    // NetworkCapabilities to check what type of
-    // network has the internet connection
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-        // Returns a Network object corresponding to
-        // the currently active default data network.
-        val network = connectivityManager.activeNetwork ?: return false
-
-        // Representation of the capabilities of an active network.
-        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-
-        return when {
-            // Indicates this network uses a Wi-Fi transport,
-            // or WiFi has network connectivity
-            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-
-            // Indicates this network uses a Cellular transport. or
-            // Cellular has network connectivity
-            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-
-            // else return false
-            else -> false
-        }
-    } else {
-        // if the android version is below M
-        @Suppress("DEPRECATION") val networkInfo =
-            connectivityManager.activeNetworkInfo ?: return false
-        @Suppress("DEPRECATION")
-        return networkInfo.isConnected
-    }
-}
-
-class myAdapterhome(
+class HomeItemAdapter(
     private val context: Context,
     val fragment: Fragment,
-    private var dataList: ArrayList<items_home>
-) : RecyclerView.Adapter<myAdapterhome.MyViewHolder>() {
+    private var dataList: ArrayList<ItemsHomeDataModel>
+) : RecyclerView.Adapter<HomeItemAdapter.MyViewHolder>() {
     private lateinit var dtb: DatabaseReference
-    var onItemClick: ((items_home) -> Unit)? = null
+    var onItemClick: ((ItemsHomeDataModel) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            com.gdsc.sellr.R.layout.items_home,
+            R.layout.items_home,
             parent, false
         )
         return MyViewHolder(itemView)
+    }
+
+    private fun checkForInternet(context: Context): Boolean {
+
+        // register activity with the connectivity manager service
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // if the android version is equal to M
+        // or greater we need to use the
+        // NetworkCapabilities to check what type of
+        // network has the internet connection
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            // Returns a Network object corresponding to
+            // the currently active default data network.
+            val network = connectivityManager.activeNetwork ?: return false
+
+            // Representation of the capabilities of an active network.
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                // Indicates this network uses a Wi-Fi transport,
+                // or WiFi has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                // Indicates this network uses a Cellular transport. or
+                // Cellular has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // else return false
+                else -> false
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
     }
 
 
@@ -118,7 +119,7 @@ class myAdapterhome(
                             val items = userSnapshot.value
                             if (items == currentItem.pid) {
                                 holder.addToFav.apply {
-                                    icon = context.getDrawable(com.gdsc.sellr.R.drawable.add_to_carty)
+                                    icon = context.getDrawable(R.drawable.add_to_carty)
                                     setBackgroundColor(context.resources.getColor(R.color.white))
                                     iconTint =
                                         ColorStateList.valueOf(context.resources.getColor(R.color.golden_yellow))

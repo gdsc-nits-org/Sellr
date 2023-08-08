@@ -22,7 +22,7 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
-            android:name="com.gdsc.sellr.Zooming"
+            android:name="com.gdsc.sellr.utils.Zooming"
             android:exported="false" />
         <activity
             android:name="com.gdsc.sellr.LostAndFoundDescriptionPage"

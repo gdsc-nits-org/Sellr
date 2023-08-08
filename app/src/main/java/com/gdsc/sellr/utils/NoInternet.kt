@@ -1,4 +1,4 @@
-package com.gdsc.sellr
+package com.gdsc.sellr.utils
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import com.gdsc.sellr.MainActivity
 import com.gdsc.sellr.databinding.FragmentNoInternetBinding
 
 class noInternet : Fragment() {

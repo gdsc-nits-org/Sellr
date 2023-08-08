@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gdsc.sellr.DescriptionPage
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.GridViewBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -20,7 +20,7 @@ import com.google.firebase.ktx.Firebase
 
 class OnSaleAdapter(
     private val context: Context?,
-    private var itemList: ArrayList<SellData>
+    private var itemList: ArrayList<SellDataModel>
 ) :
     RecyclerView.Adapter<OnSaleAdapter.ItemsViewHolder>() {
 

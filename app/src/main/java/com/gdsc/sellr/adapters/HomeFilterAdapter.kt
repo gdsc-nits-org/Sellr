@@ -1,4 +1,4 @@
-package com.gdsc.sellr.datahome
+package com.gdsc.sellr.adapters
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.sellr.R
+import com.gdsc.sellr.dataModels.FilterHomeDataModel
 import com.google.android.material.button.MaterialButton
 
 
-class filterAdapter(private var dataList: ArrayList<filterData>) :
-    RecyclerView.Adapter<filterAdapter.MyViewHolder>() {
+class HomeFilterAdapter(private var dataList: ArrayList<FilterHomeDataModel>) :
+    RecyclerView.Adapter<HomeFilterAdapter.MyViewHolder>() {
 
     var selectedItemPosition: Int = 0
     private lateinit var mListener : onItemClickListener
@@ -28,10 +29,10 @@ class filterAdapter(private var dataList: ArrayList<filterData>) :
         mListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): filterAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filter_item,
             parent, false)
-        return filterAdapter.MyViewHolder(itemView,mListener)
+        return MyViewHolder(itemView,mListener)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

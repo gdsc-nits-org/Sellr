@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gdsc.sellr.LostAndFoundDescriptionPage
 import com.gdsc.sellr.R
-import com.gdsc.sellr.data.LostAndFoundData
+import com.gdsc.sellr.dataModels.LostAndFoundDataModel
 import com.gdsc.sellr.databinding.LayoutLostandfoundItemBinding
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
-class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAndFoundData> ):
+class LostAndFoundAdapter(val context: Context,val objectList:MutableList<LostAndFoundDataModel> ):
     RecyclerView.Adapter<LostAndFoundAdapter.LostAndFoundViewHolder>() {
 
 

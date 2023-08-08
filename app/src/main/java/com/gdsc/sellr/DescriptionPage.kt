@@ -17,6 +17,7 @@ import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.gdsc.sellr.databinding.ActivityDescrptionPageBinding
+import com.gdsc.sellr.utils.Zooming
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.gdsc.sellr.fragment.*
+import com.gdsc.sellr.utils.noInternet
 
 class MainFragmentHolder : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

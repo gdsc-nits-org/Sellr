@@ -15,9 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gdsc.sellr.LostAndFoundInput
-import com.gdsc.sellr.R
 import com.gdsc.sellr.adapters.LostAndFoundAdapter
-import com.gdsc.sellr.data.LostAndFoundData
+import com.gdsc.sellr.dataModels.LostAndFoundDataModel
 import com.gdsc.sellr.databinding.FragmentLostAndFoundBinding
 import com.gdsc.sellr.utils.CheckInternet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -32,9 +31,9 @@ class LostAndFound : Fragment() {
     lateinit var binding :FragmentLostAndFoundBinding
     private lateinit var emptyH : ConstraintLayout
     private var database : FirebaseDatabase ? = null
-    lateinit var objectList: ArrayList<LostAndFoundData>
-    lateinit var foundList : ArrayList<LostAndFoundData>
-    lateinit var lostList : ArrayList<LostAndFoundData>
+    lateinit var objectList: ArrayList<LostAndFoundDataModel>
+    lateinit var foundList : ArrayList<LostAndFoundDataModel>
+    lateinit var lostList : ArrayList<LostAndFoundDataModel>
     lateinit var refreshLostAndFound : SwipeRefreshLayout
     private lateinit var goToTopButton: ExtendedFloatingActionButton
     override fun onCreateView(
@@ -111,7 +110,7 @@ class LostAndFound : Fragment() {
                     binding.lostandfoundFab.visibility=View.VISIBLE
 
                     for(snapshot1 in snapshot.children){
-                        val obj = snapshot1.getValue(LostAndFoundData::class.java)
+                        val obj = snapshot1.getValue(LostAndFoundDataModel::class.java)
                         if (obj != null) {
                             objectList.add(obj)
                         }

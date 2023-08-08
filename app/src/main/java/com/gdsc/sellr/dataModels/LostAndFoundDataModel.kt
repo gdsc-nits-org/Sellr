@@ -1,6 +1,6 @@
-package com.gdsc.sellr.data
+package com.gdsc.sellr.dataModels
 
-data class LostAndFoundData(
+data class LostAndFoundDataModel(
     val objectName: String? = null,
     val objectLocation: String? = null,
     val objectDescription: String? = null,

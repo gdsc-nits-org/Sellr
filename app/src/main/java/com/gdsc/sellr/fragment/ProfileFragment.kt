@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import android.widget.Toast
 
 import com.gdsc.sellr.*
-import com.gdsc.sellr.data.UserData
+import com.gdsc.sellr.dataModels.UserDataModel
 import com.gdsc.sellr.databinding.FragmentProfileBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -93,7 +93,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.progressBar.visibility = View.VISIBLE
 
-                val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
+                val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserDataModel::class.java)
                 if (user != null) {
                     binding.EMAIL.text = user.email
                     binding.USERNAME.text = user.name

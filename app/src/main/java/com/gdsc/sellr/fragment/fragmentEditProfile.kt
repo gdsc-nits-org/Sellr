@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.gdsc.sellr.data.UserData
+import com.gdsc.sellr.dataModels.UserDataModel
 import com.gdsc.sellr.databinding.FragmentEditProfileBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -37,7 +37,7 @@ class fragmentEditProfile : Fragment() {
         myReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserData::class.java)
+                val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(UserDataModel::class.java)
                 if (user != null) {
                     binding.editUserName.setText(user.name)
                     binding.editPhoneNumber.setText(user.phonenum)

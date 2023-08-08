@@ -21,7 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.airbnb.lottie.LottieAnimationView
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.ActivitySellBinding
 import com.gdsc.sellr.utils.CheckInternet
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -419,7 +419,7 @@ class SellActivity : AppCompatActivity() {
     @SuppressLint("SimpleDateFormat")
     //used to get the data from the menu and send an object containing all the information
     //to the setData() method
-    private fun getData(uID: String): SellData? {
+    private fun getData(uID: String): SellDataModel? {
         var flag = true
         val productName =  binding.textFieldName.text.toString().trim()
         if (productName == "") {
@@ -494,7 +494,7 @@ class SellActivity : AppCompatActivity() {
             val currentDate = SimpleDateFormat("dd-MM-yyyy").format(Date())
 
 
-            return SellData(
+            return SellDataModel(
                 productName,
                 productDesc,
                 category,

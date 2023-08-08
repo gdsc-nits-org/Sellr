@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gdsc.sellr.adapters.OnSaleAdapter
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.FragmentOnSaleBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -19,7 +19,7 @@ class OnSaleFragment : Fragment() {
 
 
 
-    val itemList=ArrayList<SellData>()
+    val itemList=ArrayList<SellDataModel>()
     lateinit var itemsAdapter:OnSaleAdapter
 
 
@@ -48,7 +48,7 @@ class OnSaleFragment : Fragment() {
             val user=Firebase.auth.currentUser?.uid.toString()
             itemList.clear()   //For clearing when data gets added to database.
             for(eachItem in it.children){
-                val item=eachItem.getValue(SellData::class.java)
+                val item=eachItem.getValue(SellDataModel::class.java)
                 if(item!=null && item.userUID==user&&!item.sold!!){
                     itemList.add(item)
 

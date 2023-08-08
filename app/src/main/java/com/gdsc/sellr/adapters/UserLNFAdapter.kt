@@ -9,16 +9,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gdsc.sellr.LostAndFoundDescriptionPage
-import com.gdsc.sellr.data.LostAndFoundData
+import com.gdsc.sellr.dataModels.LostAndFoundDataModel
 import com.gdsc.sellr.databinding.LostFoundItemCardBinding
 import com.google.firebase.database.*
 
 
-class userItemLostFoundAdapter(
+class UserLNFAdapter(
     private val context: Context?,
-    private var itemList: ArrayList<LostAndFoundData>
+    private var itemList: ArrayList<LostAndFoundDataModel>
 ) :
-    RecyclerView.Adapter<userItemLostFoundAdapter.ItemsViewHolder>() {
+    RecyclerView.Adapter<UserLNFAdapter.ItemsViewHolder>() {
 
     inner class ItemsViewHolder(val adapterBinding: LostFoundItemCardBinding) :
         RecyclerView.ViewHolder(adapterBinding.root)
@@ -32,7 +32,7 @@ class userItemLostFoundAdapter(
     }
 
 
-    override fun onBindViewHolder(holder: userItemLostFoundAdapter.ItemsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserLNFAdapter.ItemsViewHolder, position: Int) {
         //holder.adapterBinding.itemImage.setImageResource(itemList[position].imagePrimary)
         val url = itemList[position].imagePrimary
 

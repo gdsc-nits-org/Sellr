@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.gdsc.sellr.*
+import com.gdsc.sellr.dataModels.UserSignUpDataModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -169,7 +170,7 @@ class RegisterFragment : Fragment() {
 
     private fun saveuserinfo(emailtxt: String, passtxt: String, uid: String , otp:String) {
 
-        val user = UserModel(emailtxt,passtxt,null,null,null, otp,"no")
+        val user = UserSignUpDataModel(emailtxt,passtxt,null,null,null, otp,"no")
         database.child("Users").child(uid).setValue(user)
 
     }

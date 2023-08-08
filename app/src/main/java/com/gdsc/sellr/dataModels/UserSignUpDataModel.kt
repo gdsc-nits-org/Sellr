@@ -1,6 +1,6 @@
-package com.gdsc.sellr
+package com.gdsc.sellr.dataModels
 
-data class UserModel(
+data class UserSignUpDataModel(
     val email:String,
     val password:String,
     val phonenum: String?,

@@ -1,9 +1,10 @@
-package com.gdsc.sellr
+package com.gdsc.sellr.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
+import com.gdsc.sellr.R
 import com.gdsc.sellr.databinding.ActivityZoomingBinding
 
 class Zooming : AppCompatActivity() {

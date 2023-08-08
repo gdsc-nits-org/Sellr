@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.gdsc.sellr.AuthActivity
 import com.gdsc.sellr.MainFragmentHolder
-import com.gdsc.sellr.data.UserData
+import com.gdsc.sellr.dataModels.UserDataModel
 import com.gdsc.sellr.databinding.FragmentFragementSettingsBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -84,7 +84,7 @@ class FragementSettings : Fragment() {
                 //for(eachUser in snapshot.children) {
 
                 val user = snapshot.child(Firebase.auth.currentUser?.uid.toString()).getValue(
-                    UserData::class.java)
+                    UserDataModel::class.java)
                 if (user != null) {
                     //println("userId: ${user.Email}")
                     binding.userName.text=user.name

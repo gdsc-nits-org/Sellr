@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gdsc.sellr.SellActivity
-import com.gdsc.sellr.datahome.filterAdapter
-import com.gdsc.sellr.datahome.filterData
-import com.gdsc.sellr.datahome.items_home
-import com.gdsc.sellr.datahome.myAdapterhome
+import com.gdsc.sellr.adapters.HomeFilterAdapter
+import com.gdsc.sellr.dataModels.FilterHomeDataModel
+import com.gdsc.sellr.dataModels.ItemsHomeDataModel
+import com.gdsc.sellr.adapters.HomeItemAdapter
 import com.gdsc.sellr.R
 import com.gdsc.sellr.utils.CheckInternet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -33,20 +33,20 @@ class HomeFragment : Fragment() {
 
     //for items
     private lateinit var recylerView: RecyclerView
-    private lateinit var datalist: ArrayList<items_home>
-    private lateinit var searchList: ArrayList<items_home>
+    private lateinit var datalist: ArrayList<ItemsHomeDataModel>
+    private lateinit var searchList: ArrayList<ItemsHomeDataModel>
     private lateinit var searchView: SearchView
     private lateinit var dbref: DatabaseReference
 
     //for filer
-    private lateinit var datalistforfilter: ArrayList<filterData>
+    private lateinit var datalistforfilter: ArrayList<FilterHomeDataModel>
     private lateinit var recylerViewfilter: RecyclerView
 
     private lateinit var emptyH : ConstraintLayout
     private lateinit var loadingAnimationControl : LinearLayout
 
     //for filtered datalist in myadapterhome
-    private lateinit var datalistforfilteredmyAdapter: ArrayList<items_home>
+    private lateinit var datalistforfilteredmyAdapter: ArrayList<ItemsHomeDataModel>
 
     private lateinit var goToTopButton: ExtendedFloatingActionButton
 
@@ -101,14 +101,14 @@ class HomeFragment : Fragment() {
 
         datalistforfilter = arrayListOf()
 
-        datalistforfilter.add(filterData("All"))
-        datalistforfilter.add(filterData("Electronics"))
-        datalistforfilter.add(filterData("Books"))
-        datalistforfilter.add(filterData("Vehicles"))
-        datalistforfilter.add(filterData("Clothes"))
-        datalistforfilter.add(filterData("Others"))
+        datalistforfilter.add(FilterHomeDataModel("All"))
+        datalistforfilter.add(FilterHomeDataModel("Electronics"))
+        datalistforfilter.add(FilterHomeDataModel("Books"))
+        datalistforfilter.add(FilterHomeDataModel("Vehicles"))
+        datalistforfilter.add(FilterHomeDataModel("Clothes"))
+        datalistforfilter.add(FilterHomeDataModel("Others"))
 
-        val adapterfilter = filterAdapter(datalistforfilter)
+        val adapterfilter = HomeFilterAdapter(datalistforfilter)
         recylerViewfilter.adapter = adapterfilter
 
 
@@ -204,7 +204,7 @@ class HomeFragment : Fragment() {
 
         //koi filter ko press karega toh kya hoga uska code hai
 
-        adapterfilter.setOnItemClickListener(object : filterAdapter.onItemClickListener {
+        adapterfilter.setOnItemClickListener(object : HomeFilterAdapter.onItemClickListener {
             override fun onItemClick(category: String) {
                 defaultFilter=category
                 filterItemClick(category)
@@ -262,7 +262,7 @@ class HomeFragment : Fragment() {
 
         recylerView.adapter?.notifyDataSetChanged()
         recylerView.adapter =
-            context?.let { myAdapterhome(it, this@HomeFragment, datalistforfilteredmyAdapter) }
+            context?.let { HomeItemAdapter(it, this@HomeFragment, datalistforfilteredmyAdapter) }
 
 
 
@@ -286,13 +286,13 @@ class HomeFragment : Fragment() {
                     }
                     recylerView.adapter?.notifyDataSetChanged()
                     recylerView.adapter =
-                        context?.let { myAdapterhome(it, this@HomeFragment, searchList) }
+                        context?.let { HomeItemAdapter(it, this@HomeFragment, searchList) }
                 } else {
                     searchList.clear()
                     searchList.addAll(datalistforfilteredmyAdapter)
                     recylerView.adapter?.notifyDataSetChanged()
                     recylerView.adapter =
-                        context?.let { myAdapterhome(it, this@HomeFragment, searchList) }
+                        context?.let { HomeItemAdapter(it, this@HomeFragment, searchList) }
                 }
                 return false
             }
@@ -314,7 +314,7 @@ class HomeFragment : Fragment() {
                     datalist.clear()
                     for (userSnapshot in snapshot.children) {
 
-                        val items = userSnapshot.getValue(items_home::class.java)
+                        val items = userSnapshot.getValue(ItemsHomeDataModel::class.java)
                         if (items != null) {
                             if (!items.sold) {
                                 datalist.add(items!!)
@@ -336,7 +336,7 @@ class HomeFragment : Fragment() {
                         emptyH.visibility = View.INVISIBLE
 
                     recylerView.adapter =
-                        context?.let { myAdapterhome(it, this@HomeFragment, searchList) }
+                        context?.let { HomeItemAdapter(it, this@HomeFragment, searchList) }
                     filterItemClick(defaultFilter)
 
 

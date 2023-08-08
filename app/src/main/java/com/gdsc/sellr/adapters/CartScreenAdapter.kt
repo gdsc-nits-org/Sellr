@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gdsc.sellr.DescriptionPage
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.CartLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -58,9 +58,9 @@ private fun checkForInternet(context: Context?): Boolean {
     }
 }
 
-class CartRVAdapter(private val context: Context?,
-                    private var cartModelArrayList: ArrayList<SellData>) :
-    RecyclerView.Adapter<CartRVAdapter.ItemsViewHolder>() {
+class CartScreenAdapter(private val context: Context?,
+                        private var cartModelArrayList: ArrayList<SellDataModel>) :
+    RecyclerView.Adapter<CartScreenAdapter.ItemsViewHolder>() {
 
    // private val cartModelArrayList: ArrayList<SellData>
    inner class ItemsViewHolder(val adapterBinding: CartLayoutBinding) :
@@ -73,7 +73,7 @@ class CartRVAdapter(private val context: Context?,
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        val model: SellData = cartModelArrayList[position]
+        val model: SellDataModel = cartModelArrayList[position]
 
         var textRqrd = model.productName
         if (textRqrd!!.length >= 11) {

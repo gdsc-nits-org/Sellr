@@ -21,7 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.airbnb.lottie.LottieAnimationView
-import com.gdsc.sellr.data.LostAndFoundData
+import com.gdsc.sellr.dataModels.LostAndFoundDataModel
 import com.gdsc.sellr.databinding.ActivityLostAndFoundInputBinding
 import com.gdsc.sellr.utils.CheckInternet
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -239,7 +239,7 @@ class LostAndFoundInput : AppCompatActivity() {
         val datetime: String = ft.format(dNow)
         pid = emailID!!.substringBeforeLast("@") + datetime
 
-        val lostAndFoundObject = LostAndFoundData(
+        val lostAndFoundObject = LostAndFoundDataModel(
             binding.lostandfoundObjectName.text.toString(),
             binding.lostandfoundInputObjectLocation.text.toString(),
             binding.lostandfoundObjectDesc.text.toString(),

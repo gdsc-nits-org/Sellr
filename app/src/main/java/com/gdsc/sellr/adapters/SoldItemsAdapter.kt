@@ -9,17 +9,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gdsc.sellr.DescriptionPage
-import com.gdsc.sellr.data.SellData
+import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.SoldRecyclerLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
-class SoldAdapter(
+class SoldItemsAdapter(
     private val context: Context?,
-    var itemList:ArrayList<SellData>):
+    var itemList:ArrayList<SellDataModel>):
 
-    RecyclerView.Adapter<SoldAdapter.ItemsViewHolder>() {
+    RecyclerView.Adapter<SoldItemsAdapter.ItemsViewHolder>() {
 
         inner class ItemsViewHolder(val adapterBinding: SoldRecyclerLayoutBinding) : RecyclerView.ViewHolder(adapterBinding.root){}
 

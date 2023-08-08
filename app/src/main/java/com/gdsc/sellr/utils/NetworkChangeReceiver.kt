@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.gdsc.sellr.MainFragmentHolder
 import com.gdsc.sellr.R
-import com.gdsc.sellr.noInternet
+import com.gdsc.sellr.utils.noInternet
 
 class NetworkChangeReceiver(private val fragmentManager: FragmentManager) : BroadcastReceiver() {
 
