@@ -1,4 +1,4 @@
-package com.gdsc.sellr
+package com.gdsc.sellr.fragment.auth
 
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -9,10 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.gdsc.sellr.R
 import com.google.firebase.auth.FirebaseAuth
 
 
-class fragment_forgotpass : Fragment() {
+class ForgetPasswordFragment : Fragment() {
 
     private lateinit var email:EditText
     private lateinit var button: Button

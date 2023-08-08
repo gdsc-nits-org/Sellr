@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.gdsc.sellr.fragment.*
+import com.gdsc.sellr.fragment.auth.ExtraDetailsFragment
 import com.gdsc.sellr.utils.noInternet
 
 class MainFragmentHolder : AppCompatActivity() {
@@ -62,7 +63,7 @@ class MainFragmentHolder : AppCompatActivity() {
             } // catch block to handle NullPointerException
             catch (_: NullPointerException) {
             }
-            fragmentLoad(fragment_extradetails())
+            fragmentLoad(ExtraDetailsFragment())
         }
     }
 

@@ -1,5 +1,5 @@
 
-package com.gdsc.sellr.fragment
+package com.gdsc.sellr.fragment.auth
 
 import android.app.ActionBar
 import android.app.ProgressDialog
@@ -179,7 +179,7 @@ class RegisterFragment : Fragment() {
 
 //        val intent = Intent(requireContext(), AuthActivity::class.java)
 //        startActivity(intent)
-        fragmentload(fragment_extradetails())
+        fragmentload(ExtraDetailsFragment())
 
 
     }

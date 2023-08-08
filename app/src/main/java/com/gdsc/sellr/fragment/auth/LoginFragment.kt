@@ -1,4 +1,4 @@
-package com.gdsc.sellr
+package com.gdsc.sellr.fragment.auth
 
 import android.app.ActionBar
 import android.app.ProgressDialog
@@ -16,7 +16,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.gdsc.sellr.fragment.RegisterFragment
+import com.gdsc.sellr.MainActivity
+import com.gdsc.sellr.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -58,7 +59,7 @@ class LoginFragment : Fragment() {
 
 
         forgot.setOnClickListener {
-            fragmentload(fragment_forgotpass())
+            fragmentload(ForgetPasswordFragment())
 
         }
 
@@ -120,7 +121,7 @@ class LoginFragment : Fragment() {
                                 {
 
 
-                                    fragmentload(fragment_extradetails());
+                                    fragmentload(ExtraDetailsFragment());
 
                                 }
 

@@ -1,4 +1,4 @@
-package com.gdsc.sellr
+package com.gdsc.sellr.fragment.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import com.gdsc.sellr.MainActivity
+import com.gdsc.sellr.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class fragment_extradetails : Fragment() {
+class ExtraDetailsFragment : Fragment() {
 
     private lateinit var phonenum:EditText
     private lateinit var name:EditText
