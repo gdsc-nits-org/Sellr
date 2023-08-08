@@ -1,4 +1,4 @@
-package com.gdsc.sellr.fragment
+package com.gdsc.sellr.fragments.Settings
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

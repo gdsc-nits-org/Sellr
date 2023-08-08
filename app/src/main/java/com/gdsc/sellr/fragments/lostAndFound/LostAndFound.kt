@@ -1,4 +1,4 @@
-package com.gdsc.sellr.fragment
+package com.gdsc.sellr.fragments.lostAndFound
 
 import android.content.Intent
 import android.content.res.ColorStateList

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment"
+    tools:context=".fragments.Settings.ProfileFragment"
     android:background="@color/white"
     >
 

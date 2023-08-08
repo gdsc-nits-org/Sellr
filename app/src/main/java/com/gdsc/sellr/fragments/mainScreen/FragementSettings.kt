@@ -1,4 +1,4 @@
-package com.gdsc.sellr.fragment
+package com.gdsc.sellr.fragments.mainScreen
 
 import android.content.Intent
 import android.os.Bundle

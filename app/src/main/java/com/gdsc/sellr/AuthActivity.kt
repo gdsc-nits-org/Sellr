@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 import com.gdsc.sellr.databinding.ActivityAuthBinding
-import com.gdsc.sellr.fragment.auth.LoginFragment
-import com.gdsc.sellr.fragment.auth.SplashFragment
+import com.gdsc.sellr.fragments.auth.LoginFragment
+import com.gdsc.sellr.fragments.auth.SplashFragment
 
 lateinit var binding : ActivityAuthBinding
 

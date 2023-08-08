@@ -1,4 +1,4 @@
-package com.gdsc.sellr.fragment
+package com.gdsc.sellr.fragments.Settings
 
 import android.content.Context
 import android.content.Intent

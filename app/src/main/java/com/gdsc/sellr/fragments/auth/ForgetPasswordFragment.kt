@@ -1,4 +1,4 @@
-package com.gdsc.sellr.fragment.auth
+package com.gdsc.sellr.fragments.auth
 
 import android.app.ProgressDialog
 import android.os.Bundle

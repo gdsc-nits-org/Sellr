@@ -7,25 +7,25 @@
 
     <fragment
     android:id="@+id/cartFragment"
-    android:name="com.gdsc.sellr.fragment.CartFragment"
+    android:name="com.gdsc.sellr.fragments.mainScreen.CartFragment"
     android:label="CartFragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.gdsc.sellr.fragment.HomeFragment"
+        android:name="com.gdsc.sellr.fragments.mainScreen.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.gdsc.sellr.fragment.FragementSettings"
+        android:name="com.gdsc.sellr.fragments.mainScreen.FragementSettings"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_fragement_settings" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.gdsc.sellr.fragment.ProfileFragment"
+        android:name="com.gdsc.sellr.fragments.Settings.ProfileFragment"
         android:label="profile"
         tools:layout="@layout/fragment_fragement_settings" />
     <fragment
         android:id="@+id/lostAndFound"
-        android:name="com.gdsc.sellr.fragment.LostAndFound"
+        android:name="com.gdsc.sellr.fragments.lostAndFound.LostAndFound"
         android:label="fragment_lost_and_found"
         tools:layout="@layout/fragment_lost_and_found" />
 </navigation>
