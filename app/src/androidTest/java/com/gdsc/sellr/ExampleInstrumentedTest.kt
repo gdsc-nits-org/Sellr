@@ -1,4 +1,4 @@
-package com.example.sellr
+package com.gdsc.sellr
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

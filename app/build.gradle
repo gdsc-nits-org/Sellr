@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id("androidx.navigation.safeargs.kotlin")
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 
 }
 
@@ -10,7 +11,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.sellr"
+        applicationId "com.gdsc.sellr"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -63,4 +64,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.android.support:multidex:1.0.3'
+
+
+    //hilt dagger
+    implementation 'com.google.dagger:hilt-android:2.41'
+    kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
 }

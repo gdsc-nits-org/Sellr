@@ -1,4 +1,4 @@
-package com.example.sellr
+package com.gdsc.sellr
 
 import org.junit.Test
 

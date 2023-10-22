@@ -7,15 +7,15 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.sellr.fragment.CartFragment"
+        android:name="com.gdsc.sellr.ui.fragment.CartFragment"
         android:label="CartFragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.sellr.fragment.HomeFragment"
+        android:name="com.gdsc.sellr.ui.fragment.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.sellr.fragment.ProfileFragment"
+        android:name="com.gdsc.sellr.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
