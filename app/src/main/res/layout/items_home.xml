@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="12dp"
+    android:id="@+id/item_card"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#5C5C5C">
+
+    <LinearLayout
+        android:id="@+id/item_linearl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="11dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:background="@color/white"
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"/>
+<!--            app:shapeAppearance="@style/ImageViewRoundedCorner"-->
+
+
+        <TextView
+            android:id="@+id/itemname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="item_name"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp">
+
+        </TextView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentStart="true">
+                <TextView
+                    android:id="@+id/used"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NEW"
+                    android:textSize="15sp">
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/symbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. "
+                        android:textStyle="bold"
+                        android:textColor="#2CC0AD"
+                        android:textSize="15sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="price"
+                        android:textStyle="bold"
+                        android:textColor="#2CC0AD"
+                        android:textSize="15sp"
+                        android:maxWidth="190dp"
+                        android:paddingBottom="5dp">
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addedtofav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="7dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                app:iconPadding="0dp"
+                android:minWidth="0dp"
+                app:cornerRadius="50dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#5C5C5C"
+                app:icon="@drawable/add_to_cart_black" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
