@@ -1,5 +1,6 @@
 package com.gdsc.sellr.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -16,8 +17,9 @@ import com.gdsc.sellr.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,32 +30,30 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val bottomNavigationView = binding.bottomNavigation
 
+        //bottomNavigationView.setupWithNavController(navController)
         setupWithNavController(bottomNavigationView, navController)
+
+        //appBarConfiguration = AppBarConfiguration(navController.graph)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+//                in listOf(
+//                    R.id.splashFragment,
+//                    R.id.myAccountFragment,
+//                    R.id.settingsFragment,
+//                    R.id.notificationsSettingsFragment,
+//                    R.id.notificationsFragment,
+//                    R.id.deactivateAccountFragment
+//                ) -> {
+//                    binding.bottomNavigation.visibility = android.view.View.GONE
+//                }
                 else -> {
                     supportActionBar?.show()
                     binding.bottomNavigation.visibility = android.view.View.VISIBLE
                 }
-//                in listOf(
-////                    R.id.splashFragment,
-////                    R.id.myAccountFragment,
-////                    R.id.settingsFragment,
-////                    R.id.notificationsSettingsFragment,
-////                    R.id.notificationsFragment,
-////                    R.id.deactivateAccountFragment
-//                ) -> {
-//                    binding.bottomNavigation.visibility = android.view.View.GONE
-//                }
-//                else -> {
-//                    supportActionBar?.show()
-//                    binding.bottomNavigation.visibility = android.view.View.VISIBLE
-//                }
             }
         }
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
