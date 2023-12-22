@@ -1,362 +1,375 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SellActivity">
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/success_animation_view"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="false"
-        app:lottie_rawRes="@raw/upload_success"
-        android:outlineAmbientShadowColor="#000"
-        android:layout_centerInParent="true"
-        >
+    xmlns:tools="http://schemas.android.com/tools">
 
-    </com.airbnb.lottie.LottieAnimationView>
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/progress_animation_view"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loading"
-        android:translationZ="90dp"
-        android:outlineAmbientShadowColor="#000"
-        android:layout_centerInParent="true"
-        >
+    <data>
+        <!-- This is where you declare the binding variable and associate it with the generated binding class -->
+        <variable
+            name="viewModel"
+            type="com.gdsc.sellr.viewModels.SellViewModel" />
+        <!-- Add other variables if needed -->
+    </data>
 
-    </com.airbnb.lottie.LottieAnimationView>
-    <ScrollView
-        android:id="@+id/sellMainScrollView"
+
+
+    <RelativeLayout
+        android:id="@+id/parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="vertical"
-            android:fitsSystemWindows="true"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".SellActivity">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/success_animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:outlineAmbientShadowColor="#000"
+            android:visibility="invisible"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/upload_success">
+
+        </com.airbnb.lottie.LottieAnimationView>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress_animation_view"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading"
+            android:translationZ="90dp"
+            android:outlineAmbientShadowColor="#000"
+            android:layout_centerInParent="true"
+            >
+
+        </com.airbnb.lottie.LottieAnimationView>
+        <ScrollView
+            android:id="@+id/sellMainScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/inputName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="70dp"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                android:hint="@string/item_name">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textFieldName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                android:id="@+id/inputCategory"
-                app:errorEnabled="true">
-                <AutoCompleteTextView
-                    android:id="@+id/categoryDropDown"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/choose_a_category"
-                    android:inputType="none"
-                    tools:ignore="LabelFor" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                android:id="@+id/inputDesc"
-                android:hint="Description"
-                tools:ignore="HardcodedText">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textFieldDesc"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/inputPrice"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="70dp"
-                android:layout_margin="20dp"
-                app:startIconDrawable="@drawable/rup"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-
-                android:hint="@string/price">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/price"
-                    android:maxLength="6"
-                    android:inputType="number"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
+                android:orientation="vertical"
+                android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/condition_layout"
-                android:paddingTop="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="vertical">
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_condition"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="5dp"
-                    />
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/chipError"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/please_choose_item_condition"
-                    android:textSize="12sp"
-                    android:textColor="@color/error"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="5dp"
-                    />
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:id="@+id/chipGroup"
-                    app:singleSelection="true">
+                android:layout_height="wrap_content">
 
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/newChip"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="90dp"
-                        app:chipBackgroundColor="@color/bg_chip_state_list"
-                        android:text="@string/newChip"
-                        android:textAlignment="center"
-                        android:theme="@style/Theme.MaterialComponents.Light" />
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/usedChip"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="90dp"
-                        app:chipBackgroundColor="@color/bg_chip_state_list"
-                        android:text="@string/used"
-                        android:textAlignment="center"
-                        android:theme="@style/Theme.MaterialComponents.Light" />
-
-                </com.google.android.material.chip.ChipGroup>
                 <com.google.android.material.textfield.TextInputLayout
-                    app:errorEnabled="true"
-                    android:id="@+id/usedCondition"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/inputName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="5dp"
+                    android:minHeight="70dp"
                     app:boxCornerRadiusBottomEnd="15dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusTopStart="15dp"
-                    >
-                    <AutoCompleteTextView
-                        android:id="@+id/textFieldUsedCondition"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    android:hint="@string/item_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textFieldName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Used For Time"
+                        android:singleLine="true"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    android:id="@+id/inputCategory"
+                    app:errorEnabled="true">
+                    <AutoCompleteTextView
+                        android:id="@+id/categoryDropDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/choose_a_category"
                         android:inputType="none"
                         tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
 
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_marginStart="20dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                android:background="@drawable/condition_layout"
-                app:layout_constraintTop_toTopOf="parent">
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/upload_image"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="5dp"
-                    />
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/imageError"
-                    android:layout_width="wrap_content"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    android:id="@+id/inputDesc"
+                    android:hint="Description"
+                    tools:ignore="HardcodedText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textFieldDesc"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/inputPrice"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/please_upload_images"
-                    android:textStyle="normal"
-                    android:textSize="12sp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:textColor="@color/error"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="5dp"
-                    />
+                    android:minHeight="70dp"
+                    android:layout_margin="20dp"
+                    app:startIconDrawable="@drawable/rup"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+
+                    android:hint="@string/price">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/price"
+                        android:maxLength="6"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/condition_layout"
+                    android:paddingTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_condition"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginBottom="5dp"
+                        />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/chipError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/please_choose_item_condition"
+                        android:textSize="12sp"
+                        android:textColor="@color/error"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginBottom="5dp"
+                        />
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:id="@+id/chipGroup"
+                        app:singleSelection="true">
+
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/newChip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="90dp"
+                            app:chipBackgroundColor="@color/bg_chip_state_list"
+                            android:text="@string/newChip"
+                            android:textAlignment="center"
+                            android:theme="@style/Theme.MaterialComponents.Light" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/usedChip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="90dp"
+                            app:chipBackgroundColor="@color/bg_chip_state_list"
+                            android:text="@string/used"
+                            android:textAlignment="center"
+                            android:theme="@style/Theme.MaterialComponents.Light" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                    <com.google.android.material.textfield.TextInputLayout
+                        app:errorEnabled="true"
+                        android:id="@+id/usedCondition"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        >
+                        <AutoCompleteTextView
+                            android:id="@+id/textFieldUsedCondition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Used For Time"
+                            android:inputType="none"
+                            tools:ignore="LabelFor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:padding="10dp"
-                    android:layout_height="300dp"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonFirst"
-                            android:tag="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_image_placeholder"
-                            tools:ignore="NestedWeights" />
-
-                        <ImageButton
-                            android:id="@+id/imageButtonThird"
-                            android:visibility="invisible"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:scaleType="fitCenter"
-                            />
-                    </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/condition_layout"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/upload_image"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginBottom="5dp"
+                        />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/imageError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/please_upload_images"
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:textColor="@color/error"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginBottom="5dp"
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageButton
-                            android:id="@+id/imageButtonSecond"
-                            android:visibility="invisible"
+                        android:padding="10dp"
+                        android:layout_height="300dp"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:scaleType="fitCenter"
-                            tools:ignore="NestedWeights" />
+                            android:orientation="vertical">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonFourth"
-                            android:visibility="invisible"
+                            <ImageButton
+                                android:id="@+id/imageButtonFirst"
+                                android:tag="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_image_placeholder"
+                                tools:ignore="NestedWeights" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonThird"
+                                android:visibility="invisible"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:scaleType="fitCenter"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:scaleType="fitCenter"
-                            />
+                            android:orientation="vertical">
+
+                            <ImageButton
+                                android:id="@+id/imageButtonSecond"
+                                android:visibility="invisible"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:scaleType="fitCenter"
+                                tools:ignore="NestedWeights" />
+
+                            <ImageButton
+                                android:id="@+id/imageButtonFourth"
+                                android:visibility="invisible"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:scaleType="fitCenter"
+                                />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+
             </LinearLayout>
+        </ScrollView>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/colourAccent"
+                android:text="@string/list_it"
+                app:icon="@drawable/car_ui_icon_add"
+                />
 
-        </LinearLayout>
-    </ScrollView>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/colourAccent"
-            android:text="@string/list_it"
-            app:icon="@drawable/car_ui_icon_add"
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_marginVertical="10dp"
+            android:visibility="gone"
+            android:progress="10"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colourPrimary"
             />
+    </RelativeLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <ProgressBar
-        android:id="@+id/progress_circular"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_centerInParent="true"
-        android:layout_marginVertical="10dp"
-        android:visibility="gone"
-        android:progress="10"
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/colourPrimary"
-        />
-
-</RelativeLayout>
+</layout>

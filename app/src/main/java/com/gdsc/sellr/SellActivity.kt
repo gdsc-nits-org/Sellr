@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.airbnb.lottie.LottieAnimationView
+import com.gdsc.sellr.viewModels.SellViewModel
 import com.gdsc.sellr.dataModels.SellDataModel
 import com.gdsc.sellr.databinding.ActivitySellBinding
 import com.gdsc.sellr.utils.CheckInternet
@@ -37,10 +38,16 @@ import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.observeOn
 
 
 class SellActivity : AppCompatActivity() {
-    private lateinit var database: DatabaseReference
+    private val viewModel: SellViewModel by viewModels()
+
+    //    private lateinit var database: DatabaseReference
     private var userUID: String? = ""
     private var emailID: String? = ""
 
@@ -57,11 +64,16 @@ class SellActivity : AppCompatActivity() {
     private lateinit var baos:ByteArrayOutputStream
     private lateinit var uploadTask:UploadTask
     //private val coreHelper = AnstronCoreHelper(this)
-    lateinit var binding : ActivitySellBinding
+    private lateinit var binding : ActivitySellBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySellBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sell)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#ffffff")))
         imageArray.add("")
@@ -77,6 +89,7 @@ class SellActivity : AppCompatActivity() {
             makeToast("Not logged in")
             onBackPressed()
         }
+
 
         populateDropDown()
         binding.categoryDropDown.doAfterTextChanged {
@@ -132,7 +145,7 @@ class SellActivity : AppCompatActivity() {
                 ImagePicker.with(this).crop().
                 compress(250).
                 maxResultSize(600,600).
-                    start(3000)
+                start(3000)
             }
         }
         imageButtonFourth?.setOnClickListener {
@@ -155,6 +168,18 @@ class SellActivity : AppCompatActivity() {
         }
         newChip.setOnClickListener {
             chipClicked()
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.progressBarVisible.collect { isVisible ->
+                if (isVisible) {
+                    // Show progress bar
+                    setProgressBar()
+                } else {
+                    // Hide progress bar
+                    deleteProgressBar()
+                }
+            }
         }
 
 
@@ -205,11 +230,10 @@ class SellActivity : AppCompatActivity() {
         }
     }
 
-//    private fun compressImage(pickedImageURI: Uri): Uri{
+    //    private fun compressImage(pickedImageURI: Uri): Uri{
 //        val filePath = File(SiliCompressor.with(this).compress(pickedImageURI.toString(), File(this.cacheDir, "temp")))
 //        return Uri.fromFile(filePath)
 //}
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -238,7 +262,7 @@ class SellActivity : AppCompatActivity() {
     }
 
     //updating image in firebase storage
-    private fun upDateImage(i: Int, data: Intent?) {
+    private fun upDateImage(i: Int, data: Intent?)  {
         setProgressBar()
         val storageRef = Firebase.storage.reference
 
@@ -265,7 +289,6 @@ class SellActivity : AppCompatActivity() {
 //___________________________________________________________________________________________________________________
 
         uploadTask = storageRef.child("file/$filename").putFile(imageUri!!)
-
 
         //if even the delay specified the progress bar is still visible
         //it means that the image was not uploaded
@@ -365,56 +388,56 @@ class SellActivity : AppCompatActivity() {
     }
 
     //this method gets the data about the item and sets it in the firebase
-    private fun setData() {
-        setProgressBar()
-        val uID: String = generateUID(emailID!!)
-        val dataObject = getData(uID)
-        if (dataObject == null) {
-            deleteProgressBar()
-            return
-        }
-        database =
-            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("Items")
-        val uploadData = database.child(uID).setValue(dataObject)
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (progressCircular?.visibility == View.VISIBLE) {
-                Toast.makeText(this, "Listing Failed, Please try again", Toast.LENGTH_LONG).show()
-                deleteProgressBar()
-                FirebaseDatabase.getInstance().purgeOutstandingWrites()
-            }
-
-        }, 180000)
-        uploadData.addOnSuccessListener {
-            database =
-                FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                    .getReference("Users")
-            val upDateUserList = database.child(userUID!!).child("pId").push().setValue(uID)
-            upDateUserList.addOnSuccessListener {
-                makeToast("Successfully Listed")
-                deleteProgressBar()
-                closeKeyboard()
-                binding.sellMainScrollView.visibility=View.GONE
-                binding.successAnimationView.visibility=View.VISIBLE
-                binding.fab.visibility=View.INVISIBLE
-                supportActionBar?.hide()
-                binding.successAnimationView.playAnimation()
-                Handler(Looper.getMainLooper()).postDelayed({
-
-                    onBackPressed()
-                    finish()
-                }, 2000)
-
-            }.addOnFailureListener {
-                makeToast("Listing Failed, Please try again")
-                deleteProgressBar()
-            }
-        }.addOnFailureListener {
-            makeToast("Listing Failed, Please try again")
-            deleteProgressBar()
-        }
-
-    }
+//    private fun setData() {
+//        setProgressBar()
+//        val uID: String = generateUID(emailID!!)
+//        val dataObject = getData(uID)
+//        if (dataObject == null) {
+//            deleteProgressBar()
+//            return
+//        }
+//        database =
+//            FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+//                .getReference("Items")
+//        val uploadData = database.child(uID).setValue(dataObject)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            if (progressCircular?.visibility == View.VISIBLE) {
+//                Toast.makeText(this, "Listing Failed, Please try again", Toast.LENGTH_LONG).show()
+//                deleteProgressBar()
+//                FirebaseDatabase.getInstance().purgeOutstandingWrites()
+//            }
+//
+//        }, 180000)
+//        uploadData.addOnSuccessListener {
+//            database =
+//                FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
+//                    .getReference("Users")
+//            val upDateUserList = database.child(userUID!!).child("pId").push().setValue(uID)
+//            upDateUserList.addOnSuccessListener {
+//                makeToast("Successfully Listed")
+//                deleteProgressBar()
+//                closeKeyboard()
+//                binding.sellMainScrollView.visibility=View.GONE
+//                binding.successAnimationView.visibility=View.VISIBLE
+//                binding.fab.visibility=View.INVISIBLE
+//                supportActionBar?.hide()
+//                binding.successAnimationView.playAnimation()
+//                Handler(Looper.getMainLooper()).postDelayed({
+//
+//                    onBackPressed()
+//                    finish()
+//                }, 2000)
+//
+//            }.addOnFailureListener {
+//                makeToast("Listing Failed, Please try again")
+//                deleteProgressBar()
+//            }
+//        }.addOnFailureListener {
+//            makeToast("Listing Failed, Please try again")
+//            deleteProgressBar()
+//        }
+//
+//    }
 
     @SuppressLint("SimpleDateFormat")
     //used to get the data from the menu and send an object containing all the information
@@ -605,6 +628,31 @@ class SellActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    private fun setData() {
+        val UID = generateUID(emailID!!)
+        val sellDataModel = getData(generateUID(emailID!!))
+
+
+        if (sellDataModel != null) {
+            viewModel.uploadSellData(sellDataModel, userUID!!, UID, {
+                // On success
+                binding.sellMainScrollView.visibility = View.GONE
+                binding.successAnimationView.visibility = View.VISIBLE
+                binding.fab.visibility = View.INVISIBLE
+                supportActionBar?.hide()
+                binding.successAnimationView.playAnimation()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    onBackPressed()
+                    finish()
+                }, 2000)
+            }, {
+                // On failure
+            })
+        } else {
+            deleteProgressBar()
+        }
     }
 
 
