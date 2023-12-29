@@ -10,9 +10,4 @@
     <item android:id="@+id/profileFragment"
         android:title="Profile"
         android:icon="@drawable/profile"/>
-
-    <item android:id="@+id/LostFragment"
-        android:title="Lost_and_found"
-        android:icon="@drawable/lost_and_found"/>
-
 </menu>
