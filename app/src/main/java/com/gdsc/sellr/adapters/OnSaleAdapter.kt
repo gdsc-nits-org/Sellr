@@ -20,7 +20,7 @@ import com.google.firebase.ktx.Firebase
 
 class OnSaleAdapter(
     private val context: Context?,
-    private var itemList: ArrayList<SellDataModel>
+    private var itemList: List<SellDataModel>
 ) :
     RecyclerView.Adapter<OnSaleAdapter.ItemsViewHolder>() {
 
@@ -44,48 +44,37 @@ class OnSaleAdapter(
 
 
         holder.adapterBinding.soldButton.setOnClickListener {
-            //println("position to delete ${itemList[position].toString()}")
             val builder = AlertDialog.Builder(context!!)
             builder.setTitle("Are you sure?")
             builder.setMessage("Your item will be marked as Sold in the database")
             builder.setPositiveButton("Yes") { _, _ ->
                 soldModel(itemList[position].pid.toString())
-                itemList.removeAt(position)
+                itemList = itemList.toMutableList().apply { removeAt(position) }
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemList.size)
-
             }
-            builder.setNegativeButton("No") { _, _ ->
-            }
+            builder.setNegativeButton("No") { _, _ -> }
             builder.show()
-
-
         }
 
         holder.adapterBinding.deleteButton.setOnClickListener {
-
             if (context?.let { it1 -> isNetworkConnected(it1) } == true) {
-                println("position to delete ${itemList[position]}")
                 val builder = AlertDialog.Builder(context!!)
                 builder.setTitle("Are you sure?")
                 builder.setMessage("Your item will be deleted permanently from the database")
                 builder.setPositiveButton("Yes") { _, _ ->
                     deleteModel(itemList[position].pid.toString())
-                    itemList.removeAt(position)
+                    itemList = itemList.toMutableList().apply { removeAt(position) }
                     notifyItemRemoved(position)
                     notifyItemRangeChanged(position, itemList.size)
-
                 }
-                builder.setNegativeButton("No") { _, _ ->
-                }
+                builder.setNegativeButton("No") { _, _ -> }
                 builder.show()
-            }
-
-            else{
+            } else {
                 Toast.makeText(context, "Please Check Your Internet and Try again.", Toast.LENGTH_LONG).show()
             }
-
         }
+
         holder.itemView.setOnClickListener {
             val value = itemList[position].pid.toString()
             val i = Intent(context, DescriptionPage::class.java)

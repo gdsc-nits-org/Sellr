@@ -6,10 +6,10 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.gdsc.sellr.fragments.Settings.EditProfileFragment
 import com.gdsc.sellr.fragments.Settings.OnSaleFragment
 import com.gdsc.sellr.fragments.Settings.ProfileFragment
 import com.gdsc.sellr.fragments.Settings.SoldFragment
-import com.gdsc.sellr.fragments.Settings.fragmentEditProfile
 import com.gdsc.sellr.fragments.auth.ExtraDetailsFragment
 import com.gdsc.sellr.fragments.lostAndFound.UserItemLostAndFound
 import com.gdsc.sellr.fragments.mainScreen.HomeFragment
@@ -44,7 +44,7 @@ class MainFragmentHolder : AppCompatActivity() {
         } else if (intent.hasExtra("editProfile")) {
             
             title = "Edit Profile"
-            fragmentLoad(fragmentEditProfile())
+            fragmentLoad(EditProfileFragment())
         } else if (intent.hasExtra("reportUs")) {
             
             title = "Report an issue"

@@ -17,7 +17,8 @@ import com.google.firebase.ktx.Firebase
 
 class SoldItemsAdapter(
     private val context: Context?,
-    var itemList:ArrayList<SellDataModel>):
+    var itemList: List<SellDataModel>
+):
 
     RecyclerView.Adapter<SoldItemsAdapter.ItemsViewHolder>() {
 
@@ -46,7 +47,7 @@ class SoldItemsAdapter(
                 builder.setMessage("Your item will be deleted permanently from the database")
                 builder.setPositiveButton("Yes") { _, _ ->
                     deleteModel(itemList[position].pid.toString())
-                    itemList.removeAt(position)
+                    itemList = itemList.toMutableList().apply { removeAt(position) }
                     notifyItemRemoved(position)
                     notifyItemRangeChanged(position, itemList.size)
 
