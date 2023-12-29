@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!-- This is where you declare the binding variable and associate it with the generated binding class -->
+
         <variable
             name="viewModel"
             type="com.gdsc.sellr.viewModels.SellViewModel" />
-        <!-- Add other variables if needed -->
+
     </data>
 
 

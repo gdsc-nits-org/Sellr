@@ -66,23 +66,23 @@ private val _sellDataModel = MutableStateFlow<SellDataModel?>(null)
         }
 
 
-private val _progressBarVisible = MutableStateFlow(false)
+        private val _progressBarVisible = MutableStateFlow(false)
         val progressBarVisible: StateFlow<Boolean>
         get() = _progressBarVisible
 
-                fun setProgressBar() {
-                viewModelScope.launch {
-                _progressBarVisible.value = true
-                }
-                }
+        fun setProgressBar() {
+        viewModelScope.launch {
+        _progressBarVisible.value = true
+        }
+        }
 
-                fun deleteProgressBar() {
-                viewModelScope.launch {
-                _progressBarVisible.value = false
-                }
-                }
+        fun deleteProgressBar() {
+        viewModelScope.launch {
+        _progressBarVisible.value = false
+        }
+        }
 
-private fun makeToast(value: String) {
+        private fun makeToast(value: String) {
         Toast.makeText(getApplication(), value, Toast.LENGTH_LONG).show()
         }
 
