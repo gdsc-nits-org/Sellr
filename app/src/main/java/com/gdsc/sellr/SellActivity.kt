@@ -41,7 +41,9 @@ import java.util.*
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
 
 
 class SellActivity : AppCompatActivity() {
@@ -634,22 +636,23 @@ class SellActivity : AppCompatActivity() {
         val UID = generateUID(emailID!!)
         val sellDataModel = getData(generateUID(emailID!!))
 
-
         if (sellDataModel != null) {
-            viewModel.uploadSellData(sellDataModel, userUID!!, UID, {
-                // On success
-                binding.sellMainScrollView.visibility = View.GONE
-                binding.successAnimationView.visibility = View.VISIBLE
-                binding.fab.visibility = View.INVISIBLE
-                supportActionBar?.hide()
-                binding.successAnimationView.playAnimation()
-                Handler(Looper.getMainLooper()).postDelayed({
+            lifecycleScope.launch {
+                val success = viewModel.uploadSellData(sellDataModel, userUID!!, UID)
+                if (success) {
+                    // On success
+                    binding.sellMainScrollView.visibility = View.GONE
+                    binding.successAnimationView.visibility = View.VISIBLE
+                    binding.fab.visibility = View.INVISIBLE
+                    supportActionBar?.hide()
+                    binding.successAnimationView.playAnimation()
+                    delay(2000) // Using delay instead of Handler
                     onBackPressed()
                     finish()
-                }, 2000)
-            }, {
-                // On failure
-            })
+                } else {
+                    // On failure
+                }
+            }
         } else {
             deleteProgressBar()
         }
