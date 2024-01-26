@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.gdsc.sellr.dataModels.SellDataModel
+import com.gdsc.sellr.repository.SellRepository
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,40 +14,30 @@ import kotlinx.coroutines.tasks.await
 
 class SellViewModel(application: Application) : AndroidViewModel(application) {
 
-        private val _sellDataModel = MutableStateFlow<SellDataModel?>(null)
+        private val sellRepository = SellRepository()
 
-        suspend fun uploadSellData(
-                sellDataModel: SellDataModel,
-                userUID: String,
-                uID: String
-        ): Boolean {
+        private val _progressBarVisible = MutableStateFlow(false)
+        val progressBarVisible: StateFlow<Boolean>
+                get() = _progressBarVisible
+
+        suspend fun uploadSellData(sellDataModel: SellDataModel, userUID: String, uID: String): Boolean {
                 setProgressBar()
 
                 return try {
-                        val database = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                                .getReference("Items")
-
-                        database.child(uID).setValue(sellDataModel).await()
-
-                        val userDatabase = FirebaseDatabase.getInstance("https://sellr-7a02b-default-rtdb.asia-southeast1.firebasedatabase.app")
-                                .getReference("Users")
-
-                        userDatabase.child(userUID).child("pId").push().setValue(uID).await()
-
-                        makeToast("Successfully Listed")
+                        val success = sellRepository.uploadSellData(sellDataModel, userUID, uID)
+                        if (success) {
+                                makeToast("Successfully Listed")
+                        } else {
+                                makeToast("Listing Failed, Please try again")
+                        }
                         deleteProgressBar()
-                        true
+                        success
                 } catch (e: Exception) {
                         makeToast("Listing Failed, Please try again")
                         deleteProgressBar()
                         false
                 }
         }
-
-
-        private val _progressBarVisible = MutableStateFlow(false)
-        val progressBarVisible: StateFlow<Boolean>
-                get() = _progressBarVisible
 
         private fun setProgressBar() {
                 viewModelScope.launch {
@@ -63,7 +54,4 @@ class SellViewModel(application: Application) : AndroidViewModel(application) {
         private fun makeToast(value: String) {
                 Toast.makeText(getApplication(), value, Toast.LENGTH_LONG).show()
         }
-
-
-
 }
